@@ -4,13 +4,14 @@ from selenium.common.exceptions import StaleElementReferenceException, NoSuchEle
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from sqlalchemy import exc
 from bs4 import BeautifulSoup
 import re
 
 import os
 import time
 
-from app.models import Composer, Piece
+from app.models import Composer, Piece, Publisher
 from app import app, db
 
 ignored_exceptions = (NoSuchElementException, StaleElementReferenceException,)
@@ -20,7 +21,7 @@ def daniels_scrape():
     url = "https://daniels-orchestral.com"
 
 
-    driver = webdriver.Chrome()
+    driver = webdriver.Firefox()
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -42,7 +43,7 @@ def daniels_scrape():
 
     composerletters = driver.find_elements_by_class_name('letterLink')
 
-    for comp_last_initial in range(len(composerletters)):
+    for comp_last_initial in range(3, len(composerletters)):
         composerletters = driver.find_elements_by_class_name('letterLink')
         composerletters[comp_last_initial].click()
         comprows = driver.find_elements_by_css_selector('div.composerRow a')
@@ -73,10 +74,18 @@ def daniels_scrape():
             if work == 0:
               current_composer = work_source.find(class_='newComposerName').text
               composer_years = work_source.find(class_='newComposerYear').text
-              composer_details = work_source.find(class_='newComposerDetails').text.split('.', 1)[0]
-              composer_nationality = work_source.find(class_='newComposerDetails').text.split('.', 1)[1]
+              try:
+                composer_details = work_source.find(class_='newComposerDetails').text.split('.', 1)[0]
+                composer_nationality = work_source.find(class_='newComposerDetails').text.split('.', 1)[1]
+              except IndexError:
+                composer_details = work_source.find(class_='newComposerDetails').text.split(')', 1)[0]
+                composer_nationality = work_source.find(class_='newComposerDetails').text.split(')', 1)[0]
               c = Composer(name=current_composer, years=composer_years, nationality=composer_nationality, details=composer_details)
-              db.session.add(a)
+              try:
+                db.session.add(c)
+              except exc.IntegrityError:
+                db.session().rollback()
+
 
 
 
@@ -137,13 +146,21 @@ def daniels_scrape():
             percussion = None
             soloists = None
 
-            for i in publishers:
-              pub = Publisher(name=i.text)
-              p.publishers.append(p)
-
+            
+            
             c.add_piece(p)
             db.session.add(p)
-            db.session.commit()
+            try:
+              for i in publishers:
+                pub = Publisher(name=i.text)
+                p.publishers.append(pub)
+            except:
+              pass
+
+            try:
+              db.session.commit()
+            except exc.IntegrityError:
+              db.session().rollback()
 
             if len(works) == 1 or work == (len(works) - 1):
               currentletter = driver.find_elements_by_class_name('letterLink')

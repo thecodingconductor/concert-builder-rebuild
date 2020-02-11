@@ -7,3 +7,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+
+class ComposerSearchForm(FlaskForm):
+    search = StringField('Composer Search', validators=[DataRequired()])
+    submit = SubmitField('Search')

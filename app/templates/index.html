@@ -5,5 +5,33 @@
   </head>
 <body>
   <h1>Repertoire Database</h1>
+  <div class='container'>
+    <form method="post" id="search-form">
+      {{ search_form.csrf_token }}
+      <div class="form-group">
+        <label id='search-label' for='search'>{{ search_form.search.label }}</label>
+        {{ search_form.search(size=32, class_='form-control', id='search-field') }}
+        {{ search_form.submit(class_='btn btn-primary')}}
+      </div>
+    </form>
+
+    {% if composer %}
+    <div id='composer-img-div'>
+      <img id='composer-img' src='#'>
+    </div>
+      <div id='composer-details'>
+        {{ composer.name }}<br>
+        {{ composer.years }}<br>
+        {{ composer.nationality }}<br>
+        {{ composer.details }}
+      </div>
+      {% for piece in composer.pieces %}
+        <div class='composer-pieces'>
+          <a class='piece-link' href='#'>{{ piece.title }}</a>
+      
+        </div>
+        {% endfor %}
+        {% endif %}
+  </div>
 </body>
 </html>
