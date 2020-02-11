@@ -4,6 +4,7 @@ from daniels_scrape import daniels_scrape
 from app.forms import LoginForm, ComposerSearchForm
 from app.models import Composer, Piece, Publisher
 import requests
+import wikipedia
 
 @app.route('/', methods=["GET", "POST"])
 @app.route('/index', methods=["GET", "POST"])
@@ -16,19 +17,10 @@ def index():
             flash('No results. Try a different search')
             return render_template('index.html', search_form=search_form)
 
-        # s = requests.Session()
-        # url = "https://en.wikipedia.org/w/api.php"
-        # params = {
-        #     "action": "query",
-        #     "format": "json",
-        #     "titles": composer.name,
-        #     "prop": "images"
-        # }
-        # res = s.get(url=url, params=params)
-        # data = res.json()
-        # filename = data['query']['pages'][0]['images'][0]
-        
+        last_name = composer.name.split(',')[0]
+        composer_images = wikipedia.page(composer.name).images
+        matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
 
         
-        return render_template('index.html', composer=composer, search_form=search_form)
+        return render_template('index.html', composer=composer, search_form=search_form, matching=matching)
     return render_template('index.html', search_form=search_form)

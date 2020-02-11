@@ -7,7 +7,7 @@ publisher_pieces = db.Table('publisher_pieces',
 
 favorited_pieces = db.Table('favorited_pieces',
     db.Column('piece_id', db.Integer, db.ForeignKey('piece.id')),
-    db.Column('user_id'), db.Integer, db.ForeignKey('user.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')))
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -52,9 +52,6 @@ class Piece(db.Model):
     percussion = db.Column(db.String(244))
     notes = db.Column(db.String(400))
     publishers = db.relationship('Publisher', backref='pieces', secondary=publisher_pieces, lazy='dynamic')
-    studied = db.Column(db.Boolean, nullable=True)
-    favorite = db.Column(db.Boolean, nullable=True)
-    need_to_learn = db.Column(db.Boolean, nullable=True)
     composer_id = db.Column(db.Integer, db.ForeignKey('composer.id'))
     favorited_by = db.Column(db.Integer, db.ForeignKey('user.id'))
 

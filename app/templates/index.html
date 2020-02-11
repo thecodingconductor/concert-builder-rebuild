@@ -16,9 +16,12 @@
     </form>
 
     {% if composer %}
+
+    
     <div id='composer-img-div'>
-      <img id='composer-img' src='#'>
+      <img id='composer-img' src='{{ matching }}'>
     </div>
+    
       <div id='composer-details'>
         {{ composer.name }}<br>
         {{ composer.years }}<br>
