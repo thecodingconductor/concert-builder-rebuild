@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, jsonify
 from app import app, db
 from daniels_scrape import daniels_scrape
 from app.forms import LoginForm, ComposerSearchForm
@@ -24,3 +24,10 @@ def index():
         
         return render_template('index.html', composer=composer, search_form=search_form, matching=matching)
     return render_template('index.html', search_form=search_form)
+
+@app.route('/composers')
+def composers():
+    
+    res = Composer.query.filter(Composer.name.ilike("%mozart%")).all()
+    list_composers = [r.as_dict() for r in res]
+    return jsonify(list_composers)

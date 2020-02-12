@@ -27,6 +27,12 @@ class User(db.Model):
         self.need_to_study.append(piece)
         db.session.commit()
 
+    def as_dict(self):
+        return {'username': self.username,
+                'studied': [p.as_dict() for p in self.studied],
+                'favorites': [p.as_dict() for p in self.favorites]
+        }
+
 class Composer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), index=True, unique=True)
@@ -40,6 +46,13 @@ class Composer(db.Model):
 
     def add_piece(self, piece):
         self.pieces.append(piece)
+    
+    def as_dict(self):
+        return {'name': self.name,
+                'years': self.years,
+                'nationality': self.nationality,
+                'details': self.details,
+                'pieces': [p.as_dict() for p in self.pieces]}
 
 class Piece(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -58,6 +71,17 @@ class Piece(db.Model):
     def __repr__(self):
         return '<Piece {}'.format(self.title)
 
+    def as_dict(self):
+        return {"title": self.title,
+                "duration": self.duration,
+                "movements": self.movements,
+                "movement_duration": self.movement_duration,
+                "instrumentation": self.instrumentation,
+                "soloists": self.soloists,
+                "percussion":self.percussion,
+                "notes":self.notes,
+                "publishers": [pub.as_dict() for pub in self.publishers]
+                }
 class Publisher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(244))
@@ -65,3 +89,6 @@ class Publisher(db.Model):
 
     def __repr__(self):
         return '<Publisher {}'.format(self.name)
+
+    def as_dict(self):
+        return {"name": self.name}
