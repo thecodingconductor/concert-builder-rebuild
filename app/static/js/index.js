@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         request.onload = () => {
             //turn into JSON in Flask app?
+            
         }
 
         const data = new FormData();
