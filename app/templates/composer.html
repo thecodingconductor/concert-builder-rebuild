@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Composer Page</title>
+    </head>
+    <body>
+        
+        {% if composer %}
+
+    
+    <div id='composer-img-div'>
+      <img id='composer-img' src='{{ matching }}'>
+    </div>
+    
+      <div id='composer-details'>
+        {{ composer.name }}<br>
+        {{ composer.years }}<br>
+        {{ composer.nationality }}<br>
+        {{ composer.details }}
+      </div>
+      {% for piece in composer.pieces %}
+        <div class='composer-pieces'>
+          <a class='piece-link' href='#'>{{ piece.title }}</a>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div id='piece-results'>
+          
+        </div>
+    </body>
+</html>

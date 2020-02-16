@@ -36,12 +36,12 @@ def composers():
     return jsonify({"success": True, "composers": list_composers})
 
 
-@app.route('/composer/<composer_name>')
+@app.route('/composer/<composer_name>', methods=["POST"])
 def composer(composer_name):
     
-    composer = Composer.query.filter_by(composer.name=composer_name).first_or_404()
+    composer = Composer.query.filter_by(name=composer.name).first_or_404()
     
-    return render_template('composer.html')
+    return render_template('composer.html', composer=composer)
 
 
 @app.route('/piece_detail/<piece>')
