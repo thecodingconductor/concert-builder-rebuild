@@ -1,10 +1,11 @@
-from flask import render_template, flash, redirect, url_for, jsonify
+from flask import render_template, flash, redirect, url_for, jsonify, request
 from app import app, db
 from daniels_scrape import daniels_scrape
 from app.forms import LoginForm, ComposerSearchForm
 from app.models import Composer, Piece, Publisher
 import requests
 import wikipedia
+import json
 
 @app.route('/', methods=["GET", "POST"])
 @app.route('/index', methods=["GET", "POST"])
@@ -25,9 +26,24 @@ def index():
         return render_template('index.html', composer=composer, search_form=search_form, matching=matching)
     return render_template('index.html', search_form=search_form)
 
-@app.route('/composers')
+@app.route('/composers', methods=["POST"])
 def composers():
+
+    composer_name = request.form.get("search-field")
+    res = Composer.query.filter(Composer.name.ilike(f"%{composer_name}%")).all()
+    list_composers = json.dumps([{"name": composer.name} for composer in res])
+
+    return jsonify({"success": True, "composers": list_composers})
+
+
+@app.route('/composer/<composer_name>')
+def composer(composer_name):
     
-    res = Composer.query.filter(Composer.name.ilike("%mozart%")).all()
-    list_composers = [r.as_dict() for r in res]
-    return jsonify(list_composers)
+    composer = Composer.query.filter_by(composer.name=composer_name).first_or_404()
+    
+    return render_template('composer.html')
+
+
+@app.route('/piece_detail/<piece>')
+def piece_detail():
+    pass

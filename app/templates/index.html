@@ -2,11 +2,12 @@
 <html>
   <head>
     <title>Repertoire Database</title>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
   </head>
 <body>
   <h1>Repertoire Database</h1>
   <div class='container'>
-    <form method="post" id="search-form">
+    <form id="search-form">
       {{ search_form.csrf_token }}
       <div class="form-group">
         <label id='search-label' for='search'>{{ search_form.search.label }}</label>
@@ -14,6 +15,11 @@
         {{ search_form.submit(class_='btn btn-primary')}}
       </div>
     </form>
+    <div id='test'></div>
+    <ul id='composer-results'>
+      
+      <li></li>
+    </ul>
 
     {% if composer %}
 
