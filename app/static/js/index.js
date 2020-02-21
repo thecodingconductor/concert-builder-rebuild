@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  const composerLinks = document.querySelector("#composer-results");
+
     document.querySelector("#search-field").onkeyup = () => {
+
       //if searchfield is empty, prevent search and clear all results  
           if (document.querySelector("#search-field").value.length === 0) {
             const myNode = document.querySelector("#composer-results");
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                   for (let i=0; i < composer_data.length; i++) {
                     const li = document.createElement('li');
-                    li.innerHTML = `<a class="composerLinks" href="#">${composer_data[i].name}</a>`;
+                    li.innerHTML = `<a class="composerLinks" href="#">${composer_data[i].name}</a>`; 
                     document.querySelector("#composer-results").append(li);
                   }
                 }
@@ -51,6 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
 
         };
+
+        $('#composer-results').on('click', 'a', function(){
+          
+          var composerName = $(this).text();
+          composerName = composerName.replace(/ /g, "%20"); 
+
+          $("html").load(`composer/${composerName}`)
+
+          console.log(composerName);
+
+        });
 
 
         
