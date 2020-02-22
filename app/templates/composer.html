@@ -4,15 +4,17 @@
         <title>Composer Page</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="{{ url_for('static', filename='js/composer.js') }}"></script>
+        <link rel='stylesheet' href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
         
         {% if composer %}
 
-    
+    {% if matching %}
     <div id='composer-img-div'>
       <img id='composer-img' src='{{ matching }}'>
     </div>
+    {% endif %}
     
       <div id='composer-details'>
         {{ composer.name }}<br>
@@ -20,15 +22,27 @@
         {{ composer.nationality }}<br>
         {{ composer.details }}
       </div>
-      {% for piece in composer.pieces %}
-        <div class='composer-pieces'>
-          <a class='piece-link' href='#'>{{ piece.title }}</a>
-        </div>
-        {% endfor %}
+
+      <div id='composer-page-container' class='container'>
+      <div id='composer-pieces-div'>
+        <ul id='composer-pieces'>
+          {% for piece in composer.pieces %}
+          <li><a class='piece-link' href='#'>{{ piece.title }}</a></li>
+          {% endfor %}
+        </ul>
+
+        <ul id='piece-results'>
+          
+        </ul>
+        
+      </div>   
+        
+        
         {% endif %}
 
-        <div id='piece-results'>
-          
-        </div>
+        
+    </div>
+      
     </body>
 </html>
+

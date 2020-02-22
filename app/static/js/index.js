@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                   for (let i=0; i < composer_data.length; i++) {
                     const li = document.createElement('li');
-                    li.innerHTML = `<a class="composerLinks" href="#">${composer_data[i].name}</a>`; 
+                    li.innerHTML = `<a class="composerLinks" href="composer/${composer_data[i].name}">${composer_data[i].name}</a>`; 
                     document.querySelector("#composer-results").append(li);
                   }
                 }
@@ -65,32 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(composerName);
 
         });
-
-
-        
-      //get clicked link and open new page.
-      // if (document.querySelectorAll(".composerLinks").length > 0) {
-           
-      //   console.log('It worked');
-      //   console.log(document.querySelectorAll(".composerLinks"));
-      //   document.querySelectorAll('.composerLinks').onclick = (e) => {
-          
-          
-      //     const linkRequest = new XMLHttpRequest();
-      //     linkRequest.open('GET', `/composer/${e.target.value}`, true);  
-      //     console.log(e.target.value);
-      //     request.onload = () => {
-      //       if(this.status >= 200 && this.status < 400) {
-      //         const resp = this.response;
-      //       } else{
-      //         return 'There was an error'
-      //       }
-      //     };
-      //     linkRequest.send();
-
-      //   }
-      // }
-
 
 
 }); 

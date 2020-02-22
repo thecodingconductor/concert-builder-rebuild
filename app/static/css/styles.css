@@ -1,0 +1,12 @@
+#composer-pieces-div {
+    display: flex;
+    /*flex-direction: column;*/
+}
+
+#composer-pieces {
+    width: 50%;
+}
+
+#piece-results {
+    width: 50%;
+}

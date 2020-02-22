@@ -40,6 +40,7 @@ def composers():
 @app.route('/composer/<composer_name>', methods=["GET", "POST"])
 def composer(composer_name):
 
+    #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
     composer_name = urllib.parse.unquote(composer_name)
     composer_name = composer_name.split('/')[-1]
 
@@ -51,13 +52,20 @@ def composer(composer_name):
     
     last_name = composer.name.split(',')[0]
     composer_images = wikipedia.page(composer.name).images
-    matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-    
+    try:
+        matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
+    except IndexError:
+        return render_template('composer.html', composer=composer)
+
     
     
     return render_template('composer.html', composer=composer, matching=matching)
 
 
-@app.route('/piece_detail/<piece>')
-def piece_detail():
-    pass
+@app.route('/piece_detail/<piece_title>', methods=["GET","POST"])
+def piece_detail(piece_title):
+    piece_title = urllib.parse.unquote(piece_title)
+    piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
+    return jsonify({"succcess":True, "piece": piece})
+
+    
