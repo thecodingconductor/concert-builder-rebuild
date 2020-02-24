@@ -12,8 +12,10 @@ favorited_pieces = db.Table('favorited_pieces',
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), index=True, unique=True)
+    email = db.Column(db.String(120), index=True, unique=True)
     studied = db.Column(db.Boolean, nullable=True)
     favorites = db.relationship('Piece', backref='favorite', lazy='dynamic')
+    comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
     def add_favorite(self, piece):
         self.favorites.append(piece)
@@ -32,6 +34,13 @@ class User(db.Model):
                 'studied': [p.as_dict() for p in self.studied],
                 'favorites': [p.as_dict() for p in self.favorites]
         }
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(1000), index=True, unique=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 
 class Composer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -92,3 +101,8 @@ class Publisher(db.Model):
 
     def as_dict(self):
         return {"name": self.name}
+
+#TODO inlcude SKETCHES!!!
+#TODO SPOTIFY PLAYER
+#TODO YOUTUBE PLAYER
+#TODO BACHTRACK DATA
