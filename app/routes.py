@@ -2,14 +2,18 @@ from flask import render_template, flash, redirect, url_for, jsonify, request
 from app import app, db
 from daniels_scrape import daniels_scrape
 from app.forms import LoginForm, ComposerSearchForm
-from app.models import Composer, Piece, Publisher
+from app.models import Composer, Piece, Publisher, User, Comment
+from flask_login import logout_user, login_required
 import urllib.parse
 import requests
 import wikipedia
 import json
 
+
+
 @app.route('/', methods=["GET", "POST"])
 @app.route('/index', methods=["GET", "POST"])
+#@login_required
 def index():
     search_form = ComposerSearchForm()
     if search_form.validate_on_submit():
@@ -26,6 +30,27 @@ def index():
         
         return render_template('index.html', composer=composer, search_form=search_form, matching=matching)
     return render_template('index.html', search_form=search_form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/composers', methods=["POST"])
 def composers():
@@ -66,6 +91,6 @@ def composer(composer_name):
 def piece_detail(piece_title):
     piece_title = urllib.parse.unquote(piece_title)
     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
-    return jsonify({"succcess":True, "piece": piece})
+    return jsonify({"succcess": True, "piece": piece})
 
     

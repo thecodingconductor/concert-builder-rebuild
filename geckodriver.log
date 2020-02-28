@@ -2309,3 +2309,97 @@ JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-chi
 
 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
 
+1582675575842	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\trist\\AppData\\Local\\Temp\\rust_mozprofile.yjfdhESHS4wl"
+1582675656759	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\trist\\AppData\\Local\\Temp\\rust_mozprofile.bHL1Ri2LaHvq"
+1582675657019	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1582675657308	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1582675657308	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1582675657309	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1582675657309	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1582675658612	Marionette	INFO	Listening on port 60772
+1582675658772	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+JavaScript error: chrome://marionette/content/proxy.js, line 222: TypeError: this.browser.driver.dialogObserver is null
+JavaScript error: chrome://marionette/content/proxy.js, line 222: TypeError: this.browser.driver.dialogObserver is null
+1582675695162	Marionette	INFO	Stopped listening on port 60772
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1582675701270	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\trist\\AppData\\Local\\Temp\\rust_mozprofile.AMPuXUCMILai"
+1582675701525	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1582675701805	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1582675701805	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1582675701805	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1582675701805	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1582675703115	Marionette	INFO	Listening on port 60864
+1582675703283	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+JavaScript error: chrome://marionette/content/proxy.js, line 222: TypeError: this.browser.driver.dialogObserver is null
+JavaScript error: chrome://marionette/content/proxy.js, line 222: TypeError: this.browser.driver.dialogObserver is null
+1582687037365	Marionette	INFO	Stopped listening on port 60864
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+rmission: networkStatus
+1582686693052	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1582686693053	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1582686693053	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1582686693054	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1582686697118	Marionette	INFO	Listening on port 54228
+1582686697279	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+1582809466968	Marionette	INFO	Stopped listening on port 54228
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+ile" "C:\\Users\\trist\\AppData\\Local\\Temp\\rust_mozprofile.dewGKvbLfB3p"
+1582761015099	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1582761015384	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1582761015384	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1582761015385	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1582761015385	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1582761016773	Marionette	INFO	Listening on port 55883
+1582761016992	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+1582809138523	Marionette	INFO	Stopped listening on port 55883
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1582809182204	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\trist\\AppData\\Local\\Temp\\rust_mozprofile.HQZMVUMiDDUg"
+1582809183192	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1582809183483	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1582809183483	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1582809183483	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1582809183483	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1582809185304	Marionette	INFO	Listening on port 65079
+1582809185560	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+JavaScript error: https://daniels-orchestral.com/wp-content/themes/sparkling-child/om-global.js?ver=5.3.2, line 3: ReferenceError: jQuery is not defined
+1582809466873	Marionette	INFO	Stopped listening on port 65079
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+

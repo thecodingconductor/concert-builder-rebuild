@@ -175,3 +175,5 @@ def daniels_scrape():
                     # work_pubs = work_source.find_all(class_='workSource')
                     # work_pubs = [pub.text.strip() for pub in work_pubs]
                     # print(work_title, work_length, work_pubs)
+
+#daniels_scrape()
