@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>User: {{ user.username }}</h1>
+<hr>
+{% if user.comments %}
+{% for comment in user.comments %}
+<p>
+    {{ comment.author.username }} says: {{ comment.body }}
+</p>
+{% endfor %}
+{% endif %}
+{% endblock %}

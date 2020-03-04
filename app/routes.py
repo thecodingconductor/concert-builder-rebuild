@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, jsonify, request
 from app import app, db
 from werkzeug.urls import url_parse
 from daniels_scrape import daniels_scrape
-from app.forms import LoginForm, ComposerSearchForm, RegistrationForm
+from app.forms import LoginForm, ComposerSearchForm, RegistrationForm, PieceCommentForm
 from app.models import Composer, Piece, Publisher, User, Comment
 from flask_login import logout_user, login_required, current_user, login_user
 import urllib.parse
@@ -63,10 +63,13 @@ def register():
         flash('Congratulations, you are now a registered user.')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
 
 @app.route('/composers', methods=["POST"])
 def composers():
@@ -80,6 +83,15 @@ def composers():
 
 @app.route('/composer/<composer_name>', methods=["GET", "POST"])
 def composer(composer_name):
+
+    form = PieceCommentForm()
+    #TODO -- How to add a comment to the User, and the Piece?
+    if form.validate_on_submit():
+        comment = Comment(body=form.comment.data, author=current_user)
+        user = User.query.filter_by(username=current_user.username).first()
+       
+        flash('Your post is now live')
+        return redirect(url_for('composer', composer_name=))
 
     #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
     composer_name = urllib.parse.unquote(composer_name)
@@ -108,5 +120,11 @@ def piece_detail(piece_title):
     piece_title = urllib.parse.unquote(piece_title)
     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
     return jsonify({"succcess": True, "piece": piece})
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('user.html', user=user)
 
     

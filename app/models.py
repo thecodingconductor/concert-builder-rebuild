@@ -39,6 +39,10 @@ class User(UserMixin, db.Model):
     def add_favorite(self, piece):
         self.favorites.append(piece)
         db.session.commit()
+    
+    def add_comment(self, comment):
+        self.comments.append(comment)
+        db.session.commit()
 
     def add_studied(self, piece):
         self.studied.append(piece)
@@ -59,7 +63,8 @@ class Comment(db.Model):
     body = db.Column(db.String(1000), index=True, unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
+    
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
@@ -98,6 +103,7 @@ class Piece(db.Model):
     publishers = db.relationship('Publisher', backref='pieces', secondary=publisher_pieces, lazy='dynamic')
     composer_id = db.Column(db.Integer, db.ForeignKey('composer.id'))
     favorited_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comments = db.relationship('Comment', backref='piece', lazy='dynamic')
 
     def __repr__(self):
         return '<Piece {}'.format(self.title)
@@ -113,6 +119,11 @@ class Piece(db.Model):
                 "notes":self.notes,
                 "publishers": [pub.as_dict() for pub in self.publishers]
                 }
+
+    def add_comment(self, comment):
+        self.comments.append(comment)
+
+
 class Publisher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(244))

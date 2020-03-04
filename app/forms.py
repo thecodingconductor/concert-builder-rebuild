@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, TextAreaField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from app.models import User
 
@@ -29,3 +29,8 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+class PieceCommentForm(FlaskForm):
+    comment = TextAreaField('Say something about the piece!', validators=[
+        DataRequired(), Length(min=1)])
+    submit  = SubmitField('Submit')

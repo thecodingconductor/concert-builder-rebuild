@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             request.onload = () => {
                 
+                $(window).scrollTop(0);
                 const data = JSON.parse(request.responseText);
                 
                 console.log(data);
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const li = document.createElement('li');
                     li.innerHTML = contents;
                     document.querySelector("#piece-results").append(li);
+
 
                 }
                 else {
