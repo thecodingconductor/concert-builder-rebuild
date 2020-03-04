@@ -12,25 +12,26 @@
 </head>
 <body>
 <div class='container'>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navar-brand" href="{{ url_for('index') }}">Repertoire Database</a>
+    <ul class="nav">
+      {% if current_user.is_anonymous %}
+      <li class="nav-item">
+        <a class='nav-link' href="{{ url_for('login') }}">Login</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  {% block content %}{% endblock %}
 
     
-  <h1>Repertoire Database</h1>
-  
-    <form id="search-form">
-      {{ search_form.csrf_token }}
-      <div class="form-group">
-        <label id='search-label' for='search'>{{ search_form.search.label }}</label>
-        {{ search_form.search(size=32, class_='form-control', id='search-field') }}
-        {{ search_form.submit(class_='btn btn-primary')}}
-      </div>
-    </form>
-    <div id='test'></div>
-    <ul id='composer-results'>
-      
-      
-    </ul>
-
-  
-  </div>
 </body>
 </html>

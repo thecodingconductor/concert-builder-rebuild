@@ -1,6 +1,6 @@
-#!/home/tristanraissherman/Code/Projects/repertoire_database/venv/bin/python3
-# EASY-INSTALL-ENTRY-SCRIPT: 'alembic==1.4.0','console_scripts','alembic'
-__requires__ = 'alembic==1.4.0'
+#!/home/tristanraissherman/Code/repertoire_database/venv/bin/python3.7
+# EASY-INSTALL-ENTRY-SCRIPT: 'alembic==1.4.1','console_scripts','alembic'
+__requires__ = 'alembic==1.4.1'
 import re
 import sys
 from pkg_resources import load_entry_point
@@ -8,5 +8,5 @@ from pkg_resources import load_entry_point
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
     sys.exit(
-        load_entry_point('alembic==1.4.0', 'console_scripts', 'alembic')()
+        load_entry_point('alembic==1.4.1', 'console_scripts', 'alembic')()
     )

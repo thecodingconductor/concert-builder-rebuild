@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Repertoire Database</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-  
-  </head>
+{% extends "base.html" %}
+
+{% block content %}
 <body>
-  <h1>Repertoire Database</h1>
+  <h1>Welcome to Repertoire Database, {{ current_user.username }}</h1>
   <div class='container'>
     <form id="search-form">
       {{ search_form.csrf_token }}
@@ -25,5 +20,7 @@
 
   
   </div>
+
+{% endblock %}
 </body>
 </html>

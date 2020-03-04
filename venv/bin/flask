@@ -1,4 +1,4 @@
-#!/home/tristanraissherman/Code/Projects/repertoire_database/venv/bin/python3
+#!/home/tristanraissherman/Code/repertoire_database/venv/bin/python3.7
 
 # -*- coding: utf-8 -*-
 import re
