@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, ValidationError, EqualTo
+from wtforms.validators import DataRequired, ValidationError, EqualTo, Length
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -34,3 +34,6 @@ class PieceCommentForm(FlaskForm):
     comment = TextAreaField('Say something about the piece!', validators=[
         DataRequired(), Length(min=1)])
     submit  = SubmitField('Submit')
+
+class AddFavorite(FlaskForm):
+    add_fave = SubmitField('Add To Favorites')

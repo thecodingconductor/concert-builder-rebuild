@@ -85,13 +85,19 @@ def composers():
 def composer(composer_name):
 
     form = PieceCommentForm()
+    add_to_favorites = AddFavorite()
     #TODO -- How to add a comment to the User, and the Piece?
+
+    # FIGURE OUT HOW TO ADD FAVORITES.
+    #if add_to_favorites.validate_on_submit():
+     #   p = Piece
+
     if form.validate_on_submit():
         comment = Comment(body=form.comment.data, author=current_user)
         user = User.query.filter_by(username=current_user.username).first()
        
         flash('Your post is now live')
-        return redirect(url_for('composer', composer_name=))
+        return redirect(url_for('composer'))
 
     #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
     composer_name = urllib.parse.unquote(composer_name)
@@ -108,11 +114,11 @@ def composer(composer_name):
     try:
         matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
     except IndexError:
-        return render_template('composer.html', composer=composer)
+        return render_template('composer.html', composer=composer, form=form)
 
     
     
-    return render_template('composer.html', composer=composer, matching=matching)
+    return render_template('composer.html', composer=composer, matching=matching, form=form)
 
 
 @app.route('/piece_detail/<piece_title>', methods=["GET","POST"])
