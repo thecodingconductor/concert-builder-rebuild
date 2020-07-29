@@ -23,16 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 $(window).scrollTop(0);
                 const data = JSON.parse(request.responseText);
                 
-                console.log(data);
-                console.log(data.piece.title);
-                console.log(data["success"]);
-                console.log(data.length);
+                //console.log(data);
+                //console.log(data.piece.title);
+                //console.log(data["success"]);
+                //console.log(data.length);
                 
                 if (data.piece.title) {
-                    const contents = `${data.piece.title} <br>
-                                      ${data.piece.duration}<br>
-                                      ${data.piece.instrumentation}<br>
-                                      ${data.piece.notes}`;
+                    const contents = `<span id="piece_title">${data.piece.title}</span> <br>
+                                      <span id="piece_duration">${data.piece.duration}</span><br>
+                                      <span id="piece_instrumentation">${data.piece.instrumentation}</span><br>
+                                      <span id="piece_notes">${data.piece.notes}</span>`;
+                    if (data.piece.notes.length > 1) {
+                        for (let i=0; i < data.piece.notes.length; i++) {
+                            const operaNotes = `<span class="opera_notes">${data.piece.notes[i]}</span>`
+                            const li = document.createElement("li");
+                            li.innerHTML = operaNotes;
+                            document.querySelector("#piece-results").append(li);
+                        }
+                    }
+                                      //add publishers
+                    //for (let i=0; i < data.piece.publishers.length; i++){
+                      //  const publishers = 
+                    //}
                     const li = document.createElement('li');
                     li.innerHTML = contents;
                     document.querySelector("#piece-results").append(li);

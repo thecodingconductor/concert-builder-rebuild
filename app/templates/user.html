@@ -11,4 +11,27 @@
 </p>
 {% endfor %}
 {% endif %}
+{% if user.favorites %}
+<div class='favorites-list'>
+    <h1 id='faves'>User Favorites</h1>
+{% for favorite in user.favorites %}
+    <li class='favorite'>
+        <span class='piece_title'>{{ favorite.title }}</span>
+        <span class='piece_composer'>{{ favorite.composer}}</span>
+    </li>
+{% endfor %}
+</div>
+{% endif %}
+{% if user.studied %}
+<div class="studied-list">
+    <h1 id="studied">User Studied</h1>
+{% for studied in user.studied %}
+    <li class='favorite'>
+        <span class='piece_title'>{{ studied.title }}</span>
+        <span class='piece_composer'>{{ studied.composer }}</span>
+    </li>
+{% endfor %}
+</div>
+
+{% endif %}
 {% endblock %}

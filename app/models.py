@@ -22,8 +22,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(120), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    studied = db.Column(db.Boolean, nullable=True)
-    favorites = db.relationship('Piece', backref='favorite', lazy='dynamic')
+    studied = db.relationship('Piece', backref='studied', lazy='dynamic')
+    favorites = db.relationship('Piece', backref='favorite', secondary=favorited_pieces, lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
 
@@ -99,7 +99,7 @@ class Piece(db.Model):
     instrumentation = db.Column(db.String(400))
     soloists = db.Column(db.String(244))
     percussion = db.Column(db.String(244))
-    notes = db.Column(db.String(400))
+    notes = db.Column(db.String(1000))
     publishers = db.relationship('Publisher', backref='pieces', secondary=publisher_pieces, lazy='dynamic')
     composer_id = db.Column(db.Integer, db.ForeignKey('composer.id'))
     favorited_by = db.Column(db.Integer, db.ForeignKey('user.id'))

@@ -5,6 +5,7 @@ from daniels_scrape import daniels_scrape
 from app.forms import LoginForm, ComposerSearchForm, RegistrationForm, PieceCommentForm
 from app.models import Composer, Piece, Publisher, User, Comment
 from flask_login import logout_user, login_required, current_user, login_user
+from bs4 import BeautifulSoup
 import urllib.parse
 import requests
 import wikipedia
@@ -85,30 +86,15 @@ def composers():
 def composer(composer_name):
 
     form = PieceCommentForm()
-    add_to_favorites = AddFavorite()
-    #TODO -- How to add a comment to the User, and the Piece?
-
-    # FIGURE OUT HOW TO ADD FAVORITES.
-    #if add_to_favorites.validate_on_submit():
-     #   p = Piece
-
-    if form.validate_on_submit():
-        comment = Comment(body=form.comment.data, author=current_user)
-        user = User.query.filter_by(username=current_user.username).first()
-       
-        flash('Your post is now live')
-        return redirect(url_for('composer'))
-
-    #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
     composer_name = urllib.parse.unquote(composer_name)
     composer_name = composer_name.split('/')[-1]
 
-    
     composer = Composer.query.filter_by(name=composer_name).first_or_404()
     if composer == None:
             flash('No results. Try a different search')
             return render_template('index.html', search_form=search_form)
     
+    #get composer images
     last_name = composer.name.split(',')[0]
     composer_images = wikipedia.page(composer.name).images
     try:
@@ -117,7 +103,30 @@ def composer(composer_name):
         return render_template('composer.html', composer=composer, form=form)
 
     
-    
+    if form.validate_on_submit():
+        if form.submit_comment.data:
+            comment = Comment(body=form.comment.data, author=current_user)
+            user = User.query.filter_by(username=current_user.username).first()
+       
+            flash('Your post is now live')
+            return redirect(url_for('composer'))
+           
+        if form.add_fave.data:
+            soup = BeautifulSoup(page.text, 'html.parser')
+            piece_title = soup.find(id='piece-title')
+            p = Piece.query.filter_by(title=piece_title).first()
+            u = User.query.filter_by(username=current_user.username).first()
+            u.add_favorite(p)
+            flash('Piece added to your favorites list!')
+            
+        if form.add_studied.data:
+            soup = BeautifulSoup(page.text, 'html.parser')
+            piece_title = soup.find(id='piece-title')
+            p = Piece.query.filter_by(title=piece_title).first()
+            u = User.query.filter_by(username=current_user.username).first()
+            u.add_studied(p)
+            flash('Piece added to your Studied List!')
+    #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
     return render_template('composer.html', composer=composer, matching=matching, form=form)
 
 
@@ -126,6 +135,11 @@ def piece_detail(piece_title):
     piece_title = urllib.parse.unquote(piece_title)
     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
     return jsonify({"succcess": True, "piece": piece})
+
+#@app.route('/add_piece/<piece_title>', methods=["POST"])
+#def add_piece(piece_title):
+    
+
 
 @app.route('/user/<username>')
 @login_required

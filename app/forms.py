@@ -31,9 +31,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 class PieceCommentForm(FlaskForm):
-    comment = TextAreaField('Say something about the piece!', validators=[
-        DataRequired(), Length(min=1)])
-    submit  = SubmitField('Submit')
-
-class AddFavorite(FlaskForm):
-    add_fave = SubmitField('Add To Favorites')
+    comment = TextAreaField('Say something about the piece!')
+    submit_comment = SubmitField('Submit Comment')
+    add_fave = SubmitField("Add to Favorites")
+    add_studied = SubmitField("Add to Pieces Studied List")
