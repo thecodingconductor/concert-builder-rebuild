@@ -1,8 +1,9 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const pieceList = document.querySelectorAll(".piece-link");
-
-    
+    const addFave = document.getElementById('add_fave');
 
     for (let i=0; i < pieceList.length; i++) {
 
@@ -23,10 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 $(window).scrollTop(0);
                 const data = JSON.parse(request.responseText);
                 
-                //console.log(data);
-                //console.log(data.piece.title);
-                //console.log(data["success"]);
-                //console.log(data.length);
+                
                 
                 if (data.piece.title) {
                     const contents = `<span id="piece_title">${data.piece.title}</span> <br>
@@ -65,6 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
+//Add to Favorites
+function addToFavorites() {
+    const favesRequest = new XMLHttpRequest();
+    let pieceTitle = document.getElementById('piece_title');
+    console.log(pieceTitle);
+}
+
     // $('a').each(function() {
         
     //     var newUrl = $(this).attr("href").replace("#", `/piece_detail/${$(this).text}`);
@@ -76,3 +81,5 @@ document.addEventListener('DOMContentLoaded', () => {
 //         console.log(pieceName);
 //     })
 // }
+
+addFave.addEventListener('click', addToFavorites);

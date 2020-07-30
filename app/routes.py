@@ -136,6 +136,12 @@ def piece_detail(piece_title):
     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
     return jsonify({"succcess": True, "piece": piece})
 
+@app.route('/add_favorite/<piece_title>', methods=["GET", "POST"])
+def add_favorite(piece_title):
+    piece_title = urllib.parse.unquote(piece_title)
+    piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first().as_dict()
+    return jsonify({"success": True, "piece": piece})
+
 #@app.route('/add_piece/<piece_title>', methods=["POST"])
 #def add_piece(piece_title):
     
