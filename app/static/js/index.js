@@ -23,17 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
             //make AJAX request to Database
             const request = new XMLHttpRequest();
             const search = document.querySelector("#search-field").value;
+            console.log(search);
             request.open('POST', '/composers');
 
             //handle the JSON response from Flask
             request.onload = () => {
 
                 const data = JSON.parse(request.response);
+                console.log('data', data);
                 //if request was successful, create list of links
                 if (data.success) {
                 
                   const composer_data = JSON.parse(data.composers);
-                
+                  console.log('composer_data', composer_data);
                   for (let i=0; i < composer_data.length; i++) {
                     const li = document.createElement('li');
                     li.innerHTML = `<a class="composerLinks" href="composer/${composer_data[i].name}">${composer_data[i].name}</a>`; 
@@ -48,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
 
             const data = new FormData();
+            console.log('whats happening first?', data);
             data.append('search-field', search);
 
             request.send(data);
