@@ -88,7 +88,7 @@ def composers():
 def composer(composer_name):
 
     form = PieceCommentForm()
-    add_to_favorites = AddToFavorites()
+    
     composer_name = urllib.parse.unquote(composer_name)
     composer_name = composer_name.split('/')[-1]
 
@@ -105,7 +105,7 @@ def composer(composer_name):
         matching = 'https://via.placeholder.com/300'
     try:
         matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-    except IndexError:
+    except:
         return render_template('composer.html', composer=composer, form=form)
 
     
@@ -117,15 +117,17 @@ def composer(composer_name):
             flash('Your post is now live')
             return redirect(url_for('composer'))
 
-    if add_to_favorites.validate_on_submit():
+    # if add_to_favorites.validate_on_submit():
 
-        if form.add_fave.data:
-            soup = BeautifulSoup(page.text, 'html.parser')
-            piece_title = soup.find(id='piece-title')
-            p = Piece.query.filter_by(title=piece_title).first()
-            u = User.query.filter_by(username=current_user.username).first()
-            u.add_favorite(p)
-            flash('Piece added to your favorites list!')
+    #     if form.add_fave.data:
+    #         soup = BeautifulSoup(page.text, 'html.parser')
+    #         piece_title = soup.find(id='piece-title')
+    #         p = Piece.query.filter_by(title=piece_title).first()
+    #         u = User.query.filter_by(username=current_user.username).first()
+    #         print(p)
+    #         print(u)
+            #u.add_favorite(p)
+            #flash('Piece added to your favorites list!')
             
     #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
     return render_template('composer.html', composer=composer, matching=matching, form=form)
@@ -137,11 +139,15 @@ def piece_detail(piece_title):
     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
     return jsonify({"succcess": True, "piece": piece})
 
-@app.route('/add_favorite/<piece_title>', methods=["GET", "POST"])
+@app.route('/add_favorite/<piece_title>', methods=["POST"])
 def add_favorite(piece_title):
     piece_title = urllib.parse.unquote(piece_title)
-    piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first().as_dict()
-    return jsonify({"success": True, "piece": piece})
+    print(piece_title)
+    piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
+    u = User.query.filter_by(username=current_user.username).first()
+    u.add_favorite(piece)
+    
+    return jsonify({"success": True, "message": "Piece added to favorites!"})
 
 #@app.route('/add_piece/<piece_title>', methods=["POST"])
 #def add_piece(piece_title):
