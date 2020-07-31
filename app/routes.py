@@ -142,7 +142,7 @@ def piece_detail(piece_title):
 @app.route('/add_favorite/<piece_title>', methods=["POST"])
 def add_favorite(piece_title):
     piece_title = urllib.parse.unquote(piece_title)
-    print(piece_title)
+    
     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
     u = User.query.filter_by(username=current_user.username).first()
     u.add_favorite(piece)
@@ -160,4 +160,18 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
 
+@app.route('/user/get_favorites/<username>')
+@login_required
+def get_favorites(username):
+    user = User.query.filter_by(username=username).first()
+    print(user)
+    #favorites = user.favorites
+    #faves_list = []
+    #for f in favorites:
+    #    faves_list.append(f)
+    return jsonify({"success": True, "favorites": "result"})
+
+
+
     
+#json.dumps(faves_list)

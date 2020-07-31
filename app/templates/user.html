@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>User: {{ user.username }}</h1>
+<h1 class="no-show" id="no-show">{{user.username}}</h1>
 <hr>
 {% if user.comments %}
 {% for comment in user.comments %}
@@ -11,9 +12,15 @@
 </p>
 {% endfor %}
 {% endif %}
-{% if user.favorites %}
+
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}
+
+<!--
+    {% if user.favorites %}
 <div class='favorites-list'>
     <h1 id='faves'>User Favorites</h1>
+    <ul class="draggable-list" id="draggable-list"></ul>
 {% for favorite in user.favorites %}
     <li class='favorite'>
         <span class='piece_title'>{{ favorite.title }}</span>
@@ -22,4 +29,4 @@
 {% endfor %}
 </div>
 {% endif %}
-{% endblock %}
+-->
