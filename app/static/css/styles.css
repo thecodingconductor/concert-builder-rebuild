@@ -24,3 +24,14 @@
 .no-show{
     display: none;
 }
+
+.draggable-list {
+    list-style-type: none; 
+}
+
+.favorite {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #000;
+}

@@ -160,16 +160,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
 
-@app.route('/user/get_favorites/<username>')
-@login_required
-def get_favorites(username):
-    user = User.query.filter_by(username=username).first()
-    print(user)
-    #favorites = user.favorites
-    #faves_list = []
-    #for f in favorites:
-    #    faves_list.append(f)
-    return jsonify({"success": True, "favorites": "result"})
+
 
 
 
