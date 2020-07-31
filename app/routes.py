@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, jsonify, request
 from app import app, db
 from werkzeug.urls import url_parse
 from daniels_scrape import daniels_scrape
-from app.forms import LoginForm, ComposerSearchForm, RegistrationForm, PieceCommentForm
+from app.forms import LoginForm, ComposerSearchForm, RegistrationForm, PieceCommentForm, AddToFavorites
 from app.models import Composer, Piece, Publisher, User, Comment
 from flask_login import logout_user, login_required, current_user, login_user
 from bs4 import BeautifulSoup
@@ -26,9 +26,11 @@ def index():
             return render_template('index.html', search_form=search_form)
 
         last_name = composer.name.split(',')[0]
-        composer_images = wikipedia.page(composer.name).images
-        matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-
+        try:
+            composer_images = wikipedia.page(composer.name).images
+            matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
+        except:
+            matching = 'https://via.placeholder.com/300'
         
         return render_template('index.html', composer=composer, search_form=search_form, matching=matching)
     return render_template('index.html', search_form=search_form)
@@ -86,6 +88,7 @@ def composers():
 def composer(composer_name):
 
     form = PieceCommentForm()
+    add_to_favorites = AddToFavorites()
     composer_name = urllib.parse.unquote(composer_name)
     composer_name = composer_name.split('/')[-1]
 
@@ -96,7 +99,10 @@ def composer(composer_name):
     
     #get composer images
     last_name = composer.name.split(',')[0]
-    composer_images = wikipedia.page(composer.name).images
+    try:
+        composer_images = wikipedia.page(composer.name).images
+    except: 
+        matching = 'https://via.placeholder.com/300'
     try:
         matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
     except IndexError:
@@ -110,7 +116,9 @@ def composer(composer_name):
        
             flash('Your post is now live')
             return redirect(url_for('composer'))
-           
+
+    if add_to_favorites.validate_on_submit():
+
         if form.add_fave.data:
             soup = BeautifulSoup(page.text, 'html.parser')
             piece_title = soup.find(id='piece-title')
@@ -119,13 +127,6 @@ def composer(composer_name):
             u.add_favorite(p)
             flash('Piece added to your favorites list!')
             
-        if form.add_studied.data:
-            soup = BeautifulSoup(page.text, 'html.parser')
-            piece_title = soup.find(id='piece-title')
-            p = Piece.query.filter_by(title=piece_title).first()
-            u = User.query.filter_by(username=current_user.username).first()
-            u.add_studied(p)
-            flash('Piece added to your Studied List!')
     #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
     return render_template('composer.html', composer=composer, matching=matching, form=form)
 

@@ -3,7 +3,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const pieceList = document.querySelectorAll(".piece-link");
-    const addFave = document.getElementById('add_fave');
+    const submitForm = document.getElementById('form-submit');
+
 
     for (let i=0; i < pieceList.length; i++) {
 
@@ -82,4 +83,3 @@ function addToFavorites() {
 //     })
 // }
 
-addFave.addEventListener('click', addToFavorites);

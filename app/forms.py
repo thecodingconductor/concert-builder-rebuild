@@ -33,5 +33,7 @@ class RegistrationForm(FlaskForm):
 class PieceCommentForm(FlaskForm):
     comment = TextAreaField('Say something about the piece!')
     submit_comment = SubmitField('Submit Comment')
-    add_fave = SubmitField("Add to Favorites")
     add_studied = SubmitField("Add to Pieces Studied List")
+
+class AddToFavorites(FlaskForm):
+    add_fave = SubmitField("Add to Favorites")

@@ -58,8 +58,6 @@ function getResults() {
 
 
 searchField.addEventListener('keyup', () => {
-    
     clearList();
     getResults();
-
 })

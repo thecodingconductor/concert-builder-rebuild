@@ -31,7 +31,7 @@
           
         </ul>
         <div id="comment-box">
-          <form action="" method="post">
+          <form id="form-submit" method="post">
             {{ form.hidden_tag() }}
             <p>
               {{ form.comment.label }}<br>
@@ -58,6 +58,8 @@
 
         
     </div>
+
+    <script src="{{ url_for('static', filename='js/composer-test.js') }}"></script>
 
     {% endblock %}
       
