@@ -35,3 +35,7 @@
     justify-content: space-between;
     border: 1px solid #000;
 }
+
+.favorite.over {
+    background-color: #eaeaea;
+}
