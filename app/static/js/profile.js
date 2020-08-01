@@ -1,11 +1,11 @@
 const draggables = document.querySelectorAll('.favorite');
-const addPiece = document.getElementById('add-piece');
+const addPieces = document.querySelectorAll('.add-piece');
 const concertPieceList = document.getElementById('concert-list');
 let dragStartIndex;
 
+
 //Add data-index to each list item
 draggables.forEach((piece, index) => {
-    
     piece.setAttribute('data-index', index);
 });
 
@@ -45,7 +45,7 @@ draggables.forEach((piece, index) => {
 // }
 
 // function dragDrop() {
-//     console.ll
+//
 // }
 
 // function addEventListeners() {
@@ -54,19 +54,21 @@ draggables.forEach((piece, index) => {
 //         item.addEventListener('dragstart', dragStart);
 //         item.addEventListener('dragover', dragOver);
 //         item.addEventListener('drop', dragDrop);
-//         item.addEventListener('dragenter', dragEnter);
+//         item.addEvenistener('dragenter', dragEnter);
 //         item.addEventListener('dragleave', dragLeave);
 //     })
 // }
 
 function addPieceToConcert(e){
+    console.log('WHAT THE FLYING FUCK???');
     console.log(e.target);
     const concertItem = e.target.parentElement;
     console.log(concertItem);
     console.log(concertPieceList);
-    //concertPieceList.appendChild(concertItem);
+    concertPieceList.appendChild(concertItem);
+    console.log(concertPieceList);
+};
 
-
-}
-
-addPiece.addEventListener('click', addPieceToConcert);
+addPieces.forEach(piece => {
+    piece.addEventListener('click', addPieceToConcert);
+});
