@@ -21,9 +21,12 @@
         {% for favorite in user.favorites %}
         <li class='favorite' draggable="true">
             <div class="favorite-info">
-                <span class='piece_title'>{{ favorite.title }}</span>
-                <span class='piece_composer'>{{ favorite.composer.name}}</span>
+                <p class='piece_title'>{{ favorite.title }}</p>
+                <p class='piece_composer'>{{ favorite.composer.name}}</p>
+                <p class="piece_duration">{{ favorite.duration }}</p>
+                <p class="piece_instrumentation">{{ favorite.instrumentation }}</p>
             </div>
+            <button class="add-piece" id="add-piece">Add Piece to Concert</button>
             <i class="fas fa-grip-lines"></i>
         </li>
         {% endfor %}
@@ -32,6 +35,16 @@
 
 </div>
 {% endif %}
+
+<div class="concert-builder-container">
+    <div class="drop-area">
+
+    </div>
+    <div class="text-area">
+
+    </div>
+    
+</div>
 
     <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 {% endblock %}

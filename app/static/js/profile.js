@@ -7,21 +7,29 @@ draggables.forEach((piece, index) => {
     piece.setAttribute('data-index', index);
 });
 
+addEventListeners();
+
 
 function dragStart() {
+    console.log('event', 'drag start');
     dragStartIndex = +this.closest('li').getAttribute('data-index');
+    console.log(dragStartIndex)
 }
 
 function dragEnter() {
-    this.clasList.add('over');
+    console.log('event', 'drag enter');
+    this.classList.add('over');
 }
 
 function dragLeave() {
+    console.log('event', 'drag leave');
     this.classList.remove('over');
 }
 
 function dragOver() {
+    
     const dragEndIndex = +this.getAttribute('data-index');
+    console.log(dragEndIndex);
     swapItems(dragStartIndex, dragEndIndex);
     this.classList.remove('over');
 }
@@ -34,6 +42,9 @@ function swapItems(fromIndex, toIndex) {
     draggables[toIndex].appendChild(itemOne);
 }
 
+function dragDrop() {
+    console.ll
+}
 
 function addEventListeners() {
    

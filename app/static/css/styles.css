@@ -39,3 +39,8 @@
 .favorite.over {
     background-color: #eaeaea;
 }
+
+.drop-area {
+    height: 50vh;
+    border: 1px solid #000;
+}
