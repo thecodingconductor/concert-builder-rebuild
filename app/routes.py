@@ -80,7 +80,7 @@ def composers():
     composer_name = request.form.get("search-field")
     res = Composer.query.filter(Composer.name.ilike(f"%{composer_name}%")).all()
     list_composers = json.dumps([{"name": composer.name} for composer in res])
-
+    #list composers is a string [{"name": "Charpentier, Marc-Antoine"}] for example
     return jsonify({"success": True, "composers": list_composers})
 
 
@@ -141,8 +141,8 @@ def piece_detail(piece_title):
 
 @app.route('/add_favorite/<piece_title>', methods=["POST"])
 def add_favorite(piece_title):
+
     piece_title = urllib.parse.unquote(piece_title)
-    
     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
     u = User.query.filter_by(username=current_user.username).first()
     u.add_favorite(piece)
@@ -159,10 +159,6 @@ def add_favorite(piece_title):
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
-
-
-
-
 
     
 #json.dumps(faves_list)
