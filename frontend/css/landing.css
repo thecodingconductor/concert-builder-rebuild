@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+:root {
+    --header-background: #4257b2;
+    --hero-background: #3b4c9b;
+    --primary-button-background: #3ccfcf;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing-nav {
+    width: 100%;
+    height: 5rem;
+    background-color: var(--header-background);
+    display: flex;
+    align-items: center;
+}
+
+.site-title {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-nav-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    justify-content: space-evenly;
+}
+
+.nav-left li {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.nav-left li > * {
+    margin: 2px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+
+.nav-right li {
+    margin: 10px;
+}
+
+.primary-btn {
+    background-color: var(--primary-button-background);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+.primary-btn.sign-up-btn {
+    
+}
+
+.hero-container {
+    width: 100%;
+    flex: 1;
+    background-color: var(--hero-background);
+    display: flex;
+    align-items: center;
+}
+
+.content-container-left {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.primary-btn.get-started-btn {
+    margin-bottom: 20px;
+}
+
+.teacher-parent-links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.teacher-parent-links a {
+    font-size: 1.2rem;
+    color: var(--primary-button-background);
+    text-decoration: none;
+}
+
+.image-carousel-container {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.image-carousel {
+    height: 75%;
+    background-color: #fff;
+}
+
+.image-carousel img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.image-description {
+    flex: 1;
+    width: 100%;
+    background-color: var(--header-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
