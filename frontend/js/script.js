@@ -1,0 +1,1 @@
+//https://www.googleapis.com/customsearch/v1?q=${search}&
