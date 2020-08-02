@@ -55,6 +55,11 @@ body {
     display: flex;
     align-items: center;
     margin: 10px;
+    cursor: pointer;
+}
+
+.nav-left li:hover, .nav-right li:hover {
+    color: rgba(189, 195, 199, 0.8);
 }
 
 .nav-left li > * {
@@ -69,6 +74,7 @@ body {
 
 .nav-right li {
     margin: 10px;
+    cursor: pointer;
 }
 
 .primary-btn {
@@ -148,3 +154,84 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+
+.modal-container {
+    /* CSS change in JS */
+    display: none;
+    align-items:center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.sign-up-container {
+    height: 90%;
+    width: 40%;
+    background-color: #fff;
+    color: grey;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.third-party-buttons {
+    margin: auto;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.secondary-btn {
+    background-color: #fff;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+.sign-up-form {
+
+    margin: auto;
+    height: 85%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#close-modal {
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.register-btn, .login-btn {
+    width: 100%;
+}
+
+.register-btn {
+    background-color: grey;
+}
+
+.login-btn {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid grey;
+}
+
+.login-btn a {
+    color: var(--primary-button-background);
+}
+
