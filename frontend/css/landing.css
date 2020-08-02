@@ -58,7 +58,8 @@ button {
 
 .nav-left li {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    justify-content: center;
     margin: 10px;
     cursor: pointer;
 }
