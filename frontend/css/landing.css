@@ -24,9 +24,14 @@ body {
     background-color: var(--main-background);
 }
 
+a {
+    text-decoration: none;
+}
+
 button {
     font-family: 'Lato', sans-serif;
     cursor: pointer;
+    border-radius: 0.25rem;
 }
 
 .landing-nav {

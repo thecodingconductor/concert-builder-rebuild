@@ -27,6 +27,7 @@
   height: 100%;
   width: 25%;
   background-color: #fff;
+  padding-top: 50px;
 }
 
 .left-menu-items {
@@ -70,7 +71,15 @@
   color: #000;
 }
 
+.header-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
 
+.header-row a {
+    color: var(--primary-button-background);
+}
 
 .search-results {
   width: 100%;
@@ -79,14 +88,24 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.composer-name {
+    
+    
+}
+
 .search-result {
   position: relative;
   background-color: #fff;
   border-radius: 0.25rem;
+  padding: 20px;
 }
 
 .search-result:hover {
     border-bottom: 4px solid #facd21;
+
+}
+
+.visit-page {
 
 }
 
@@ -95,7 +114,7 @@
   height: 60px;
   width: 60px;
   border-radius: 50%;
-  right: 35%;
+  right: 20%;
   top: 50%;
 }
 
@@ -105,4 +124,10 @@
   height: 10%;
 
   bottom: 0;
+}
+
+
+
+.your-recent-concerts.hide {
+    display: none;
 }
