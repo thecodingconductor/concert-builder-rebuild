@@ -42,6 +42,10 @@ button {
     align-items: center;
 }
 
+.landing-nav p {
+    font-size: 1.2rem;
+}
+
 .site-title {
     width: 20%;
     display: flex;
