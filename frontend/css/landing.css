@@ -341,7 +341,8 @@ button {
 }
 
 #browse-modal {
-    display: flex;
+    /* CHANGE WITH JAVASCIPT */
+    display: none;
     align-items: center;
     justify-content: flex-start;
 }
@@ -370,6 +371,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 100%;
     overflow-y: scroll;
 }
 
