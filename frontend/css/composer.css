@@ -1,21 +1,30 @@
+/* FIX IMAGE */
+/* FIX SCROLL ON PIECE LIST */
+
 .composer-top {
   width: 100%;
   flex: 1;
   background-color: lightblue;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  
+}
+
+.composer-top, .composer-bottom {
+    color: #000;
 }
 
 .composer-wrap {
   height: 200px;
   width: 200px;
+  margin: 0 80px;
   position: relative;
   border-radius: 50%;
   overflow: hidden;
   object-fit: cover;
-  background: lightcoral;
-  background-image: url(img/JohannesBrahms.jpg);
+  
+  background-image: url('../img/JohannesBrahms.jpg');
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
@@ -23,14 +32,14 @@
 .composer-bottom {
   width: 100%;
   flex: 2;
-  background-color: lightcyan;
+  
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
 .composer-piece-list {
-  background-color: #fff;
+  
   height: 100%;
   max-height: 100%;
   flex: 1;
@@ -50,7 +59,7 @@
 }
 
 .piece-details {
-  background-color: lightseagreen;
+ 
   flex: 1;
   width: 100%;
 }
@@ -67,9 +76,11 @@
 }
 
 .user-interaction-area {
-  background-color: lightgoldenrodyellow;
+  
   flex: 1;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .piece-list {
@@ -86,4 +97,20 @@
   display: flex;
   align-items: center;
   border: 1px solid black;
+}
+
+#user-comment {
+    font-family: 'Lato', sans-serif;
+    flex: 1;
+    margin: 20px 20px 0 20px;
+    resize: none;
+    outline: none;
+    
+}
+
+.user-buttons {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-evenly;
 }
