@@ -4,6 +4,7 @@ const logInNav = document.getElementById('login-nav');
 const signUpButton = document.getElementById('sign-up-btn');
 const getStarted = document.getElementById('get-started-btn');
 const search = document.getElementById('search');
+const rightNavContainer = document.getElementById('right-nav-container');
 const logInOpen = document.getElementById('login-nav');
 const signUpOpen = document.getElementById('sign-up-btn');
 const signUpModal = document.getElementById('sign-up-modal');
@@ -33,7 +34,7 @@ function closeModal(e) {
 }
 
 function showSearch() {
-
+    rightNavContainer.style.display = 'none';
 }
 
 getStarted.addEventListener('click', openModal);

@@ -23,6 +23,7 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: var(--main-background);
+    overflow:hidden;
 }
 
 a {
@@ -337,4 +338,53 @@ button {
 .primary-btn.big-login-btn {
     
     width: 100%;
+}
+
+#browse-modal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.browse-modal-area {
+    height: 100%;
+    width: 35%;
+    background-color: #fff;
+}
+
+.browse-header i {
+    margin-right: 20px;
+    border: 3px solid grey;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+.browse-header {
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.browse-composers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.letter {
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+}
+
+.letter h1  {
+    flex: 4;
+}
+
+.letter-composers {
+    flex: 2;
 }
