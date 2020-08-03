@@ -67,7 +67,6 @@
   height: 90%;
   width: 90%;
   margin: auto;
-  
   color: #000;
 }
 
@@ -79,6 +78,16 @@
 
 .header-row a {
     color: var(--primary-button-background);
+    display: flex;
+    align-items: center;
+}
+
+.header-row a:hover {
+  color: var(--gold);
+}
+
+.header-row i {
+  margin-left: 10px;
 }
 
 .search-results {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/landing.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
-    <title>Concert Builder</title>
+    <title>Concert Builder - Landing</title>
 </head>
 <body>
     <nav class="landing-nav">
@@ -59,9 +59,9 @@
         </div>
     </div>
 
-    <div class="modal-container">
+    <div class="modal-container" id="sign-up-modal">
         <div class="sign-up-container">
-            <i class="fa fa-times fa-2x" id="close-modal"></i>
+            <i class="fa fa-times fa-2x" id="close-sign-up"></i>
             <div class="third-party-buttons">
                 <button class="secondary-btn">
                     <i class="fas fa-google"></i>
@@ -107,11 +107,11 @@
         </div>
     </div>
 
-    <div class="modal-container">
+    <div class="modal-container" id="sign-in-modal">
         <div class="sign-up-container sign-in-container">
             <div class="sign-in-header">
                 <h1>Log in</h1>
-                <i class="fa fa-times fa-2x"></i>
+                <i class="fa fa-times fa-2x" id="close-sign-in"></i>
             </div>
             <div class="sign-in-form-area">
                 <div class="sign-in-buttons">
@@ -144,4 +144,5 @@
             </div>
         </div>
     </div>
+    <script src="js/landing.js"></script>
 </body>

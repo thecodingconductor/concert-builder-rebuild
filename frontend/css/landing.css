@@ -5,6 +5,7 @@
     --hero-background: #3b4c9b;
     --primary-button-background: #3ccfcf;
     --main-background: #f6f7fb;
+    --gold: #facd21;
 }
 
 
@@ -193,7 +194,7 @@ button {
     color: grey;
     position: relative;
     /* Change flex/none */
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     
@@ -224,9 +225,13 @@ button {
     justify-content: space-evenly;
 }
 
-#close-modal {
+#close-sign-in {
     align-self: flex-end;
     margin-right: 10px;
+}
+
+#close-sign-in, #close-sign-up {
+    cursor: pointer;
 }
 
 .form-field {
