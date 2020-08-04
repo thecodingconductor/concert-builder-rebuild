@@ -202,6 +202,11 @@ button {
     
 }
 
+.sign-up-container > i {
+    align-self: flex-end;
+    margin-right: 1rem;
+}
+
 .third-party-buttons {
     margin: auto;
     width: 90%;
@@ -214,6 +219,21 @@ button {
     background-color: #fff;
     border: 2px solid grey;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-size: 1rem;
+    margin: 1rem;
+}
+
+.secondary-btn img {
+    height: 1rem;
+    width: 1rem;
+}
+
+.secondary-btn p {
+    margin: 1rem;
 }
 
 .sign-up-form {
@@ -227,10 +247,27 @@ button {
     justify-content: space-evenly;
 }
 
-#close-sign-in {
-    align-self: flex-end;
-    margin-right: 10px;
+.select-container {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    
 }
+
+.select-container select {
+    padding: .75rem 2rem .75rem .3rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: var(--primary-button-background);
+    border: 2px grey solid;
+    background: #fff;
+    border-radius: 5px;
+   
+}
+
+
 
 #close-sign-in, #close-sign-up {
     cursor: pointer;
@@ -244,14 +281,27 @@ button {
 
 .form-field label {
     text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: .2rem;
+}
+
+.form-field input {
+    margin-top: 1rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    padding: 1rem;
+    border: 2px solid grey;
+    border-radius: 5px;
+    color: #c2c6d4;
 }
 
 .register-btn, .login-btn {
     width: 100%;
+    font-size: 1rem;
 }
 
 .register-btn {
-    background-color: grey;
+    background-color: #c2c6d4;
 }
 
 .login-btn {
@@ -273,11 +323,12 @@ button {
 
 .sign-in-header {
     width: 100%;
-    height: 10%;
+    height: 15%;
     background-color: var(--header-background);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: #fff;
 }
 
 .sign-in-header h1 {
@@ -286,9 +337,13 @@ button {
 
 .sign-in-header i {
     margin-right: 20px;
-    border: 3px solid grey;
+    border: 3px solid rgba(0,0,0,0.1);
     border-radius: 50%;
-    padding: 7px;
+    padding: .50rem;
+}
+
+.sign-in-header i:hover {
+    background: rgba(0,0,0,0.1);
 }
 
 .sign-in-form-area {
@@ -308,7 +363,9 @@ button {
 
 .sign-in-buttons .secondary-btn {
     width: 100%;
-    margin: 30px 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: .1rem;
 }
 
 .sign-in-form-fields {
@@ -330,15 +387,17 @@ button {
     position: relative;
 }
 
-.sign-in-form-fields .form-field:last-of-type p {
+.sign-in-form-fields p {
     position: absolute;
     right: 0;
-    top: 5px;
+    top: 62%;
 }
 
 .primary-btn.big-login-btn {
-    
+
     width: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 #browse-modal {
