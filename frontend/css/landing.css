@@ -381,6 +381,12 @@ button {
     border: 0;
     outline: 0;
     border-bottom: 2px solid #000;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.sign-in-form-fields .form-field input:focus {
+    border-bottom: 2px solid var(--gold);
 }
 
 .sign-in-form-fields .form-field:last-of-type {
