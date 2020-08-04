@@ -108,14 +108,20 @@
   border-radius: 0.25rem;
   padding: 20px;
 }
-
+/*
 .search-result:hover {
     border-bottom: 4px solid #facd21;
 
 }
+*/
 
-.visit-page {
-
+.hover-gold {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: .5rem;
+  background-color: var(--gold);
 }
 
 .composer-img {
