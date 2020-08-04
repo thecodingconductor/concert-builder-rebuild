@@ -15,6 +15,9 @@ const browse = document.getElementById('browse');
 const browseModal = document.getElementById('browse-modal');
 const browseModalArea = document.getElementById('browse-modal-area');
 const closeBrowse = document.getElementById('close-browse');
+const searchBarOverlay = document.getElementById('search-bar-overlay');
+const closeSearch = document.getElementById('close-search')
+
 
 function openModal(e) {
     if(e.target.textContent.trim() === 'Log In') {
@@ -39,11 +42,18 @@ function closeModal(e) {
 
 function showSearch() {
     rightNavContainer.style.display = 'none';
+    searchBarOverlay.style.display = 'flex';
+
+}
+
+function closeSearchField() {
+    searchBarOverlay.style.display = 'none';
+    rightNavContainer.style.display = 'flex';
 }
 
 function showBrowse() {
     browseModal.style.display = 'flex';
-    browseModalArea.classList.add('show');
+    browseModalArea.style.transform = 'translateX(0)';
 }
 
 
@@ -52,11 +62,13 @@ getStarted.addEventListener('click', openModal);
 logInOpen.addEventListener('click', openModal);
 signUpOpen.addEventListener('click', openModal);
 search.addEventListener('click', showSearch);
+closeSearch.addEventListener('click', closeSearchField);
 closeSignUp.addEventListener('click', closeModal);
 closeSignIn.addEventListener('click', closeModal);
 browse.addEventListener('click', showBrowse);
 closeBrowse.addEventListener('click', () => {
     browseModalArea.classList.remove('show');
     browseModal.style.display  = 'none';
-})
+});
+
 

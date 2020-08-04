@@ -97,6 +97,27 @@ button {
     cursor: pointer;
 }
 
+.search-bar-overlay {
+    display: none;
+    align-items: center;
+    width: 60%;
+}
+
+.search-bar-field {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    line-height: 1.3rem;
+    color: #fff;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+
+.fa.fa-times.close-search {
+    cursor: pointer;
+}
+
 .primary-btn {
     background-color: var(--primary-button-background);
     color: white;
@@ -416,6 +437,12 @@ button {
 
 
 
+/*.browse-modal-area.show {
+    transition: all 1s ease;
+    transform: translateX(0);
+}
+*/
+
 .browse-modal-area {
     height: 100%;
     width: 35%;
@@ -423,14 +450,11 @@ button {
     position: fixed;
     top: 0;
     left: 0;
-    transition: transform 0.3s ease;
+    transition: transform 1s ease;
     transform: translateX(-100%);
 }
 
 
-.browse-modal-area.show {
-    transform: translateX(0);
-}
 
 .browse-header i {
     margin-right: 20px;
