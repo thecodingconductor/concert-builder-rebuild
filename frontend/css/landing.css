@@ -129,9 +129,6 @@ button {
     outline: none;
 }
 
-.primary-btn.sign-up-btn {
-    
-}
 
 .hero-container {
     width: 100%;
@@ -437,11 +434,11 @@ button {
 
 
 
-/*.browse-modal-area.show {
-    transition: all 1s ease;
+.browse-modal-area.show {
+    transition: transform 0.3s ease;
     transform: translateX(0);
 }
-*/
+
 
 .browse-modal-area {
     height: 100%;
@@ -450,7 +447,7 @@ button {
     position: fixed;
     top: 0;
     left: 0;
-    transition: transform 1s ease;
+    /*transition: transform 1s ease;*/
     transform: translateX(-100%);
 }
 

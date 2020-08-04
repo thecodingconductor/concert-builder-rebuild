@@ -53,7 +53,10 @@ function closeSearchField() {
 
 function showBrowse() {
     browseModal.style.display = 'flex';
-    browseModalArea.style.transform = 'translateX(0)';
+    setTimeout(() => {
+        browseModalArea.classList.add('show');
+    }, 300);
+    
 }
 
 
