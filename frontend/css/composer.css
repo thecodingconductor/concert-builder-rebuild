@@ -47,6 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   
 }
 
@@ -86,20 +87,28 @@
 
 .piece-list {
     list-style-type: none;
-    width: 100%;
+    width: 90%;
     max-height: 100%;
     height: 100%;
     padding: 0;
+    border: 3px solid grey;
+    border-radius: 5px;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .piece-list li {
   color: #000;
   height: 50px;
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
 }
 
 #user-comment {

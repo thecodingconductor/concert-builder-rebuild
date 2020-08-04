@@ -11,6 +11,10 @@ const signUpModal = document.getElementById('sign-up-modal');
 const signInModal = document.getElementById('sign-in-modal');
 const closeSignUp = document.getElementById('close-sign-up');
 const closeSignIn = document.getElementById('close-sign-in');
+const browse = document.getElementById('browse');
+const browseModal = document.getElementById('browse-modal');
+const browseModalArea = document.getElementById('browse-modal-area');
+const closeBrowse = document.getElementById('close-browse');
 
 function openModal(e) {
     if(e.target.textContent.trim() === 'Log In') {
@@ -37,9 +41,22 @@ function showSearch() {
     rightNavContainer.style.display = 'none';
 }
 
+function showBrowse() {
+    browseModal.style.display = 'flex';
+    browseModalArea.classList.add('show');
+}
+
+
+
 getStarted.addEventListener('click', openModal);
 logInOpen.addEventListener('click', openModal);
 signUpOpen.addEventListener('click', openModal);
 search.addEventListener('click', showSearch);
 closeSignUp.addEventListener('click', closeModal);
 closeSignIn.addEventListener('click', closeModal);
+browse.addEventListener('click', showBrowse);
+closeBrowse.addEventListener('click', () => {
+    browseModalArea.classList.remove('show');
+    browseModal.style.display  = 'none';
+})
+
