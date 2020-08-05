@@ -121,6 +121,11 @@
   left: 0;
   right: 0;
   height: .5rem;
+  
+}
+
+.hover-gold.show {
+  animation: opacity .5s ease-in-out;
   background-color: var(--gold);
 }
 
@@ -145,4 +150,14 @@
 
 .your-recent-concerts.hide {
     display: none;
+}
+
+@keyframes opacity{
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
 }

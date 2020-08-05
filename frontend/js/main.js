@@ -14,11 +14,14 @@ function showDropDown() {
 }
 
 function showGoldUnderline(e) {
-    console.log(e.target);
+    
+    e.target.querySelector('.hover-gold').classList.add('show');
 }
 
 function hideGoldUnderline(e) {
-    console.log(e.target);
+    
+    e.target.querySelector('.hover-gold').classList.remove('show');
+
 }
 
 
