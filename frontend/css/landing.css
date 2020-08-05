@@ -131,6 +131,8 @@ button {
 }
 
 
+
+
 .hero-container {
     width: 100%;
     flex: 1;
@@ -148,6 +150,8 @@ button {
 }
 
 .primary-btn.get-started-btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
 
@@ -259,7 +263,7 @@ button {
 .sign-up-form {
 
     margin: auto;
-    height: 85%;
+    height: auto%;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -493,4 +497,64 @@ button {
 
 .letter-composers {
     flex: 2;
+}
+
+@media(max-width: 426px) {
+    
+    .nav-left {
+        display: none;
+    }
+
+    .right-nav-container {
+        justify-content: flex-end;
+    }
+
+    .site-title {
+        margin-left: 1rem;
+    }
+
+    .hero-container {
+        flex-direction: column;
+    }
+
+    .sign-up-container {
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+    }
+
+    .third-party-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .third-party-buttons .secondary-btn {
+        margin: .5rem 0;
+    }
+    
+    .select-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .select-container select {
+        width: 90%;
+    }
+
+    .sign-up-form label {
+        font-size: .7rem;
+    }
+
+    .form-field input {
+        margin-top: .3rem;
+    }
+
+    .form-field {
+        margin: 1rem 0;
+    }
+
+    .primary-btn.register-btn, .primary-btn.login-btn {
+        margin: 1rem 0;
+    }
+
 }

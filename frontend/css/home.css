@@ -81,6 +81,23 @@
   width: 90%;
   margin: auto;
   color: #000;
+  
+
+}
+
+.main-content-area-inner.remove {
+  animation: 1s remove-main;
+  animation-fill-mode: forwards;
+}
+
+@keyframes remove-main {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .header-row {
@@ -118,7 +135,14 @@
   border-radius: 0.25rem;
   padding: 20px;
   box-shadow: var(--default-shadow);
+  transition: transform .3s ease;
 }
+
+
+.search-result.leave {
+  transform: translateX(500%);
+}
+
 /*
 .search-result:hover {
     border-bottom: 4px solid #facd21;
@@ -165,6 +189,8 @@
 .primary-btn.visit-page {
   box-shadow: var(--default-shadow);
 }
+
+
 
 
 
