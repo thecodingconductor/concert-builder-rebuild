@@ -1,3 +1,7 @@
+body {
+    overflow: auto;
+}
+
 .main-container {
     flex: 1;
     width: 100%;
@@ -28,7 +32,7 @@
 }
 
 .left-container h1, .right-container h1 {
-    color: #000;
+    color: #fff;
 }
 
 .left-search-area {
@@ -99,6 +103,11 @@
 
 .concert-builder-area {
     color: #000;
+    box-shadow: var(--default-shadow);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .concert {
@@ -107,10 +116,16 @@
     justify-content: space-between;
     width: 90%;
     margin: auto;
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin: 10px 0;
+    box-shadow: var(--default-shadow);
+
 }
 
 .concert i {
     cursor: pointer;
+    margin: 0 1rem;
 }
 
 .composer-img {

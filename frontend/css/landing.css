@@ -25,6 +25,7 @@ body {
     align-items: center;
     background-color: var(--main-background);
     overflow:hidden;
+    position: relative;
 }
 
 a {
@@ -43,6 +44,7 @@ button {
     background-color: var(--header-background);
     display: flex;
     align-items: center;
+    
 }
 
 .landing-nav p {
@@ -109,7 +111,44 @@ button {
     display: none;
     align-items: center;
     width: 60%;
+    
 }
+
+.search-bar-results {
+    position: absolute;
+    visibility: hidden;
+    top: 10.25%;
+    left: 26%;
+    right: 20%;
+    background-color: var(--header-background);
+    width: 60%;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+}
+
+.search-result-down {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.search-result-down:hover {
+    transition: background-color 0.3s ease;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.search-result-down p:first-of-type {
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.search-result-down .primary-btn {
+    margin-right: 1rem;
+}
+
+
 
 .search-bar-field {
     flex: 1;
@@ -337,6 +376,7 @@ button {
 .register-btn, .login-btn {
     width: 100%;
     font-size: 1rem;
+    margin: 1rem;
 }
 
 .register-btn {
@@ -519,6 +559,10 @@ button {
     body {
         overflow: auto;
     }
+
+    .landing-nav {
+        justify-content: center;
+    }
     .nav-left {
         display: none;
     }
@@ -540,6 +584,10 @@ button {
         height: 90%;
         width: 75%;
     }
+
+    .search-bar-results {
+        left: 20%;
+    }
     
 }
 
@@ -552,10 +600,16 @@ button {
 @media(max-width: 426px) {
     
    
-
     .site-title {
         margin-left: 1rem;
         width: 75%;
+    }
+
+    .search-bar-results {
+        top: 5%;
+        width: 100%;
+        left: 0;    
+    
     }
 
 

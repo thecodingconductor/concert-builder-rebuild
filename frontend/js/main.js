@@ -3,6 +3,7 @@ const dropDownMenu = document.getElementById('dropdown-menu');
 const showGold = document.querySelectorAll('.hover-gold');
 const searchResults = document.querySelectorAll('.search-result');
 const viewMore = document.querySelectorAll('.view-more-btn');
+const mainContentInner = document.getElementById('main-content-area-inner');
 
 function showDropDown() {
     if(dropDownMenu.style.display === 'block') {
@@ -26,13 +27,14 @@ function hideGoldUnderline(e) {
 }
 
 
-// function resultsExit(e) {
-//     e.preventDefault();
-//     searchResultsReverse = [...searchResults].reverse();
-//     searchResultsReverse.forEach(result => {
-//         result.classList.add('leave');
-//     })
-// }
+function resultsExit(e) {
+     e.preventDefault();
+     mainContentInner.classList.add('remove');
+     mainContentInner.setTimeout(() => {
+         mainContentInner.style.display = 'none';
+     }, 500);
+
+ }
 
 loggedIn.addEventListener('click', showDropDown);
 
@@ -43,6 +45,6 @@ searchResults.forEach(result => {
 });
 
 
-// viewMore.forEach(link => {
-//     link.addEventListener('click', resultsExit);
-// })
+viewMore.forEach(link => {
+     link.addEventListener('click', resultsExit);
+ });
