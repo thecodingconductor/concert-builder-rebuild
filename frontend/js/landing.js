@@ -1,9 +1,11 @@
 //https://www.googleapis.com/customsearch/v1?q=${search}&
 const searchNav = document.getElementById('search');
+const siteTitle = document.getElementById('site-title');
 const logInNav = document.getElementById('login-nav');
 const signUpButton = document.getElementById('sign-up-btn');
 const getStarted = document.getElementById('get-started-btn');
 const search = document.getElementById('search');
+const openMobileSearch = document.getElementById('open-mobile-search');
 const rightNavContainer = document.getElementById('right-nav-container');
 const logInOpen = document.getElementById('login-nav');
 const signUpOpen = document.getElementById('sign-up-btn');
@@ -40,15 +42,27 @@ function closeModal(e) {
     
 }
 
-function showSearch() {
-    rightNavContainer.style.display = 'none';
-    searchBarOverlay.style.display = 'flex';
+function showSearch(e) {
+    
+    if(e.target.parentElement === openMobileSearch) {
+        rightNavContainer.style.display = 'none';
+        siteTitle.style.display = 'none';
+        searchBarOverlay.style.display = 'flex';
+    } else{ 
+        rightNavContainer.style.display = 'none';
+        searchBarOverlay.style.display = 'flex';
+    }
+    
 
 }
 
 function closeSearchField() {
     searchBarOverlay.style.display = 'none';
     rightNavContainer.style.display = 'flex';
+
+    if(siteTitle.style.display === 'none') {
+        siteTitle.style.display = 'block';
+    }
 }
 
 function showBrowse() {
@@ -65,6 +79,7 @@ getStarted.addEventListener('click', openModal);
 logInOpen.addEventListener('click', openModal);
 signUpOpen.addEventListener('click', openModal);
 search.addEventListener('click', showSearch);
+openMobileSearch.addEventListener('click', showSearch)
 closeSearch.addEventListener('click', closeSearchField);
 closeSignUp.addEventListener('click', closeModal);
 closeSignIn.addEventListener('click', closeModal);
@@ -73,5 +88,6 @@ closeBrowse.addEventListener('click', () => {
     browseModalArea.classList.remove('show');
     browseModal.style.display  = 'none';
 });
+
 
 
