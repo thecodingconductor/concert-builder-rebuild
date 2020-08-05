@@ -39,6 +39,8 @@
   justify-content: space-evenly;
 }
 
+
+
 .composer-piece-list {
   
   height: 90%;
@@ -63,7 +65,7 @@
 .piece-details {
  
   flex: 1;
-  width: 100%;
+  width: 90%;
 }
 
 .piece-list-wrap {
@@ -125,5 +127,28 @@
     display: flex;
     flex: 1;
     align-items: center;
+    margin: 1rem 0;
     justify-content: space-evenly;
+}
+
+
+@media(max-width: 768px) {
+
+  .composer-top {
+    flex-direction: column;
+    box-shadow: var(--default-shadow);
+  }
+
+  .composer-hero {
+    margin-top: 1rem;
+  }
+  
+  .composer-bottom {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .composer-piece-list {
+    width: 100%;
+  }
 }

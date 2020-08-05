@@ -123,3 +123,21 @@
 
     position: static;
 }
+
+
+@media(max-width: 768px) {
+
+    .main-container {
+        flex-direction: column;
+        justify-content: normal;
+        align-items: stretch;
+    }
+
+    .left-container {
+        width: 100%;
+    }
+
+    .concert .composer-img {
+        display: none;
+    }
+}
