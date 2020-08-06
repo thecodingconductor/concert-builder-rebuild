@@ -41,6 +41,13 @@ body {
     align-items: center;
 }
 
+.right-search-area {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .left-search-area input {
     flex: 1;
     line-height: 2rem;
@@ -52,7 +59,26 @@ body {
     outline: none;
 }
 
+
 .left-search-area i {
+    color: #000;
+    padding: 9px;
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.right-search-area input {
+    flex: 1;
+    line-height: 2rem;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: none;
+    outline: none;
+}
+
+.right-search-area i {
     color: #000;
     padding: 9px;
     background-color: #fff;
@@ -90,6 +116,7 @@ body {
     background-color: #fff;
     flex: 3;
     width: 80%;
+    overflow: auto;
 }
 
 .concert-builder-text-area {
@@ -138,6 +165,8 @@ body {
 
     position: static;
 }
+
+
 
 
 @media(max-width: 768px) {

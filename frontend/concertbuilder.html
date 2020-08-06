@@ -57,7 +57,7 @@
                     
                     <div class="piece-info-right">
                         <p>20'</p>
-                        <button class="primary-btn">
+                        <button class="primary-btn add-to-concert">
                             Add to Concert
                         </button>
                     </div>
@@ -70,7 +70,7 @@
                     
                     <div class="piece-info-right">
                         <p>20'</p>
-                        <button class="primary-btn">
+                        <button class="primary-btn add-to-concert" >
                             Add to Concert
                         </button>
                     </div>
@@ -83,7 +83,7 @@
                     
                     <div class="piece-info-right">
                         <p>20'</p>
-                        <button class="primary-btn">
+                        <button class="primary-btn add-to-concert">
                             Add to Concert
                         </button>
                     </div>
@@ -96,7 +96,7 @@
                     
                     <div class="piece-info-right">
                         <p>20'</p>
-                        <button class="primary-btn">
+                        <button class="primary-btn add-to-concert">
                             Add to Concert
                         </button>
                     </div>
@@ -109,7 +109,7 @@
                     
                     <div class="piece-info-right">
                         <p>20'</p>
-                        <button class="primary-btn">
+                        <button class="primary-btn add-to-concert">
                             Add to Concert
                         </button>
                     </div>
@@ -119,7 +119,13 @@
         </div>
         <div class="right-container">
             <h1>Build Concert</h1>
-            <div class="concert-builder-area">
+            
+            <div class="right-search-area">
+                <input type="text" placeholder="Provide Concert Title" class="concert-title-input">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="concert-builder-area" id="concert-builder-area">
                 <div class="concert" draggable="true">
                     <i class="fas fa-bars"></i>
                     <div class="composer-img">
@@ -135,7 +141,7 @@
                         <p>3333-4331-tmp+3-hp,cel-str</p>
                         <p>20'</p>
                     </div>
-                    <i class="fa fa-times fa-2x"></i>
+                    <i class="fa fa-times fa-2x delete-piece"></i>
                 </div>
                 <div class="concert" draggable="true">
                     <i class="fas fa-bars"></i>
@@ -152,7 +158,7 @@
                         <p>3333-4331-tmp+3-hp,cel-str</p>
                         <p>20'</p>
                     </div>
-                    <i class="fa fa-times fa-2x"></i>
+                    <i class="fa fa-times fa-2x delete-piece"></i>
                 </div>
                 <div class="concert" draggable="true">
                     <i class="fas fa-bars"></i>
@@ -169,7 +175,7 @@
                         <p>3333-4331-tmp+3-hp,cel-str</p>
                         <p>20'</p>
                     </div>
-                    <i class="fa fa-times fa-2x"></i>
+                    <i class="fa fa-times fa-2x delete-piece"></i>
                 </div>
                 <div class="concert" draggable="true">
                     <i class="fas fa-bars"></i>
@@ -186,12 +192,12 @@
                         <p>3333-4331-tmp+3-hp,cel-str</p>
                         <p>20'</p>
                     </div>
-                    <i class="fa fa-times fa-2x"></i>
+                    <i class="fa fa-times fa-2x delete-piece"></i>
                 </div>
             </div>
             <div class="concert-builder-text-area">
-                <p>Your concert is 80 minutes long.</p>
-                <p>Thats perfect! </p>
+                <p>Your concert is <span id="concert-minutes">80</span> minutes long.</p>
+                <p id="concert-conclusion">Thats perfect! </p>
             </div>
         </div>
     </div>

@@ -4,6 +4,12 @@ const showGold = document.querySelectorAll('.hover-gold');
 const searchResults = document.querySelectorAll('.search-result');
 const viewMore = document.querySelectorAll('.view-more-btn');
 const mainContentInner = document.getElementById('main-content-area-inner');
+const openProfile = document.querySelector('.open-profile');
+const openFavorites = document.querySelector('.open-favorites');
+const openConcerts = document.querySelector('.open-concerts');
+
+const openLinks = [openProfile, openFavorites, openConcerts];
+
 
 function showDropDown() {
     if(dropDownMenu.style.display === 'block') {
@@ -48,3 +54,7 @@ searchResults.forEach(result => {
 viewMore.forEach(link => {
      link.addEventListener('click', resultsExit);
  });
+
+ openLinks.forEach(link => {
+     link.addEventListener('click', resultsExit);
+ })
