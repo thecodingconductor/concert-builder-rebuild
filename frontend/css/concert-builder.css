@@ -114,9 +114,16 @@ body {
 
 .concert-builder-area {
     background-color: #fff;
-    flex: 3;
+    color: #000;
     width: 80%;
-    overflow: auto;
+    height: 0px;
+    box-shadow: var(--default-shadow);
+    border-radius: 5px;
+    flex: 3 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
 }
 
 .concert-builder-text-area {
@@ -128,14 +135,7 @@ body {
     align-items: center;
 }
 
-.concert-builder-area {
-    color: #000;
-    box-shadow: var(--default-shadow);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 .concert {
     display: flex;
