@@ -147,7 +147,41 @@ body {
     border-radius: 5px;
     margin: 10px 0;
     box-shadow: var(--default-shadow);
+    position: relative;
+}
 
+.concert .add-intermission {
+    position: absolute;
+    height: 20px;
+    width: 200px;
+    bottom: 0;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.concert.show .add-intermission {
+    display: block;
+    background-color: grey;
+    position: absolute;
+    transition: all .5s ease;
+    bottom: -20px;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.add-intermission p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: .85rem;
+}
+
+.concert.intermission {
+    background: lightgrey;
+    height: 30px;
 }
 
 .concert i {
