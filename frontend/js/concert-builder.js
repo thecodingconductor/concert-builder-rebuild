@@ -1,15 +1,17 @@
 const addToConcert = document.querySelectorAll('.add-to-concert');
-const deletePiece = document.querySelectorAll('.delete-piece');
+const deletePiece = document.getElementsByClassName('delete-piece');
 const concertMinutes = document.getElementById('concert-minutes');
 const concertConclusion = document.getElementById('concert-conclusion');
-const concertPieces = document.querySelectorAll('.concert');
+
 const concertBuilderArea = document.getElementById('concert-builder-area');
+const searchFavorites = document.getElementById("search-favorites");
 
-console.log(concertBuilderArea);
 
+let concertPieceArr = [];
+let favoritesResults =[];
 
-function addPieceToConcert() {
-    console.log(this);
+function addPieceToConcertArr() {
+    
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
     pieceEl.setAttribute("draggable", "true");
@@ -32,26 +34,45 @@ function addPieceToConcert() {
         <i class="fa fa-times fa-2x delete-piece"></i>
     
     `;
-    console.log(pieceEl);
-    console.log(concertBuilderArea);
-    console.log(typeof concertBuilderArea);
-    concertBuilderArea.appendChild(pieceEl);
-    //concertBuilderArea.appendChild(pieceEl);
 
+    
+    concertPieceArr.push(pieceEl);
+    addPieceToDOM(pieceEl);
+    let pieces = concertBuilderArea.querySelectorAll('.delete-piece');
+    pieces.forEach(piece => {
+        piece.addEventListener('click', removePiece);
+    })
+
+    
+    
+}
+
+function addPieceToDOM(piece) {
+    concertBuilderArea.appendChild(piece);
     
 }
 
 function removePiece() {
+  
+    
     let selectedConcert = this.parentElement;
     console.log(selectedConcert);
     selectedConcert.remove();
 }
 
+function dynamicSearch() {
+    //After search, add all elements to DOM?
 
+
+}
+
+//Event Listeners
 addToConcert.forEach(button => {
-    button.addEventListener('click', addPieceToConcert);
-});
+     button.addEventListener('click', addPieceToConcertArr);
+ });
 
-deletePiece.forEach(piece => {
-    piece.addEventListener('click', removePiece);
-});
+//deletePiece.forEach(piece => {
+//     piece.addEventListener('click', removePiece);
+// });
+
+searchFavorites.addEventListener('keyup', dynamicSearch);
