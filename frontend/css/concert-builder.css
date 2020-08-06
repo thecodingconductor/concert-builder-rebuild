@@ -177,10 +177,12 @@ body {
     padding: 0;
     text-align: center;
     font-size: .85rem;
+    color: #fff;
 }
 
 .concert.intermission {
     background: lightgrey;
+   
     height: 30px;
 }
 
@@ -201,7 +203,11 @@ body {
 }
 
 
+/* TODO:
 
+FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
+
+*/
 
 @media(max-width: 768px) {
 

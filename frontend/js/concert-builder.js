@@ -43,10 +43,15 @@ function addPieceToConcertArr() {
     
     concertPieceArr.push(pieceEl);
     addPieceToDOM(pieceEl);
-    let pieces = concertBuilderArea.querySelectorAll('.delete-piece');
-    pieces.forEach(piece => {
+    let deletePieces = concertBuilderArea.querySelectorAll('.delete-piece');
+    deletePieces.forEach(piece => {
         piece.addEventListener('click', removePiece);
     });
+
+    let intermissionList = concertBuilderArea.querySelectorAll('.add-intermission');
+    intermissionList.forEach(intermission => {
+        intermission.addEventListener('click', createIntermission)
+    })
 
     
     
@@ -61,7 +66,7 @@ function removePiece() {
   
     
     let selectedConcert = this.parentElement;
-    console.log(selectedConcert);
+    
     selectedConcert.remove();
 }
 
@@ -87,7 +92,7 @@ function showIntermission(e) {
     }
 }
 
-function createIntermission(e) {
+function createIntermission() {
     
     if(!concertBuilderArea.querySelector('.add-intermission')) {
         return false;
@@ -95,9 +100,7 @@ function createIntermission(e) {
 
     concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
     
-    
-    if (e.target === concertBuilderArea.querySelector('.add-intermission') || e.target === concertBuilderArea.querySelector('.add-intermission').querySelector('p')) {
-            console.log('make my element bitch');    
+ 
             let intermissionEl = document.createElement('div');
                 intermissionEl.classList = "concert intermission";
                 intermissionEl.setAttribute("draggable", "true");
@@ -106,20 +109,15 @@ function createIntermission(e) {
                     <p>Intermission: ~20-30 minutes</p>
                     <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
                 `;
-        console.log(intermissionEl);
+        
         concertBuilderArea.appendChild(intermissionEl);
 
+        //Delete Intermission
         let closeIntermission = intermissionEl.querySelector('#delete-intermission');
-
         closeIntermission.addEventListener('click', (e) => {
             
             e.target.parentElement.remove();
         })
-    } else {
-        return false;
-    }
-
-    
 
     
 }
@@ -131,14 +129,10 @@ addToConcert.forEach(button => {
      button.addEventListener('click', addPieceToConcertArr);
  });
 
-//deletePiece.forEach(piece => {
-//     piece.addEventListener('click', removePiece);
-// });
-
 searchFavorites.addEventListener('keyup', dynamicSearch);
 
 //showAddIntermission
 concertBuilderArea.addEventListener('mouseover', showIntermission);
 
 //Add Intermission to DOM
-concertBuilderArea.addEventListener('click', createIntermission);
+//concertBuilderArea.addEventListener('click', createIntermission);
