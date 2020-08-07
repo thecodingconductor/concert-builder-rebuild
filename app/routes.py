@@ -115,9 +115,21 @@ def composers():
     return jsonify({"success": True, "composers": list_composers})
 
 
-@app.route('/composer')
-def composer():
-    return render_template('composer.html')
+@app.route('/composer/<composer_name>', methods=["GET", "POST"])
+def composer(composer_name):
+    composer_name = urllib.parse.unquote(composer_name)
+    composer_name = composer_name.split('/')[-1]
+
+    composer = Composer.query.filter_by(name=composer_name).first_or_404()
+
+    if composer == None:
+        flash('No results. Try a different search.')
+        return render_template('landing.html', search_form=search_form)
+    
+    last_name = composer.name.split(',')[0]
+    
+
+    return render_template('composer.html', composer=composer)
 
 
 # @app.route('/composer/<composer_name>', methods=["GET", "POST"])

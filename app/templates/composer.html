@@ -14,20 +14,18 @@
             
         </div>
         <div class="composer-informations">
-            <h1>Composer Name</h1>
-            <p>Composer Dates</p>
-            <p>Composer Nationality</p>
+            <h1>{{ composer.name }}</h1>
+            <p>{{ composer.years }}</p>
+            <p>{{ composer.nationality }}</p>
+            <p>{{ composer.details }}</p>
         </div>
     </div>
     <div class="composer-bottom">
         <div class="composer-piece-list">
                 <ul class="piece-list">
-                    <li>Symphony 1</li>
-                    <li>Symphony 1</li>
-                    <li>Symphony 1</li>
-                    <li>Symphony 1</li>
-                    <li>Symphony 1</li>
-                    <li>Symphony 1</li>
+                    {% for piece in composer.pieces %}
+                    <li>{{ piece.title }}</li>
+                    {% endfor %}
                    
                   
                 </ul>

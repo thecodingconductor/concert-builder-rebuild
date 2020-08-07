@@ -126,7 +126,7 @@ button {
 .search-bar-results {
     position: absolute;
     visibility: hidden;
-    top: 10.25%;
+    top: 8%;
     left: 26%;
     right: 20%;
     background-color: var(--header-background);

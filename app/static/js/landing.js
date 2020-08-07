@@ -63,6 +63,7 @@ function closeSearchField() {
     searchBarOverlay.style.display = 'none';
     rightNavContainer.style.display = 'flex';
     searchBarResults.style.visibility = 'hidden';
+    searchInput.value = '';
 
     if(siteTitle.style.display === 'none') {
         siteTitle.style.display = 'block';
@@ -113,8 +114,8 @@ function getResults() {
                 resultDiv.classList = "search-result-down";
                 resultDiv.innerHTML = `
                     <p>${composer.name}</p>
-                    <p>Symphony No. 4 in E Minor</p>
-                    <button class="primary-btn">Add Piece to Favorites</button>
+                    
+                    <a href="composer/${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
 
                 `;
                 searchBarResults.appendChild(resultDiv);
