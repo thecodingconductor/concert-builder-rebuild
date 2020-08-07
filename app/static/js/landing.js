@@ -1,5 +1,5 @@
 //https://www.googleapis.com/customsearch/v1?q=${search}&
-const searchNav = document.getElementById('search');
+
 const siteTitle = document.getElementById('site-title');
 const logInNav = document.getElementById('login-nav');
 const signUpButton = document.getElementById('sign-up-btn');
@@ -20,6 +20,8 @@ const browseModalArea = document.getElementById('browse-modal-area');
 const closeBrowse = document.getElementById('close-browse');
 const searchBarOverlay = document.getElementById('search-bar-overlay');
 const closeSearch = document.getElementById('close-search');
+const searchInput = document.getElementById('search-bar-field');
+const searchBarResults = document.getElementById('search-bar-results');
 
 
 function openModal(e) {
@@ -60,6 +62,7 @@ function showSearch(e) {
 function closeSearchField() {
     searchBarOverlay.style.display = 'none';
     rightNavContainer.style.display = 'flex';
+    searchBarResults.style.visibility = 'hidden';
 
     if(siteTitle.style.display === 'none') {
         siteTitle.style.display = 'block';
@@ -73,6 +76,57 @@ function showBrowse(e) {
         browseModalArea.classList.add('show');
     }, 300);
     
+}
+
+function clearList() {
+    if (searchInput.value.length === 0) {
+        while(searchBarResults.firstChild) {
+            searchBarResults.removeChild(searchBarResults.firstChild);
+        }
+
+        searchBarResults.style.visibility = "hidden";
+
+        return false;
+    }
+
+    while(searchBarResults.firstChild) {
+        searchBarResults.removeChild(searchBarResults.firstChild);
+    }
+}
+
+function getResults() {
+    searchBarResults.style.visibility = "visible";
+    const request = new XMLHttpRequest();
+    const searchTerm = searchInput.value;
+    request.open('POST', '/composers');
+    request.onload = () => {
+        const data = JSON.parse(request.response);
+        if(data.success) {
+            const composer_data = JSON.parse(data.composers);
+            console.log(composer_data);
+
+            
+
+            composer_data.forEach(composer => {
+                console.log(composer);
+                const resultDiv = document.createElement("div");
+                resultDiv.classList = "search-result-down";
+                resultDiv.innerHTML = `
+                    <p>${composer.name}</p>
+                    <p>Symphony No. 4 in E Minor</p>
+                    <button class="primary-btn">Add Piece to Favorites</button>
+
+                `;
+                searchBarResults.appendChild(resultDiv);
+            })
+        }
+    };
+
+    const data = new FormData();
+    data.append('search-bar-field', searchTerm);
+    request.send(data);
+    return false;
+
 }
 
 
@@ -90,7 +144,10 @@ closeBrowse.addEventListener('click', () => {
     browseModalArea.classList.remove('show');
     browseModal.style.display  = 'none';
 });
-
+searchInput.addEventListener('keyup', () => {
+    clearList();
+    getResults();
+})
 
 
 

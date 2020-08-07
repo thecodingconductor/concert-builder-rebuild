@@ -56,7 +56,7 @@ def index():
         flash('Congratulations, you are now a registered user.')
         return redirect(url_for('homepage'))
 
-    return render_template('landing.html', login_form=login_form, signup_form=signup_form)
+    return render_template('landing.html', login_form=login_form, signup_form=signup_form, search_form=search_form)
 #search_form=search_form
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -105,14 +105,14 @@ def concert_builder():
     return render_template('concertbuilder.html')
 
 
-# @app.route('/composers', methods=["POST"])
-# def composers():
+@app.route('/composers', methods=["POST"])
+def composers():
 
-#     composer_name = request.form.get("search-field")
-#     res = Composer.query.filter(Composer.name.ilike(f"%{composer_name}%")).all()
-#     list_composers = json.dumps([{"name": composer.name} for composer in res])
-#     #list composers is a string [{"name": "Charpentier, Marc-Antoine"}] for example
-#     return jsonify({"success": True, "composers": list_composers})
+    composer_name = request.form.get("search-bar-field")
+    res = Composer.query.filter(Composer.name.ilike(f"%{composer_name}%")).all()
+    list_composers = json.dumps([{"name": composer.name} for composer in res])
+     #list composers is a string [{"name": "Charpentier, Marc-Antoine"}] for example
+    return jsonify({"success": True, "composers": list_composers})
 
 
 @app.route('/composer')

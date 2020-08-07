@@ -44,15 +44,18 @@
                 </li>
             </ul>
         </div>
-        <div class="search-bar-overlay" id="search-bar-overlay">
+        <form class="search-bar-overlay" id="search-bar-overlay">
+            {{ search_form.csrf_token }}
             <i class="fa fa-search" ></i>
-            <input type="text" class="search-bar-field">
+
+            {{ search_form.search(class_="search-bar-field", id="search-bar-field") }}
+           <!-- <input type="text" class="search-bar-field" id="search-bar-field">-->
             <i class="fa fa-times close-search" id="close-search"></i>
-        </div>
+        </form>
         
         
     </nav>
-    <div class="search-bar-results">
+    <div class="search-bar-results" id="search-bar-results">
             <div class="search-result-down">
                 <p>Johannes Brahms</p>
                 <p>Symphony No. 4 in E Minor</p>
