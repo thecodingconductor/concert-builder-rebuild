@@ -56,7 +56,7 @@ def index():
         flash('Congratulations, you are now a registered user.')
         return redirect(url_for('homepage'))
 
-    return render_template('landing.html')
+    return render_template('landing.html', login_form=login_form, signup_form=signup_form)
 #search_form=search_form
 
 @app.route('/login', methods=['GET', 'POST'])

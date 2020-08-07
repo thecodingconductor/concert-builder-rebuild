@@ -3,7 +3,8 @@
         <h1>Log in</h1>
         <i class="fa fa-times fa-2x" id="close-sign-in"></i>
     </div>
-    <div class="sign-in-form-area">
+    <form method="post" class="sign-in-form-area" novalidate>
+        {{ login_form.hidden_tag() }}
         <div class="sign-in-buttons">
             <button class="secondary-btn">
                 <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
@@ -20,16 +21,20 @@
         </div>
         <div class="sign-in-form-fields">
             <div class="form-field">
-                <input type="text" placeholder="Type your username">
-                <label for="username">Username</label>
+                {{ login_form.username(placeholder="Type your username") }}
+                {{ login_form.username.label }}
+                
             </div>
             <div class="form-field">
-                <input type="password" placeholder="Type your password">
-                <label for="password">Password</label>
+                {{ login_form.password(placeholder="Type Password")}}
+                {{ login_form.password.label }}
+                
                 <p><a href="#">Forgot?</a></p>
             </div>
             
-            <button class="primary-btn big-login-btn">Log in</button>
+            {{ login_form.submit(class_="primary-btn big-login-btn")}}
+            
            
         </div>
-    </div>
+    </form>
+</div>
