@@ -13,15 +13,15 @@ const concertTitleHeader = document.getElementById('concert-title-header');
 
 let concertPieceArr = [];
 let favoritesResults =[];
+let dragStartIndex;
 
 function addPieceToConcertArr() {
     
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
-    pieceEl.setAttribute("draggable", "true");
     pieceEl.innerHTML =  `
     
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
         <div class="composer-img">
 
         </div>
@@ -44,19 +44,30 @@ function addPieceToConcertArr() {
 
     
     concertPieceArr.push(pieceEl);
+    concertPieceArr.forEach((piece, index) => {
+        piece.setAttribute('data-index', index);
+    });
+
     addPieceToDOM(pieceEl);
+
+    deletePiecesListeners();
+    createIntermissionListeners();
+    dragListeners();
+    
+}
+
+function deletePiecesListeners() {
     let deletePieces = concertBuilderArea.querySelectorAll('.delete-piece');
     deletePieces.forEach(piece => {
         piece.addEventListener('click', removePiece);
     });
+}
 
+function createIntermissionListeners() {
     let intermissionList = concertBuilderArea.querySelectorAll('.add-intermission');
     intermissionList.forEach(intermission => {
         intermission.addEventListener('click', createIntermission)
-    })
-
-    
-    
+    });
 }
 
 function addPieceToDOM(piece) {
@@ -66,8 +77,20 @@ function addPieceToDOM(piece) {
 
 function removePiece() {
   
+    //get parent El
     let selectedConcert = this.parentElement;
+    
+    //Remove Selected Piece from Array
+    concertPieceArr.splice(concertPieceArr.indexOf(selectedConcert), 1);
+    
+    //Remove Piece from DOM
     selectedConcert.remove();
+    
+    //Update Data-Index Attribute
+    concertPieceArr.forEach((piece, index) => {
+        piece.setAttribute('data-index', index);
+    });
+    
 }
 
 function dynamicSearch() {
@@ -103,9 +126,8 @@ function createIntermission() {
  
             let intermissionEl = document.createElement('div');
                 intermissionEl.classList = "concert intermission";
-                intermissionEl.setAttribute("draggable", "true");
                 intermissionEl.innerHTML = `
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars" draggable="true"></i>
                     <p>Intermission: ~20-30 minutes</p>
                     <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
                 `;
@@ -140,6 +162,47 @@ function saveConcertTitle() {
 function removeConcertTitle() {
     //Change object in Flask*
     rightSearchArea.classList.remove('show');
+}
+
+//Drag Functions
+function dragStart() {
+    console.log('Event: Drag Start');
+}
+
+function dragEnter() {
+    console.log('Event: Drag Enter');
+}
+
+function dragLeave() {
+    console.log('Event: Drag Leave');
+}   
+
+function dragOver(e) {
+    console.log('Event: Drag Over');
+}
+
+function dragDrop() {
+    console.log('Event: Drag Drop');
+}
+
+function swapItems(fromIndex, toIndex) {
+
+}
+
+//good. working.
+function dragListeners() {
+    const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
+    const dragBoxes = document.querySelectorAll('.concert');
+    pieceDragBars.forEach(drag => {
+        drag.addEventListener('dragstart', dragStart);
+    });
+    
+    dragBoxes.forEach(box => {
+        box.addEventListener('dragover', dragOver);
+        box.addEventListener('drop', dragDrop);
+        box.addEventListener('dragenter', dragEnter);
+        box.addEventListener('dragleave', dragLeave);
+    })
 }
 
 
