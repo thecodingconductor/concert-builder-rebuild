@@ -78,18 +78,27 @@ button {
 
 .nav-left li {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.nav-left li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
     align-items: baseline;
     justify-content: center;
     margin: 10px;
     cursor: pointer;
 }
 
-.nav-left li:hover, .nav-right li:hover {
+.nav-left li a:hover, .nav-right li a:hover {
     color: rgba(189, 195, 199, 0.8);
 }
 
-.nav-left li > * {
-    margin: 2px;
+.nav-left li a > * {
+    margin: .2rem;
 }
 
 .nav-right {
@@ -506,9 +515,10 @@ button {
     height: 100%;
     width: 35%;
     background-color: #fff;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
+   
     /*transition: transform 1s ease;*/
     transform: translateX(-100%);
 }

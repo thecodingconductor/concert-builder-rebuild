@@ -5,6 +5,7 @@ const logInNav = document.getElementById('login-nav');
 const signUpButton = document.getElementById('sign-up-btn');
 const getStarted = document.getElementById('get-started-btn');
 const search = document.getElementById('search');
+const createConcert = document.getElementById('create');
 const openMobileSearch = document.getElementById('open-mobile-search');
 const rightNavContainer = document.getElementById('right-nav-container');
 const logInOpen = document.getElementById('login-nav');
@@ -18,7 +19,7 @@ const browseModal = document.getElementById('browse-modal');
 const browseModalArea = document.getElementById('browse-modal-area');
 const closeBrowse = document.getElementById('close-browse');
 const searchBarOverlay = document.getElementById('search-bar-overlay');
-const closeSearch = document.getElementById('close-search')
+const closeSearch = document.getElementById('close-search');
 
 
 function openModal(e) {
@@ -43,7 +44,7 @@ function closeModal(e) {
 }
 
 function showSearch(e) {
-    
+    e.preventDefault();
     if(e.target.parentElement === openMobileSearch) {
         rightNavContainer.style.display = 'none';
         siteTitle.style.display = 'none';
@@ -65,7 +66,8 @@ function closeSearchField() {
     }
 }
 
-function showBrowse() {
+function showBrowse(e) {
+    e.preventDefault();
     browseModal.style.display = 'flex';
     setTimeout(() => {
         browseModalArea.classList.add('show');
@@ -88,6 +90,7 @@ closeBrowse.addEventListener('click', () => {
     browseModalArea.classList.remove('show');
     browseModal.style.display  = 'none';
 });
+
 
 
 

@@ -13,16 +13,23 @@
         <div class="right-nav-container" id="right-nav-container">
             <ul class="nav-left">
                 <li class="search" id="search">
-                    <i class="fas fa-search"></i>
-                    <p>Search</p>
+                    <a href="#">
+                        <i class="fas fa-search"></i>
+                        <p>Search</p>
+                    </a>
                 </li>
                 <li class="browse" id="browse">
-                    <i class="fas fa-book"></i>
-                    <p>Browse</p>
+                    <a href="#">
+                        <i class="fas fa-book"></i>
+                        <p>Browse</p>
+                    </a>
+                    
                 </li>
-                <li class="create">
-                    <i class="fas fa-plus-square"></i>
-                    <p>Create</p>
+                <li class="create" id="create">
+                    <a href="{{ url_for('concert_builder')}}">
+                        <i class="fas fa-plus-square"></i>
+                        <p>Create</p>
+                    </a>     
                 </li>
             </ul>
             <ul class="nav-right">
