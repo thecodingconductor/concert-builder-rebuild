@@ -105,63 +105,68 @@ def concert_builder():
     return render_template('concertbuilder.html')
 
 
-@app.route('/composers', methods=["POST"])
-def composers():
+# @app.route('/composers', methods=["POST"])
+# def composers():
 
-    composer_name = request.form.get("search-field")
-    res = Composer.query.filter(Composer.name.ilike(f"%{composer_name}%")).all()
-    list_composers = json.dumps([{"name": composer.name} for composer in res])
-    #list composers is a string [{"name": "Charpentier, Marc-Antoine"}] for example
-    return jsonify({"success": True, "composers": list_composers})
+#     composer_name = request.form.get("search-field")
+#     res = Composer.query.filter(Composer.name.ilike(f"%{composer_name}%")).all()
+#     list_composers = json.dumps([{"name": composer.name} for composer in res])
+#     #list composers is a string [{"name": "Charpentier, Marc-Antoine"}] for example
+#     return jsonify({"success": True, "composers": list_composers})
 
 
-@app.route('/composer/<composer_name>', methods=["GET", "POST"])
-def composer(composer_name):
+@app.route('/composer')
+def composer():
+    return render_template('composer.html')
 
-    form = PieceCommentForm()
+
+# @app.route('/composer/<composer_name>', methods=["GET", "POST"])
+# def composer(composer_name):
+
+#     form = PieceCommentForm()
     
-    composer_name = urllib.parse.unquote(composer_name)
-    composer_name = composer_name.split('/')[-1]
+#     composer_name = urllib.parse.unquote(composer_name)
+#     composer_name = composer_name.split('/')[-1]
 
-    composer = Composer.query.filter_by(name=composer_name).first_or_404()
-    if composer == None:
-            flash('No results. Try a different search')
-            return render_template('index.html', search_form=search_form)
+#     composer = Composer.query.filter_by(name=composer_name).first_or_404()
+#     if composer == None:
+#             flash('No results. Try a different search')
+#             return render_template('index.html', search_form=search_form)
     
-    #get composer images
-    last_name = composer.name.split(',')[0]
-    try:
-        composer_images = wikipedia.page(composer.name).images
-    except: 
-        matching = 'https://via.placeholder.com/300'
-    try:
-        matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-    except:
-        return render_template('composer.html', composer=composer, form=form)
+#     #get composer images
+#     last_name = composer.name.split(',')[0]
+#     try:
+#         composer_images = wikipedia.page(composer.name).images
+#     except: 
+#         matching = 'https://via.placeholder.com/300'
+#     try:
+#         matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
+#     except:
+#         return render_template('composer.html', composer=composer, form=form)
 
     
-    if form.validate_on_submit():
-        if form.submit_comment.data:
-            comment = Comment(body=form.comment.data, author=current_user)
-            user = User.query.filter_by(username=current_user.username).first()
+#     if form.validate_on_submit():
+#         if form.submit_comment.data:
+#             comment = Comment(body=form.comment.data, author=current_user)
+#             user = User.query.filter_by(username=current_user.username).first()
        
-            flash('Your post is now live')
-            return redirect(url_for('composer'))
+#             flash('Your post is now live')
+#             return redirect(url_for('composer'))
 
-    # if add_to_favorites.validate_on_submit():
+#     # if add_to_favorites.validate_on_submit():
 
-    #     if form.add_fave.data:
-    #         soup = BeautifulSoup(page.text, 'html.parser')
-    #         piece_title = soup.find(id='piece-title')
-    #         p = Piece.query.filter_by(title=piece_title).first()
-    #         u = User.query.filter_by(username=current_user.username).first()
-    #         print(p)
-    #         print(u)
-            #u.add_favorite(p)
-            #flash('Piece added to your favorites list!')
+#     #     if form.add_fave.data:
+#     #         soup = BeautifulSoup(page.text, 'html.parser')
+#     #         piece_title = soup.find(id='piece-title')
+#     #         p = Piece.query.filter_by(title=piece_title).first()
+#     #         u = User.query.filter_by(username=current_user.username).first()
+#     #         print(p)
+#     #         print(u)
+#             #u.add_favorite(p)
+#             #flash('Piece added to your favorites list!')
             
-    #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
-    return render_template('composer.html', composer=composer, matching=matching, form=form)
+#     #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
+#     return render_template('composer.html', composer=composer, matching=matching, form=form)
 
 
 @app.route('/piece_detail/<piece_title>', methods=["GET","POST"])
@@ -185,11 +190,11 @@ def add_favorite(piece_title):
     
 
 
-@app.route('/user/<username>')
-#@login_required
-def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user)
+# @app.route('/user/<username>')
+# #@login_required
+# def user(username):
+#     user = User.query.filter_by(username=username).first_or_404()
+#     return render_template('user.html', user=user)
 
     
 #json.dumps(faves_list)

@@ -1,50 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
-    <title>Concert Builder - Home</title>
-</head>
-<body>
-    <nav class="landing-nav">
-        <h1 class="site-title">Concert Builder</h1>
-        <div class="right-nav-container" id='right-nav-container'>
-            <ul class="nav-left">
-                <li class="search" id="search">
-                    <i class="fas fa-search"></i>
-                    <p>Search</p>
-                </li>
-                <li class="browse">
-                    <i class="fas fa-book"></i>
-                    <p>Browse</p>
-                </li>
-                <li class="create">
-                    <i class="fas fa-plus-square"></i>
-                    <p>Create</p>
-                </li>
-            </ul>
-            <ul class="nav-right">
-                 <li class="home-mobile-icons">
-                    <i class="fas fa-book"></i>
-                </li>
-                <li class="home-mobile-icons">
-                    <i class="fas fa-search"></i>
-                </li>
-                <li class="logged-in" id="logged-in"> 
-                    <img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="">
-                </li>
-            </ul>
-            <ul class="dropdown-menu" id="dropdown-menu">
-                <li><a href="#">Your Concerts</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Log Out</a></li>
-            </ul>
-        </div>
-        
-    </nav>
+{% extends 'base.html' %}
+
+{% block content %}
     <div class="main-container">
         <div class="left-menu">
             <ul class="left-menu-items">
@@ -145,3 +101,4 @@
 
     <script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
 </body>
+{% endblock %}
