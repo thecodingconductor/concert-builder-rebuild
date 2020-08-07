@@ -5,9 +5,11 @@ const concertConclusion = document.getElementById('concert-conclusion');
 const concertBuilderArea = document.getElementById('concert-builder-area');
 const searchFavorites = document.getElementById("search-favorites");
 const deleteIntermission = document.getElementById('delete-intermission');
-
-
-
+const concertTitleBtn = document.getElementById('concert-title-btn');
+const rightSearchArea = document.getElementById('right-search-area');
+const concertTitleInput = document.getElementById('concert-title-input');
+const changeTitleBtn = document.getElementById('change-title-btn');
+const concertTitleHeader = document.getElementById('concert-title-header');
 
 let concertPieceArr = [];
 let favoritesResults =[];
@@ -64,9 +66,7 @@ function addPieceToDOM(piece) {
 
 function removePiece() {
   
-    
     let selectedConcert = this.parentElement;
-    
     selectedConcert.remove();
 }
 
@@ -122,9 +122,31 @@ function createIntermission() {
     
 }
 
+function saveConcertTitle() {
+    let concertTitle = concertTitleInput.value;
+    
+
+
+    if(concertTitle === '') {
+        //Please Provide A Title.
+    } else {
+        //Create Concert Object with Title *Flask
+        //Change DOM
+        rightSearchArea.classList.add('show');
+        concertTitleHeader.textContent = `${concertTitle}`; 
+    }
+}
+
+function removeConcertTitle() {
+    //Change object in Flask*
+    rightSearchArea.classList.remove('show');
+}
+
 
 
 //Event Listeners
+
+//This needs to be fixed -- it will go inside dynamicSearch
 addToConcert.forEach(button => {
      button.addEventListener('click', addPieceToConcertArr);
  });
@@ -134,5 +156,5 @@ searchFavorites.addEventListener('keyup', dynamicSearch);
 //showAddIntermission
 concertBuilderArea.addEventListener('mouseover', showIntermission);
 
-//Add Intermission to DOM
-//concertBuilderArea.addEventListener('click', createIntermission);
+concertTitleBtn.addEventListener('click', saveConcertTitle);
+changeTitleBtn.addEventListener('click', removeConcertTitle);

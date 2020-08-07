@@ -46,6 +46,8 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+    justify-content: space-between;
+    position: relative;
 }
 
 .left-search-area input {
@@ -60,22 +62,20 @@ body {
 }
 
 
-.left-search-area i {
-    color: #000;
-    padding: 9px;
-    background-color: #fff;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
 
-.right-search-area input {
-    flex: 1;
+
+.concert-title-input {
+    width: 25%;
     line-height: 2rem;
     border-radius: 5px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
     border: none;
     outline: none;
+    opacity: 1;
+}
+
+.concert-title-btn {
+    width: 25%;
+    opacity: 1;
 }
 
 .right-search-area i {
@@ -85,6 +85,39 @@ body {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+.right-search-area .concert-title {
+    transition: opacity .3s ease;
+    opacity: 0;
+}
+
+.right-search-area.show .concert-title {
+    opacity: 1;
+}
+
+.right-search-area.show .concert-title-input{
+    transition: opacity .3s ease;
+    opacity: 0;
+}
+
+.right-search-area.show .concert-title-btn {
+    transition: opacity .3s ease;
+    opacity: 0;
+}
+
+.change-title-btn {
+    position: absolute;
+    width: 25%;
+    right: 0;
+    visibility: hidden;
+}
+
+.right-search-area.show .change-title-btn {
+    transition: visibility .3s ease;
+    visibility: visible
+    
+}
+
 
 
 .builder-piece-list {
