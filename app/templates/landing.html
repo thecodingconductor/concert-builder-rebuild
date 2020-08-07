@@ -92,91 +92,12 @@
     </div>
 
     <div class="modal-container" id="sign-up-modal">
-        <div class="sign-up-container">
-            <i class="fa fa-times fa-2x" id="close-sign-up"></i>
-            <div class="third-party-buttons">
-                <button class="secondary-btn">
-                    <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
-                    <p>Sign up with Google</p>
-                </button>
-                <button class="secondary-btn">
-                    <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="facebook-sign-up">
-
-                    <p>Sign up with Facebook</p>
-                </button>
-            </div>
-           
-            <div class="sign-up-form">
-                <div class="form-field birthday-selector">
-                    <label for="">Birthday</label>
-                    <div class="select-container">
-                        <select name="month" id="month">
-                            <option value="">Month</option>
-                        </select>
-                        <select name="day" id="day">
-                            <option value="">Day</option>
-                        </select>
-                        <select name="year" id="year">
-                            <option value="">Year</option>
-                        </select>
-                    </div>
-                    
-                </div>
-                <div class="form-field">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter username">
-                </div>
-                <div class="form-field">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter email">
-                </div>
-                <div class="form-field">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter  password">
-                </div>
-                <button class="primary-btn register-btn">Register Now</button>
-                <button class="primary-btn login-btn">Already have an account? Log in <a href="#">here.</a></button>
-            </div>
-        </div>
+       {% include '_register.html' %}
     </div>
 
     <div class="modal-container" id="sign-in-modal">
-        <div class="sign-up-container sign-in-container">
-            <div class="sign-in-header">
-                <h1>Log in</h1>
-                <i class="fa fa-times fa-2x" id="close-sign-in"></i>
-            </div>
-            <div class="sign-in-form-area">
-                <div class="sign-in-buttons">
-                    <button class="secondary-btn">
-                        <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
-                        <p>Sign in with Google</p>
-                    </button>
-                    <button class="secondary-btn">
-                        <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="facebook-sign-up">
-                        <p>Sign in with Facebook</p>
-                    </button>
-                    <button class="secondary-btn">
-                        <img src="{{ url_for('static', filename='img/company.svg') }}" alt="" class="facebook-sign-up">
-                        <p>Sign in with Apple</p>
-                    </button>
-                </div>
-                <div class="sign-in-form-fields">
-                    <div class="form-field">
-                        <input type="text" placeholder="Type your username">
-                        <label for="username">Username</label>
-                    </div>
-                    <div class="form-field">
-                        <input type="password" placeholder="Type your password">
-                        <label for="password">Password</label>
-                        <p><a href="#">Forgot?</a></p>
-                    </div>
-                    
-                    <button class="primary-btn big-login-btn">Log in</button>
-                   
-                </div>
-            </div>
-        </div>
+        {% include '_login.html'%}    
+    </div>
     </div>
 
     <div class="modal-container" id="browse-modal">

@@ -1,0 +1,46 @@
+<div class="sign-up-container">
+    <i class="fa fa-times fa-2x" id="close-sign-up"></i>
+    <div class="third-party-buttons">
+        <button class="secondary-btn">
+            <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
+            <p>Sign up with Google</p>
+        </button>
+        <button class="secondary-btn">
+            <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="facebook-sign-up">
+
+            <p>Sign up with Facebook</p>
+        </button>
+    </div>
+   
+    <div class="sign-up-form">
+        <div class="form-field birthday-selector">
+            <label for="">Birthday</label>
+            <div class="select-container">
+                <select name="month" id="month">
+                    <option value="">Month</option>
+                </select>
+                <select name="day" id="day">
+                    <option value="">Day</option>
+                </select>
+                <select name="year" id="year">
+                    <option value="">Year</option>
+                </select>
+            </div>
+            
+        </div>
+        <div class="form-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+        <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter  password">
+        </div>
+        <button class="primary-btn register-btn">Register Now</button>
+        <button class="primary-btn login-btn">Already have an account? Log in <a href="#">here.</a></button>
+    </div>
+</div>

@@ -8,14 +8,13 @@ from flask_login import logout_user, login_required, current_user, login_user
 from bs4 import BeautifulSoup
 import urllib.parse
 import requests
-import wikipedia
+#import wikipedia
 import json
 
 
 
 @app.route('/', methods=["GET", "POST"])
 @app.route('/index', methods=["GET", "POST"])
-@login_required
 def index():
     search_form = ComposerSearchForm()
     if search_form.validate_on_submit():
@@ -32,9 +31,9 @@ def index():
         except:
             matching = 'https://via.placeholder.com/300'
         
-        return render_template('index.html', composer=composer, search_form=search_form, matching=matching)
-    return render_template('index.html', search_form=search_form)
-
+        return render_template('landing.html', composer=composer, search_form=search_form, matching=matching)
+    return render_template('landing.html')
+#search_form=search_form
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
