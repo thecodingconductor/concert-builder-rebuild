@@ -1,4 +1,10 @@
-    {% extends 'base.html' %}
+{% extends 'base.html' %}
+
+{% block title %} Homepage {% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/composer.css') }}">
+{% endblock %}
     {% block content %}
     <div class="composer-top">
         <div class="composer-hero">
