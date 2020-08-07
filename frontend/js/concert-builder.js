@@ -14,19 +14,21 @@ const concertTitleHeader = document.getElementById('concert-title-header');
 let concertPieceArr = [];
 let favoritesResults =[];
 let dragStartIndex;
+let number = 0;
 
 function addPieceToConcertArr() {
-    
+    number++;
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
+    pieceEl.setAttribute("draggable", "true");
     pieceEl.innerHTML =  `
     
-        <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
+        <i class="fas fa-bars piece-drag-bars"></i>
         <div class="composer-img">
 
         </div>
         <div class="composer-info">
-            <p>Composer Name</p>
+            <p>Composer Name ${number-1}</p>
             <p>Dates</p>
             <p>Nationality</p>
         </div>
@@ -126,8 +128,9 @@ function createIntermission() {
  
             let intermissionEl = document.createElement('div');
                 intermissionEl.classList = "concert intermission";
+                intermissionEl.setAttribute("draggable", "true");
                 intermissionEl.innerHTML = `
-                    <i class="fas fa-bars" draggable="true"></i>
+                    <i class="fas fa-bars"></i>
                     <p>Intermission: ~20-30 minutes</p>
                     <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
                 `;
@@ -167,26 +170,38 @@ function removeConcertTitle() {
 //Drag Functions
 function dragStart() {
     console.log('Event: Drag Start');
+    dragStartIndex = +this.parentElement.getAttribute('data-index');
+    
 }
 
 function dragEnter() {
-    console.log('Event: Drag Enter');
+    
+    this.classList.add('over');
 }
 
 function dragLeave() {
-    console.log('Event: Drag Leave');
+    this.classList.remove('over');
 }   
 
 function dragOver(e) {
     console.log('Event: Drag Over');
+    e.preventDefault();
 }
 
 function dragDrop() {
     console.log('Event: Drag Drop');
+
+    const dragEndIndex = +this.getAttribute('data-index');
+    swapItems(dragStartIndex, dragEndIndex);
+    this.classList.remove('over');
 }
 
 function swapItems(fromIndex, toIndex) {
+    const itemOne = concertPieceArr[fromIndex];
+    const itemTwo = concertPieceArr[toIndex];
 
+    concertPieceArr[fromIndex].appendChild(itemTwo);
+    concertPieceArr[toIndex].appendChild(itemOne);
 }
 
 //good. working.
@@ -198,6 +213,7 @@ function dragListeners() {
     });
     
     dragBoxes.forEach(box => {
+        
         box.addEventListener('dragover', dragOver);
         box.addEventListener('drop', dragDrop);
         box.addEventListener('dragenter', dragEnter);
