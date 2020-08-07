@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <title>Concert Builder - Landing</title>
 </head>
@@ -82,7 +82,7 @@
         </div>
         <div class="image-carousel-container">
             <div class="image-carousel">
-                <img src="img/mozart.gif" alt="">
+                <img src="{{ url_for('static', filename='img/mozart.gif') }}" alt="">
             </div>
             <div class="image-description">
                 <h3 class="image-description-text">Concert Builder is for:</h3>
@@ -96,11 +96,11 @@
             <i class="fa fa-times fa-2x" id="close-sign-up"></i>
             <div class="third-party-buttons">
                 <button class="secondary-btn">
-                    <img src="img/brands-and-logotypes.svg" alt="" class="google-sign-up">
+                    <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
                     <p>Sign up with Google</p>
                 </button>
                 <button class="secondary-btn">
-                    <img src="img/facebook.svg" alt="" class="facebook-sign-up">
+                    <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="facebook-sign-up">
 
                     <p>Sign up with Facebook</p>
                 </button>
@@ -149,15 +149,15 @@
             <div class="sign-in-form-area">
                 <div class="sign-in-buttons">
                     <button class="secondary-btn">
-                        <img src="img/brands-and-logotypes.svg" alt="" class="google-sign-up">
+                        <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
                         <p>Sign in with Google</p>
                     </button>
                     <button class="secondary-btn">
-                        <img src="img/facebook.svg" alt="" class="facebook-sign-up">
+                        <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="facebook-sign-up">
                         <p>Sign in with Facebook</p>
                     </button>
                     <button class="secondary-btn">
-                        <img src="img/company.svg" alt="" class="facebook-sign-up">
+                        <img src="{{ url_for('static', filename='img/company.svg') }}" alt="" class="facebook-sign-up">
                         <p>Sign in with Apple</p>
                     </button>
                 </div>
@@ -333,5 +333,5 @@
             </div>
         </div>
     </div>
-    <script src="js/landing.js"></script>
+    <script src="{{ url_for('static', filename='js/landing.js') }}"></script>
 </body>

@@ -1,68 +1,87 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-
-        
-        {% if composer %}
-
-    {% if matching %}
-    <div id='composer-img-div'>
-      <img id='composer-img' src='{{ matching }}'>
-    </div>
-    {% endif %}
-    
-      <div id='composer-details'>
-        {{ composer.name }}<br>
-        {{ composer.years }}<br>
-        {{ composer.nationality }}<br>
-        {{ composer.details }}
-      </div>
-
-      <div id='composer-page-container' class='container'>
-      <div id='composer-pieces-div'>
-        <ul id='composer-pieces'>
-          {% for piece in composer.pieces %}
-          <li><a class='piece-link' href='#'>{{ piece.title }}</a></li>
-          {% endfor %}
-        </ul>
-
-        <ul id='piece-results'>
-          
-        </ul>
-        
-
-        <div id="comment-box">
-          <form id="form-submit" method="post">
-            {{ form.hidden_tag() }}
-            <p>
-              {{ form.comment.label }}<br>
-              {{ form.comment(cols=32, rows=4) }}<br>
-              {% for error in form.comment.errors %}
-              <span>[{{ error }}]</span>
-              {% endfor %}
-            </p>
-            <p>
-              {{ form.submit_comment(class_='btn btn-primary')}}
-            </p>
-           
-           
-            
-          </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/composer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+    <title>Composer Page</title>
+</head>
+<body>
+    <nav class="landing-nav">
+        <h1 class="site-title">Concert Builder</h1>
+        <div class="right-nav-container">
+            <ul class="nav-left">
+                <li class="search">
+                    <i class="fas fa-search"></i>
+                    <p>Search</p>
+                </li>
+                <li class="browse">
+                    <i class="fas fa-book"></i>
+                    <p>Browse</p>
+                </li>
+                <li class="create">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Create</p>
+                </li>
+            </ul>
+            <ul class="nav-right">
+                <li class="logged-in"> 
+                    <img src="img/JohannesBrahms.jpg" alt="">
+                </li>
+            </ul>
+            <ul class="dropdown-menu">
+                <li> <a href="#">Your Concerts</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
         </div>
-
-        <button id="fave-button" class="btn btn-primary">Save to Favorites</button>
-        
-      </div>   
-        
-        
-        {% endif %}
-
-        
+    </nav>
+    <div class="composer-top">
+        <div class="composer-hero">
+            <div class="composer-wrap">
+               
+            </div>
+            
+        </div>
+        <div class="composer-informations">
+            <h1>Composer Name</h1>
+            <p>Composer Dates</p>
+            <p>Composer Nationality</p>
+        </div>
     </div>
-
-    <script src="{{ url_for('static', filename='js/composer-test.js') }}"></script>
-
-    {% endblock %}
-      
- 
+    <div class="composer-bottom">
+        <div class="composer-piece-list">
+                <ul class="piece-list">
+                    <li>Symphony 1</li>
+                    <li>Symphony 1</li>
+                    <li>Symphony 1</li>
+                    <li>Symphony 1</li>
+                    <li>Symphony 1</li>
+                    <li>Symphony 1</li>
+                   
+                  
+                </ul>
+        </div>
+        <div class="composer-bottom-right">
+            <div class="piece-details">
+                <h2>Symphony No. 1</h2>
+                <p>2222-4331-tmp+2-str</p>
+                <p>14'</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, totam? Cupiditate ipsam voluptas eveniet accusantium, ad consequuntur repellendus quam tempora numquam veritatis, eaque vitae omnis itaque earum, dolor impedit. Ab?</p>
+            </div>
+            <div class="user-interaction-area">
+                <textarea name="user-comment" id="user-comment" cols="30" rows="10"></textarea>
+                <div class="user-buttons">
+                    <button class="primary-btn">Submit Comment</button>
+                    <button class="primary-btn">Add Piece to Favorites</button>
+                    <button class="primary-btn">Create Concert</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="js/composer.js"></script>
+</body>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+        
+        {% if composer %}
+
+    {% if matching %}
+    <div id='composer-img-div'>
+      <img id='composer-img' src='{{ matching }}'>
+    </div>
+    {% endif %}
+    
+      <div id='composer-details'>
+        {{ composer.name }}<br>
+        {{ composer.years }}<br>
+        {{ composer.nationality }}<br>
+        {{ composer.details }}
+      </div>
+
+      <div id='composer-page-container' class='container'>
+      <div id='composer-pieces-div'>
+        <ul id='composer-pieces'>
+          {% for piece in composer.pieces %}
+          <li><a class='piece-link' href='#'>{{ piece.title }}</a></li>
+          {% endfor %}
+        </ul>
+
+        <ul id='piece-results'>
+          
+        </ul>
+        
+
+        <div id="comment-box">
+          <form id="form-submit" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+              {{ form.comment.label }}<br>
+              {{ form.comment(cols=32, rows=4) }}<br>
+              {% for error in form.comment.errors %}
+              <span>[{{ error }}]</span>
+              {% endfor %}
+            </p>
+            <p>
+              {{ form.submit_comment(class_='btn btn-primary')}}
+            </p>
+           
+           
+            
+          </form>
+        </div>
+
+        <button id="fave-button" class="btn btn-primary">Save to Favorites</button>
+        
+      </div>   
+        
+        
+        {% endif %}
+
+        
+    </div>
+
+    <script src="{{ url_for('static', filename='js/composer-test.js') }}"></script>
+
+    {% endblock %}
+      
+ 
