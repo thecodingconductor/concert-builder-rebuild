@@ -19,21 +19,21 @@ def index():
     search_form = ComposerSearchForm()
     login_form = LoginForm()
     signup_form = RegistrationForm()
-    if search_form.validate_on_submit():
-        user_search = search_form.search.data
-        composer = Composer.query.filter(Composer.name.ilike("%{}%".format(user_search))).first()
-        #if composer == None:
-        #    flash('No results. Try a different search')
-        #    return render_template('index.html', search_form=search_form)
+    # if search_form.validate_on_submit():
+    #     user_search = search_form.search.data
+    #     composer = Composer.query.filter(Composer.name.ilike("%{}%".format(user_search))).first()
+    #     #if composer == None:
+    #     #    flash('No results. Try a different search')
+    #     #    return render_template('index.html', search_form=search_form)
 
-        last_name = composer.name.split(',')[0]
-        #try:
-        #    composer_images = wikipedia.page(composer.name).images
-        #    matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-        #except:
-        #    matching = 'https://via.placeholder.com/300'
+    #     last_name = composer.name.split(',')[0]
+    #     #try:
+    #     #    composer_images = wikipedia.page(composer.name).images
+    #     #    matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
+    #     #except:
+    #     #    matching = 'https://via.placeholder.com/300'
         
-        return render_template('composer.html', composer=composer, search_form=search_form)
+    #     return render_template('composer.html', composer=composer, search_form=search_form)
     
     #INCLUDE LOGIN FORM
     if login_form.validate_on_submit():

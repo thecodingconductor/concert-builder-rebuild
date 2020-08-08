@@ -1,5 +1,5 @@
 //https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${search}&
-
+//Nav Bar - to Base file
 const siteTitle = document.getElementById('site-title');
 const logInNav = document.getElementById('login-nav');
 const signUpButton = document.getElementById('sign-up-btn');
@@ -8,12 +8,15 @@ const search = document.getElementById('search');
 const createConcert = document.getElementById('create');
 const openMobileSearch = document.getElementById('open-mobile-search');
 const rightNavContainer = document.getElementById('right-nav-container');
+//Unique for Landing
+
 const logInOpen = document.getElementById('login-nav');
 const signUpOpen = document.getElementById('sign-up-btn');
 const signUpModal = document.getElementById('sign-up-modal');
 const signInModal = document.getElementById('sign-in-modal');
 const closeSignUp = document.getElementById('close-sign-up');
 const closeSignIn = document.getElementById('close-sign-in');
+//For Base
 const browse = document.getElementById('browse');
 const browseModal = document.getElementById('browse-modal');
 const browseModalArea = document.getElementById('browse-modal-area');
@@ -23,7 +26,7 @@ const closeSearch = document.getElementById('close-search');
 const searchInput = document.getElementById('search-bar-field');
 const searchBarResults = document.getElementById('search-bar-results');
 
-
+//For Base
 function openModal(e) {
     if(e.target.textContent.trim() === 'Log In') {
         signInModal.style.display = 'flex';
@@ -131,15 +134,20 @@ function getResults() {
 }
 
 
-
+//for Landing Only
 getStarted.addEventListener('click', openModal);
 logInOpen.addEventListener('click', openModal);
 signUpOpen.addEventListener('click', openModal);
+closeSignUp.addEventListener('click', closeModal);
+closeSignIn.addEventListener('click', closeModal);
+
+//For Base
 search.addEventListener('click', showSearch);
 openMobileSearch.addEventListener('click', showSearch)
 closeSearch.addEventListener('click', closeSearchField);
-closeSignUp.addEventListener('click', closeModal);
-closeSignIn.addEventListener('click', closeModal);
+
+
+//for Base
 browse.addEventListener('click', showBrowse);
 closeBrowse.addEventListener('click', () => {
     browseModalArea.classList.remove('show');

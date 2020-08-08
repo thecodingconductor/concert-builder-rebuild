@@ -1,3 +1,5 @@
+
+//Nav Bar Elements
 const loggedIn = document.getElementById('logged-in');
 const dropDownMenu = document.getElementById('dropdown-menu');
 const showGold = document.querySelectorAll('.hover-gold');
@@ -10,7 +12,7 @@ const openConcerts = document.querySelector('.open-concerts');
 
 const openLinks = [openProfile, openFavorites, openConcerts];
 
-
+//FOr Nav Bar
 function showDropDown() {
     if(dropDownMenu.style.display === 'block') {
         dropDownMenu.style.display = 'none';
@@ -42,6 +44,7 @@ function resultsExit(e) {
 
  }
 
+//For Nav bar
 loggedIn.addEventListener('click', showDropDown);
 
 searchResults.forEach(result => {
