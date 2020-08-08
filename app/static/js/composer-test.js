@@ -1,14 +1,15 @@
-const pieceList = document.querySelectorAll(".piece-link");
-const submitForm = document.getElementById('form-submit');
+const pieceList = document.querySelectorAll(".piece-title");
+//const submitForm = document.getElementById('form-submit');
 const pieceResults = document.getElementById('piece-results');
-const testingFave = document.getElementById('fave-button');
+//const testingFave = document.getElementById('fave-button');
+const pieceDetailsContainer = document.getElementById('piece-details');
+
+
 
 let pieceData;
 
 function clearResults() {
-    while(pieceResults.firstChild) {
-        pieceResults.removeChild(pieceResults.firstChild);
-    }
+   pieceDetailsContainer.innerHTML = '';
 }
 
 function getPieceResults(e) {
@@ -20,21 +21,21 @@ function getPieceResults(e) {
     request.open('POST', `/piece_detail/${formattedString}`);
 
     request.onload = () => {
-        window.scrollTo(0,0);
+       // window.scrollTo(0,0);
         const data = JSON.parse(request.responseText);
         console.log(data);
 
         if(data.piece.title) {
-            const contents = `<p id="piece-title">${data.piece.title}</p> 
+            const contents = `<h2 id="piece-title-result">${data.piece.title}</h2> 
                             <p id="piece-duration">${data.piece.duration}</p>
                             <p id="piece-instrumentation">${data.piece.instrumentation}</p>
-                            <p id="piece-notes">${data.piece.notes}</p>`;
+                           `;
             
                             
 
-            const li = document.createElement('li');
-            li.innerHTML = contents;
-            pieceResults.append(li);
+            //const li = document.createElement('li');
+            //li.innerHTML = contents;
+            pieceDetailsContainer.innerHTML = contents;
             pieceData = data;
             return pieceData;
         
@@ -67,12 +68,15 @@ function addToFavorites() {
 }
 
 
-testingFave.addEventListener('click', addToFavorites);
+// testingFave.addEventListener('click', addToFavorites);
 
 pieceList.forEach((piece) => {
     piece.addEventListener('click', getPieceResults)
 })
 
-submitForm.addEventListener('submit', () => {
 
-})
+
+// <p id="piece-notes">${data.piece.notes}</p>
+// submitForm.addEventListener('submit', () => {
+
+// })

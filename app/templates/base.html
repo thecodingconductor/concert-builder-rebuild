@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+
     <title>Concert Builder - {% block title %}{% endblock %}</title>
     {% endblock %}
     
@@ -16,16 +18,23 @@
         <div class="right-nav-container" id='right-nav-container'>
             <ul class="nav-left">
                 <li class="search" id="search">
-                    <i class="fas fa-search"></i>
-                    <p>Search</p>
+                    <a href="">
+                        <i class="fas fa-search"></i>
+                        <p>Search</p>
+                    </a>
+                    
                 </li>
                 <li class="browse">
-                    <i class="fas fa-book"></i>
-                    <p>Browse</p>
+                    <a href="">
+                        <i class="fas fa-book"></i>
+                        <p>Browse</p>
+                    </a>
                 </li>
                 <li class="create">
-                    <i class="fas fa-plus-square"></i>
-                    <p>Create</p>
+                    <a href="">
+                        <i class="fas fa-plus-square"></i>
+                        <p>Create</p>
+                    </a>
                 </li>
             </ul>
             <ul class="nav-right">

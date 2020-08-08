@@ -3,6 +3,7 @@
 {% block title %} Homepage {% endblock %}
 {% block head %}
 {{ super() }}
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/composer.css') }}">
 {% endblock %}
     {% block content %}
@@ -24,18 +25,15 @@
         <div class="composer-piece-list">
                 <ul class="piece-list">
                     {% for piece in composer.pieces %}
-                    <li>{{ piece.title }}</li>
+                    <li class="piece-title">{{ piece.title }}</li>
                     {% endfor %}
                    
                   
                 </ul>
         </div>
         <div class="composer-bottom-right">
-            <div class="piece-details">
-                <h2>Symphony No. 1</h2>
-                <p>2222-4331-tmp+2-str</p>
-                <p>14'</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, totam? Cupiditate ipsam voluptas eveniet accusantium, ad consequuntur repellendus quam tempora numquam veritatis, eaque vitae omnis itaque earum, dolor impedit. Ab?</p>
+            <div class="piece-details"  id="piece-details">
+                
             </div>
             <div class="user-interaction-area">
                 <textarea name="user-comment" id="user-comment" cols="30" rows="10"></textarea>
@@ -48,6 +46,6 @@
             </div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/composer.css') }}"></script>
+    <script src="{{ url_for('static', filename='js/composer-test.js') }}"></script>
 </body>
 {% endblock %}

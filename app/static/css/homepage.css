@@ -1,7 +1,10 @@
+
+
 .logged-in img {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  margin-right: 2rem;
 }
 
 .nav-right {
