@@ -83,7 +83,7 @@ button {
     
 }
 
-.nav-left li a {
+.nav-left li a, .site-title a {
     color: #fff;
     text-decoration: none;
     display: flex;
@@ -93,7 +93,7 @@ button {
     cursor: pointer;
 }
 
-.nav-left li a:hover, .nav-right li a:hover {
+.nav-left li a:hover, .nav-right li a:hover, .site-title a:hover {
     color: rgba(189, 195, 199, 0.8);
 }
 
