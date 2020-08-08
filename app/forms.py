@@ -37,3 +37,9 @@ class PieceCommentForm(FlaskForm):
 
 class AddToFavorites(FlaskForm):
     add_fave = SubmitField("Add to Favorites")
+
+class AddToConcerts(FlaskForm):
+    add_concert = SubmitField("Save to Concerts")
+
+class SearchFavorites(FlaskForm):
+    search_favorite = StringField("Search Favorites")

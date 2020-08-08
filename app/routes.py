@@ -19,38 +19,24 @@ def index():
     search_form = ComposerSearchForm()
     login_form = LoginForm()
     signup_form = RegistrationForm()
-    # if search_form.validate_on_submit():
-    #     user_search = search_form.search.data
-    #     composer = Composer.query.filter(Composer.name.ilike("%{}%".format(user_search))).first()
-    #     #if composer == None:
-    #     #    flash('No results. Try a different search')
-    #     #    return render_template('index.html', search_form=search_form)
-
-    #     last_name = composer.name.split(',')[0]
-    #     #try:
-    #     #    composer_images = wikipedia.page(composer.name).images
-    #     #    matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-    #     #except:
-    #     #    matching = 'https://via.placeholder.com/300'
-        
-    #     return render_template('composer.html', composer=composer, search_form=search_form)
     
     #INCLUDE LOGIN FORM
     if login_form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
+        user = User.query.filter_by(username=login_form.username.data).first()
+        ## DO VALIDATION CLIENT SIDE. NO NEED FOR FLASK VALIDATION
+        if user is None or not user.check_password(login_form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
+            return redirect(url_for('index'))
+        login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('landing')
+            next_page = url_for('index')
         return redirect(url_for('homepage'))
 
     #INCLUDE SIGN UP FORM
     if signup_form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
+        user = User(username=signup_form.username.data, email=signup_form.email.data)
+        user.set_password(signup_form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user.')
@@ -93,12 +79,16 @@ def register():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('landing'))
 
 @app.route('/homepage')
+@login_required
 def homepage():
+
     search_form = ComposerSearchForm()
-    return render_template('homepage.html', search_form=search_form)
+    user = User.query.filter_by(username=current_user.username).first()
+    print(user)
+    return render_template('homepage.html', search_form=search_form, user=user)
 
 @app.route('/concert_builder')
 #@login_required
@@ -214,3 +204,24 @@ def add_favorite(piece_title):
 
     
 #json.dumps(faves_list)
+
+
+
+
+
+# if search_form.validate_on_submit():
+    #     user_search = search_form.search.data
+    #     composer = Composer.query.filter(Composer.name.ilike("%{}%".format(user_search))).first()
+    #     #if composer == None:
+    #     #    flash('No results. Try a different search')
+    #     #    return render_template('index.html', search_form=search_form)
+
+    #     last_name = composer.name.split(',')[0]
+    #     #try:
+    #     #    composer_images = wikipedia.page(composer.name).images
+    #     #    matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
+    #     #except:
+    #     #    matching = 'https://via.placeholder.com/300'
+        
+    #     return render_template('composer.html', composer=composer, search_form=search_form)
+    
