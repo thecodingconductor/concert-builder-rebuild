@@ -14,7 +14,7 @@
 </head>
 <body>
     <nav class="landing-nav">
-        <h1 class="site-title"> <a href="{{ url_for('index') }}">Concert Builder</a> </h1>
+        <h1 class="site-title" id="site-title"> <a href="{{ url_for('index') }}">Concert Builder</a> </h1>
         <div class="right-nav-container" id='right-nav-container'>
             <ul class="nav-left">
                 <li class="search" id="search">
@@ -24,14 +24,14 @@
                     </a>
                     
                 </li>
-                <li class="browse">
+                <li class="browse" id="browse">
                     <a href="">
                         <i class="fas fa-book"></i>
                         <p>Browse</p>
                     </a>
                 </li>
-                <li class="create">
-                    <a href="">
+                <li class="create" id="create">
+                    <a href="{{ url_for('concert_builder') }}">
                         <i class="fas fa-plus-square"></i>
                         <p>Create</p>
                     </a>
@@ -41,7 +41,7 @@
                  <li class="home-mobile-icons">
                     <i class="fas fa-book"></i>
                 </li>
-                <li class="home-mobile-icons">
+                <li class="home-mobile-icons" id="open-mobile-search">
                     <i class="fas fa-search"></i>
                 </li>
                 <li class="logged-in" id="logged-in"> 
@@ -54,7 +54,271 @@
                 <li><a href="#">Log Out</a></li>
             </ul>
         </div>
+        <form class="search-bar-overlay" id="search-bar-overlay">
+            {{ search_form.csrf_token }}
+            <i class="fa fa-search" ></i>
+
+            {{ search_form.search(class_="search-bar-field", id="search-bar-field") }}
+           
+            <i class="fa fa-times close-search" id="close-search"></i>
+        </form>    
+    </nav>
+    <div class="search-bar-results" id="search-bar-results">
+        <div class="search-result-down">
+            <p>Johannes Brahms</p>
+            <p>Symphony No. 4 in E Minor</p>
+            <button class="primary-btn">Add Piece to Favorites</button>
+        </div>
+        <div class="search-result-down">
+            <p>Johannes Brahms</p>
+            <p>Symphony No. 4 in E Minor</p>
+            <button class="primary-btn">Add Piece to Favorites</button>
+        </div>
+        <div class="search-result-down">
+            <p>Johannes Brahms</p>
+            <p>Symphony No. 4 in E Minor</p>
+            <button class="primary-btn">Add Piece to Favorites</button>
+        </div>
+        <div class="search-result-down">
+            <p>Johannes Brahms</p>
+            <p>Symphony No. 4 in E Minor</p>
+            <button class="primary-btn">Add Piece to Favorites</button>
+        </div>
+    </div>
+    
+    {% block content %}
+        {% block javascript %}
+            <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+        {% endblock %}
+    {% endblock %}
+
+
+    <!--
+
+         <nav class="landing-nav">
+        <h1 class="site-title" id="site-title">Concert Builder</h1>
+        <div class="right-nav-container" id="right-nav-container">
+            <ul class="nav-left">
+                <li class="search" id="search">
+                    <a href="#">
+                        <i class="fas fa-search"></i>
+                        <p>Search</p>
+                    </a>
+                </li>
+                <li class="browse" id="browse">
+                    <a href="#">
+                        <i class="fas fa-book"></i>
+                        <p>Browse</p>
+                    </a>
+                    
+                </li>
+                <li class="create" id="create">
+                    <a href="{{ url_for('concert_builder')}}">
+                        <i class="fas fa-plus-square"></i>
+                        <p>Create</p>
+                    </a>     
+                </li>
+            </ul>
+            <ul class="nav-right">
+                <li class="mobile-search-icon" id="open-mobile-search">
+                    <i class="fas fa-search"></i>
+                </li>
+                <li id="login-nav">
+                    Log In
+                </li>
+                <li>
+                    <button class="primary-btn sign-up-btn" id="sign-up-btn">Sign Up</button>
+                </li>
+            </ul>
+        </div>
+        <form class="search-bar-overlay" id="search-bar-overlay">
+            {{ search_form.csrf_token }}
+            <i class="fa fa-search" ></i>
+
+            {{ search_form.search(class_="search-bar-field", id="search-bar-field") }}
+           <i class="fa fa-times close-search" id="close-search"></i>
+        </form>
+        
         
     </nav>
-    {% block content %}{% endblock %}
+    <div class="search-bar-results" id="search-bar-results">
+            <div class="search-result-down">
+                <p>Johannes Brahms</p>
+                <p>Symphony No. 4 in E Minor</p>
+                <button class="primary-btn">Add Piece to Favorites</button>
+            </div>
+            <div class="search-result-down">
+                <p>Johannes Brahms</p>
+                <p>Symphony No. 4 in E Minor</p>
+                <button class="primary-btn">Add Piece to Favorites</button>
+            </div>
+            <div class="search-result-down">
+                <p>Johannes Brahms</p>
+                <p>Symphony No. 4 in E Minor</p>
+                <button class="primary-btn">Add Piece to Favorites</button>
+            </div>
+            <div class="search-result-down">
+                <p>Johannes Brahms</p>
+                <p>Symphony No. 4 in E Minor</p>
+                <button class="primary-btn">Add Piece to Favorites</button>
+            </div>
+        </div>
+    -->
 
+
+    <!--
+
+        <div class="modal-container" id="browse-modal">
+        <div class="browse-modal-area show" id="browse-modal-area">
+            <div class="browse-header">
+                <h1>Browse Composers</h1>
+                <i class="fa fa-times fa-2x" id="close-browse"></i>
+            </div>
+            <div class="browse-composers">
+                <div class="letter">
+                    <h1>A</h1>
+                    <div class="letter-composers">
+                        <p>Adams, John</p>
+                        <p>Ades, Thomas</p>
+                        <p>Albeniz, Isaac</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>C</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>D</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>E</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>F</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>G</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->

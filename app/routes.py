@@ -97,12 +97,14 @@ def logout():
 
 @app.route('/homepage')
 def homepage():
-    return render_template('homepage.html')
+    search_form = ComposerSearchForm()
+    return render_template('homepage.html', search_form=search_form)
 
 @app.route('/concert_builder')
 #@login_required
 def concert_builder():
-    return render_template('concertbuilder.html')
+    search_form = ComposerSearchForm()
+    return render_template('concertbuilder.html', search_form=search_form)
 
 
 @app.route('/composers', methods=["POST"])
@@ -117,6 +119,7 @@ def composers():
 
 @app.route('/composer/<composer_name>', methods=["GET", "POST"])
 def composer(composer_name):
+    search_form = ComposerSearchForm()
     composer_name = urllib.parse.unquote(composer_name)
     composer_name = composer_name.split('/')[-1]
     res = requests.get(f'https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${composer_name}')
@@ -130,7 +133,7 @@ def composer(composer_name):
     last_name = composer.name.split(',')[0]
     
 
-    return render_template('composer.html', composer=composer)
+    return render_template('composer.html', composer=composer, search_form=search_form)
 
 
 # @app.route('/composer/<composer_name>', methods=["GET", "POST"])

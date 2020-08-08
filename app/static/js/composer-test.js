@@ -81,6 +81,10 @@ function imageFetch() {
             const composerImgSrc = data.items[0].pagemap.cse_thumbnail[0].src;
             composerWrap.style.backgroundImage = `url('${composerImgSrc}')`;
         })
+        .catch(err => {
+            console.log(err);
+            composerWrap.style.backgroundImage = 'url("https://via.placeholder.com/200")';
+        })
 }
 // testingFave.addEventListener('click', addToFavorites);
 

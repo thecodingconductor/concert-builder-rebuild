@@ -18,7 +18,7 @@
             <h1 id="composer-name">{{ composer.name }}</h1>
             <p>{{ composer.years }}</p>
             <p>{{ composer.nationality }}</p>
-            <p>{{ composer.details }}</p>
+            
         </div>
     </div>
     <div class="composer-bottom">
@@ -46,6 +46,9 @@
             </div>
         </div>
     </div>
+    {% block javascript %}
+    {{ super() }}
     <script src="{{ url_for('static', filename='js/composer-test.js') }}"></script>
+    {% endblock %}
 </body>
 {% endblock %}
