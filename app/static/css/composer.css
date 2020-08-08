@@ -27,7 +27,7 @@ body {
   border-radius: 50%;
   overflow: hidden;
   object-fit: cover;
-  background-image: url('../img/JohannesBrahms.jpg');
+  
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }

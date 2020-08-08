@@ -1,4 +1,4 @@
-//https://www.googleapis.com/customsearch/v1?q=${search}&
+//https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${search}&
 
 const siteTitle = document.getElementById('site-title');
 const logInNav = document.getElementById('login-nav');

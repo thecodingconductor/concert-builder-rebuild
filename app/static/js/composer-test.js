@@ -3,8 +3,7 @@ const pieceList = document.querySelectorAll(".piece-title");
 const pieceResults = document.getElementById('piece-results');
 //const testingFave = document.getElementById('fave-button');
 const pieceDetailsContainer = document.getElementById('piece-details');
-
-
+const composerWrap = document.getElementById('composer-wrap');
 
 let pieceData;
 
@@ -67,9 +66,25 @@ function addToFavorites() {
         })
 }
 
-
+function imageFetch() {
+    const composerName = document.getElementById('composer-name');
+    console.log(composerName.textContent);
+    fetch(`https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${composerName.textContent}`)
+        .then(res => {
+            if(!res.ok) {
+                throw new Error('Network response was bad.');
+            } else {
+                return res.json();
+            }
+        })
+        .then(data => {
+            const composerImgSrc = data.items[0].pagemap.cse_thumbnail[0].src;
+            composerWrap.style.backgroundImage = `url('${composerImgSrc}')`;
+        })
+}
 // testingFave.addEventListener('click', addToFavorites);
 
+window.addEventListener('DOMContentLoaded', imageFetch)
 pieceList.forEach((piece) => {
     piece.addEventListener('click', getPieceResults)
 })
