@@ -103,7 +103,9 @@
     <div class="audio-player-container">
         <audio src="../../../portfolio/img/fast-energy.mp3"></audio>
     </div>
-
+    {% block javascript %}
+    {{ super() }}
     <script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
+    {% endblock %}
 </body>
 {% endblock %}

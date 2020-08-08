@@ -24,8 +24,12 @@ function showDropDown() {
 }
 
 function showGoldUnderline(e) {
+    if(!e.target.querySelector('.hover-gold')) {
+        return false;
+    } else {
+        e.target.querySelector('.hover-gold').classList.add('show');
+    }
     
-    e.target.querySelector('.hover-gold').classList.add('show');
 }
 
 function hideGoldUnderline(e) {
