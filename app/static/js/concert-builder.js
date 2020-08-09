@@ -69,9 +69,14 @@ function addPieceToConcertArr(e) {
 }
 
 function getConcertDuration(pieceArr) {
-    const concertDurationArr = pieceArr.map(item => Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]));
-    const concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
-    return concertDuration;
+    if(pieceArr.length === 0) {
+        return 0;
+    } else {
+        const concertDurationArr = pieceArr.map(item => Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]));
+        const concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
+        return concertDuration;
+    }
+    
 }
 
 
