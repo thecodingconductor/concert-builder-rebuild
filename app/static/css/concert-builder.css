@@ -143,6 +143,25 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.piece-info-left p:last-of-type {
+    font-size: .75rem;
+    text-align: center;
+}
+
+.data-composer-info {
+    display: none;
+}
+
+.piece-info p {
+    font-size: .75rem;
+}
+
+.piece-info {
+    width: 25%;
 }
 
 .concert-builder-area {

@@ -91,10 +91,11 @@ def homepage():
     return render_template('homepage.html', search_form=search_form, user=user)
 
 @app.route('/concert_builder')
-#@login_required
+@login_required
 def concert_builder():
     search_form = ComposerSearchForm()
-    return render_template('concertbuilder.html', search_form=search_form)
+    user = User.query.filter_by(username=current_user.username).first()
+    return render_template('concertbuilder.html', search_form=search_form, user=user)
 
 
 @app.route('/composers', methods=["POST"])

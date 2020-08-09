@@ -12,6 +12,15 @@ const openConcerts = document.querySelector('.open-concerts');
 
 const openLinks = [openProfile, openFavorites, openConcerts];
 
+
+const pieceNames = document.querySelectorAll('.piece-name');
+
+pieceNames.forEach(piece => {
+    let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
+    piece.textContent = pieceTitleLength;
+})
+
+
 //FOr Nav Bar
 function showDropDown() {
     if(dropDownMenu.style.display === 'block') {
@@ -42,10 +51,20 @@ function hideGoldUnderline(e) {
 function resultsExit(e) {
      e.preventDefault();
      mainContentInner.classList.add('remove');
-     mainContentInner.setTimeout(() => {
-         mainContentInner.style.display = 'none';
-     }, 500);
+     //window.setTimeout(() => {
+       //  mainContentInner.style.display = 'none';
+     //}, 1000);
+     //mainContentInner.classList.remove('remove');
 
+ }
+
+ function formatResultsCard() {
+    const pieceNames = document.querySelectorAll('.piece-name');
+
+    pieceNames.forEach(piece => {
+        let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
+        piece.textContent = pieceTitleLength;
+    })
  }
 
 //For Nav bar
@@ -58,6 +77,7 @@ searchResults.forEach(result => {
 });
 
 
+
 viewMore.forEach(link => {
      link.addEventListener('click', resultsExit);
  });
@@ -65,3 +85,5 @@ viewMore.forEach(link => {
  openLinks.forEach(link => {
      link.addEventListener('click', resultsExit);
  })
+
+ window.addEventListener('DOMContentLoaded', formatResultsCard);

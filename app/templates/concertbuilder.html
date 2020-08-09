@@ -16,71 +16,29 @@
             </div>
             
             <ul class="builder-piece-list">
+                {% if user.favorites %}
+                {% for favorite in user.favorites %}
                 <li>
+                    <div class="data-composer-info">
+                        <p class="data-composer-dates">{{ favorite.composer.years}}</p>
+                        <p class="data-composer-nationality">{{favorite.composer.nationality}}</p>
+                        <p class="data-piece-instrumentation">{{ favorite.instrumentation }}</p>
+                    </div>
                     <div class="piece-info-left">
-                        <p>Composer Name</p>
-                        <p>Piece Title</p>
+                        <p>{{ favorite.composer.name }}</p>
+                        <p>{{ favorite.title }}</p>
                     </div>
                     
                     <div class="piece-info-right">
-                        <p>20'</p>
+                        <p>{{ favorite.duration }}</p>
                         <button class="primary-btn add-to-concert">
                             Add to Concert
                         </button>
                     </div>
                 </li>
-                <li>
-                    <div class="piece-info-left">
-                        <p>Composer Name</p>
-                        <p>Piece Title</p>
-                    </div>
-                    
-                    <div class="piece-info-right">
-                        <p>20'</p>
-                        <button class="primary-btn add-to-concert" >
-                            Add to Concert
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <div class="piece-info-left">
-                        <p>Composer Name</p>
-                        <p>Piece Title</p>
-                    </div>
-                    
-                    <div class="piece-info-right">
-                        <p>20'</p>
-                        <button class="primary-btn add-to-concert">
-                            Add to Concert
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <div class="piece-info-left">
-                        <p>Composer Name</p>
-                        <p>Piece Title</p>
-                    </div>
-                    
-                    <div class="piece-info-right">
-                        <p>20'</p>
-                        <button class="primary-btn add-to-concert">
-                            Add to Concert
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <div class="piece-info-left">
-                        <p>Composer Name</p>
-                        <p>Piece Title</p>
-                    </div>
-                    
-                    <div class="piece-info-right">
-                        <p>20'</p>
-                        <button class="primary-btn add-to-concert">
-                            Add to Concert
-                        </button>
-                    </div>
-                </li>
+                {% endfor %}
+                {% endif %}
+                
                 
             </ul>
         </div>

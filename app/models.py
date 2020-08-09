@@ -17,6 +17,12 @@ favorited_pieces = db.Table('favorited_pieces',
     db.Column('piece_id', db.Integer, db.ForeignKey('piece.id')),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')))
 
+
+concert_pieces = db.Table('concert_pieces',
+    db.Column('piece_id', db.Integer, db.ForeignKey('piece.id')),
+    db.Column('concert_id', db.Integer, db.ForeignKey('concert.id')))
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), index=True, unique=True)
@@ -25,6 +31,7 @@ class User(UserMixin, db.Model):
     studied = db.relationship('Piece', backref='studied', lazy='dynamic')
     favorites = db.relationship('Piece', backref='favorite', secondary=favorited_pieces, lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+    concerts = db.relationship('Concert', backref='conductor', lazy="dynamic")
 
 
     def set_password(self, password):
@@ -48,15 +55,29 @@ class User(UserMixin, db.Model):
         self.studied.append(piece)
         db.session.commit()
 
-    def add_need_to_study(self, piece):
-        self.need_to_study.append(piece)
+    def add_concert(self, concert):
+        self.concerts.append(concert)
         db.session.commit()
 
+   
     def as_dict(self):
         return {'username': self.username,
                 'studied': [p.as_dict() for p in self.studied],
                 'favorites': [p.as_dict() for p in self.favorites]
         }
+
+
+class Concert(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), index=True)
+    pieces = db.relationship('Piece', backref="concert", secondary=concert_pieces, lazy='dynamic')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def add_piece(self, piece):
+        self.pieces.append(piece)
+        db.session.commit()
+
+
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -99,7 +120,7 @@ class Piece(db.Model):
     instrumentation = db.Column(db.String(400))
     soloists = db.Column(db.String(244))
     percussion = db.Column(db.String(244))
-    notes = db.Column(db.String(1000))
+    notes = db.Column(db.String(600))
     publishers = db.relationship('Publisher', backref='pieces', secondary=publisher_pieces, lazy='dynamic')
     composer_id = db.Column(db.Integer, db.ForeignKey('composer.id'))
     favorited_by = db.Column(db.Integer, db.ForeignKey('user.id'))

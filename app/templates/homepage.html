@@ -43,15 +43,28 @@
                     {% if user.favorites %}
                     {% for i in range(3) %}
                         <div class="search-result">
-                            <h2 class="composer-name" id="composer-name">{{user.favorites[i].composer.name }}</h2>
-                            <p class="piece-name" id="piece-name">{{ user.favorites[i].title }}</p>
-                            <img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img" id="composer-img">
-                            <button class="primary-btn visit-page" id="visit-page">Create Concert</button>
+                            <h2 class="composer-name">{{user.favorites[i].composer.name }}</h2>
+                            <p class="piece-name">{{ user.favorites[i].title }}</p>
+                           <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
+                            <button class="primary-btn visit-page">Create Concert</button>
                             <span class="hover-gold "></span>
                         </div>
                     {% endfor %}
                     {% endif %}
-                    
+                </div>
+
+                <div class="search-results full-favorites-grid">
+                    {% if user.favorites %}
+                    {% for favorite in user.favorites %}
+                        <div class="search-result">
+                            <h2 class="composer-name">{{favorite.composer.name }}</h2>
+                            <p class="piece-name">{{ favorite.title }}</p>
+                           <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
+                            <button class="primary-btn visit-page">Create Concert</button>
+                            <span class="hover-gold "></span>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="your-recent-concerts">
                     <div class="header-row">

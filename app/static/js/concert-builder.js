@@ -16,8 +16,16 @@ let favoritesResults =[];
 let dragStartIndex;
 let number = 0;
 
-function addPieceToConcertArr() {
-    number++;
+function addPieceToConcertArr(e) {
+    
+    const addToConcertContainer = e.target.parentElement.parentElement;
+    const pieceComposer = addToConcertContainer.querySelector('.piece-info-left > p');
+    const pieceComposerDates = addToConcertContainer.querySelector('.data-composer-dates');
+    const pieceComposerNationality = addToConcertContainer.querySelector('.data-composer-nationality');
+    const pieceInstrumentation = addToConcertContainer.querySelector('.data-piece-instrumentation');
+    const pieceTitle = addToConcertContainer.querySelector('.piece-info-left p:last-child');
+    const pieceDuration = addToConcertContainer.querySelector('.piece-info-right p');
+    
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
     pieceEl.setAttribute("draggable", "true");
@@ -28,14 +36,14 @@ function addPieceToConcertArr() {
 
         </div>
         <div class="composer-info">
-            <p>Composer Name ${number-1}</p>
-            <p>Dates</p>
-            <p>Nationality</p>
+            <p>${pieceComposer.textContent}</p>
+            <p>${pieceComposerDates.textContent}</p>
+            <p>${pieceComposerNationality.textContent}</p>
         </div>
         <div class="piece-info">
-            <p>Piece Name</p>
-            <p>3333-4331-tmp+3-hp,cel-str</p>
-            <p>20'</p>
+            <p>${pieceTitle.textContent}</p>
+            <p>${pieceInstrumentation.textContent}</p>
+            <p>${pieceDuration.textContent}</p>
         </div>
         <i class="fa fa-times fa-2x delete-piece"></i>
         <div class="add-intermission">
