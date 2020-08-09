@@ -140,6 +140,10 @@ body {
     justify-content: space-evenly;
 }
 
+#submit-comment {
+  border-radius: 0.25rem;
+}
+
 
 @media(max-width: 768px) {
 

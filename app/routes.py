@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, jsonify, request
+from flask import render_template, flash, redirect, url_for, jsonify, request, make_response
 from app import app, db
 from werkzeug.urls import url_parse
 from daniels_scrape import daniels_scrape
@@ -116,10 +116,12 @@ def composer(composer_name):
     last_name = composer.name.split(',')[0]
 
     if comment_form.validate_on_submit():
-        comment = Comment(body=form.comment.data, author=current_user)
+        comment = Comment(body=comment_form.comment.data, author=current_user)
         user = User.query.filter_by(username=current_user.username).first()
+        piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
         user.add_comment(comment)
-        
+        piece.add_comment(comment)
+
         return jsonify({"success": True, "value": "Comment added!"})
     return render_template('composer.html', composer=composer, search_form=search_form, comment_form=comment_form, add_to_favorites_button=add_to_favorites_button)
 
@@ -189,7 +191,24 @@ def add_favorite(piece_title):
     
     return jsonify({"success": True, "message": "Piece added to favorites!"})
 
+@app.route('/add_comment', methods=["GET", "POST"])
+def add_comment():
 
+    req = request.get_json()
+    user = User.query.filter_by(username=current_user.username).first()
+    comment = Comment(body=req["body"], author=user)
+    piece = Piece.query.filter(Piece.title.ilike(f'%{req["piece"]}')).first()
+    user.add_comment(comment)
+    piece.add_comment(comment)
+    for p in piece.comments:
+            print(p.body)
+
+
+    res = make_response(jsonify({"message": "OK"}), 200)
+
+    return res
+    #piece_title = urllib.parse.unquote(piece_title)
+    #piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
 
 
 #@app.route('/add_piece/<piece_title>', methods=["POST"])

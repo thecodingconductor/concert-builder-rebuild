@@ -30,7 +30,17 @@ function getPieceResults(e) {
             const contents = `<h2 id="piece-title-result">${data.piece.title}</h2> 
                             <p id="piece-duration">${data.piece.duration}</p>
                             <p id="piece-instrumentation">${data.piece.instrumentation}</p>
-                           `;
+                            `;
+
+            const commentList = document.createElement('ul');
+            data.piece.comments.forEach(comment => {
+                const commentLI = document.createElement('li');
+                commentLI.innerHTML = comment + comment.body;
+                console.log(comment);
+                console.log(comment.body);
+                commentList.appendChild(commentLI);
+            });
+
             
                             
 
@@ -52,12 +62,10 @@ function getPieceResults(e) {
     
 }
 
-function addToFavorites() {
 
-}
 function imageFetch() {
     const composerName = document.getElementById('composer-name');
-    console.log(composerName.textContent);
+    
     fetch(`https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${composerName.textContent}`)
         .then(res => {
             if(!res.ok) {
@@ -78,6 +86,40 @@ function imageFetch() {
 
 function commitNewComment() {
 
+    const commentBody = document.getElementById('user-comment');
+    const commentPieceTitle = document.getElementById('piece-title-result');
+
+    const entry = {
+        body: commentBody.value,
+        piece: commentPieceTitle.textContent
+    };
+
+    fetch(`/add_comment`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(entry),
+        cache: "no-cache",
+        headers: new Headers({
+            "content-type": "application/json"
+        })
+    })
+    .then(res => {
+        if(res.status !== 200) {
+            console.log(`There was a problem. Status code ${res.status}`);
+            return;
+        }
+
+        res.json()
+        .then(data => {
+            console.log(data);
+        })
+    })
+    .catch(err => {
+        console.log("Fetch error: " + err);
+    });
+
+    
+
 }
 
 function commitNewFavorite() {
@@ -87,10 +129,7 @@ function commitNewFavorite() {
     request.open('POST', `/add_favorite/${document.getElementById('piece-title-result').textContent}`);
 
     request.onload = () => {
-        console.log(request.responseText);
-        console.log(typeof request.responseText);
-        //const data = JSON.parse(request.reponseText);
-        console.log(data);
+            
         if(data.success) {
             console.log('piece added to favorites!');
         }
@@ -109,16 +148,8 @@ function newConcert() {
 window.addEventListener('DOMContentLoaded', imageFetch)
 pieceList.forEach((piece) => {
     piece.addEventListener('click', getPieceResults)
-})
+});
+
 submitComment.addEventListener('click', commitNewComment);
 addPieceToFavorites.addEventListener('click', commitNewFavorite);
 createConcert.addEventListener('click', newConcert);
-
-
-
-// <p id="piece-notes">${data.piece.notes}</p>
-// submitForm.addEventListener('submit', () => {
-
-// })
-
-

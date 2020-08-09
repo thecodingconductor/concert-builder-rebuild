@@ -35,9 +35,16 @@
             <div class="piece-details"  id="piece-details">
                 
             </div>
-            <div class="user-interaction-area">
+            <div class="user-interaction-area" method='post'>
+               <!--
+                {{ comment_form.hidden_tag() }}
+                {{ comment_form.comment(id="user-comment", cols="30", rows="10") }}
+                
+
+               --> 
                 <textarea name="user-comment" id="user-comment" cols="30" rows="10"></textarea>
                 <div class="user-buttons">
+                    <!--{{ comment_form.submit_comment(id="submit-comment", class_="primary-btn") }}-->
                     <button class="primary-btn" id="submit-comment">Submit Comment</button>
                     <button class="primary-btn" id="add-piece-to-favorites">Add Piece to Favorites</button>
                     <button class="primary-btn" id="create-concert">Create Concert</button>

@@ -138,6 +138,7 @@ class Piece(db.Model):
                 "soloists": self.soloists,
                 "percussion":self.percussion,
                 "notes":self.notes,
+                "comments": [comment.as_dict() for comment in self.comments],
                 "publishers": [pub.as_dict() for pub in self.publishers]
                 }
 
