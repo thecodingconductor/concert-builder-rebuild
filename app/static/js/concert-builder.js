@@ -60,26 +60,27 @@ function addPieceToConcertArr(e) {
 
     addPieceToDOM(pieceEl);
 
-    const concertDurationArr = concertPieceArr.map(item => Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]))
-    
-    
-
-    const concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
-    console.log(concertDuration);
-
+   
     deletePiecesListeners();
     createIntermissionListeners();
     dragListeners();
-    updateConcertDuration(concertDuration);
+    updateConcertDuration(getConcertDuration(concertPieceArr));
     
 }
+
+function getConcertDuration(pieceArr) {
+    const concertDurationArr = pieceArr.map(item => Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]));
+    const concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
+    return concertDuration;
+}
+
 
 function updateConcertDuration(durationNum) {
     concertMinutes.textContent = `${durationNum}`;
 }
 
 function concertLengthJudgement(container) {
-    
+
 }
 
 function parseDuration() {
@@ -120,6 +121,7 @@ function removePiece() {
     concertPieceArr.forEach((piece, index) => {
         piece.setAttribute('data-index', index);
     });
+    updateConcertDuration(getConcertDuration(concertPieceArr));
     
 }
 
