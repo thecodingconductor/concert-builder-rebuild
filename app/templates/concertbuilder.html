@@ -10,12 +10,12 @@
     <div class="main-container">
         <div class="left-container">
             <h1>Pick Piece from Favorites</h1>
-            <div class="left-search-area">
+            <form class="left-search-area">
                 <input type="text" placeholder="Search Favorites" id="search-favorites">
                 <i class="fa fa-search"></i>
-            </div>
+            </form>
             
-            <ul class="builder-piece-list">
+            <ul class="builder-piece-list" id="favorites-search-results">
                 {% if user.favorites %}
                 {% for favorite in user.favorites %}
                 <li>

@@ -4,6 +4,7 @@ const concertMinutes = document.getElementById('concert-minutes');
 const concertConclusion = document.getElementById('concert-conclusion');
 const concertBuilderArea = document.getElementById('concert-builder-area');
 const searchFavorites = document.getElementById("search-favorites");
+const favoritesSearchResults = document.getElementById('favorites-search-results');
 const deleteIntermission = document.getElementById('delete-intermission');
 const concertTitleBtn = document.getElementById('concert-title-btn');
 const rightSearchArea = document.getElementById('right-search-area');
@@ -70,22 +71,43 @@ function addPieceToConcertArr(e) {
 
 function getConcertDuration(pieceArr) {
     if(pieceArr.length === 0) {
-        return 0;
+        let empty = 0;
+        concertLengthJudgement(concertBuilderArea, empty);
+        return empty;
     } else {
         const concertDurationArr = pieceArr.map(item => Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]));
         const concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
+        
+        concertLengthJudgement(concertBuilderArea, concertDuration);
+
         return concertDuration;
+        
     }
     
 }
 
 
 function updateConcertDuration(durationNum) {
+    console.log(durationNum);
     concertMinutes.textContent = `${durationNum}`;
 }
 
-function concertLengthJudgement(container) {
+function concertLengthJudgement(container, duration) {
 
+    if(duration == 0) {
+        concertConclusion.textContent = `Please add some pieces.`;
+    } else if (duration < 60 && duration > 0) {
+        concertConclusion.textContent = `Concert is potentially too short.`;
+    } else if (duration >= 60 && duration <= 80) {
+        concertConclusion.textContent = `Perfect concert length!`;
+    } else {
+        concertConclusion.textContent = `Concert is getting a bit long...`;
+    };
+
+   
+    if(container.querySelector('.concert.intermission')) {
+        console.log('no intermission yet');
+    };
 }
 
 function parseDuration() {
@@ -130,9 +152,61 @@ function removePiece() {
     
 }
 
+function clearList() {
+    
+  
+        while(favoritesSearchResults.firstChild) {
+            favoritesSearchResults.removeChild(favoritesSearchResults.firstChild);
+        }
+
+//Not quite working
+
+}
+
+
 function dynamicSearch() {
     //After search, add all elements to DOM?
+    const request = new XMLHttpRequest();
+    const searchTerm = searchFavorites.value;
+    request.open('POST', '/search_favorites');
+    request.onload = () => {
+        const data = JSON.parse(request.response);
+        if(data.success) {
 
+            const favorites_data = JSON.parse(data.favorites);
+            favorites_data.forEach(favorite => {
+                console.log(favorite);
+                const favoriteLI = document.createElement("li");
+                favoriteLI.innerHTML = `
+                <div class="data-composer-info">
+                        <p class="data-composer-dates">${favorite.composer.years}</p>
+                        <p class="data-composer-nationality">${favorite.composer.nationality}</p>
+                        <p class="data-piece-instrumentation">${favorite.instrumentation }</p>
+                    </div>
+                    <div class="piece-info-left">
+                        <p>${favorite.composer}</p>
+                        <p>${favorite.title }</p>
+                    </div>
+                    
+                    <div class="piece-info-right">
+                        <p>${favorite.duration }</p>
+                        <button class="primary-btn add-to-concert">
+                            Add to Concert
+                        </button>
+                    </div>
+                `;
+                favoritesSearchResults.appendChild(favoriteLI);
+            });
+
+        } else {
+            console.log(data.error);
+        }
+    }
+
+    const data = new FormData();
+    data.append('search-favorites', searchTerm);
+    request.send(data);
+    return false;
 
 }
 
@@ -265,10 +339,14 @@ addToConcert.forEach(button => {
      button.addEventListener('click', addPieceToConcertArr);
  });
 
-searchFavorites.addEventListener('keyup', dynamicSearch);
+searchFavorites.addEventListener('keyup', () => {
+    clearList();
+    dynamicSearch();
+});
 
 //showAddIntermission
 concertBuilderArea.addEventListener('mouseover', showIntermission);
 
 concertTitleBtn.addEventListener('click', saveConcertTitle);
 changeTitleBtn.addEventListener('click', removeConcertTitle);
+window.addEventListener('DOMContentLoaded', updateConcertDuration(getConcertDuration(concertPieceArr)));

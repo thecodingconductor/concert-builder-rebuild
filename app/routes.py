@@ -108,6 +108,26 @@ def composers():
     return jsonify({"success": True, "composers": list_composers})
 
 
+@app.route('/search_favorites', methods=["GET", "POST"])
+def search_favorites():
+    user = User.query.filter_by(username=current_user.username).first()
+    user_search_entry = request.form.get("search-favorites")
+
+    res = Composer.query.filter(Composer.name.ilike(f"%{user_search_entry}%")).all()
+    composer_names = [composer.name for composer in res]
+    matching_favorites = [f for f in user.favorites if composer_names[0] in f.composer.name]
+    json_faves = json.dumps([{"title": piece.title,
+                            "composer": piece.composer.name,
+                            "instrumentation": piece.instrumentation,
+                            "duration": piece.duration,
+                            "composer_nationality": piece.composer.nationality,
+                            "composer_dates": piece.composer.years} for piece in matching_favorites], sort_keys=True, indent=4)
+
+
+    return jsonify({"success": True, "favorites": json_faves})
+    
+
+
 @app.route('/composer/<composer_name>', methods=["GET", "POST"])
 def composer(composer_name):
     search_form = ComposerSearchForm()
@@ -191,6 +211,9 @@ def add_favorite(piece_title):
     u.add_favorite(piece)
     
     return jsonify({"success": True, "message": "Piece added to favorites!"})
+
+
+
 
 #@app.route('/add_piece/<piece_title>', methods=["POST"])
 #def add_piece(piece_title):
