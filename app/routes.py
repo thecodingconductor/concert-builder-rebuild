@@ -45,37 +45,6 @@ def index():
     return render_template('landing.html', login_form=login_form, signup_form=signup_form, search_form=search_form)
 #search_form=search_form
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(url_for('index'))
-    return render_template('login.html', title='Sign In', form=form)
-
-@app.route('/register', methods=["GET", "POST"])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Congratulations, you are now a registered user.')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
-
 @app.route('/logout')
 def logout():
     logout_user()
@@ -131,6 +100,9 @@ def search_favorites():
 @app.route('/composer/<composer_name>', methods=["GET", "POST"])
 def composer(composer_name):
     search_form = ComposerSearchForm()
+    comment_form = PieceCommentForm()
+    add_to_favorites_button = AddToFavorites()
+
     composer_name = urllib.parse.unquote(composer_name)
     composer_name = composer_name.split('/')[-1]
     res = requests.get(f'https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${composer_name}')
@@ -142,9 +114,14 @@ def composer(composer_name):
         return render_template('landing.html', search_form=search_form)
     
     last_name = composer.name.split(',')[0]
-    
 
-    return render_template('composer.html', composer=composer, search_form=search_form)
+    if comment_form.validate_on_submit():
+        comment = Comment(body=form.comment.data, author=current_user)
+        user = User.query.filter_by(username=current_user.username).first()
+        user.add_comment(comment)
+        
+        return jsonify({"success": True, "value": "Comment added!"})
+    return render_template('composer.html', composer=composer, search_form=search_form, comment_form=comment_form, add_to_favorites_button=add_to_favorites_button)
 
 
 # @app.route('/composer/<composer_name>', methods=["GET", "POST"])
@@ -249,3 +226,34 @@ def add_favorite(piece_title):
         
     #     return render_template('composer.html', composer=composer, search_form=search_form)
     
+
+#     @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if current_user.is_authenticated:
+#         return redirect(url_for('index'))
+#     form = LoginForm()
+#     if form.validate_on_submit():
+#         user = User.query.filter_by(username=form.username.data).first()
+#         if user is None or not user.check_password(form.password.data):
+#             flash('Invalid username or password')
+#             return redirect(url_for('login'))
+#         login_user(user, remember=form.remember_me.data)
+#         next_page = request.args.get('next')
+#         if not next_page or url_parse(next_page).netloc != '':
+#             next_page = url_for('index')
+#         return redirect(url_for('index'))
+#     return render_template('login.html', title='Sign In', form=form)
+
+# @app.route('/register', methods=["GET", "POST"])
+# def register():
+#     if current_user.is_authenticated:
+#         return redirect(url_for('index'))
+#     form = RegistrationForm()
+#     if form.validate_on_submit():
+#         user = User(username=form.username.data, email=form.email.data)
+#         user.set_password(form.password.data)
+#         db.session.add(user)
+#         db.session.commit()
+#         flash('Congratulations, you are now a registered user.')
+#         return redirect(url_for('login'))
+#     return render_template('register.html', title='Register', form=form)

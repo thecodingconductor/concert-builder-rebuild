@@ -1,9 +1,11 @@
 const pieceList = document.querySelectorAll(".piece-title");
-//const submitForm = document.getElementById('form-submit');
 const pieceResults = document.getElementById('piece-results');
-//const testingFave = document.getElementById('fave-button');
 const pieceDetailsContainer = document.getElementById('piece-details');
 const composerWrap = document.getElementById('composer-wrap');
+const submitComment = document.getElementById('submit-comment');
+const addPieceToFavorites = document.getElementById('add-piece-to-favorites');
+const createConcert = document.getElementById('create-concert');
+
 
 let pieceData;
 
@@ -51,21 +53,8 @@ function getPieceResults(e) {
 }
 
 function addToFavorites() {
-    console.log('This is from addToFavorites');
-    fetch(`/add_favorite/${pieceData.piece.title}`, {
-        method: 'POST',
-        body: JSON.stringify({
-            "piece": pieceData.piece
-        })
-    })
-        .then(res => {
-            return res.text();
-        }).then(text => {
-            console.log('POST response');
-            console.log(text);
-        })
-}
 
+}
 function imageFetch() {
     const composerName = document.getElementById('composer-name');
     console.log(composerName.textContent);
@@ -86,12 +75,44 @@ function imageFetch() {
             composerWrap.style.backgroundImage = 'url("https://via.placeholder.com/200")';
         })
 }
-// testingFave.addEventListener('click', addToFavorites);
+
+function commitNewComment() {
+
+}
+
+function commitNewFavorite() {
+    console.log('This is from addToFavorites');
+
+    const request = new XMLHttpRequest();
+    request.open('POST', `/add_favorite/${document.getElementById('piece-title-result').textContent}`);
+
+    request.onload = () => {
+        console.log(request.responseText);
+        console.log(typeof request.responseText);
+        //const data = JSON.parse(request.reponseText);
+        console.log(data);
+        if(data.success) {
+            console.log('piece added to favorites!');
+        }
+    };
+
+    request.send()
+    return false;
+}
+
+
+function newConcert() {
+
+}
+
 
 window.addEventListener('DOMContentLoaded', imageFetch)
 pieceList.forEach((piece) => {
     piece.addEventListener('click', getPieceResults)
 })
+submitComment.addEventListener('click', commitNewComment);
+addPieceToFavorites.addEventListener('click', commitNewFavorite);
+createConcert.addEventListener('click', newConcert);
 
 
 
@@ -99,3 +120,5 @@ pieceList.forEach((piece) => {
 // submitForm.addEventListener('submit', () => {
 
 // })
+
+
