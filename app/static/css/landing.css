@@ -562,15 +562,26 @@ button {
     align-items: center;
     justify-content: space-between;
     color: #000;
+    border-bottom: 1px solid grey;
 }
 
 .letter h1  {
-    flex: 4;
+    flex: 1;
 }
 
 .letter-composers {
-    flex: 2;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
+
+.random-composer-links a {
+    text-decoration: none;
+    color: blue;
+}
+
+
 
 @media(max-width: 768px) {
 

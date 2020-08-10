@@ -25,6 +25,12 @@ const searchBarOverlay = document.getElementById('search-bar-overlay');
 const closeSearch = document.getElementById('close-search');
 const searchInput = document.getElementById('search-bar-field');
 const searchBarResults = document.getElementById('search-bar-results');
+const browseComposers = document.getElementById('browse-composers');
+
+
+function generateRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max-min) + min);
+}
 
 //For Base
 function openModal(e) {
@@ -81,6 +87,61 @@ function showBrowse(e) {
     setTimeout(() => {
         browseModalArea.classList.add('show');
     }, 300);
+    fetch('/browse_composer_list')
+        .then(res => {
+            if(res.status != 200) {
+                console.log(`There was a problem. Status code ${res.status}`);
+                return;
+            }
+
+            res.json()
+            .then(data => {
+                
+                //this is the composers array. 
+                composersArr = data.composers_array;
+                composersArr.forEach(group => { 
+                    const mainLetter = group[0][0];
+                   
+
+                    let composerLetter = document.createElement('div');
+                    composerLetter.classList = 'letter';
+                    const randomCompArr = [];
+                    for(let i =0; i < 3; i++) {
+                        randomCompArr.push(group[generateRandomNumber(0, group.length)]);
+                    }
+                   
+
+                    
+                    
+                    composerLetter.innerHTML = `
+                        <h1>${mainLetter}</h1>
+                        <div class="letter-composers">
+                        
+                            ${randomCompArr.map((item, i) => `
+                                <p class="random-composer-links"><a href="#">${item}</a></p>
+                            `.trim()).join('')}
+
+                        </div>`;
+                    
+                    
+                    
+                    browseComposers.appendChild(composerLetter);
+                    const randomComposerList = document.querySelectorAll('.random-composer-links a');
+                    console.log(randomComposerList);
+                    [...randomComposerList].forEach(composerLink => {
+                        console.log(composerLink);
+                        composerLink.href = `/composer/${composerLink.textContent}`;
+                        composerLink.addEventListener('click', () => console.log('TITS'));
+        });
+                })
+            })
+
+        })
+        .catch(err => {
+            console.log("Fetch error: " + err);
+        });
+
+        
     
 }
 
@@ -159,6 +220,5 @@ searchInput.addEventListener('keyup', () => {
     clearList();
     getResults();
 })
-
 
 

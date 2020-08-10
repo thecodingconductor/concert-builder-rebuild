@@ -55,7 +55,6 @@ function showBrowse(e) {
     setTimeout(() => {
         browseModalArea.classList.add('show');
     }, 300);
-
     fetch('/browse_composer_list')
         .then(res => {
             if(res.status != 200) {
@@ -70,7 +69,7 @@ function showBrowse(e) {
                 composersArr = data.composers_array;
                 composersArr.forEach(group => { 
                     const mainLetter = group[0][0];
-                    console.log(mainLetter);
+                   
 
                     let composerLetter = document.createElement('div');
                     composerLetter.classList = 'letter';
@@ -78,7 +77,7 @@ function showBrowse(e) {
                     for(let i =0; i < 3; i++) {
                         randomCompArr.push(group[generateRandomNumber(0, group.length)]);
                     }
-                    console.log(randomCompArr);
+                   
 
                     
                     
@@ -87,16 +86,21 @@ function showBrowse(e) {
                         <div class="letter-composers">
                         
                             ${randomCompArr.map((item, i) => `
-                                <p>${item}</p>
+                                <p class="random-composer-links"><a href="#">${item}</a></p>
                             `.trim()).join('')}
 
                         </div>`;
                     
                     
-                    console.log(composerLetter);
+                    
                     browseComposers.appendChild(composerLetter);
-                    //let randomComposer = group[generateRandomNumber(0, group.length)];
-                    //console.log(randomComposer);
+                    const randomComposerList = document.querySelectorAll('.random-composer-links a');
+                    console.log(randomComposerList);
+                    [...randomComposerList].forEach(composerLink => {
+                        console.log(composerLink);
+                        composerLink.href = `/composer/${composerLink.textContent}`;
+                        composerLink.addEventListener('click', () => console.log('TITS'));
+        });
                 })
             })
 
@@ -104,6 +108,8 @@ function showBrowse(e) {
         .catch(err => {
             console.log("Fetch error: " + err);
         });
+
+        
     
 }
 
