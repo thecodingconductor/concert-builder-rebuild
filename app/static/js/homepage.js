@@ -6,14 +6,16 @@ const showGold = document.querySelectorAll('.hover-gold');
 const searchResults = document.querySelectorAll('.search-result');
 const viewMore = document.querySelectorAll('.view-more-btn');
 const mainContentInner = document.getElementById('main-content-area-inner');
-const openProfile = document.querySelector('.open-profile');
-const openFavorites = document.querySelector('.open-favorites');
-const openConcerts = document.querySelector('.open-concerts');
+const openProfile = document.getElementById('open-profile');
+const openFavorites = document.getElementById('open-favorites');
+const openConcerts = document.getElementById('open-concerts');
+const returnHome = document.getElementById('return-home');
 
 const homeSearchResults = document.getElementById('home-search-results');
 //const fullFavoritesGrid = document.getElementById('full-favorites-grid');
+const yourConcertsContainer = document.getElementById('your-concerts-container'); 
 
-const openLinks = [openProfile, openFavorites, openConcerts];
+const openLinks = [openProfile, openFavorites, openConcerts, returnHome];
 const openBrowse = document.querySelector('.open-browse');
 
 const pieceNames = document.querySelectorAll('.piece-name');
@@ -31,8 +33,6 @@ function showDropDown() {
     } else {
         dropDownMenu.style.display = 'block';
     }
-    
-    
 }
 
 function showGoldUnderline(e) {
@@ -59,16 +59,51 @@ function resultsExit(e) {
             node.style.display = 'none';
      })}, 1000);
 
-
+     console.log(e.target);
+    //  if(e.target === returnHome) {
+    //      console.log("RETURN HOME");
+    //  } else if (e.target === openProfile) {
+    //      console.log("OPEN PROFILE");
+    //  } else if (e.target === openFavorites) {
+    //      console.log("OPEN FAVORITES");
+    //  } else if (e.target === openConcerts) {
+    //      console.log("OPEN CONCERTS");
+    //  }
+     
      window.setTimeout(() => {
         mainContentInner.classList.remove('remove');
-        favoritesEnter(mainContentInner);
+        if(e.target === returnHome) {
+
+            console.log("RETURN HOME");
+            homeCardEnter(mainContentInner);
+
+        } else if (e.target === openProfile) {
+
+            console.log("OPEN PROFILE");
+
+        } else if (e.target === openFavorites) {
+
+            console.log("OPEN FAVORITES");
+            favoritesEnter(mainContentInner);
+
+        } else if (e.target === openConcerts) {
+
+            console.log("OPEN CONCERTS");
+
+        }
+        
      }, 1500);
+
+     
     
 
      //window.setTimeout(() => {
       //  mainContentInner.classList.remove('remove');
      //}, 3000);
+ }
+
+ function homeCardEnter(container) {    
+    console.log("HOME CARD ENTER");
  }
 
  function favoritesEnter(container) {
@@ -118,5 +153,5 @@ viewMore.forEach(link => {
      link.addEventListener('click', resultsExit);
  })
 
- window.addEventListener('DOMContentLoaded', formatResultsCard);
+window.addEventListener('DOMContentLoaded', formatResultsCard);
 openBrowse.addEventListener('click', showBrowse)

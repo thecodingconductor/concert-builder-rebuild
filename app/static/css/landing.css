@@ -589,6 +589,10 @@ button {
         overflow: auto;
     }
 
+    .hero-container {
+        flex-direction: column;
+    }
+
     .landing-nav {
         justify-content: center;
     }
@@ -621,9 +625,7 @@ button {
 }
 
 @media(max-width: 620px) {
-    .hero-container {
-        flex-direction: column;
-    }
+   
 }
 
 @media(max-width: 426px) {

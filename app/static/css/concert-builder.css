@@ -58,6 +58,15 @@
     outline: none;
 }
 
+.left-search-area i {
+    color: #000;
+    background: #fff;
+    padding: .58rem;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+}
+
 
 
 
@@ -255,6 +264,10 @@
     background-position: center center;
 
     position: static;
+}
+
+.composer-info > p:first-child {
+    font-weight: bold;
 }
 
 

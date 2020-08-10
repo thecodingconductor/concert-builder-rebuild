@@ -36,9 +36,7 @@ function addPieceToConcertArr(e) {
     pieceEl.innerHTML =  `
     
         <i class="fas fa-bars piece-drag-bars"></i>
-        <div class="composer-img">
-
-        </div>
+        
         <div class="composer-info">
             <p>${pieceComposer.textContent}</p>
             <p>${pieceComposerDates.textContent}</p>
@@ -71,6 +69,8 @@ function addPieceToConcertArr(e) {
     updateConcertDuration(getConcertDuration(concertPieceArr));
     
 }
+
+
 
 function getConcertDuration(pieceArr) {
     if(pieceArr.length === 0) {
