@@ -12,13 +12,16 @@ const browse = document.getElementById('browse');
 const browseModal = document.getElementById('browse-modal');
 const browseModalArea = document.getElementById('browse-modal-area');
 const closeBrowse = document.getElementById('close-browse');
+const browseComposers = document.getElementById('browse-composers');
 
 const searchBarOverlay = document.getElementById('search-bar-overlay');
 const closeSearch = document.getElementById('close-search');
 const searchInput = document.getElementById('search-bar-field');
 const searchBarResults = document.getElementById('search-bar-results');
 
-
+function generateRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max-min) + min);
+}
 
 
 function showSearch(e) {
@@ -52,6 +55,55 @@ function showBrowse(e) {
     setTimeout(() => {
         browseModalArea.classList.add('show');
     }, 300);
+
+    fetch('/browse_composer_list')
+        .then(res => {
+            if(res.status != 200) {
+                console.log(`There was a problem. Status code ${res.status}`);
+                return;
+            }
+
+            res.json()
+            .then(data => {
+                
+                //this is the composers array. 
+                composersArr = data.composers_array;
+                composersArr.forEach(group => { 
+                    const mainLetter = group[0][0];
+                    console.log(mainLetter);
+
+                    let composerLetter = document.createElement('div');
+                    composerLetter.classList = 'letter';
+                    const randomCompArr = [];
+                    for(let i =0; i < 3; i++) {
+                        randomCompArr.push(group[generateRandomNumber(0, group.length)]);
+                    }
+                    console.log(randomCompArr);
+
+                    
+                    
+                    composerLetter.innerHTML = `
+                        <h1>${mainLetter}</h1>
+                        <div class="letter-composers">
+                        
+                            ${randomCompArr.map((item, i) => `
+                                <p>${item}</p>
+                            `.trim()).join('')}
+
+                        </div>`;
+                    
+                    
+                    console.log(composerLetter);
+                    browseComposers.appendChild(composerLetter);
+                    //let randomComposer = group[generateRandomNumber(0, group.length)];
+                    //console.log(randomComposer);
+                })
+            })
+
+        })
+        .catch(err => {
+            console.log("Fetch error: " + err);
+        });
     
 }
 
@@ -126,7 +178,6 @@ search.addEventListener('click', showSearch);
 openMobileSearch.addEventListener('click', showSearch)
 closeSearch.addEventListener('click', closeSearchField);
 
-
 //for Base
 browse.addEventListener('click', showBrowse);
 closeBrowse.addEventListener('click', () => {
@@ -138,3 +189,5 @@ searchInput.addEventListener('keyup', () => {
     clearList();
     getResults();
 })
+
+// 

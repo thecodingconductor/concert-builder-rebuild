@@ -48,7 +48,7 @@ def index():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('landing'))
+    return redirect(url_for('index'))
 
 @app.route('/homepage')
 @login_required
@@ -195,6 +195,22 @@ def add_favorite(piece_title):
     u.add_favorite(piece)
     
     return jsonify({"success": True, "message": "Piece added to favorites!"})
+
+
+@app.route('/browse_composer_list', methods=["GET", "POST"])
+def browse_composer_list():
+    main_array = []
+    letter_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    composers = Composer.query.all()
+    for letter in letter_string:
+        letter_array = []
+        for composer in composers:
+            if letter in composer.name[0]:
+                letter_array.append(composer.name)
+        main_array.append(letter_array)
+    return jsonify({"success": True, "composers_array": main_array})
+    
+
 
 @app.route('/add_comment', methods=["GET", "POST"])
 def add_comment():

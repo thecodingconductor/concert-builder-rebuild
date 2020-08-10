@@ -14,7 +14,7 @@ const homeSearchResults = document.getElementById('home-search-results');
 //const fullFavoritesGrid = document.getElementById('full-favorites-grid');
 
 const openLinks = [openProfile, openFavorites, openConcerts];
-
+const openBrowse = document.querySelector('.open-browse');
 
 const pieceNames = document.querySelectorAll('.piece-name');
 
@@ -119,3 +119,4 @@ viewMore.forEach(link => {
  })
 
  window.addEventListener('DOMContentLoaded', formatResultsCard);
+openBrowse.addEventListener('click', showBrowse)
