@@ -155,7 +155,7 @@ function removePiece() {
     
 }
 
-function clearList() {
+function clearFaveList() {
     
   
         while(favoritesSearchResults.firstChild) {
@@ -343,7 +343,7 @@ addToConcert.forEach(button => {
  });
 
 searchFavorites.addEventListener('keyup', () => {
-    clearList();
+    clearFaveList();
     dynamicSearch();
 });
 

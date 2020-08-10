@@ -152,7 +152,7 @@ body {
 .search-results.full-favorites-grid {
   display: none;
   opacity: 1;
-  animation: opacity .5s ease-in;]
+  animation: opacity .5s ease-in;
   overflow-y: scroll;
 }
 
