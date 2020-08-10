@@ -115,14 +115,14 @@ def composer(composer_name):
     
     last_name = composer.name.split(',')[0]
 
-    if comment_form.validate_on_submit():
-        comment = Comment(body=comment_form.comment.data, author=current_user)
-        user = User.query.filter_by(username=current_user.username).first()
-        piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
-        user.add_comment(comment)
-        piece.add_comment(comment)
+    # if comment_form.validate_on_submit():
+    #     comment = Comment(body=comment_form.comment.data, author=current_user)
+    #     user = User.query.filter_by(username=current_user.username).first()
+    #     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
+    #     user.add_comment(comment)
+    #     piece.add_comment(comment)
 
-        return jsonify({"success": True, "value": "Comment added!"})
+    #     return jsonify({"success": True, "value": "Comment added!"})
     return render_template('composer.html', composer=composer, search_form=search_form, comment_form=comment_form, add_to_favorites_button=add_to_favorites_button)
 
 
@@ -178,7 +178,12 @@ def composer(composer_name):
 @app.route('/piece_detail/<piece_title>', methods=["GET","POST"])
 def piece_detail(piece_title):
     piece_title = urllib.parse.unquote(piece_title)
-    piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
+    try:
+        piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}%")).first().as_dict()
+        print(piece)
+    except:
+        print("Recursion Fuck Up.")
+        
     return jsonify({"succcess": True, "piece": piece})
 
 @app.route('/add_favorite/<piece_title>', methods=["POST"])
@@ -198,10 +203,10 @@ def add_comment():
     user = User.query.filter_by(username=current_user.username).first()
     comment = Comment(body=req["body"], author=user)
     piece = Piece.query.filter(Piece.title.ilike(f'%{req["piece"]}')).first()
+    
     user.add_comment(comment)
     piece.add_comment(comment)
-    for p in piece.comments:
-            print(p.body)
+    
 
 
     res = make_response(jsonify({"message": "OK"}), 200)

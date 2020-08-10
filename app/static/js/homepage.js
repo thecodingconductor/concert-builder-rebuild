@@ -77,6 +77,13 @@ function resultsExit(e) {
     fullFavoritesGrid.style.display = 'grid';
     document.querySelector('.header-row').style.display = 'flex';
     document.querySelector('.header-row .view-more-btn').style.display = 'none';
+    [...fullFavoritesGrid.children].forEach(favorite => {
+        if (favorite.querySelector('.composer-name').textContent.length >= 18) {
+            favorite.querySelector('.composer-name').style.fontSize = '1.2rem';
+        } else {
+            return;
+        }
+    })
     //window.setTimeout(() => {
     //    fullFavoritesGrid.classList.add('animate');
     //}, 1000);

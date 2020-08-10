@@ -63,7 +63,8 @@ class User(UserMixin, db.Model):
     def as_dict(self):
         return {'username': self.username,
                 'studied': [p.as_dict() for p in self.studied],
-                'favorites': [p.as_dict() for p in self.favorites]
+                'favorites': [p.as_dict() for p in self.favorites],
+                'comments': [p.as_dict() for p in self.comments]
         }
 
 
@@ -88,6 +89,13 @@ class Comment(db.Model):
     
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+    
+    def as_dict(self):
+        return {
+            "body": self.body,
+            "author": self.author.username,
+            "timestamp": self.timestamp
+        }
 
 
 class Composer(db.Model):
@@ -144,6 +152,7 @@ class Piece(db.Model):
 
     def add_comment(self, comment):
         self.comments.append(comment)
+        db.session.commit()
 
 
 class Publisher(db.Model):

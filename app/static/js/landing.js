@@ -28,6 +28,7 @@ const searchBarResults = document.getElementById('search-bar-results');
 
 //For Base
 function openModal(e) {
+    document.body.style.overflow = 'hidden';
     if(e.target.textContent.trim() === 'Log In') {
         signInModal.style.display = 'flex';
     } else {
@@ -38,6 +39,7 @@ function openModal(e) {
 }
 
 function closeModal(e) {
+    document.body.style.overflow = 'auto';
     if(e.target.getAttribute('id') === 'close-sign-in') {
         const signInModalParent = e.target.parentElement.parentElement.parentElement;
         signInModalParent.style.display = 'none';

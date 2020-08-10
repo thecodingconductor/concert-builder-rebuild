@@ -171,6 +171,12 @@ button {
     margin-left: 1rem;
 }
 
+.search-bar-field:invalid {
+    outline: 0;
+    box-shadow: none;
+    border: none;
+}
+
 .fa.fa-times.close-search {
     cursor: pointer;
 }
@@ -611,7 +617,12 @@ button {
 
 @media(max-width: 426px) {
     
-   
+    body {
+        /*
+        overflow: hidden;
+        */
+    }
+
     .site-title {
         margin-left: 1rem;
         width: 75%;

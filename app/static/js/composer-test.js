@@ -31,22 +31,39 @@ function getPieceResults(e) {
                             <p id="piece-duration">${data.piece.duration}</p>
                             <p id="piece-instrumentation">${data.piece.instrumentation}</p>
                             `;
-
-            const commentList = document.createElement('ul');
-            data.piece.comments.forEach(comment => {
+            pieceDetailsContainer.innerHTML = contents;
+            
+            if(data.piece.comments.length > 0) {
+                
+                
+                const commentList = document.createElement('ul');
+                commentList.classList = 'comment-list';
+                pieceDetailsContainer.appendChild(commentList);
+                data.piece.comments.forEach(comment => {
                 const commentLI = document.createElement('li');
-                commentLI.innerHTML = comment + comment.body;
-                console.log(comment);
-                console.log(comment.body);
+                commentLI.classList = 'comment';
+                
+                console.log(comment.author, comment.body, comment.timestamp);
+                
+                commentLI.innerHTML = `
+                    <p>${comment.author} says: </p>
+                    <p>${comment.body}</p>
+                    <p>${comment.timestamp}</p>
+                `
                 commentList.appendChild(commentLI);
-            });
+                
+                });
+
+            }
+            
 
             
                             
 
             //const li = document.createElement('li');
             //li.innerHTML = contents;
-            pieceDetailsContainer.innerHTML = contents;
+            
+            
             pieceData = data;
             return pieceData;
         
