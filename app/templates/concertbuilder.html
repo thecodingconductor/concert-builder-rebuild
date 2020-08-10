@@ -64,6 +64,9 @@
             </div>
         </div>
     </div>
+    {% block javascript %}
+    {{ super() }}
     <script src="{{ url_for('static', filename='js/concert-builder.js') }}"></script>
+    {% endblock %}
 </body>
 {% endblock %}

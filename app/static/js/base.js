@@ -4,12 +4,15 @@ const signUpButton = document.getElementById('sign-up-btn');
 const getStarted = document.getElementById('get-started-btn');
 const search = document.getElementById('search');
 const openConcertBuilder = document.getElementById('create');
+
 const openMobileSearch = document.getElementById('open-mobile-search');
 const rightNavContainer = document.getElementById('right-nav-container');
+
 const browse = document.getElementById('browse');
 const browseModal = document.getElementById('browse-modal');
 const browseModalArea = document.getElementById('browse-modal-area');
 const closeBrowse = document.getElementById('close-browse');
+
 const searchBarOverlay = document.getElementById('search-bar-overlay');
 const closeSearch = document.getElementById('close-search');
 const searchInput = document.getElementById('search-bar-field');
@@ -126,10 +129,11 @@ closeSearch.addEventListener('click', closeSearchField);
 
 //for Base
 browse.addEventListener('click', showBrowse);
-// closeBrowse.addEventListener('click', () => {
-//     browseModalArea.classList.remove('show');
-//     browseModal.style.display  = 'none';
-// });
+closeBrowse.addEventListener('click', () => {
+    browseModalArea.classList.remove('show');
+    browseModal.style.display  = 'none';
+});
+
 searchInput.addEventListener('keyup', () => {
     clearList();
     getResults();

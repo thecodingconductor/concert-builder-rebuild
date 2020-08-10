@@ -24,7 +24,7 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: var(--main-background);
-    overflow:hidden;
+    overflow: hidden;
     position: relative;
 }
 
@@ -133,6 +133,7 @@ button {
     width: 60%;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    z-index: 1000;
 
 }
 
@@ -273,6 +274,7 @@ button {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.4);
+    z-index: 5;
 }
 
 .sign-up-container {
@@ -502,15 +504,6 @@ button {
     justify-content: flex-start;
 }
 
-
-
-
-.browse-modal-area.show {
-    transition: transform 0.3s ease;
-    transform: translateX(0);
-}
-
-
 .browse-modal-area {
     height: 100%;
     width: 35%;
@@ -522,6 +515,15 @@ button {
     /*transition: transform 1s ease;*/
     transform: translateX(-100%);
 }
+
+
+.browse-modal-area.show {
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+
+
 
 
 

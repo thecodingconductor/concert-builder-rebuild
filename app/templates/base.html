@@ -64,7 +64,8 @@
         </form>    
     </nav>
     <div class="search-bar-results" id="search-bar-results">
-        <div class="search-result-down">
+       <!-- <div class="search-result-down">
+            
             <p>Johannes Brahms</p>
             <p>Symphony No. 4 in E Minor</p>
             <button class="primary-btn">Add Piece to Favorites</button>
@@ -83,9 +84,165 @@
             <p>Johannes Brahms</p>
             <p>Symphony No. 4 in E Minor</p>
             <button class="primary-btn">Add Piece to Favorites</button>
+        </div>
+
+            -->
+            
+    </div>
+    <div class="modal-container" id="browse-modal">
+        <div class="browse-modal-area" id="browse-modal-area">
+            <div class="browse-header">
+                <h1>Browse Composers</h1>
+                <i class="fa fa-times fa-2x" id="close-browse"></i>
+            </div>
+            <div class="browse-composers">
+                <div class="letter">
+                    <h1>A</h1>
+                    <div class="letter-composers">
+                        <p>Adams, John</p>
+                        <p>Ades, Thomas</p>
+                        <p>Albeniz, Isaac</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>C</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>D</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>E</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>F</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>G</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+                <div class="letter">
+                    <h1>B</h1>
+                    <div class="letter-composers">
+                        <p>Bach, J.S.</p>
+                        <p>Beethoven, Ludwig van</p>
+                        <p>Brahms, Johannes</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
     {% block content %}
         {% block javascript %}
             <script src="{{ url_for('static', filename='js/base.js') }}"></script>

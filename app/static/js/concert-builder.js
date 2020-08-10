@@ -1,8 +1,11 @@
 const addToConcert = document.querySelectorAll('.add-to-concert');
 const deletePiece = document.getElementsByClassName('delete-piece');
+
+const concertBuilderArea = document.getElementById('concert-builder-area');
 const concertMinutes = document.getElementById('concert-minutes');
 const concertConclusion = document.getElementById('concert-conclusion');
-const concertBuilderArea = document.getElementById('concert-builder-area');
+
+
 const searchFavorites = document.getElementById("search-favorites");
 const favoritesSearchResults = document.getElementById('favorites-search-results');
 const deleteIntermission = document.getElementById('delete-intermission');
@@ -264,7 +267,7 @@ function saveConcertTitle() {
     if(concertTitle === '') {
         //Please Provide A Title.
     } else {
-        //Create Concert Object with Title *Flask
+        
         //Change DOM
         rightSearchArea.classList.add('show');
         concertTitleHeader.textContent = `${concertTitle}`; 
@@ -272,7 +275,7 @@ function saveConcertTitle() {
 }
 
 function removeConcertTitle() {
-    //Change object in Flask*
+    
     rightSearchArea.classList.remove('show');
 }
 

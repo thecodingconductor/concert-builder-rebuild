@@ -10,6 +10,9 @@ const openProfile = document.querySelector('.open-profile');
 const openFavorites = document.querySelector('.open-favorites');
 const openConcerts = document.querySelector('.open-concerts');
 
+const homeSearchResults = document.getElementById('home-search-results');
+//const fullFavoritesGrid = document.getElementById('full-favorites-grid');
+
 const openLinks = [openProfile, openFavorites, openConcerts];
 
 
@@ -51,11 +54,33 @@ function hideGoldUnderline(e) {
 function resultsExit(e) {
      e.preventDefault();
      mainContentInner.classList.add('remove');
-     //window.setTimeout(() => {
-       //  mainContentInner.style.display = 'none';
-     //}, 1000);
-     //mainContentInner.classList.remove('remove');
+     window.setTimeout(() => {
+        [...mainContentInner.children].forEach(node => {
+            node.style.display = 'none';
+     })}, 1000);
 
+
+     window.setTimeout(() => {
+        mainContentInner.classList.remove('remove');
+        favoritesEnter(mainContentInner);
+     }, 1500);
+    
+
+     //window.setTimeout(() => {
+      //  mainContentInner.classList.remove('remove');
+     //}, 3000);
+ }
+
+ function favoritesEnter(container) {
+    
+    const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
+    fullFavoritesGrid.style.display = 'grid';
+    document.querySelector('.header-row').style.display = 'flex';
+    document.querySelector('.header-row .view-more-btn').style.display = 'none';
+    //window.setTimeout(() => {
+    //    fullFavoritesGrid.classList.add('animate');
+    //}, 1000);
+    
  }
 
  function formatResultsCard() {

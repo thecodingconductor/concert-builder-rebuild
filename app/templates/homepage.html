@@ -39,7 +39,7 @@
                     
                 </div>
                 
-                <div class="search-results">
+                <div class="search-results" id="home-search-results">
                     {% if user.favorites %}
                     {% for i in range(3) %}
                         <div class="search-result">
@@ -52,8 +52,8 @@
                     {% endfor %}
                     {% endif %}
                 </div>
-
-                <div class="search-results full-favorites-grid">
+                
+                <div class="search-results full-favorites-grid" id="full-favorites-grid">
                     {% if user.favorites %}
                     {% for favorite in user.favorites %}
                         <div class="search-result">
