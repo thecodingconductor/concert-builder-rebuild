@@ -1,9 +1,3 @@
-
-//Nav Bar Elements
-//const loggedIn = document.getElementById('logged-in');
-//const dropDownMenu = document.getElementById('dropdown-menu');
-
-
 const showGold = document.querySelectorAll('.hover-gold');
 const searchResults = document.querySelectorAll('.search-result');
 const viewMore = document.querySelectorAll('.view-more-btn');

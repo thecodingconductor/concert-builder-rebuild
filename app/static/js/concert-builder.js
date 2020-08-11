@@ -83,16 +83,7 @@ function addPieceFromLocalStorage(pObject) {
 
 function addPieceToConcertArr(e) {
     
-    
-    
-        // const pieceComposer = piece.composer;
-        // const pieceComposerDates = piece.composer.years;
-        // const pieceComposerNationality = piece.composer.nationality;
-        // const pieceInstrumentation = piece.instrumentation;
-        // const pieceTitle = piece.title;
-        // const pieceDuration = piece.duration;
-        // console.log(pieceComposer, pieceTitle);
-   
+
         const addToConcertContainer = e.target.parentElement.parentElement;
         const pieceComposer = addToConcertContainer.querySelector('.piece-info-left > p');
         const pieceComposerDates = addToConcertContainer.querySelector('.data-composer-dates');
@@ -152,7 +143,10 @@ function getConcertDuration(pieceArr) {
         return empty;
     } else {
         const concertDurationArr = pieceArr.map(item => Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]));
-        const concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
+        let concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
+        if(concertBuilderArea.querySelector('.concert.intermission')){
+            concertDuration += 30;
+        }
         
         concertLengthJudgement(concertBuilderArea, concertDuration);
 
@@ -164,7 +158,7 @@ function getConcertDuration(pieceArr) {
 
 
 function updateConcertDuration(durationNum) {
-    console.log(durationNum);
+    
     concertMinutes.textContent = `${durationNum}`;
 }
 
@@ -172,9 +166,9 @@ function concertLengthJudgement(container, duration) {
 
     if(duration == 0) {
         concertConclusion.textContent = `Please add some pieces.`;
-    } else if (duration < 60 && duration > 0) {
+    } else if (duration < 90 && duration > 0) {
         concertConclusion.textContent = `Concert is potentially too short.`;
-    } else if (duration >= 60 && duration <= 80) {
+    } else if (duration >= 90 && duration <= 120) {
         concertConclusion.textContent = `Perfect concert length!`;
     } else {
         concertConclusion.textContent = `Concert is getting a bit long...`;
@@ -185,6 +179,39 @@ function concertLengthJudgement(container, duration) {
         console.log('no intermission yet');
     };
 }
+
+function createIntermission() {
+    
+    if(!concertBuilderArea.querySelector('.add-intermission')) {
+        return false;
+    }
+
+    concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
+    
+ 
+            let intermissionEl = document.createElement('div');
+                intermissionEl.classList = "concert intermission";
+                intermissionEl.setAttribute("draggable", "true");
+                intermissionEl.innerHTML = `
+                    <i class="fas fa-bars"></i>
+                    <p>Intermission: ~30 minutes</p>
+                    <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
+                `;
+        
+        concertBuilderArea.appendChild(intermissionEl);
+        
+
+        updateConcertDuration(getConcertDuration(concertPieceArr));
+
+        //Delete Intermission
+        let closeIntermission = intermissionEl.querySelector('#delete-intermission');
+        closeIntermission.addEventListener('click', (e) => {
+            
+            e.target.parentElement.remove();
+            updateConcertDuration(getConcertDuration(concertPieceArr));
+        })
+}
+
 
 function parseDuration() {
     return Number(this.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]);
@@ -305,35 +332,7 @@ function showIntermission(e) {
     }
 }
 
-function createIntermission() {
-    
-    if(!concertBuilderArea.querySelector('.add-intermission')) {
-        return false;
-    }
 
-    concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
-    
- 
-            let intermissionEl = document.createElement('div');
-                intermissionEl.classList = "concert intermission";
-                intermissionEl.setAttribute("draggable", "true");
-                intermissionEl.innerHTML = `
-                    <i class="fas fa-bars"></i>
-                    <p>Intermission: ~20-30 minutes</p>
-                    <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
-                `;
-        
-        concertBuilderArea.appendChild(intermissionEl);
-
-        //Delete Intermission
-        let closeIntermission = intermissionEl.querySelector('#delete-intermission');
-        closeIntermission.addEventListener('click', (e) => {
-            
-            e.target.parentElement.remove();
-        })
-
-    
-}
 
 function saveConcertTitle() {
     let concertTitle = concertTitleInput.value;
