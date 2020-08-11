@@ -1,0 +1,116 @@
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+    <title>Concert Builder - Landing</title>
+</head>
+<body>
+    <nav class="landing-nav">
+        <h1 class="site-title" id="site-title">Concert Builder</h1>
+        <div class="right-nav-container" id="right-nav-container">
+            <ul class="nav-left">
+                <li class="search" id="search">
+                    <a href="#">
+                        <i class="fas fa-search"></i>
+                        <p>Search</p>
+                    </a>
+                </li>
+                <li class="browse" id="browse">
+                    <a href="#">
+                        <i class="fas fa-book"></i>
+                        <p>Browse</p>
+                    </a>
+                    
+                </li>
+                <li class="create" id="create">
+                    <a href="{{ url_for('concert_builder')}}">
+                        <i class="fas fa-plus-square"></i>
+                        <p>Create</p>
+                    </a>     
+                </li>
+            </ul>
+            <ul class="nav-right">
+                <li class="mobile-search-icon" id="open-mobile-search">
+                    <i class="fas fa-search"></i>
+                </li>
+                <li id="login-nav">
+                    Log In
+                </li>
+                <li>
+                    <button class="primary-btn sign-up-btn" id="sign-up-btn">Sign Up</button>
+                </li>
+            </ul>
+        </div>
+        <form class="search-bar-overlay" id="search-bar-overlay">
+            {{ search_form.csrf_token }}
+            <i class="fa fa-search" ></i>
+
+            {{ search_form.search(class_="search-bar-field", id="search-bar-field") }}
+           
+            <i class="fa fa-times close-search" id="close-search"></i>
+        </form>
+        
+        
+    </nav>
+    <div class="search-bar-results" id="search-bar-results">
+          
+
+    </div>
+        
+    
+    <div class="hero-container">
+        <div class="content-container-left">
+            <div class="content-text-container">
+                <h1 class="hero-head">Program better concerts</h1>
+                <p class="hero-description">A great concert can change the world.</p>
+                <button class="primary-btn get-started-btn" id="get-started-btn">Get started</button>
+                <div class="teacher-parent-links">
+                    <a href="#">I'm a teacher</a>
+                    <a href="#">I'm a parent</a>
+                </div>
+            </div>
+        </div>
+        <div class="image-carousel-container">
+            <div class="image-carousel">
+                <img src="{{ url_for('static', filename='img/mozart.gif') }}" alt="">
+            </div>
+            <div class="image-description">
+                <h3 class="image-description-text">Concert Builder is for:</h3>
+                <p>Conductors who care</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-container" id="sign-up-modal">
+       {% include '_register.html' %}
+    </div>
+
+    <div class="modal-container" id="sign-in-modal">
+        {% include '_login.html'%}    
+    </div>
+ </div> 
+
+  <div class="modal-container" id="browse-modal">
+    <div class="browse-modal-area" id="browse-modal-area">
+        <div class="browse-header">
+            <h1>Browse Composers</h1>
+            <i class="fa fa-times fa-2x" id="close-browse"></i>
+        </div>
+        <div class="browse-composers" id="browse-composers">
+            
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/landing.js') }}"></script>
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+</body>
+-->
+
+
+
+

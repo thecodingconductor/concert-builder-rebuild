@@ -1,29 +1,63 @@
 const siteTitle = document.getElementById('site-title');
 const logInNav = document.getElementById('login-nav');
 const signUpButton = document.getElementById('sign-up-btn');
-const getStarted = document.getElementById('get-started-btn');
+
 const search = document.getElementById('search');
 const openConcertBuilder = document.getElementById('create');
 
 const openMobileSearch = document.getElementById('open-mobile-search');
 const rightNavContainer = document.getElementById('right-nav-container');
-
+//Browse Modal
 const browse = document.getElementById('browse');
 const browseModal = document.getElementById('browse-modal');
 const browseModalArea = document.getElementById('browse-modal-area');
 const closeBrowse = document.getElementById('close-browse');
 const browseComposers = document.getElementById('browse-composers');
 
+//Dynamic Search Result Elements
 const searchBarOverlay = document.getElementById('search-bar-overlay');
 const closeSearch = document.getElementById('close-search');
 const searchInput = document.getElementById('search-bar-field');
 const searchBarResults = document.getElementById('search-bar-results');
 
+//Login and Sign Up Elements
+const logInOpen = document.getElementById('login-nav');
+const signUpOpen = document.getElementById('sign-up-btn');
+const signUpModal = document.getElementById('sign-up-modal');
+const signInModal = document.getElementById('sign-in-modal');
+const closeSignUp = document.getElementById('close-sign-up');
+const closeSignIn = document.getElementById('close-sign-in');
+
+//Random Number Generator
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max-min) + min);
 }
 
 
+function openModal(e) {
+    document.body.style.overflow = 'hidden';
+    if(e.target.textContent.trim() === 'Log In') {
+        signInModal.style.display = 'flex';
+    } else {
+        signUpModal.style.display = 'flex';
+        console.log("SIGN UP SUCCESS");
+    }
+    
+}
+
+function closeModal(e) {
+    document.body.style.overflow = 'auto';
+    if(e.target.getAttribute('id') === 'close-sign-in') {
+        const signInModalParent = e.target.parentElement.parentElement.parentElement;
+        signInModalParent.style.display = 'none';
+    } else {
+        const modalParent = e.target.parentElement.parentElement;
+        modalParent.style.display = 'none';
+    }
+    
+}
+
+//Show the Search Bar
 function showSearch(e) {
     e.preventDefault();
     if(e.target.parentElement === openMobileSearch) {
@@ -38,6 +72,7 @@ function showSearch(e) {
 
 }
 
+//Close Search Bar
 function closeSearchField() {
     searchBarOverlay.style.display = 'none';
     rightNavContainer.style.display = 'flex';
@@ -49,6 +84,8 @@ function closeSearchField() {
     }
 }
 
+
+//Show Browse Side Bar, Populate with results
 function showBrowse(e) {
     e.preventDefault();
     browseModal.style.display = 'flex';
@@ -113,6 +150,8 @@ function showBrowse(e) {
     
 }
 
+
+//Clear the search results
 function clearList() {
     if (searchInput.value.length === 0) {
         while(searchBarResults.firstChild) {
@@ -129,6 +168,7 @@ function clearList() {
     }
 }
 
+//Retrieve the list of composer search results
 function getResults() {
     searchBarResults.style.visibility = "visible";
     const request = new XMLHttpRequest();
@@ -197,3 +237,9 @@ searchInput.addEventListener('keyup', () => {
 })
 
 // 
+
+//getStarted.addEventListener('click', openModal);
+logInOpen.addEventListener('click', openModal);
+signUpOpen.addEventListener('click', openModal);
+closeSignUp.addEventListener('click', closeModal);
+closeSignIn.addEventListener('click', closeModal);

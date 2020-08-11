@@ -45,6 +45,8 @@ def index():
     return render_template('landing.html', login_form=login_form, signup_form=signup_form, search_form=search_form)
 #search_form=search_form
 
+
+
 @app.route('/logout')
 def logout():
     logout_user()
@@ -103,6 +105,31 @@ def composer(composer_name):
     comment_form = PieceCommentForm()
     add_to_favorites_button = AddToFavorites()
 
+    login_form = LoginForm()
+    signup_form = RegistrationForm()
+    
+    #INCLUDE LOGIN FORM
+    if login_form.validate_on_submit():
+        user = User.query.filter_by(username=login_form.username.data).first()
+        ## DO VALIDATION CLIENT SIDE. NO NEED FOR FLASK VALIDATION
+        if user is None or not user.check_password(login_form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('index'))
+        login_user(user)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(url_for('homepage'))
+
+    #INCLUDE SIGN UP FORM
+    if signup_form.validate_on_submit():
+        user = User(username=signup_form.username.data, email=signup_form.email.data)
+        user.set_password(signup_form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user.')
+        return redirect(url_for('homepage'))
+
     composer_name = urllib.parse.unquote(composer_name)
     composer_name = composer_name.split('/')[-1]
     res = requests.get(f'https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${composer_name}')
@@ -115,64 +142,13 @@ def composer(composer_name):
     
     last_name = composer.name.split(',')[0]
 
-    # if comment_form.validate_on_submit():
-    #     comment = Comment(body=comment_form.comment.data, author=current_user)
-    #     user = User.query.filter_by(username=current_user.username).first()
-    #     piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
-    #     user.add_comment(comment)
-    #     piece.add_comment(comment)
+    try:
+        
+        user = User.query.filter_by(username=current_user.username).first()
+        return render_template('composer.html', user=user, composer=composer, search_form=search_form, comment_form=comment_form, add_to_favorites_button=add_to_favorites_button)
+    except:
 
-    #     return jsonify({"success": True, "value": "Comment added!"})
-    return render_template('composer.html', composer=composer, search_form=search_form, comment_form=comment_form, add_to_favorites_button=add_to_favorites_button)
-
-
-# @app.route('/composer/<composer_name>', methods=["GET", "POST"])
-# def composer(composer_name):
-
-#     form = PieceCommentForm()
-    
-#     composer_name = urllib.parse.unquote(composer_name)
-#     composer_name = composer_name.split('/')[-1]
-
-#     composer = Composer.query.filter_by(name=composer_name).first_or_404()
-#     if composer == None:
-#             flash('No results. Try a different search')
-#             return render_template('index.html', search_form=search_form)
-    
-#     #get composer images
-#     last_name = composer.name.split(',')[0]
-#     try:
-#         composer_images = wikipedia.page(composer.name).images
-#     except: 
-#         matching = 'https://via.placeholder.com/300'
-#     try:
-#         matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-#     except:
-#         return render_template('composer.html', composer=composer, form=form)
-
-    
-#     if form.validate_on_submit():
-#         if form.submit_comment.data:
-#             comment = Comment(body=form.comment.data, author=current_user)
-#             user = User.query.filter_by(username=current_user.username).first()
-       
-#             flash('Your post is now live')
-#             return redirect(url_for('composer'))
-
-#     # if add_to_favorites.validate_on_submit():
-
-#     #     if form.add_fave.data:
-#     #         soup = BeautifulSoup(page.text, 'html.parser')
-#     #         piece_title = soup.find(id='piece-title')
-#     #         p = Piece.query.filter_by(title=piece_title).first()
-#     #         u = User.query.filter_by(username=current_user.username).first()
-#     #         print(p)
-#     #         print(u)
-#             #u.add_favorite(p)
-#             #flash('Piece added to your favorites list!')
-            
-#     #composer_name comes in with %20 in the spaces. Lines below properly format it for database query.
-#     return render_template('composer.html', composer=composer, matching=matching, form=form)
+        return render_template('composer.html', composer=composer, search_form=search_form, comment_form=comment_form, add_to_favorites_button=add_to_favorites_button, login_form=login_form, signup_form=signup_form)
 
 
 @app.route('/piece_detail/<piece_title>', methods=["GET","POST"])
@@ -232,9 +208,7 @@ def add_comment():
     #piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
 
 
-#@app.route('/add_piece/<piece_title>', methods=["POST"])
-#def add_piece(piece_title):
-    
+
 
 
 # @app.route('/user/<username>')
