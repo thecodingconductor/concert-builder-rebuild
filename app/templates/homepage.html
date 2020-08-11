@@ -46,7 +46,7 @@
                             <h2 class="composer-name">{{user.favorites[i].composer.name }}</h2>
                             <p class="piece-name">{{ user.favorites[i].title }}</p>
                            <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
-                            <button class="primary-btn visit-page">Create Concert</button>
+                            <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
                             <span class="hover-gold "></span>
                         </div>
                     {% endfor %}
@@ -60,12 +60,18 @@
                             <h2 class="composer-name">{{favorite.composer.name }}</h2>
                             <p class="piece-name">{{ favorite.title }}</p>
                            <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
-                            <button class="primary-btn visit-page">Create Concert</button>
+                            <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
                             <span class="hover-gold "></span>
                         </div>
                     {% endfor %}
                     {% endif %}
                 </div>
+
+                <div class="search-results user-profile">
+
+                </div>
+
+
                 <div class="your-recent-concerts">
                     <div class="header-row">
                         <h1 class="search-result-header">Your Concerts</h1>

@@ -19,6 +19,42 @@ const openLinks = [openProfile, openFavorites, openConcerts, returnHome];
 const openBrowse = document.querySelector('.open-browse');
 
 const pieceNames = document.querySelectorAll('.piece-name');
+const createConcertBtns = document.getElementsByClassName('create-concert-btn');
+
+console.log(createConcertBtns);
+
+//Concerts Functionality 
+class Concert {
+    constructor(title, pieces = []) {
+        this.title = title;
+        this.pieces = pieces;
+    }
+}
+
+class Piece {
+    constructor(composer, title,) {
+        this.composer = composer;
+        this.title = title;
+    }
+}
+
+function createConcertFunction(e) {
+    let composerName = e.target.parentElement.querySelector('.composer-name').textContent;
+    let pieceName = e.target.parentElement.querySelector('.piece-name').textContent;
+    let newPiece = new Piece(composerName, pieceName);
+    let newConcert = new Concert("No Name");
+    newConcert.pieces.push(newPiece);
+    localStorage.setItem('newConcert', JSON.stringify(newConcert));
+    location.href="/concert_builder";
+    console.log(newConcert);
+}
+
+[...createConcertBtns].forEach(btn => {
+    
+    btn.addEventListener('click', createConcertFunction);
+    
+})
+
 
 pieceNames.forEach(piece => {
     let pieceTitleLength = piece.textContent.slice(0, 20) + '...';

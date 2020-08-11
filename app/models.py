@@ -139,6 +139,9 @@ class Piece(db.Model):
 
     def as_dict(self):
         return {"title": self.title,
+                "composer": self.composer.name,
+                "nationality": self.composer.nationality,
+                "years": self.composer.years,
                 "duration": self.duration,
                 "movements": self.movements,
                 "movement_duration": self.movement_duration,

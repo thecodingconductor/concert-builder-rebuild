@@ -20,15 +20,88 @@ let favoritesResults =[];
 let dragStartIndex;
 let number = 0;
 
+if(localStorage.getItem('newConcert')) {
+    let res = JSON.parse(localStorage.getItem('newConcert'));
+    getFullPieceInfo(res.pieces[0].title.split('...')[0]);
+    //dynamicSearch(localStorage.getItem('newConcert', 'piece'))
+}
+
+function getFullPieceInfo(pieceTitle) {
+    const request = new XMLHttpRequest();
+    request.open('POST', `/piece_detail/${pieceTitle}`);
+    request.onload = () => {
+        const data = JSON.parse(request.responseText);
+        addPieceFromLocalStorage(data);
+    }
+
+    request.send();
+    return false;
+}
+
+function addPieceFromLocalStorage(pObject) {
+
+    const pieceObject = pObject.piece;
+    console.log(pieceObject);
+    let pieceEl = document.createElement('div');
+    pieceEl.classList = "concert";
+    pieceEl.setAttribute("draggable", "true");
+    pieceEl.innerHTML =  `
+    
+        <i class="fas fa-bars piece-drag-bars"></i>
+        
+        <div class="composer-info">
+            <p>${pieceObject.composer}</p>
+            <p>${pieceObject.years}</p>
+            <p>${pieceObject.nationality}</p>
+        </div>
+        <div class="piece-info">
+            <p>${pieceObject.title}</p>
+            <p>${pieceObject.instrumentation}</p>
+            <p>${pieceObject.duration}</p>
+        </div>
+        <i class="fa fa-times fa-2x delete-piece"></i>
+        <div class="add-intermission">
+            <p>Add Intermission Here</p>
+        </div>
+    
+    `;
+
+    
+    concertPieceArr.push(pieceEl);
+    concertPieceArr.forEach((piece, index) => {
+        piece.setAttribute('data-index', index);
+    });
+
+    addPieceToDOM(pieceEl);
+
+   
+    deletePiecesListeners();
+    createIntermissionListeners();
+    dragListeners();
+    updateConcertDuration(getConcertDuration(concertPieceArr));
+}
+
 function addPieceToConcertArr(e) {
     
-    const addToConcertContainer = e.target.parentElement.parentElement;
-    const pieceComposer = addToConcertContainer.querySelector('.piece-info-left > p');
-    const pieceComposerDates = addToConcertContainer.querySelector('.data-composer-dates');
-    const pieceComposerNationality = addToConcertContainer.querySelector('.data-composer-nationality');
-    const pieceInstrumentation = addToConcertContainer.querySelector('.data-piece-instrumentation');
-    const pieceTitle = addToConcertContainer.querySelector('.piece-info-left p:last-child');
-    const pieceDuration = addToConcertContainer.querySelector('.piece-info-right p');
+    
+    
+        // const pieceComposer = piece.composer;
+        // const pieceComposerDates = piece.composer.years;
+        // const pieceComposerNationality = piece.composer.nationality;
+        // const pieceInstrumentation = piece.instrumentation;
+        // const pieceTitle = piece.title;
+        // const pieceDuration = piece.duration;
+        // console.log(pieceComposer, pieceTitle);
+   
+        const addToConcertContainer = e.target.parentElement.parentElement;
+        const pieceComposer = addToConcertContainer.querySelector('.piece-info-left > p');
+        const pieceComposerDates = addToConcertContainer.querySelector('.data-composer-dates');
+        const pieceComposerNationality = addToConcertContainer.querySelector('.data-composer-nationality');
+        const pieceInstrumentation = addToConcertContainer.querySelector('.data-piece-instrumentation');
+        const pieceTitle = addToConcertContainer.querySelector('.piece-info-left p:last-child');
+        const pieceDuration = addToConcertContainer.querySelector('.piece-info-right p');
+    
+    
     
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
@@ -167,10 +240,13 @@ function clearFaveList() {
 }
 
 
-function dynamicSearch() {
+function dynamicSearch(searchTerm = '') {
     //After search, add all elements to DOM?
     const request = new XMLHttpRequest();
-    const searchTerm = searchFavorites.value;
+    if(searchTerm === '') {
+        searchTerm = searchFavorites.value;
+    }
+    
     request.open('POST', '/search_favorites');
     request.onload = () => {
         const data = JSON.parse(request.response);
