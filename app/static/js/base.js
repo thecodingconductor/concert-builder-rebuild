@@ -27,6 +27,8 @@ const signUpModal = document.getElementById('sign-up-modal');
 const signInModal = document.getElementById('sign-in-modal');
 const closeSignUp = document.getElementById('close-sign-up');
 const closeSignIn = document.getElementById('close-sign-in');
+const loggedIn = document.getElementById('logged-in');
+const dropDownMenu = document.getElementById('dropdown-menu');
 
 //Random Number Generator
 function generateRandomNumber(min, max) {
@@ -217,6 +219,14 @@ function getResults() {
 
 }
 
+function showDropDown() {
+    if(dropDownMenu.style.display === 'block') {
+        dropDownMenu.style.display = 'none';
+    } else {
+        dropDownMenu.style.display = 'block';
+    }
+}
+
 
 
 //For Base
@@ -244,4 +254,8 @@ if(logInOpen && signUpOpen) {
     signUpOpen.addEventListener('click', openModal);
     closeSignUp.addEventListener('click', closeModal);
     closeSignIn.addEventListener('click', closeModal);
+}
+
+if(loggedIn) {
+    loggedIn.addEventListener('click', showDropDown);
 }

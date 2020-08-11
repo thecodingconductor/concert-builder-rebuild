@@ -1,7 +1,9 @@
 
 //Nav Bar Elements
-const loggedIn = document.getElementById('logged-in');
-const dropDownMenu = document.getElementById('dropdown-menu');
+//const loggedIn = document.getElementById('logged-in');
+//const dropDownMenu = document.getElementById('dropdown-menu');
+
+
 const showGold = document.querySelectorAll('.hover-gold');
 const searchResults = document.querySelectorAll('.search-result');
 const viewMore = document.querySelectorAll('.view-more-btn');
@@ -63,13 +65,13 @@ pieceNames.forEach(piece => {
 
 
 //FOr Nav Bar
-function showDropDown() {
-    if(dropDownMenu.style.display === 'block') {
-        dropDownMenu.style.display = 'none';
-    } else {
-        dropDownMenu.style.display = 'block';
-    }
-}
+// function showDropDown() {
+//     if(dropDownMenu.style.display === 'block') {
+//         dropDownMenu.style.display = 'none';
+//     } else {
+//         dropDownMenu.style.display = 'block';
+//     }
+// }
 
 function showGoldUnderline(e) {
     if(!e.target.querySelector('.hover-gold')) {
@@ -191,7 +193,7 @@ function resultsExit(e) {
  }
 
 //For Nav bar
-loggedIn.addEventListener('click', showDropDown);
+//loggedIn.addEventListener('click', showDropDown);
 
 searchResults.forEach(result => {
     result.addEventListener('mouseover', showGoldUnderline)

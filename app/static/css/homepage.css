@@ -1,5 +1,5 @@
 body {
-  overflow: auto;
+  overflow: hidden;
 }
 
 .logged-in img {
@@ -44,7 +44,7 @@ body {
   height: 100%;
   width: 25%;
   background-color: #fff;
-  padding-top: 50px;
+  
   box-shadow: var(--default-shadow);
 }
 
@@ -54,7 +54,7 @@ body {
   margin-top: 30px;
   padding-left: 0;
   width: 100%;
-  height: 60%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -135,12 +135,20 @@ body {
 
 
 .search-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   background-color: #fff;
   border-radius: 0.25rem;
   padding: 20px;
   box-shadow: var(--default-shadow);
   transition: transform .3s ease;
+}
+
+.search-result .composer-name {
+  padding: 0;
+  margin: 0;
 }
 
 
