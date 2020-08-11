@@ -239,7 +239,9 @@ searchInput.addEventListener('keyup', () => {
 // 
 
 //getStarted.addEventListener('click', openModal);
-logInOpen.addEventListener('click', openModal);
-signUpOpen.addEventListener('click', openModal);
-closeSignUp.addEventListener('click', closeModal);
-closeSignIn.addEventListener('click', closeModal);
+if(logInOpen && signUpOpen) {
+    logInOpen.addEventListener('click', openModal);
+    signUpOpen.addEventListener('click', openModal);
+    closeSignUp.addEventListener('click', closeModal);
+    closeSignIn.addEventListener('click', closeModal);
+}

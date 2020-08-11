@@ -60,6 +60,7 @@ function resultsExit(e) {
      })}, 1000);
 
      console.log(e.target);
+     console.log(e.target.classList[0]);
     //  if(e.target === returnHome) {
     //      console.log("RETURN HOME");
     //  } else if (e.target === openProfile) {
@@ -81,9 +82,10 @@ function resultsExit(e) {
 
             console.log("OPEN PROFILE");
 
-        } else if (e.target === openFavorites) {
+        } else if (e.target === openFavorites || e.target.classList[0] === 'view-more-btn') {
 
             console.log("OPEN FAVORITES");
+            
             favoritesEnter(mainContentInner);
 
         } else if (e.target === openConcerts) {
@@ -104,6 +106,24 @@ function resultsExit(e) {
 
  function homeCardEnter(container) {    
     console.log("HOME CARD ENTER");
+    const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
+    fullFavoritesGrid.style.display = 'none';
+
+    [...container.children].forEach(element => {
+        if(element === fullFavoritesGrid) {
+            return;
+        } else if(element.classList[0] === 'header-row') {
+            element.style.display = 'flex';
+            element.querySelector('.view-more-btn').style.display = 'flex';
+        } else if (element.classList[0] === 'search-results') {
+            element.style.display = 'grid';
+        } else if (element.classList[0] === 'your-recent-concerts') {
+            element.style.display = 'block';
+        }
+
+       
+    });
+
  }
 
  function favoritesEnter(container) {
