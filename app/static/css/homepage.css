@@ -125,7 +125,7 @@ body {
   margin-left: 10px;
 }
 
-.search-results {
+.search-results, .your-recent-concerts {
   width: 100%;
   display: grid;
   grid-gap: 20px;
@@ -149,6 +149,14 @@ body {
 .search-result .composer-name {
   padding: 0;
   margin: 0;
+}
+
+.search-result .concert-name {
+  color: blue;
+}
+
+.search-result .tiny-piece-title {
+  font-size: .5rem;
 }
 
 

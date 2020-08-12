@@ -1,3 +1,4 @@
+
 const showGold = document.querySelectorAll('.hover-gold');
 const searchResults = document.querySelectorAll('.search-result');
 const viewMore = document.querySelectorAll('.view-more-btn');
@@ -17,36 +18,37 @@ const openBrowse = document.querySelector('.open-browse');
 const pieceNames = document.querySelectorAll('.piece-name');
 const createConcertBtns = document.getElementsByClassName('create-concert-btn');
 
-console.log(createConcertBtns);
+
+
 
 let user = document.getElementById('current-username').textContent;
 
 //Concerts Functionality 
-class User {
-    constructor(username, concerts = []) {
-        this.username = username;
-        this.concerts = concerts;
-    }
-}
+// class User {
+//     constructor(username, concerts = []) {
+//         this.username = username;
+//         this.concerts = concerts;
+//     }
+// }
 
-class Concert {
-    constructor(title, pieces = []) {
-        this.title = title;
-        this.pieces = pieces;
-    }
-}
+// class Concert {
+//     constructor(title, pieces = []) {
+//         this.title = title;
+//         this.pieces = pieces;
+//     }
+// }
 
-class Piece {
-    constructor(composer, title,) {
-        this.composer = composer;
-        this.title = title;
-    }
-}
+// class Piece {
+//     constructor(composer, title,) {
+//         this.composer = composer;
+//         this.title = title;
+//     }
+// }
 
 function createUser() {
     let user = document.getElementById('current-username').textContent;
-    console.log(user);
-    console.log(JSON.parse(localStorage.getItem('user')).username);
+    //console.log(user);
+    //console.log(JSON.parse(localStorage.getItem('user')).username);
     
     if(user === JSON.parse(localStorage.getItem('user')).username) {
         
@@ -64,22 +66,32 @@ function createUser() {
 }
 
 function displayConcerts(user) {
+
     user.concerts.forEach(concert => {
         console.log(concert);
         let concertContainer = document.createElement("div");
         concertContainer.classList = 'search-result';
         concertContainer.innerHTML = `
-            <h1 class="concert-name" id="concert-name"> Concert Title </h1>
-        `
-        concert.forEach(piece => {
-            console.log(piece.title);
-        })
+            <h1 class="concert-name" id="concert-name"> ${concert.title}</h1>
+                 ${concert.pieces.map((item) => 
+                     
+                    `
+                     
+                     <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
+                     
+                     `.trim()
+                     ).join('')}
+               `;
 
+        console.log(concertContainer);
+        yourConcertsContainer.appendChild(concertContainer);
+                
 
-        //yourConcertsContainer.innerHTML =  
-    })
+        }
+    )
 }
 
+        
 function createConcertFunction(e) {
     let composerName = e.target.parentElement.querySelector('.composer-name').textContent;
     let pieceName = e.target.parentElement.querySelector('.piece-name').textContent;
