@@ -287,7 +287,7 @@ function dynamicSearch(searchTerm = '') {
 
             const favorites_data = JSON.parse(data.favorites);
             favorites_data.forEach(favorite => {
-                console.log(favorite);
+                
                 const favoriteLI = document.createElement("li");
                 favoriteLI.innerHTML = `
                 <div class="data-composer-info">
@@ -352,6 +352,7 @@ function saveConcertTitle() {
         concertTitleHeader.textContent = `${concertTitle}`; 
     }
 }
+
 function removeConcertTitle() {
     
     rightSearchArea.classList.remove('show');
@@ -378,6 +379,7 @@ function saveConcert() {
         }, 1000);
         return false;
     }
+
     let currentConcert = new Concert(concertTitleHeader.textContent);
     //console.log(currentConcert);
     concertPieceArr.forEach(piece => {
@@ -391,6 +393,10 @@ function saveConcert() {
     //console.log(currentUser.concerts);
     localStorage.setItem('user', JSON.stringify(currentUser));
     console.log(localStorage.getItem('user'));
+    saveConcertBtn.textContent = 'Concert Saved!!';
+    window.setTimeout(() => {
+        saveConcertBtn.textContent = 'Save Concert';
+    }, 1000);
 }
 
 

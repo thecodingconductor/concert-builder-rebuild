@@ -33,6 +33,7 @@ const dropDownMenu = document.getElementById('dropdown-menu');
 //OBJECT DECLARATION
 class User {
     constructor(username, concerts = []) {
+        
         this.username = username;
         this.concerts = concerts;
     }
@@ -40,6 +41,7 @@ class User {
 
 class Concert {
     constructor(title, pieces = []) {
+        this.id = generateRandomNumber(0, 50000);
         this.title = title;
         this.pieces = pieces;
     }
