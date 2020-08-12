@@ -30,6 +30,28 @@ const closeSignIn = document.getElementById('close-sign-in');
 const loggedIn = document.getElementById('logged-in');
 const dropDownMenu = document.getElementById('dropdown-menu');
 
+//OBJECT DECLARATION
+class User {
+    constructor(username, concerts = []) {
+        this.username = username;
+        this.concerts = concerts;
+    }
+}
+
+class Concert {
+    constructor(title, pieces = []) {
+        this.title = title;
+        this.pieces = pieces;
+    }
+}
+
+class Piece {
+    constructor(composer, title,) {
+        this.composer = composer;
+        this.title = title;
+    }
+}
+
 //Random Number Generator
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max-min) + min);

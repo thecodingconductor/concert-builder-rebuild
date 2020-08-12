@@ -62,7 +62,6 @@ class User(UserMixin, db.Model):
    
     def as_dict(self):
         return {'username': self.username,
-                'studied': [p.as_dict() for p in self.studied],
                 'favorites': [p.as_dict() for p in self.favorites],
                 'comments': [p.as_dict() for p in self.comments]
         }

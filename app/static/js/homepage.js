@@ -19,7 +19,16 @@ const createConcertBtns = document.getElementsByClassName('create-concert-btn');
 
 console.log(createConcertBtns);
 
+let user = document.getElementById('current-username').textContent;
+
 //Concerts Functionality 
+class User {
+    constructor(username, concerts = []) {
+        this.username = username;
+        this.concerts = concerts;
+    }
+}
+
 class Concert {
     constructor(title, pieces = []) {
         this.title = title;
@@ -32,6 +41,43 @@ class Piece {
         this.composer = composer;
         this.title = title;
     }
+}
+
+function createUser() {
+    let user = document.getElementById('current-username').textContent;
+    console.log(user);
+    console.log(JSON.parse(localStorage.getItem('user')).username);
+    
+    if(user === JSON.parse(localStorage.getItem('user')).username) {
+        
+        let currentUser = JSON.parse(localStorage.getItem('user'));
+        console.log(currentUser);
+        displayConcerts(currentUser);
+       
+        return false;
+    } else {
+        console.log('NOT MATCHING?');
+        let newUser = new User(user);
+        localStorage.setItem('user', JSON.stringify(newUser));
+    }
+    
+}
+
+function displayConcerts(user) {
+    user.concerts.forEach(concert => {
+        console.log(concert);
+        let concertContainer = document.createElement("div");
+        concertContainer.classList = 'search-result';
+        concertContainer.innerHTML = `
+            <h1 class="concert-name" id="concert-name"> Concert Title </h1>
+        `
+        concert.forEach(piece => {
+            console.log(piece.title);
+        })
+
+
+        //yourConcertsContainer.innerHTML =  
+    })
 }
 
 function createConcertFunction(e) {
@@ -206,4 +252,5 @@ viewMore.forEach(link => {
  })
 
 window.addEventListener('DOMContentLoaded', formatResultsCard);
+window.addEventListener('DOMContentLoaded', createUser)
 openBrowse.addEventListener('click', showBrowse)

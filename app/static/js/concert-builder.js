@@ -14,11 +14,17 @@ const rightSearchArea = document.getElementById('right-search-area');
 const concertTitleInput = document.getElementById('concert-title-input');
 const changeTitleBtn = document.getElementById('change-title-btn');
 const concertTitleHeader = document.getElementById('concert-title-header');
+const saveConcertBtn = document.getElementById('save-concert-btn');
+
+
+
 
 let concertPieceArr = [];
 let favoritesResults =[];
 let dragStartIndex;
 let number = 0;
+
+
 
 if(localStorage.getItem('newConcert')) {
     let res = JSON.parse(localStorage.getItem('newConcert'));
@@ -336,8 +342,6 @@ function showIntermission(e) {
 
 function saveConcertTitle() {
     let concertTitle = concertTitleInput.value;
-    
-
 
     if(concertTitle === '') {
         //Please Provide A Title.
@@ -348,11 +352,30 @@ function saveConcertTitle() {
         concertTitleHeader.textContent = `${concertTitle}`; 
     }
 }
-
 function removeConcertTitle() {
     
     rightSearchArea.classList.remove('show');
 }
+
+function saveConcert() {
+    let currentUser = JSON.parse(localStorage.getItem('user'));
+    //console.log(currentUser);
+    let currentConcert = new Concert(concertTitleHeader.textContent);
+    //console.log(currentConcert);
+    concertPieceArr.forEach(piece => {
+        let thisPiece = new Piece(piece.querySelector('.composer-info > p:first-child').textContent,
+                                    piece.querySelector('.piece-info > p:first-child').textContent);
+        
+        currentConcert.pieces.push(thisPiece);
+    });
+    //console.log(currentConcert.pieces);
+    currentUser.concerts.push(currentConcert);
+    //console.log(currentUser.concerts);
+    localStorage.setItem('user', JSON.stringify(currentUser));
+    console.log(localStorage.getItem('user'));
+}
+
+
 
 //Drag Functions
 function dragStart() {
@@ -428,3 +451,4 @@ concertBuilderArea.addEventListener('mouseover', showIntermission);
 concertTitleBtn.addEventListener('click', saveConcertTitle);
 changeTitleBtn.addEventListener('click', removeConcertTitle);
 window.addEventListener('DOMContentLoaded', updateConcertDuration(getConcertDuration(concertPieceArr)));
+saveConcertBtn.addEventListener('click', saveConcert);
