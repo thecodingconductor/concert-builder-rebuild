@@ -270,6 +270,15 @@
     font-weight: bold;
 }
 
+.primary-btn.save-concert {
+    transition: background-color .5s ease;
+}
+
+.primary-btn.save-concert.disabled {
+    
+    background-color:  #c4302b;
+    pointer-events: none;
+}
 
 /* TODO:
 

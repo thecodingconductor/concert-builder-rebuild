@@ -360,6 +360,24 @@ function removeConcertTitle() {
 function saveConcert() {
     let currentUser = JSON.parse(localStorage.getItem('user'));
     //console.log(currentUser);
+    if(concertTitleHeader.textContent === '') {
+        
+        saveConcertBtn.classList.add('disabled');
+        saveConcertBtn.textContent = 'Please add title.';
+        window.setTimeout(() => {
+            saveConcertBtn.classList.remove('disabled');
+            saveConcertBtn.textContent = 'Save Concert';
+        }, 1000);
+        return false;
+    } else if (concertPieceArr.length === 0) {
+        saveConcertBtn.classList.add('disabled');
+        saveConcertBtn.textContent = 'Please add pieces...';
+        window.setTimeout(() => {
+            saveConcertBtn.classList.remove('disabled');
+            saveConcertBtn.textContent = 'Save Concert';
+        }, 1000);
+        return false;
+    }
     let currentConcert = new Concert(concertTitleHeader.textContent);
     //console.log(currentConcert);
     concertPieceArr.forEach(piece => {
