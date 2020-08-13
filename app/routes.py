@@ -19,6 +19,7 @@ def index():
     search_form = ComposerSearchForm()
     login_form = LoginForm()
     signup_form = RegistrationForm()
+    print(signup_form)
     
     #INCLUDE LOGIN FORM
     if login_form.validate_on_submit():
@@ -31,19 +32,25 @@ def index():
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
+        for e in login_form.errors:
+                print(e)
         return redirect(url_for('homepage'))
 
     #INCLUDE SIGN UP FORM
     if signup_form.validate_on_submit():
         user = User(username=signup_form.username.data, email=signup_form.email.data)
+        print(user)
         user.set_password(signup_form.password.data)
         db.session.add(user)
         db.session.commit()
+        print("User Registered")
         flash('Congratulations, you are now a registered user.')
+        for f in signup_form.errors:
+            print(f)
         return redirect(url_for('homepage'))
 
     return render_template('landing.html', login_form=login_form, signup_form=signup_form, search_form=search_form)
-#search_form=search_form
+
 
 
 

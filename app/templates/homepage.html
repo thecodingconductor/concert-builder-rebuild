@@ -33,6 +33,7 @@
         <div class="main-content-area">
             <!--TODO HIDE THIS STUFF ON SEARCH-->
             <div class="main-content-area-inner" id="main-content-area-inner">
+                
                 <div class="header-row">
                     <h1 class="search-result-header">Your Favorites</h1>
                     <a href="" class="view-more-btn">View More <i class="fas fa-angle-right fa-2x"></i></a>
@@ -40,10 +41,11 @@
                 </div>
                 
                 <div class="search-results" id="home-search-results">
+                    
                     {% if user.favorites %}
                     {% for i in range(3) %}
                         <div class="search-result">
-                            <h2 class="composer-name">{{user.favorites[i].composer.name }}</h2>
+                            <h2 class="composer-name">{{ user.favorites[i].composer.name }}</h2>
                             <p class="piece-name">{{ user.favorites[i].title }}</p>
                            <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
                             <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
@@ -57,7 +59,7 @@
                     {% if user.favorites %}
                     {% for favorite in user.favorites %}
                         <div class="search-result">
-                            <h2 class="composer-name">{{favorite.composer.name }}</h2>
+                            <h2 class="composer-name">{{ favorite.composer.name }}</h2>
                             <p class="piece-name">{{ favorite.title }}</p>
                            <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
                             <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
@@ -71,7 +73,7 @@
 
                 </div>
 
-                <div class="header-row">
+                <div class="header-row concerts-header-row">
                     <h1 class="search-result-header">Your Concerts</h1>
                     <a href="" class="view-more-btn">View More <i class="fas fa-angle-right fa-2x"></i></a>
                     
@@ -80,7 +82,9 @@
                    
                     
                     
-                    </div>
+                 </div>
+                 <div class="search-results full-concerts-grid" id='full-concerts-grid'></div>
+
                 </div>
             </div>
         </div>

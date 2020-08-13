@@ -29,6 +29,8 @@ const closeSignUp = document.getElementById('close-sign-up');
 const closeSignIn = document.getElementById('close-sign-in');
 const loggedIn = document.getElementById('logged-in');
 const dropDownMenu = document.getElementById('dropdown-menu');
+const registerUserBtn = document.getElementById('register-user-btn');
+const logInUserBtn = document.getElementById('login-user-btn');
 
 //OBJECT DECLARATION
 class User {
@@ -283,3 +285,17 @@ if(logInOpen && signUpOpen) {
 if(loggedIn) {
     loggedIn.addEventListener('click', showDropDown);
 }
+
+//Check to see if user is logged in or not.
+if(registerUserBtn && loginUserBtn) {
+    registerUserBtn.addEventListener('click', (e) => {
+        console.log(e.target);
+    })
+
+    loginUserBtn.addEventListener('click', (e) => {
+        console.log(e.target);
+    })
+}
+
+
+

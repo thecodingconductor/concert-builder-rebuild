@@ -1,5 +1,5 @@
 const showGold = document.querySelectorAll('.hover-gold');
-const searchResults = document.querySelectorAll('.search-result');
+//const searchResults = document.querySelectorAll('.search-result');
 const viewMore = document.querySelectorAll('.view-more-btn');
 const mainContentInner = document.getElementById('main-content-area-inner');
 const openProfile = document.getElementById('open-profile');
@@ -7,9 +7,16 @@ const openFavorites = document.getElementById('open-favorites');
 const openConcerts = document.getElementById('open-concerts');
 const returnHome = document.getElementById('return-home');
 
+//Favorites on Home Page
 const homeSearchResults = document.getElementById('home-search-results');
-//const fullFavoritesGrid = document.getElementById('full-favorites-grid');
+//Favorites Page
+const fullFavoritesGrid = document.getElementById('full-favorites-grid');
+
+//Concerts on Home Page
 const yourConcertsContainer = document.getElementById('your-concerts-container'); 
+
+//Concerts on Concerts Page
+const fullConcertsGrid = document.getElementById('full-concerts-grid');
 
 const openLinks = [openProfile, openFavorites, openConcerts, returnHome];
 const openBrowse = document.querySelector('.open-browse');
@@ -25,8 +32,7 @@ let user = document.getElementById('current-username').textContent;
 
 function createUser() {
     let user = document.getElementById('current-username').textContent;
-    //console.log(user);
-    //console.log(JSON.parse(localStorage.getItem('user')).username);
+    
     
     if(!JSON.parse(localStorage.getItem('user'))) {
         
@@ -38,9 +44,8 @@ function createUser() {
     } else if (user === JSON.parse(localStorage.getItem('user')).username) {
 
         let currentUser = JSON.parse(localStorage.getItem('user'));
-        console.log(currentUser);
+        
         displayConcerts(currentUser);
-       
         return false;
     }
     
@@ -48,44 +53,111 @@ function createUser() {
 
 
 
-function displayConcerts(user) {
+function displayConcerts(user, all=false) {
    
+    if(fullConcertsGrid.children.length > 0) {
+        fullConcertsGrid.innerHTML = ``;
+    }
+    if(user.concerts.length === 0) {
+
+        let notificationContainer = document.createElement("div");
+        notificationContainer.classList = 'no-concerts-notification';
+        notificationContainer.innerHTML = `
+        
+        <p class="no-concerts-message">Please visit the concert builder to add some concerts!</p>
+        
+        `;
+        yourConcertsContainer.appendChild(notificationContainer);
+
+    } 
+    
     user.concerts.forEach((concert, index) => {
         
-        if(index > 2) {
-            return false;
-        }
-        let concertContainer = document.createElement("div");
-        concertContainer.classList = 'search-result';
-        concertContainer.innerHTML = `
-            <span class="concert-id-num">${concert.id}</span>
+        if(all===false && index < 3) {
             
-            <h1 class="concert-name" id="concert-name"> ${concert.title}</h1>
-                 ${concert.pieces.map((item) => 
-                     
-                    `
-                     
-                     <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
-                     
-                     `.trim()
-                     ).join('')}
-                     <button class="primary-btn remove-concert-btn">Delete Concert</button>
-                     <span class="hover-gold "></span>
-                `;
+            console.log('all===false, index < 3');
+            //fullConcertsGrid.style.display = 'none';
+            let concertContainer = document.createElement("div");
+            concertContainer.classList = 'search-result';
+            concertContainer.innerHTML = `
+                <span class="concert-id-num">${concert.id}</span>
+                
+                <h1 class="concert-name" id="concert-name"> ${concert.title}</h1>
+                     ${concert.pieces.map((item) => 
+                         
+                        `
+                         
+                         <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
+                         
+                         `.trim()
+                         ).join('')}
+                         <button class="primary-btn remove-concert-btn">Delete Concert</button>
+                         <span class="hover-gold"></span>
+                    `;
+            yourConcertsContainer.appendChild(concertContainer);
+           
+                    
+            return false;
+        } else {
+            let concertContainer = document.createElement("div");
+            concertContainer.classList = 'search-result';
+            concertContainer.innerHTML = `
+                <span class="concert-id-num">${concert.id}</span>
+                
+                <h1 class="concert-name" id="concert-name"> ${concert.title}</h1>
+                     ${concert.pieces.map((item) => 
+                         
+                        `
+                         
+                         <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
+                         
+                         `.trim()
+                         ).join('')}
+                         <button class="primary-btn remove-concert-btn">Delete Concert</button>
+                         <span class="hover-gold "></span>
+                    `;
+            
+            
+            fullConcertsGrid.appendChild(concertContainer);
+            
+            }
+
+            
+        }
 
         
-        yourConcertsContainer.appendChild(concertContainer);
-                
-
-        }
     );
+
     
-    removeConcertListeners();
+   
+   console.log(fullConcertsGrid.children);
+   console.log(yourConcertsContainer.children);
+   if(fullConcertsGrid.children.length === 0) {
+        console.log('FULL CONCERTS GRID DISPLAY NONE');
+   } else if (yourConcertsContainer.children.length === 0) {
+        console.log("HOMEPAGE DISPLAY NONE");
+   }
+
+
+
 }
 
-function removeConcertListeners() {
-    console.log(yourConcertsContainer.children);
-    let concertsList = yourConcertsContainer.children;
+//This works.
+function updateHoverListeners() {
+    let searchResults = document.querySelectorAll('.search-result');
+    
+    [...searchResults].forEach(result => {
+        console.log(result);
+        result.addEventListener('mouseover', showGoldUnderline)
+        result.addEventListener('mouseleave', hideGoldUnderline);
+
+    });
+}
+
+//THis is not working.
+function removeConcertListeners(container) {
+
+    let concertsList = container.children;
     [...concertsList].forEach(concert => {
         concert.querySelector('.remove-concert-btn').addEventListener('click', deleteConcert)
     })
@@ -103,7 +175,7 @@ function deleteConcert(e) {
             console.log(object);
             object.splice(index, 1)
         } else {
-            console.log("fucking bullshit cock ass");
+            return;
         }
     })
     console.log(deleteConcertUser.concerts);
@@ -118,7 +190,7 @@ function createConcertFunction(e) {
     newConcert.pieces.push(newPiece);
     localStorage.setItem('newConcert', JSON.stringify(newConcert));
     location.href="/concert_builder";
-    //console.log(newConcert);
+    
 }
 
 
@@ -131,9 +203,12 @@ pieceNames.forEach(piece => {
 
 
 function showGoldUnderline(e) {
+
     if(!e.target.querySelector('.hover-gold')) {
+      
         return false;
     } else {
+        
         e.target.querySelector('.hover-gold').classList.add('show');
     }
 }
@@ -178,40 +253,53 @@ function resultsExit(e) {
         }
         
      }, 1500);
-
-     
-    
-
-     
  }
 
- function concertsEnter(container) {
-     console.log('Concerts Enter');
-     
-     
- }
+
 
  function homeCardEnter(container) {    
-    console.log("HOME CARD ENTER");
+    
     const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
+    const fullConcertsGrid = container.querySelector('.full-concerts-grid');
+    console.log('homeCardEnter>>>>', fullConcertsGrid);
     fullFavoritesGrid.style.display = 'none';
+    fullConcertsGrid.style.display = 'none';
 
     [...container.children].forEach(element => {
+        console.log(element);
         if(element === fullFavoritesGrid) {
             return;
         } else if(element.classList[0] === 'header-row') {
             element.style.display = 'flex';
             element.querySelector('.view-more-btn').style.display = 'flex';
-        } else if (element.classList[0] === 'search-results') {
+        } else if (element.classList.length === 1 && element.classList[0] === 'search-results') {
             element.style.display = 'grid';
-        } else if (element.classList[0] === 'your-recent-concerts') {
-            element.style.display = 'block';
+        }
+        else if (element.classList[1] === 'your-recent-concerts') {
+            element.style.display = 'grid';
+        } else if (element.classList[1] === 'full-concerts-grid') {
+            element.style.display = 'none';
         }
 
        
     });
 
  }
+
+ function concertsEnter(container) {
+    console.log('Concerts Enter');
+    const fullConcertsGrid = container.querySelector('.search-results.full-concerts-grid');
+   
+    
+    fullConcertsGrid.style.display = 'grid';
+    
+    container.querySelector('.header-row.concerts-header-row').style.display = 'flex';
+    container.querySelector('.header-row.concerts-header-row .view-more-btn').style.display = 'none';
+    let currentUser = JSON.parse(localStorage.getItem('user'));
+    
+    displayConcerts(currentUser, all=true);
+    
+}
 
  function favoritesEnter(container) {
     
@@ -225,7 +313,9 @@ function resultsExit(e) {
         } else {
             return;
         }
-    })
+    });
+
+    
    
     
  }
@@ -239,14 +329,16 @@ function resultsExit(e) {
     })
  }
 
-//For Nav bar
-//loggedIn.addEventListener('click', showDropDown);
 
-searchResults.forEach(result => {
-    result.addEventListener('mouseover', showGoldUnderline)
-    result.addEventListener('mouseleave', hideGoldUnderline);
 
-});
+
+
+// [...searchResults].forEach(result => {
+//         console.log(result);
+//         result.addEventListener('mouseover', showGoldUnderline)
+//         result.addEventListener('mouseleave', hideGoldUnderline);
+
+// });
 
 
 
@@ -259,7 +351,20 @@ viewMore.forEach(link => {
  })
 
 window.addEventListener('DOMContentLoaded', formatResultsCard);
-window.addEventListener('DOMContentLoaded', createUser)
+window.addEventListener('DOMContentLoaded', createUser);
+window.addEventListener('DOMContentLoaded', () => {
+
+    let searchResults = document.querySelectorAll('.search-result');
+    [...searchResults].forEach(result => {
+        //console.log(result);
+        result.addEventListener('mouseover', showGoldUnderline)
+        result.addEventListener('mouseleave', hideGoldUnderline);
+
+    });
+
+
+})
+
 openBrowse.addEventListener('click', showBrowse);
 
 [...createConcertBtns].forEach(btn => {

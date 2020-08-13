@@ -28,10 +28,10 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(120), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    studied = db.relationship('Piece', backref='studied', lazy='dynamic')
-    favorites = db.relationship('Piece', backref='favorite', secondary=favorited_pieces, lazy='dynamic')
-    comments = db.relationship('Comment', backref='author', lazy='dynamic')
-    concerts = db.relationship('Concert', backref='conductor', lazy="dynamic")
+    studied = db.relationship('Piece', backref='studied')
+    favorites = db.relationship('Piece', backref='favorite', secondary=favorited_pieces)
+    comments = db.relationship('Comment', backref='author')
+    concerts = db.relationship('Concert', backref='conductor')
 
 
     def set_password(self, password):

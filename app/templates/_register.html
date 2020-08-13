@@ -13,6 +13,7 @@
     </div>
    
     <form method="post" class="sign-up-form" novalidate>
+        {{ signup_form.hidden_tag() }}
         <div class="form-field birthday-selector">
             <label for="">Birthday</label>
             <div class="select-container">
@@ -30,21 +31,25 @@
         </div>
         <div class="form-field">
             {{ signup_form.username.label }}
-            {{ signup_form.username(placeholder="Enter Username", id="username") }}
+            {{ signup_form.username(placeholder="Enter Username", id="register-username") }}
            
         </div>
         <div class="form-field">
             {{ signup_form.email.label }}
-            {{ signup_form.email(id="email", placeholder="Enter email") }}
+            {{ signup_form.email(id="register-email", placeholder="Enter email") }}
             
         </div>
         <div class="form-field">
             {{ signup_form.password.label }}
-            {{ signup_form.password(id="password", placeholder="Enter Password")}}
+            {{ signup_form.password(id="register-password", placeholder="Enter Password")}}
             
         </div>
+        <div class="form-field">
+            {{ signup_form.password2.label }}
+            {{ signup_form.password2(id="register-password2", placeholder="Repeat Username") }}
+        </div>
 
-             {{ signup_form.submit(class_="primary-btn register-btn") }}
+             {{ signup_form.submit(id="register-user-btn", class_="primary-btn register-btn") }}
         
         <button class="primary-btn login-btn">Already have an account? Log in <a href="#">here.</a></button>
     </form>

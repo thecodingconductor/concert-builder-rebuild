@@ -85,6 +85,8 @@ function addPieceFromLocalStorage(pObject) {
     createIntermissionListeners();
     dragListeners();
     updateConcertDuration(getConcertDuration(concertPieceArr));
+
+    localStorage.removeItem('newConcert');
 }
 
 function addPieceToConcertArr(e) {

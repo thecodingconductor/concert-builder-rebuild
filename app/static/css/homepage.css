@@ -86,6 +86,9 @@ body {
   width: 90%;
   margin: auto;
   color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 }
 
@@ -109,6 +112,8 @@ body {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    align-self: stretch;
+    
 }
 
 .header-row a {
@@ -134,6 +139,10 @@ body {
 
 
 
+.search-results.user-profile {
+  display: none;
+}
+
 .search-result {
   display: flex;
   flex-direction: column;
@@ -153,11 +162,11 @@ body {
 }
 
 .search-result .concert-name {
-  color: blue;
+  
 }
 
 .search-result .tiny-piece-title {
-  font-size: .5rem;
+  font-size: .75rem;
 }
 
 
@@ -166,7 +175,7 @@ body {
 }
 
 
-.search-results.full-favorites-grid {
+.search-results.full-favorites-grid, .search-results.full-concerts-grid {
   display: none;
   opacity: 1;
   animation: opacity .5s ease-in;
@@ -204,7 +213,7 @@ body {
   position: fixed;
   width: 100%;
   height: 10%;
-
+  display: none;
   bottom: 0;
 }
 
@@ -218,16 +227,12 @@ body {
 }
 
 
-.remove-concert {
-  cursor: pointer;
-  
-}
-
 .concert-id-num {
   display: none;
 }
 
 .primary-btn.remove-concert-btn {
+  cursor: pointer;
   background-color: #c4302b;
   
 }
