@@ -55,6 +55,7 @@ function createUser() {
 
 function displayConcerts(user, all=false) {
    
+    //FIXED!!!!
     if(fullConcertsGrid.children.length > 0) {
         fullConcertsGrid.innerHTML = ``;
     }
@@ -128,7 +129,8 @@ function displayConcerts(user, all=false) {
         
     );
 
-    
+    removeConcertListeners(fullConcertsGrid);
+    removeConcertListeners(yourConcertsContainer);
    
    console.log(fullConcertsGrid.children);
    console.log(yourConcertsContainer.children);
@@ -219,6 +221,7 @@ function hideGoldUnderline(e) {
 
 
 function resultsExit(e) {
+    console.log(e.target);
      e.preventDefault();
      mainContentInner.classList.add('remove');
      window.setTimeout(() => {
@@ -239,13 +242,13 @@ function resultsExit(e) {
 
             console.log("OPEN PROFILE");
 
-        } else if (e.target === openFavorites || e.target.classList[0] === 'view-more-btn') {
+        } else if (e.target === openFavorites || !e.target.classList.contains('concert-view-more-btn')) {
 
             console.log("OPEN FAVORITES");
-            
+            console.log(e.target.classList);
             favoritesEnter(mainContentInner);
 
-        } else if (e.target === openConcerts) {
+        } else if (e.target === openConcerts || e.target.classList.contains('concert-view-more-btn')) {
 
             console.log("OPEN CONCERTS");
             concertsEnter(mainContentInner);
