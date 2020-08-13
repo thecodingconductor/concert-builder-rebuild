@@ -24,6 +24,7 @@ const openBrowse = document.querySelector('.open-browse');
 const pieceNames = document.querySelectorAll('.piece-name');
 const createConcertBtns = document.getElementsByClassName('create-concert-btn');
 
+const dropDownYourConcerts = document.getElementById('dropdown-your-concerts');
 
 
 
@@ -221,7 +222,8 @@ function hideGoldUnderline(e) {
 
 
 function resultsExit(e) {
-    console.log(e.target);
+    console.log('from results exit', e.target.id);
+    console.log(dropDownYourConcerts.id);
      e.preventDefault();
      mainContentInner.classList.add('remove');
      window.setTimeout(() => {
@@ -242,13 +244,13 @@ function resultsExit(e) {
 
             console.log("OPEN PROFILE");
 
-        } else if (e.target === openFavorites || !e.target.classList.contains('concert-view-more-btn')) {
+        } else if (e.target === openFavorites || !e.target.classList.contains('concert-view-more-btn') && e.target.classList.contains('view-more-btn')) {
 
             console.log("OPEN FAVORITES");
             console.log(e.target.classList);
             favoritesEnter(mainContentInner);
 
-        } else if (e.target === openConcerts || e.target.classList.contains('concert-view-more-btn')) {
+        } else if (e.target === openConcerts || e.target.classList.contains('concert-view-more-btn') || e.target.id === dropDownYourConcerts.id) {
 
             console.log("OPEN CONCERTS");
             concertsEnter(mainContentInner);
@@ -343,7 +345,13 @@ function resultsExit(e) {
 
 // });
 
+dropDownYourConcerts.addEventListener('click', (e) => {
+    console.log('from event listener>>>', e.target);
+    dropDownMenu.style.display = 'none';
+    resultsExit(e);
+    concertsEnter(mainContentInner);
 
+})
 
 viewMore.forEach(link => {
      link.addEventListener('click', resultsExit);

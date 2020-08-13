@@ -287,14 +287,14 @@ if(loggedIn) {
 }
 
 //Check to see if user is logged in or not.
-if(registerUserBtn && loginUserBtn) {
+if(registerUserBtn && logInUserBtn) {
     registerUserBtn.addEventListener('click', (e) => {
         console.log(e.target);
-    })
+    });
 
-    loginUserBtn.addEventListener('click', (e) => {
+    logInUserBtn.addEventListener('click', (e) => {
         console.log(e.target);
-    })
+    });
 }
 
 
