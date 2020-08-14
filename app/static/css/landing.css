@@ -7,6 +7,8 @@
     --main-background: #f6f7fb;
     --gold: #facd21;
     --default-shadow: 0px 13px 26px #0000002F;
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
 }
 
 
@@ -390,6 +392,24 @@ button {
     border: 2px solid grey;
     border-radius: 5px;
     color: #c2c6d4;
+}
+
+.sign-up-form .form-field input:focus {
+    border: 2px solid var(--gold);
+    transition: border 0.3s ease;
+}
+
+.sign-up-form .form-field.error {
+    border: 2px solid var(--error-color);
+}
+
+.sign-up-form .error-text {
+    color: var(--error-color);
+    /*visibility: hidden;*/
+}
+
+.sign-up-form .form-field.error .error-text {
+    visibility: visible;
 }
 
 .register-btn, .login-btn {

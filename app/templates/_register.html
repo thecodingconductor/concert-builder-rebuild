@@ -32,23 +32,32 @@
         <div class="form-field">
             {{ signup_form.username.label }}
             {{ signup_form.username(placeholder="Enter Username", id="register-username") }}
-           
+         
+            {% for error in signup_form.username.errors %}
+            <span class="error-text" data-status="">{{ error }}</span>
+            {% endfor %}
         </div>
         <div class="form-field">
             {{ signup_form.email.label }}
             {{ signup_form.email(id="register-email", placeholder="Enter email") }}
-            
+            {% for error in signup_form.email.errors %}
+            <span class="error-text">{{ error }}</span>
+            {% endfor %}
         </div>
         <div class="form-field">
             {{ signup_form.password.label }}
             {{ signup_form.password(id="register-password", placeholder="Enter Password")}}
-            
+            {% for error in signup_form.password.errors %}
+            <span class="error-text">{{ error }}</span>
+            {% endfor %}
         </div>
         <div class="form-field">
             {{ signup_form.password2.label }}
             {{ signup_form.password2(id="register-password2", placeholder="Repeat Username") }}
+            {% for error in signup_form.password2.errors %}
+            <span class="error-text">{{ error }}</span>
+            {% endfor %}
         </div>
-
              {{ signup_form.register_submit(id="register-user-btn", class_="primary-btn register-btn") }}
         
         <button class="primary-btn login-btn">Already have an account? Log in <a href="#">here.</a></button>

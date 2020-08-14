@@ -32,6 +32,17 @@ const dropDownMenu = document.getElementById('dropdown-menu');
 const registerUserBtn = document.getElementById('register-user-btn');
 const logInUserBtn = document.getElementById('login-user-btn');
 
+//Registration Validation
+const registerUsername = document.getElementById('register-username');
+const registerEmail = document.getElementById('register-email');
+const registerPassword = document.getElementById('register-password');
+const registerPassword2 = document.getElementById('register-password2');
+
+//Log In Validation
+const loginUsername = document.getElementById('login-password');
+const loginPassword = document.getElementById('login-password');
+
+
 //OBJECT DECLARATION
 class User {
     constructor(username, concerts = []) {
@@ -68,7 +79,7 @@ function openModal(e) {
         signInModal.style.display = 'flex';
     } else {
         signUpModal.style.display = 'flex';
-        console.log("SIGN UP SUCCESS");
+        
     }
     
 }
@@ -253,6 +264,17 @@ function showDropDown() {
     }
 }
 
+function registerValidation(e) {
+    e.preventDefault();
+    console.log(e.target.parentElement);
+    console.log('register prevented.');
+}
+
+function logInValidation(e) {
+    e.preventDefault();
+    console.log('Log In Prevented');
+}
+
 
 
 //For Base
@@ -287,15 +309,18 @@ if(loggedIn) {
 }
 
 //Check to see if user is logged in or not.
-if(registerUserBtn && logInUserBtn) {
-    registerUserBtn.addEventListener('click', (e) => {
-        console.log(e.target);
-    });
+// if(registerUserBtn && logInUserBtn) {
+//     registerUserBtn.addEventListener('click', (e) => {
+//         console.log(e.target);
+//     });
 
-    logInUserBtn.addEventListener('click', (e) => {
-        console.log(e.target);
-    });
-}
+//     logInUserBtn.addEventListener('click', (e) => {
+//         console.log(e.target);
+//     });
+// }
+
+registerUserBtn.addEventListener('click', registerValidation);
+logInUserBtn.addEventListener('click', logInValidation);
 
 
 

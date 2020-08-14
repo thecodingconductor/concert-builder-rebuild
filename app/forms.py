@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, ValidationError, EqualTo, Length
+from wtforms.validators import DataRequired, ValidationError, EqualTo, Length, Email
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -14,10 +14,10 @@ class ComposerSearchForm(FlaskForm):
     submit = SubmitField('Search')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    username = StringField('Username', validators=[DataRequired(), Length(min=6, max=20, message="Username must be more than 6 characters and less than 20.")])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6, max=20, message="Password must be more than 6 characters and less than 20.")])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password', message="Passwords must match.")])
     register_submit = SubmitField('Register Now')
 
     def validate_username(self, username):

@@ -24,16 +24,16 @@ def index():
     #INCLUDE LOGIN FORM
     if login_form.login_submit.data and login_form.validate_on_submit():
         user = User.query.filter_by(username=login_form.username.data).first()
-        ## DO VALIDATION CLIENT SIDE. NO NEED FOR FLASK VALIDATION
+        
         if user is None or not user.check_password(login_form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('index'))
+            error = jsonify({"success": "false"})
+            redirect(url_for('landing'))
         login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
-        for e in login_form.errors:
-                print(e)
+        
         return redirect(url_for('homepage'))
 
     #INCLUDE SIGN UP FORM
