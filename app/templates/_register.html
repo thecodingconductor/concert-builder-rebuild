@@ -12,9 +12,9 @@
         </button>
     </div>
    
-    <form method="post" class="sign-up-form" novalidate>
+    <form method="post" class="sign-up-form" id="sign-up-form" novalidate>
         {{ signup_form.hidden_tag() }}
-        <div class="form-field birthday-selector">
+        <div class="birthday-selector">
             <label for="">Birthday</label>
             <div class="select-container">
                 <select name="month" id="month">

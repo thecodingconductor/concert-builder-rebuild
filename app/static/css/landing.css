@@ -371,6 +371,13 @@ button {
     cursor: pointer;
 }
 
+.birthday-selector {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 1rem 0;
+}
+
 .form-field {
     display: flex;
     flex-direction: column;
