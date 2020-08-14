@@ -404,9 +404,9 @@ function saveConcert() {
 
 
 //Drag Functions
-function dragStart() {
+function dragStart(e) {
     console.log('Event: Drag Start');
-    dragStartIndex = +this.parentElement.getAttribute('data-index');
+    dragStartIndex = e.target.parentElement.getAttribute('data-index');
     
 }
 
@@ -444,7 +444,10 @@ function swapItems(fromIndex, toIndex) {
 function dragListeners() {
     const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
     const dragBoxes = document.querySelectorAll('.concert');
+    console.log(pieceDragBars);
+    console.log(dragBoxes);
     pieceDragBars.forEach(drag => {
+        console.log(drag);
         drag.addEventListener('dragstart', dragStart);
     });
     

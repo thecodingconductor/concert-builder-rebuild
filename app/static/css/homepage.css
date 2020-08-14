@@ -231,6 +231,10 @@ body {
   display: none;
 }
 
+#current-username  {
+  display: none;
+}
+
 .primary-btn.remove-concert-btn {
   cursor: pointer;
   background-color: #c4302b;

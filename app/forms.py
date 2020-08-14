@@ -7,7 +7,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    login_submit = SubmitField('Sign In')
 
 class ComposerSearchForm(FlaskForm):
     search = StringField('Composer Search', validators=[DataRequired()])
@@ -18,7 +18,7 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register Now')
+    register_submit = SubmitField('Register Now')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()

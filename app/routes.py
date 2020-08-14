@@ -19,10 +19,10 @@ def index():
     search_form = ComposerSearchForm()
     login_form = LoginForm()
     signup_form = RegistrationForm()
-    print(signup_form)
+    
     
     #INCLUDE LOGIN FORM
-    if login_form.validate_on_submit():
+    if login_form.login_submit.data and login_form.validate_on_submit():
         user = User.query.filter_by(username=login_form.username.data).first()
         ## DO VALIDATION CLIENT SIDE. NO NEED FOR FLASK VALIDATION
         if user is None or not user.check_password(login_form.password.data):
@@ -37,7 +37,7 @@ def index():
         return redirect(url_for('homepage'))
 
     #INCLUDE SIGN UP FORM
-    if signup_form.validate_on_submit():
+    if signup_form.register_submit.data and signup_form.validate_on_submit():
         user = User(username=signup_form.username.data, email=signup_form.email.data)
         print(user)
         user.set_password(signup_form.password.data)
