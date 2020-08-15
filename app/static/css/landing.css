@@ -406,9 +406,21 @@ button {
     transition: border 0.3s ease;
 }
 
-.sign-up-form .form-field.error {
+.sign-up-form .form-field.success input {
+    border: 2px solid var(--success-color);
+}
+
+.sign-up-form .form-field.success label {
+    color: var(--success-color);
+}
+
+.sign-up-form .form-field.error input  {
     border: 2px solid var(--error-color);
 }
+
+.sign-up-form .form-field.error label {
+    color: var(--error-color);
+} 
 
 .sign-up-form .error-text {
     color: var(--error-color);

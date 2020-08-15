@@ -286,59 +286,7 @@ function registerValidation(e) {
 
 //FORM VALIDATION EXCERPT
 
-function showError(input, message) {
-    const formControl = input.parentElement;
-    formControl.classList.add('error');    
-}
 
-function showSuccess(input) {
-    const formControl = input.parentElement;
-    formControl.classList.add('success');
-}
-
-function checkEmail(input) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(re.test(input.value.trim())) {
-        showSuccess(input);
-    } else {
-        showError(input, 'Email is not valid');
-    }
-}
-
-function checkRequired(inputArr) {
-    let isRequired = false;
-    inputArr.forEach(input => {
-        if(input.value.trim() === '') {
-            showError(input, `${getFieldName(input)} is required.`);
-            isRequired = true;
-        } else {
-            showSuccess(input);
-        }
-    });
-
-    return isRequired;
-}
-
-
-function checkLength(input, min, max) {
-    if (input.value.length < min) {
-        showError(input, `${getFieldName(input)} must be at least ${min} characters`);
-    } else if (input.value.length > max) {
-        showError(input, `${getFieldName(input)} must be less than ${max} characters`;)
-    } else {
-        showSuccess(input);
-    }
-}
-
-function checkPasswordsMatch(input1, input2) {
-    if(input1.value !== input2.value) {
-        showError(input2, 'Passwords do not match');
-    }
-}
-
-function getFieldName(input) {
-    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
 
 
 
@@ -382,22 +330,123 @@ if(loggedIn) {
     loggedIn.addEventListener('click', showDropDown);
 }
 
+
+
+
+function showError(input, message) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-field error';    
+}
+
+function showSuccess(input) {
+    console.log('show success');
+    const formControl = input.parentElement;
+    console.log(formControl);
+    formControl.className = 'form-field success';
+}
+
+function checkEmail(input) {
+    console.log('check email' + input.value);
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(input.value.trim())) {
+        showSuccess(input);
+    } else {
+        showError(input, 'Email is not valid');
+    }
+}
+
+function checkRequired(inputArr) {
+    console.log('check Required');
+    let isRequired = false;
+    inputArr.forEach(input => {
+        console.log(input.value);
+        if(input.value.trim() === '') {
+            showError(input, `${getFieldName(input)} is required.`);
+            isRequired = true;
+        } else {
+            showSuccess(input);
+        }
+    });
+
+    return isRequired;
+}
+
+
+function checkLength(input, min, max) {
+    console.log("CHECK LENGTH");
+    console.log(input.value);
+    if (input.value.length < min) {
+        showError(input, `${getFieldName(input)} must be at least ${min} characters`);
+    } else if (input.value.length > max) {
+        showError(input, `${getFieldName(input)} must be less than ${max} characters}`);
+    } else {
+        showSuccess(input);
+    }
+}
+
+function checkPasswordsMatch(input1, input2) {
+    console.log('checkPasswordsMatch');
+    console.log(input1.value, input2.value);
+    if(input1.value !== input2.value) {
+        showError(input2, 'Passwords do not match');
+    }
+}
+
+function getFieldName(input) {
+    console.log('GET FIELD NAME.')
+    console.log(input.id.charAt(0).toUpperCase() + input.id.slice(1));
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
+
+function checkAllValid(formInputArr) {
+    console.log('checkAllValid');
+    let allValid = true;
+    formInputArr.forEach(field => {
+        console.log(field);
+        console.log(field.parentElement);
+        console.log(field.parentElement.classList);
+        if (field.parentElement.classList.contains('error') && field.parentElement.classList.length > 1) {
+            allValid = false;
+            return allValid;
+        }
+    });
+    console.log(allValid);
+    return allValid;
+}
+
+
 registrationForm.addEventListener('submit', (e) => {
-    
+    e.preventDefault();
     console.log(e.target.parentElement);
     let formInputs = e.target.parentElement.querySelectorAll('.form-field input');
+    // console.log(formInputs);
+    // let checkResult = checkAllValid([...formInputs]);
+    // console.log('check results>>>', checkResult);
     
-    [...formInputs].forEach(input => {
-        console.log(input.value);
-        if(input.value === '') {
-            console.log('empty and form not submitted.');
-            e.preventDefault();
+    if(!checkRequired([...formInputs])) {
+        
+        checkLength(registerUsername, 6, 20);
+        checkLength(registerPassword, 6 ,20);
+        checkEmail(registerEmail);
+        checkPasswordsMatch(registerPassword, registerPassword2)
+        if(checkAllValid([...formInputs])) {
+            console.log('WE ARE REEADY TO SUBMIT');
+            registrationForm.submit();
         }
-    })
-    
-     console.log(formInputs);
-    console.log('registration form prevented');
+    }
+    // } else if (!checkRequired([...formInputs]) && checkAllValid([...formInputs])) {
+    //     console.log("READY?");
+    //     //checkLength(registerUsername, 6, 20);
+    //     //checkLength(registerPassword, 6 ,20);
+    //     //checkEmail(registerEmail);
+    //     //checkPasswordsMatch(registerPassword, registerPassword2);
+    //     //registrationForm.requestSubmit();
+    // }
 })
+
+
+
+
 
 
 logInForm.addEventListener('submit', (e) => {
@@ -419,6 +468,3 @@ logInForm.addEventListener('submit', (e) => {
 
 //registerUserBtn.addEventListener('click', registerValidation);
 //logInUserBtn.addEventListener('click', logInValidation);
-
-
-
