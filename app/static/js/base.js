@@ -393,8 +393,7 @@ function checkPasswordsMatch(input1, input2) {
 }
 
 function getFieldName(input) {
-    console.log('GET FIELD NAME.')
-    console.log(input.id.charAt(0).toUpperCase() + input.id.slice(1));
+    
     return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
@@ -402,26 +401,20 @@ function checkAllValid(formInputArr) {
     console.log('checkAllValid');
     let allValid = true;
     formInputArr.forEach(field => {
-        console.log(field);
-        console.log(field.parentElement);
-        console.log(field.parentElement.classList);
         if (field.parentElement.classList.contains('error') && field.parentElement.classList.length > 1) {
             allValid = false;
             return allValid;
         }
     });
-    console.log(allValid);
+    
     return allValid;
 }
 
 
 registrationForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(e.target.parentElement);
+   
     let formInputs = e.target.parentElement.querySelectorAll('.form-field input');
-    // console.log(formInputs);
-    // let checkResult = checkAllValid([...formInputs]);
-    // console.log('check results>>>', checkResult);
     
     if(!checkRequired([...formInputs])) {
         
@@ -430,18 +423,11 @@ registrationForm.addEventListener('submit', (e) => {
         checkEmail(registerEmail);
         checkPasswordsMatch(registerPassword, registerPassword2)
         if(checkAllValid([...formInputs])) {
-            console.log('WE ARE REEADY TO SUBMIT');
+            
             registrationForm.submit();
         }
     }
-    // } else if (!checkRequired([...formInputs]) && checkAllValid([...formInputs])) {
-    //     console.log("READY?");
-    //     //checkLength(registerUsername, 6, 20);
-    //     //checkLength(registerPassword, 6 ,20);
-    //     //checkEmail(registerEmail);
-    //     //checkPasswordsMatch(registerPassword, registerPassword2);
-    //     //registrationForm.requestSubmit();
-    // }
+ 
 })
 
 
