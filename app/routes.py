@@ -66,16 +66,30 @@ def index():
 def login():
 
     if request.method == "POST":
-        req = request.form
+        req = request.get_json()
+        print(req)
+
         user = User.query.filter_by(username=req.get('username')).first()
         if user is None or not user.check_password(req.get('password')):
-            flash('invalid username')
-            redirect(url_for('index'))
+            res = make_response(jsonify({"update": "failure", "message":"Please enter a valid username and password"}))
+            return res
         login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
-        return redirect(url_for('homepage'))
+
+        res = make_response(jsonify({"update": "success", "message": "Logging you in."}), 200)
+        return res
+        #user = User.query.filter_by(username=req.get('username')).first()
+        # if user is None or not user.check_password(req.get('password')):
+        #     flash('invalid username or password')
+        #     return "Didnt Work"
+            
+        # login_user(user)
+        # next_page = request.args.get('next')
+        # if not next_page or url_parse(next_page).netloc != '':
+        #     next_page = url_for('index')
+        # return redirect(url_for('homepage'))
        
 
 @app.route('/register', methods=["GET", 'POST'])

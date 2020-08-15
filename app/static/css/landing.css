@@ -537,6 +537,27 @@ button {
     top: 62%;
 }
 
+.sign-in-form-fields .form-field.success input {
+    border: 2px solid var(--success-color);
+}
+
+.sign-in-form-fields .form-field.success label {
+    color: var(--success-color);
+}
+
+.sign-in-form-fields .form-field.error input  {
+    border: 2px solid var(--error-color);
+}
+
+.sign-in-form-fields .form-field.error label {
+    color: var(--error-color);
+} 
+
+.sign-in-form-fields .error-text {
+    color: var(--error-color);
+    /*visibility: hidden;*/
+}
+
 .primary-btn.big-login-btn {
 
     width: 100%;

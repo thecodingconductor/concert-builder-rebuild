@@ -23,12 +23,21 @@
             <div class="form-field">
                 {{ login_form.username(id="login-username", placeholder="Type your username") }}
                 {{ login_form.username.label }}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <span class="error-text">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 
             </div>
             <div class="form-field">
                 {{ login_form.password(id="login-password", placeholder="Type Password")}}
                 {{ login_form.password.label }}
-                
+                {% for error in login_form.password.errors %}
+                <span class="error-text">{{ error }}</span>
+                {% endfor %}
                 <p><a href="#">Forgot?</a></p>
             </div>
             
