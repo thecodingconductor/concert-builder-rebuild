@@ -743,6 +743,7 @@ button {
     .search-bar-overlay {
         justify-content: center;
         margin: auto;
+        height: 5rem;
     }
 
     .search-result-down p {

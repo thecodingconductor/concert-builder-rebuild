@@ -36,8 +36,8 @@ body {
 .main-container {
   width: 85%;
   flex: 1;
-  
   display: flex;
+  margin-bottom: 3rem;
 }
 
 .left-menu {
@@ -257,6 +257,15 @@ body {
 
 @media(max-width: 768px) {
 
+
+  body {
+    overflow: auto;
+  }
+
+  .main-content-area-inner {
+    margin-bottom: 5rem;
+  }
+
   .home-mobile-icons {
     display: inline-block;
   }
@@ -265,3 +274,4 @@ body {
     display: none;
   }
 }
+

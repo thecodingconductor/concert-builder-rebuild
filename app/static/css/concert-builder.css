@@ -38,13 +38,21 @@
     align-items: center;
 }
 
-.right-search-area {
+.right-search-area-container {
     width: 80%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 1rem;
     justify-content: space-between;
     position: relative;
+}
+
+.right-search-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .left-search-area input {
@@ -71,7 +79,7 @@
 
 
 .concert-title-input {
-    width: 25%;
+    width: 50%;
     line-height: 2rem;
     border-radius: 5px;
     border: none;
@@ -172,6 +180,10 @@
     width: 25%;
 }
 
+.concert-title.concert-title-mobile {
+    display: none;
+}
+
 .concert-builder-area {
     background-color: #fff;
     color: #000;
@@ -208,6 +220,12 @@
     margin: 10px 0;
     box-shadow: var(--default-shadow);
     position: relative;
+}
+
+.info-inner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .concert.over {
@@ -272,6 +290,7 @@
 
 .primary-btn.save-concert {
     transition: background-color .5s ease;
+    margin-bottom: 1rem;
 }
 
 .primary-btn.save-concert.disabled {
@@ -292,13 +311,82 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
         flex-direction: column;
         justify-content: normal;
         align-items: stretch;
+        margin-bottom: 0;
     }
 
     .left-container {
+        
         width: 100%;
+    }
+
+    .left-container h1 {
+        font-size: 1.2rem;
+    }
+
+    .right-container {
+        flex: none;
+        height: 100vh;
+
+    }
+
+    .piece-info-left p {
+        font-size: .7rem;
+    }
+
+    .piece-info-left p:last-of-type {
+        font-size: .6rem;
+    }
+
+    .concert-builder-text-area {
+        margin-bottom: 3rem;
     }
 
     .concert .composer-img {
         display: none;
+    }
+}
+
+@media(max-width: 426px) {
+
+    .left-container {
+        height: 100vh;
+    }
+
+    .primary-btn.change-title-btn {
+        width: 50%;
+    }
+    .concert-title-input {
+        width: 25%;
+    }
+
+    .concert-title-btn {
+        width: 50%;
+    }
+
+    .info-inner-container {
+        width: 50%;
+    }
+    .concert-title.concert-title-mobile {
+        display: block;
+    }
+
+    .composer-info, .piece-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .composer-info p, .piece-info p {
+        margin: 0;
+    }
+
+    .composer-info p {
+        font-size: .75rem;
+    }
+
+    .piece-info p {
+        font-size: .5rem;
+        text-align: center;
     }
 }

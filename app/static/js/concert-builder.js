@@ -54,17 +54,19 @@ function addPieceFromLocalStorage(pObject) {
     pieceEl.innerHTML =  `
     
         <i class="fas fa-bars piece-drag-bars"></i>
+        <div class="info-inner-container">
+            <div class="composer-info">
+                <p>${pieceObject.composer}</p>
+                <p>${pieceObject.years}</p>
+                <p>${pieceObject.nationality}</p>
+            </div>
+            <div class="piece-info">
+                <p>${pieceObject.title}</p>
+                <p>${pieceObject.instrumentation}</p>
+                <p>${pieceObject.duration}</p>
+            </div>
+        </div>
         
-        <div class="composer-info">
-            <p>${pieceObject.composer}</p>
-            <p>${pieceObject.years}</p>
-            <p>${pieceObject.nationality}</p>
-        </div>
-        <div class="piece-info">
-            <p>${pieceObject.title}</p>
-            <p>${pieceObject.instrumentation}</p>
-            <p>${pieceObject.duration}</p>
-        </div>
         <i class="fa fa-times fa-2x delete-piece"></i>
         <div class="add-intermission">
             <p>Add Intermission Here</p>
@@ -108,16 +110,17 @@ function addPieceToConcertArr(e) {
     pieceEl.innerHTML =  `
     
         <i class="fas fa-bars piece-drag-bars"></i>
-        
-        <div class="composer-info">
-            <p>${pieceComposer.textContent}</p>
-            <p>${pieceComposerDates.textContent}</p>
-            <p>${pieceComposerNationality.textContent}</p>
-        </div>
-        <div class="piece-info">
-            <p>${pieceTitle.textContent}</p>
-            <p>${pieceInstrumentation.textContent}</p>
-            <p>${pieceDuration.textContent}</p>
+        <div class="info-inner-container">
+            <div class="composer-info">
+                <p>${pieceComposer.textContent}</p>
+                <p>${pieceComposerDates.textContent}</p>
+                <p>${pieceComposerNationality.textContent}</p>
+            </div>
+            <div class="piece-info">
+                <p>${pieceTitle.textContent}</p>
+                <p>${pieceInstrumentation.textContent}</p>
+                <p>${pieceDuration.textContent}</p>
+            </div>
         </div>
         <i class="fa fa-times fa-2x delete-piece"></i>
         <div class="add-intermission">
