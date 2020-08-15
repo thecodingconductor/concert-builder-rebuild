@@ -436,7 +436,7 @@ registrationForm.addEventListener('submit', (e) => {
 
 
 logInForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     console.log(e.target);
     console.log("login form prevented");
 });

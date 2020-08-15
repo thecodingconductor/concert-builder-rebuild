@@ -24,42 +24,75 @@ def index():
 
     #INCLUDE LOGIN FORM
     #
-    if login_form.login_submit.data and login_form.validate_on_submit():
-        user = User.query.filter_by(username=login_form.username.data).first()
+    # if login_form.login_submit.data and login_form.validate_on_submit():
+    #     user = User.query.filter_by(username=login_form.username.data).first()
         
+    #     req = request.form
+    #     print(req)
         
 
-        if user is None or not user.check_password(login_form.password.data):
-            flash('Invalid username or password')
-            error = jsonify({"success": "false"})
+    #     if user is None or not user.check_password(login_form.password.data):
+    #         flash('Invalid username or password')
+    #         error = jsonify({"success": "false"})
+    #         redirect(url_for('index'))
+    #     login_user(user)
+    #     next_page = request.args.get('next')
+    #     if not next_page or url_parse(next_page).netloc != '':
+    #         next_page = url_for('index')
+        
+    #     return redirect(url_for('homepage'))
+
+    #INCLUDE SIGN UP FORM
+    # if signup_form.validate_on_submit():
+    #     usernamefield = request.data
+    #     print(usernamefield)
+        
+    #     user = User(username=signup_form.username.data, email=signup_form.email.data)
+        
+    #     user.set_password(signup_form.password.data)
+    #     db.session.add(user)
+    #     db.session.commit()
+        
+    #     print("User Registered")
+    #     flash('Congratulations, you are now a registered user.')
+    #     go_u = User.query.filter_by(username=signup_form.username.data).first()
+    #     login_user(go_u)    
+    #     #login_user(user)
+    #     return redirect(url_for('homepage'))
+
+    return render_template('landing.html', login_form=login_form, signup_form=signup_form, search_form=search_form)
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+        req = request.form
+        user = User.query.filter_by(username=req.get('username')).first()
+        if user is None or not user.check_password(req.get('password')):
+            flash('invalid username')
             redirect(url_for('index'))
         login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
-        
         return redirect(url_for('homepage'))
+       
 
-    #INCLUDE SIGN UP FORM
-    if signup_form.validate_on_submit():
-        usernamefield = request.data
-        print(usernamefield)
+@app.route('/register', methods=["GET", 'POST'])
+def register():
+    if request.method == "POST":
         
-        user = User(username=signup_form.username.data, email=signup_form.email.data)
-        
-        user.set_password(signup_form.password.data)
+        req = request.form
+        username = req.get('username')
+        user = User(username=req.get("username"), email=req.get("email"))
+        user.set_password(req.get("password"))
         db.session.add(user)
         db.session.commit()
-        
-        print("User Registered")
-        flash('Congratulations, you are now a registered user.')
-        go_u = User.query.filter_by(username=signup_form.username.data).first()
-        login_user(go_u)    
-        #login_user(user)
+
+        go_u = User.query.filter_by(username=username).first()
+        login_user(go_u)
         return redirect(url_for('homepage'))
-
-    return render_template('landing.html', login_form=login_form, signup_form=signup_form, search_form=search_form)
-
+        
 
 
 
