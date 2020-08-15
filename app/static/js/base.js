@@ -33,16 +33,21 @@ const registerUserBtn = document.getElementById('register-user-btn');
 const logInUserBtn = document.getElementById('login-user-btn');
 
 //Registration Validation
+
 const registrationForm = document.getElementById('sign-up-form');
 const registerUsername = document.getElementById('register-username');
 const registerEmail = document.getElementById('register-email');
 const registerPassword = document.getElementById('register-password');
 const registerPassword2 = document.getElementById('register-password2');
 
-//Log In Validation
+
 const logInForm = document.getElementById('sign-in-form');
 const loginUsername = document.getElementById('login-password');
 const loginPassword = document.getElementById('login-password');
+
+
+//Log In Validation
+
 
 
 //OBJECT DECLARATION
@@ -287,52 +292,6 @@ function registerValidation(e) {
 //FORM VALIDATION EXCERPT
 
 
-
-
-
-
-
-function logInValidation(e) {
-    e.preventDefault();
-    console.log('Log In Prevented');
-}
-
-
-
-//For Base
-search.addEventListener('click', showSearch);
-openMobileSearch.addEventListener('click', showSearch)
-closeSearch.addEventListener('click', closeSearchField);
-
-//for Base
-browse.addEventListener('click', showBrowse);
-closeBrowse.addEventListener('click', () => {
-    browseModalArea.classList.remove('show');
-    browseModal.style.display  = 'none';
-});
-
-searchInput.addEventListener('keyup', () => {
-    clearList();
-    getResults();
-})
-
-// 
-
-//getStarted.addEventListener('click', openModal);
-if(logInOpen && signUpOpen) {
-    logInOpen.addEventListener('click', openModal);
-    signUpOpen.addEventListener('click', openModal);
-    closeSignUp.addEventListener('click', closeModal);
-    closeSignIn.addEventListener('click', closeModal);
-}
-
-if(loggedIn) {
-    loggedIn.addEventListener('click', showDropDown);
-}
-
-
-
-
 function showError(input, message) {
     const formControl = input.parentElement;
     formControl.className = 'form-field error';    
@@ -411,35 +370,85 @@ function checkAllValid(formInputArr) {
 }
 
 
-registrationForm.addEventListener('submit', (e) => {
+
+
+
+
+function logInValidation(e) {
     e.preventDefault();
-   
-    let formInputs = e.target.parentElement.querySelectorAll('.form-field input');
-    
-    if(!checkRequired([...formInputs])) {
-        
-        checkLength(registerUsername, 6, 20);
-        checkLength(registerPassword, 6 ,20);
-        checkEmail(registerEmail);
-        checkPasswordsMatch(registerPassword, registerPassword2)
-        if(checkAllValid([...formInputs])) {
-            
-            registrationForm.submit();
-        }
-    }
- 
+    console.log('Log In Prevented');
+}
+
+
+
+//For Base
+search.addEventListener('click', showSearch);
+openMobileSearch.addEventListener('click', showSearch)
+closeSearch.addEventListener('click', closeSearchField);
+
+//for Base
+browse.addEventListener('click', showBrowse);
+closeBrowse.addEventListener('click', () => {
+    browseModalArea.classList.remove('show');
+    browseModal.style.display  = 'none';
+});
+
+searchInput.addEventListener('keyup', () => {
+    clearList();
+    getResults();
 })
 
+// 
+
+//getStarted.addEventListener('click', openModal);
+if(logInOpen && signUpOpen) {
+    logInOpen.addEventListener('click', openModal);
+    signUpOpen.addEventListener('click', openModal);
+    closeSignUp.addEventListener('click', closeModal);
+    closeSignIn.addEventListener('click', closeModal);
+}
+
+if(loggedIn) {
+    loggedIn.addEventListener('click', showDropDown);
+}
+
+
+
+
+if(registrationForm) {
+    registrationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+       
+        let formInputs = e.target.parentElement.querySelectorAll('.form-field input');
+        
+        if(!checkRequired([...formInputs])) {
+            
+            checkLength(registerUsername, 6, 20);
+            checkLength(registerPassword, 6 ,20);
+            checkEmail(registerEmail);
+            checkPasswordsMatch(registerPassword, registerPassword2)
+            if(checkAllValid([...formInputs])) {
+                
+                registrationForm.submit();
+            }
+        }
+     
+    })
+}   
 
 
 
 
 
-logInForm.addEventListener('submit', (e) => {
-    //e.preventDefault();
-    console.log(e.target);
-    console.log("login form prevented");
-});
+
+if(logInForm) {
+    logInForm.addEventListener('submit', (e) => {
+        //e.preventDefault();
+        console.log(e.target);
+        console.log("login form prevented");
+    });
+}
+
 
 //Check to see if user is logged in or not.
 // if(registerUserBtn && logInUserBtn) {

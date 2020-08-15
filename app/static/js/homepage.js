@@ -33,7 +33,7 @@ let user = document.getElementById('current-username').textContent;
 
 function createUser() {
     let user = document.getElementById('current-username').textContent;
-    
+    console.log(user);
     
     if(!JSON.parse(localStorage.getItem('user'))) {
         
@@ -48,30 +48,44 @@ function createUser() {
         
         displayConcerts(currentUser);
         return false;
+    } else if (user !== JSON.parse(localStorage.getItem('user')).username) {
+        let newUser = new User(user);
+        localStorage.setItem('user', JSON.stringify(newUser));
     }
-    
 }
 
-
-
+// display the concerts. 
 function displayConcerts(user, all=false) {
    
     //FIXED!!!!
     if(fullConcertsGrid.children.length > 0) {
         fullConcertsGrid.innerHTML = ``;
     }
+
+    //console.log(user);
     if(user.concerts.length === 0) {
 
         let notificationContainer = document.createElement("div");
         notificationContainer.classList = 'no-concerts-notification';
         notificationContainer.innerHTML = `
+        <div class="search-result">
+                        <h2 class="composer-name">Visit the concert builder page above to start building concerts!</h2>
+        </div>
         
-        <p class="no-concerts-message">Please visit the concert builder to add some concerts!</p>
         
         `;
         yourConcertsContainer.appendChild(notificationContainer);
 
-    } 
+    }
+    
+    // if(user.favorites.length === 0) {
+    //     let notificationContainer = document.createElement("div");
+    //     notificationContainer.classList = 'no-favorites-notification';
+    //     notificationContainer.innerHTML = `
+    //         <p class="no-favorites-message">Please browse composers to add some favorites!</p>
+    //     `;
+    //     homeSearchResults.appendChild(notificationContainer);
+    // }
     
     user.concerts.forEach((concert, index) => {
         
@@ -157,15 +171,22 @@ function updateHoverListeners() {
     });
 }
 
-//THis is not working.
+//Make sure each button has a delete function
 function removeConcertListeners(container) {
 
     let concertsList = container.children;
+    
     [...concertsList].forEach(concert => {
-        concert.querySelector('.remove-concert-btn').addEventListener('click', deleteConcert)
+        if(!concert.querySelector('.remove-concert-btn')) {
+            return false;
+        } else {
+            concert.querySelector('.remove-concert-btn').addEventListener('click', deleteConcert);
+        }
+        
     })
 }
 
+//Remove Concert from DOM and Local Storage
 function deleteConcert(e) {
     console.log(e.target.parentElement);
     e.target.parentElement.remove();
@@ -176,7 +197,7 @@ function deleteConcert(e) {
         // console.log(Number(selectedConcertID.textContent));
         if(concert.id === Number(selectedConcertID.textContent)) {
             console.log(object);
-            object.splice(index, 1)
+            object.splice(index, 1);
         } else {
             return;
         }
@@ -184,7 +205,9 @@ function deleteConcert(e) {
     console.log(deleteConcertUser.concerts);
     localStorage.setItem('user', JSON.stringify(deleteConcertUser));
 }
-        
+
+
+//Create concert button -- send piece to the concert builder.        
 function createConcertFunction(e) {
     let composerName = e.target.parentElement.querySelector('.composer-name').textContent;
     let pieceName = e.target.parentElement.querySelector('.piece-name').textContent;
@@ -197,14 +220,14 @@ function createConcertFunction(e) {
 }
 
 
-
+// Why is this here?
 pieceNames.forEach(piece => {
     let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
     piece.textContent = pieceTitleLength;
 })
 
 
-
+//Show and Hide the Gold Underline
 function showGoldUnderline(e) {
 
     if(!e.target.querySelector('.hover-gold')) {
@@ -217,13 +240,17 @@ function showGoldUnderline(e) {
 }
 
 function hideGoldUnderline(e) {
-    e.target.querySelector('.hover-gold').classList.remove('show');
+    if(e.target.querySelector('.hover-gold')) {
+        e.target.querySelector('.hover-gold').classList.remove('show');
+    }
+    return false;
+    
 }
 
-
+//Get rid of the main content, and enter whatever was clicked.
 function resultsExit(e) {
-    console.log('from results exit', e.target.id);
-    console.log(dropDownYourConcerts.id);
+    //console.log('from results exit', e.target.id);
+    //console.log(dropDownYourConcerts.id);
      e.preventDefault();
      mainContentInner.classList.add('remove');
      window.setTimeout(() => {
@@ -261,12 +288,12 @@ function resultsExit(e) {
  }
 
 
-
+//Show the homeCard
  function homeCardEnter(container) {    
     
     const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
     const fullConcertsGrid = container.querySelector('.full-concerts-grid');
-    console.log('homeCardEnter>>>>', fullConcertsGrid);
+   
     fullFavoritesGrid.style.display = 'none';
     fullConcertsGrid.style.display = 'none';
 
@@ -285,12 +312,11 @@ function resultsExit(e) {
         } else if (element.classList[1] === 'full-concerts-grid') {
             element.style.display = 'none';
         }
-
-       
     });
 
  }
 
+ //Display Concerts
  function concertsEnter(container) {
     console.log('Concerts Enter');
     const fullConcertsGrid = container.querySelector('.search-results.full-concerts-grid');
@@ -306,6 +332,8 @@ function resultsExit(e) {
     
 }
 
+
+//Display favorite pieces
  function favoritesEnter(container) {
     
     const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
@@ -318,13 +346,11 @@ function resultsExit(e) {
         } else {
             return;
         }
-    });
-
-    
-   
-    
+    });    
  }
 
+
+//Shorten the piece titles
  function formatResultsCard() {
     const pieceNames = document.querySelectorAll('.piece-name');
 
@@ -335,24 +361,18 @@ function resultsExit(e) {
  }
 
 
+//EVENT LISTENERS
 
-
-
-// [...searchResults].forEach(result => {
-//         console.log(result);
-//         result.addEventListener('mouseover', showGoldUnderline)
-//         result.addEventListener('mouseleave', hideGoldUnderline);
-
-// });
-
+//Add clivk event to the your concets button in the dropdown
 dropDownYourConcerts.addEventListener('click', (e) => {
-    console.log('from event listener>>>', e.target);
+    
     dropDownMenu.style.display = 'none';
     resultsExit(e);
     concertsEnter(mainContentInner);
 
 })
 
+//Add click events to all links.
 viewMore.forEach(link => {
      link.addEventListener('click', resultsExit);
  });
@@ -361,8 +381,12 @@ viewMore.forEach(link => {
      link.addEventListener('click', resultsExit);
  })
 
+ //Format the cards to shorten piece Title
 window.addEventListener('DOMContentLoaded', formatResultsCard);
+
+
 window.addEventListener('DOMContentLoaded', createUser);
+//Add Gold Underline
 window.addEventListener('DOMContentLoaded', () => {
 
     let searchResults = document.querySelectorAll('.search-result');
@@ -376,7 +400,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 })
 
+//Open the Composer Browse
 openBrowse.addEventListener('click', showBrowse);
+
 
 [...createConcertBtns].forEach(btn => {
     

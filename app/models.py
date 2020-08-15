@@ -29,7 +29,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     studied = db.relationship('Piece', backref='studied')
-    favorites = db.relationship('Piece', backref='favorite', secondary=favorited_pieces)
+    favorites = db.relationship('Piece', backref='favorite', secondary=favorited_pieces, lazy="dynamic")
     comments = db.relationship('Comment', backref='author')
     concerts = db.relationship('Concert', backref='conductor')
 

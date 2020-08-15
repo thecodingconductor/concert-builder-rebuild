@@ -53,6 +53,13 @@
                         </div>
                     {% endfor %}
                     {% endif %}
+
+                    {% if not user.favorites %}
+                    <div class="search-result">
+                        <h2 class="composer-name">Browse or search for composers to add a favorite!</h2>
+                    </div>
+
+                    {% endif %}
                 </div>
                 
                 <div class="search-results full-favorites-grid" id="full-favorites-grid">
