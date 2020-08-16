@@ -1,3 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Homepage {% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/browse_composers.css') }}">
+{% endblock %}
+
+{% block content %}
 <div class="browse-composers-container">
     <ul class="composer-letter-container" id="composer-letter-container">
         <li>A</li>
@@ -29,12 +37,18 @@
     </ul>
     <div class="composer-browse-result-list" id="composer-result-list">
         
-           <div class="row">
+           
                <div class="column" id="results-column">
 
 
                </div>
-               <div class="column"></div>
-           </div> 
+               
+           
     </div>
 </div>
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/browse_composers.js') }}"></script>
+{% endblock %}
+</body>
+{% endblock %}

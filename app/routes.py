@@ -132,6 +132,23 @@ def concert_builder():
     return render_template('concertbuilder.html', search_form=search_form, user=user)
 
 
+@app.route('/browse_composers')
+def browse_composers():
+    
+    search_form = ComposerSearchForm()
+    login_form = LoginForm()
+    signup_form = RegistrationForm()
+
+
+    if not current_user:
+        
+        
+
+        return render_template('browse_composers.html', login_form=login_form, signup_form=signup_form, search_form=search_form)
+    return render_template('browse_composers.html',login_form=login_form, signup_form=signup_form, search_form=search_form)
+
+
+
 @app.route('/composers', methods=["POST"])
 def composers():
 
@@ -242,6 +259,14 @@ def browse_composer_list():
     if request.method == 'POST':
         req = request.get_json()
         letter = req.get("letter")
+        composers = Composer.query.all()
+        letter_array = []
+
+        for composer in composers:
+            if letter in composer.name[0]:
+                letter_array.append(composer.name)
+        return jsonify({"success": True, "letterArray": letter_array})
+
     
     main_array = []
     letter_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

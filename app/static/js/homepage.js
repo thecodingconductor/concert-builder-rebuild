@@ -34,6 +34,7 @@ const composerResultList = document.getElementById('composer-result-list');
 let user = document.getElementById('current-username').textContent;
 
 
+//Load User from Local Storage and display concerts. Or create new "User"
 function createUser() {
     let user = document.getElementById('current-username').textContent;
     console.log(user);
@@ -363,40 +364,40 @@ function resultsExit(e) {
     })
  }
 
- function openCurrentLetter(e) {
+//  function openCurrentLetter(e) {
      
-     if(e.target.tagName === "LI") {
-        console.log(e.target.textContent);
-        let composerLetter = e.target.textContent;
-        let send = {letter: composerLetter};
-        fetch('/browse_composer_list', {
-            method: 'POST',
-            credentials: "include",
-            body: JSON.stringify(send),
-            cache: "no-cache",
-            headers: new Headers({
-                "content-type": "application/json"
-            })
-        })
-        .then(res => {
-            if(res.status !== 200) {
-                console.log('There was a problem');
-                return;
-            }
-            res.json().then(data => {
-                data.letterArray.forEach(item => {
-                    let composerResultName = document.createElement('p');
-                    composerResultName.textContent = `${item}`;
-                    composerResultList.appendChild(composerResultName);
+//      if(e.target.tagName === "LI") {
+//         console.log(e.target.textContent);
+//         let composerLetter = e.target.textContent;
+//         let send = {letter: composerLetter};
+//         fetch('/browse_composer_list', {
+//             method: 'POST',
+//             credentials: "include",
+//             body: JSON.stringify(send),
+//             cache: "no-cache",
+//             headers: new Headers({
+//                 "content-type": "application/json"
+//             })
+//         })
+//         .then(res => {
+//             if(res.status !== 200) {
+//                 console.log('There was a problem');
+//                 return;
+//             }
+//             res.json().then(data => {
+//                 data.letterArray.forEach(item => {
+//                     let composerResultName = document.createElement('p');
+//                     composerResultName.textContent = `${item}`;
+//                     composerResultList.appendChild(composerResultName);
                     
 
-                })
-            });
+//                 })
+//             });
                 
-        })
-        .catch(err => console.log(err));
-     }
- }
+//         })
+//         .catch(err => console.log(err));
+//      }
+//  }
 
 
 //EVENT LISTENERS
@@ -448,4 +449,4 @@ openBrowse.addEventListener('click', showBrowse);
     
 });
 
-composerLetterContainer.addEventListener('click', openCurrentLetter);
+//composerLetterContainer.addEventListener('click', openCurrentLetter);

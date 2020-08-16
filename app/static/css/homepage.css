@@ -247,32 +247,6 @@ body {
     display: none;
 }
 
-.composer-letter-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  list-style-type: none;
-  padding: 0;
-}
-
-.composer-letter-container li {
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.composer-letter-container li:hover {
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.composer-browse-result-list {
-  width: 100%;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
 
 
 @keyframes opacity{

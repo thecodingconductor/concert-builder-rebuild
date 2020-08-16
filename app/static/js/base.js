@@ -178,12 +178,22 @@ function showBrowse(e) {
                     
                     browseComposers.appendChild(composerLetter);
                     const randomComposerList = document.querySelectorAll('.random-composer-links a');
-                    console.log(randomComposerList);
+                    
+                    const letterLinks = document.querySelectorAll('.letter h1');
+                    [...letterLinks].forEach(link => {
+                        link.addEventListener('click', () => {
+                            window.location.href = '/browse_composers';
+                        })
+                    });
+                    
+
                     [...randomComposerList].forEach(composerLink => {
                         console.log(composerLink);
                         composerLink.href = `/composer/${composerLink.textContent}`;
                         composerLink.addEventListener('click', () => console.log('TITS'));
-        });
+       
+       
+                    });
                 })
             })
 
