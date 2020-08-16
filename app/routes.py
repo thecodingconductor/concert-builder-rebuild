@@ -236,18 +236,21 @@ def add_favorite(piece_title):
     return jsonify({"success": True, "message": "Piece added to favorites!"})
 
 
-@app.route('/browse_composer_list', methods=["GET", "POST"])
+@app.route('/browse_composer_list', methods=["POST"])
 def browse_composer_list():
-    main_array = []
-    letter_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    req = request.get_json()
+    letter = req.get("letter")
+    
+    # main_array = []
+    # letter_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     composers = Composer.query.all()
-    for letter in letter_string:
-        letter_array = []
-        for composer in composers:
-            if letter in composer.name[0]:
-                letter_array.append(composer.name)
-        main_array.append(letter_array)
-    return jsonify({"success": True, "composers_array": main_array})
+    letter_array = []
+
+    for composer in composers:
+        if letter in composer.name[0]:
+            letter_array.append(composer.name)
+    
+    return jsonify({"success": True, "letterArray": letter_array})
     
 
 

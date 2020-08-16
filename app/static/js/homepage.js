@@ -26,6 +26,9 @@ const createConcertBtns = document.getElementsByClassName('create-concert-btn');
 
 const dropDownYourConcerts = document.getElementById('dropdown-your-concerts');
 
+const composerLetterContainer = document.getElementById('composer-letter-container');
+const resultsColumn = document.getElementById('results-column');
+const composerResultList = document.getElementById('composer-result-list');
 
 
 let user = document.getElementById('current-username').textContent;
@@ -360,6 +363,41 @@ function resultsExit(e) {
     })
  }
 
+ function openCurrentLetter(e) {
+     
+     if(e.target.tagName === "LI") {
+        console.log(e.target.textContent);
+        let composerLetter = e.target.textContent;
+        let send = {letter: composerLetter};
+        fetch('/browse_composer_list', {
+            method: 'POST',
+            credentials: "include",
+            body: JSON.stringify(send),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        })
+        .then(res => {
+            if(res.status !== 200) {
+                console.log('There was a problem');
+                return;
+            }
+            res.json().then(data => {
+                data.letterArray.forEach(item => {
+                    let composerResultName = document.createElement('p');
+                    composerResultName.textContent = `${item}`;
+                    composerResultList.appendChild(composerResultName);
+                    
+
+                })
+            });
+                
+        })
+        .catch(err => console.log(err));
+     }
+ }
+
 
 //EVENT LISTENERS
 
@@ -409,3 +447,5 @@ openBrowse.addEventListener('click', showBrowse);
     btn.addEventListener('click', createConcertFunction);
     
 });
+
+composerLetterContainer.addEventListener('click', openCurrentLetter);
