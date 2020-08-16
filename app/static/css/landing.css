@@ -772,4 +772,9 @@ button {
         font-size: .75rem;
     }
 
+    .browse-modal-area {
+        width: auto;
+        right: 0;
+    }
+
 }

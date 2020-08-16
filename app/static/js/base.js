@@ -6,6 +6,7 @@ const search = document.getElementById('search');
 const openConcertBuilder = document.getElementById('create');
 
 const openMobileSearch = document.getElementById('open-mobile-search');
+const openMobileBrowse = document.getElementById('open-mobile-browse');
 const rightNavContainer = document.getElementById('right-nav-container');
 //Browse Modal
 const browse = document.getElementById('browse');
@@ -451,8 +452,10 @@ function logInValidation(e) {
 search.addEventListener('click', showSearch);
 openMobileSearch.addEventListener('click', showSearch)
 closeSearch.addEventListener('click', closeSearchField);
+openMobileBrowse.addEventListener('click', showBrowse);
 
 //for Base
+
 browse.addEventListener('click', showBrowse);
 closeBrowse.addEventListener('click', () => {
     browseModalArea.classList.remove('show');
