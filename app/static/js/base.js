@@ -157,13 +157,15 @@ function showBrowse(e) {
                     let composerLetter = document.createElement('div');
                     composerLetter.classList = 'letter';
                     const randomCompArr = [];
+
+                    //Generate 3 random composers
                     for(let i =0; i < 3; i++) {
                         randomCompArr.push(group[generateRandomNumber(0, group.length)]);
                     }
                    
 
                     
-                    
+                    //Add random composers to DOM
                     composerLetter.innerHTML = `
                         <h1>${mainLetter}</h1>
                         <div class="letter-composers">
@@ -177,20 +179,20 @@ function showBrowse(e) {
                     
                     
                     browseComposers.appendChild(composerLetter);
-                    const randomComposerList = document.querySelectorAll('.random-composer-links a');
+                   
                     
                     const letterLinks = document.querySelectorAll('.letter h1');
                     [...letterLinks].forEach(link => {
-                        link.addEventListener('click', () => {
-                            window.location.href = '/browse_composers';
-                        })
-                    });
+                        link.addEventListener('click', openCurrentLetter);
+                        //link.addEventListener('click', openCurrentLetter)
+                        });
+                
                     
-
+                        const randomComposerList = document.querySelectorAll('.random-composer-links a');
                     [...randomComposerList].forEach(composerLink => {
                         console.log(composerLink);
                         composerLink.href = `/composer/${composerLink.textContent}`;
-                        composerLink.addEventListener('click', () => console.log('TITS'));
+                        //composerLink.addEventListener('click', () => console.log('TITS'));
        
        
                     });
@@ -205,6 +207,60 @@ function showBrowse(e) {
         
     
 }
+
+
+ function openCurrentLetter(e) {
+
+    if(!window.location.href.includes('browse_composers')) {
+        window.location.href = '/browse_composers';
+    }
+
+    if(e.target.tagName !== "LI" || e.target.tagName !== "H1") {
+        return false;
+    } else {
+        console.log(e.target.textContent);
+        let composerLetter = e.target.textContent;
+        let send = {letter: composerLetter};
+        fetch('/browse_composer_list', {
+            method: 'POST',
+            credentials: "include",
+            body: JSON.stringify(send),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        })
+        .then(res => {
+            if(res.status !== 200) {
+                console.log('There was a problem');
+                return;
+            }
+            res.json().then(data => {
+                if (resultsColumn.textContent !== '') {
+                    resultsColumn.textContent = '';
+                }
+
+                data.letterArray.forEach(item => {
+                    
+                    let composerResultName = document.createElement('p');
+                    composerResultName.textContent = `${item}`;
+                    resultsColumn.appendChild(composerResultName);
+                    
+                });
+
+
+                [...resultsColumn.children].forEach(comp => {
+                    comp.addEventListener('click', (e) => {
+                        window.location.href = `composer/${e.target.textContent}`;
+                    })
+                })
+
+            });
+                
+        })
+        .catch(err => console.log(err));
+     }
+    }
 
 
 //Clear the search results
