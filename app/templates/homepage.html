@@ -41,8 +41,15 @@
                 </div>
                 
                 <div class="search-results" id="home-search-results">
-                    
-                    {% if user.favorites %}
+                    {% if not user.favorites.all()|length %}
+                    <div class="search-result">
+                        <h2 class="composer-name">Browse or search for composers to add a favorite!</h2>
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if user.favorites.all() %}
                     {% for i in range(3) %}
                         <div class="search-result">
                             <h2 class="composer-name">{{ user.favorites[i].composer.name }}</h2>
@@ -54,16 +61,11 @@
                     {% endfor %}
                     {% endif %}
 
-                    {% if not user.favorites %}
-                    <div class="search-result">
-                        <h2 class="composer-name">Browse or search for composers to add a favorite!</h2>
-                    </div>
-
-                    {% endif %}
+                   
                 </div>
                 
                 <div class="search-results full-favorites-grid" id="full-favorites-grid">
-                    {% if user.favorites %}
+                    {% if user.favorites.all() %}
                     {% for favorite in user.favorites %}
                         <div class="search-result">
                             <h2 class="composer-name">{{ favorite.composer.name }}</h2>

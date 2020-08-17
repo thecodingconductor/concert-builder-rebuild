@@ -361,7 +361,10 @@ function registerValidation(e) {
 
 function showError(input, message) {
     const formControl = input.parentElement;
-    formControl.className = 'form-field error';    
+    formControl.className = 'form-field error';   
+    
+    const error = formControl.querySelector('.error-text');
+    error.innerText = message;
 }
 
 function showSuccess(input) {
@@ -420,7 +423,12 @@ function checkPasswordsMatch(input1, input2) {
 
 function getFieldName(input) {
     
-    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+    let newString = input.id.split('-')[1];
+    console.log(newString.charAt(0).toUpperCase() + newString.slice(1));
+    if(newString.includes('password2')) {
+        return "Repeated Password"
+    }
+    return newString.charAt(0).toUpperCase() + newString.slice(1);
 }
 
 function checkAllValid(formInputArr) {
@@ -452,7 +460,10 @@ function logInValidation(e) {
 search.addEventListener('click', showSearch);
 openMobileSearch.addEventListener('click', showSearch)
 closeSearch.addEventListener('click', closeSearchField);
-openMobileBrowse.addEventListener('click', showBrowse);
+if(openMobileBrowse) {
+    openMobileBrowse.addEventListener('click', showBrowse);
+}
+
 
 //for Base
 

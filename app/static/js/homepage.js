@@ -41,9 +41,11 @@ function createUser() {
     
     if(!JSON.parse(localStorage.getItem('user'))) {
         
-        console.log('NO USER? MAKE ONE!');
+        
+        
         let newUser = new User(user);
         localStorage.setItem('user', JSON.stringify(newUser));
+        displayConcerts(newUser);
 
         
     } else if (user === JSON.parse(localStorage.getItem('user')).username) {

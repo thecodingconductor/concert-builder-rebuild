@@ -359,6 +359,10 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
         width: 25%;
     }
 
+    .concert-builder-text-area {
+        margin-top: 2rem;
+    }
+
     .concert-title-btn {
         width: 50%;
     }
