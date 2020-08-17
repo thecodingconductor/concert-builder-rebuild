@@ -75,19 +75,37 @@ body {
 .piece-details {
  
   flex: 1;
-  width: 90%;
+  width: 95%;
   display: flex;
   flex-direction: column;
 }
 
 .comment-list {
+  background: #fff;
+  box-shadow: var(--default-shadow);
   list-style: none;
   padding: 0;
+  width: 100%;
   flex: 3 1 auto;
-  border: 2px blue solid;
   border-radius: 4px;
   overflow-y: scroll; 
   height: 80px;
+}
+
+.comment-list .comment {
+  margin: 1rem 0;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.comment p:first-child {
+  font-weight: bold;
+}
+
+.comment p:last-child {
+  font-size: .6rem;
 }
 
 .primary-btn.disabled {
