@@ -191,13 +191,15 @@ function concertLengthJudgement(container, duration) {
     };
 }
 
-function createIntermission() {
+function createIntermission(e) {
     
     if(!concertBuilderArea.querySelector('.add-intermission')) {
         return false;
     }
 
-    concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
+    e.target.parentElement.parentElement.classList.remove('show');
+
+    //concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
     
  
             let intermissionEl = document.createElement('div');
@@ -292,7 +294,7 @@ function dynamicSearch() {
     } else {
 
         request.open('POST', '/search_favorites');
-    request.onload = () => {
+        request.onload = () => {
         const data = JSON.parse(request.response);
         if(data.success) {
 
