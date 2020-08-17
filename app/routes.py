@@ -213,6 +213,20 @@ def add_favorite(piece_title):
     return jsonify({"success": True, "message": "Piece added to favorites!"})
 
 
+@app.route('/add_piece_to_favorites', methods=["POST"])
+def add_piece_to_favorites():
+    req = request.get_json()
+    piece_title = req.get("pieceTitleSend")
+    print(piece_title)
+    piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
+    user = User.query.filter_by(username=current_user.username).first()
+    user.add_favorite(piece)
+
+    for fave in user.favorites:
+        print(fave.title)
+
+    return jsonify({"success": True, "message": "Piece added to favorites"})
+
 @app.route('/browse_composer_list', methods=["GET", "POST"])
 def browse_composer_list():
     
@@ -255,7 +269,7 @@ def add_comment():
     
 
 
-    res = make_response(jsonify({"message": "OK"}), 200)
+    res = make_response(jsonify({"message": "OK", "piece": piece.as_dict()}), 200)
 
     return res
     #piece_title = urllib.parse.unquote(piece_title)

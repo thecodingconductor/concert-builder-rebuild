@@ -6,7 +6,7 @@ const submitComment = document.getElementById('submit-comment');
 const addPieceToFavorites = document.getElementById('add-piece-to-favorites');
 const createConcert = document.getElementById('create-concert');
 
-const composerUser = document.getElementById('hidden-user');
+//const composerUser = document.getElementById('hidden-user');
 
 let pieceData;
 
@@ -114,18 +114,22 @@ function showButtonError(button, message) {
 
 function commitNewComment(e) {
 
-    console.log(e.target);
-
+    
+    let composerUser = document.getElementById('hidden-user');
     const commentBody = document.getElementById('user-comment');
+    console.log(commentBody.value);
     const commentPieceTitle = document.getElementById('piece-title-result');
+    console.log(composerUser);
 
-    if(!commentBody || !commentPieceTitle) {
+    if(!composerUser) {
         //TODO WRITE SHOW BUTTON ERROR 
+        showButtonError(e.target, 'Please log in');
+    } else if (!commentPieceTitle) {
         showButtonError(e.target, 'Select a piece');
-    } else if (!composerUser) {
-        showButtonError(e.target, 'Please log In');
+    } else if (commentBody.value === '') {
+        showButtonError(e.target, 'Write  a comment!');
     } else {
-
+        console.log("else block");
         const entry = {
             body: commentBody.value,
             piece: commentPieceTitle.textContent
@@ -160,28 +164,60 @@ function commitNewComment(e) {
 }
 
 function commitNewFavorite(e) {
-    console.log('This is from addToFavorites');
+    //console.log('This is from addToFavorites');
+    let composerUser = document.getElementById('hidden-user'); 
     let pieceTitle = document.getElementById('piece-title-result');
+    
+    let pieceSend = {
+        pieceTitleSend: pieceTitle.textContent
+    }
+
     if(!pieceTitle) {
         showButtonError(e.target, 'Select a piece');
     } else if (!composerUser) {
         showButtonError(e.target, 'Please Log in');
     } else {
-        const request = new XMLHttpRequest();
-        request.open('POST', `/add_favorite/${document.getElementById('piece-title-result').textContent}`);
 
-        request.onload = () => {
-            
-            if(data.success) {
-                console.log('piece added to favorites!');
+        fetch(`/add_piece_to_favorites`, {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(pieceSend),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        })
+        .then(res => {
+            if(res.status !== 200) {
+                showButtonError(e.target);
+                console.log(`There was a problem. Status Code ${res.status}`);
             }
-        };
 
-        request.send()
-        return false;
-        }
+            res.json().then(data => {
+                e.target.textContent = `${data.message}`;
+                window.setTimeout(() => {
+                    e.target.textContent = 'Add piece to favorites';
+                }, 1000);
+            
+            })
+        })
+        .catch(err => {
+            console.log("Fetch error " + err)
+        })
+    }
+        // const request = new XMLHttpRequest();
+        // request.open('POST', `/add_favorite/${document.getElementById('piece-title-result').textContent}`);
 
-    
+        // request.onload = () => {
+            
+        //     if(data.success) {
+        //         console.log('piece added to favorites!');
+        //     }
+        // };
+
+        // request.send()
+        // return false;
+        // }
 }
 
 

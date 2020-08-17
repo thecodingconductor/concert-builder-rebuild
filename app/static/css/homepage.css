@@ -85,12 +85,15 @@ body {
 
 .main-content-area-inner {
   height: 90%;
+  max-height: 90%;
+  overflow: hidden;
   width: 90%;
   margin: auto;
   color: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 
 }
 
@@ -177,7 +180,11 @@ body {
 }
 
 
+
 .search-results.full-favorites-grid, .search-results.full-concerts-grid {
+  
+  height: 100%;
+  max-height: 100%;
   display: none;
   opacity: 1;
   animation: opacity .5s ease-in;
