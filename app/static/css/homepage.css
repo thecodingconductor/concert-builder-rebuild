@@ -37,7 +37,8 @@ body {
   width: 85%;
   flex: 1;
   display: flex;
-  margin-bottom: 3rem;
+  /*margin-bottom: 3rem;
+  */
 }
 
 .left-menu {
