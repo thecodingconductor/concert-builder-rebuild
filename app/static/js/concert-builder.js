@@ -102,7 +102,11 @@ function addPieceToConcertArr(e) {
         const pieceTitle = addToConcertContainer.querySelector('.piece-info-left p:last-child');
         const pieceDuration = addToConcertContainer.querySelector('.piece-info-right p');
     
-    
+    e.target.textContent = 'Piece added to concert';
+
+    window.setTimeout(() => {
+        e.target.textContent = "Add to concert";
+    }, 1000);
     
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
