@@ -87,6 +87,20 @@ body {
   overflow-y: scroll; 
 }
 
+.primary-btn.disabled {
+  background-color: rgba(60, 207, 207, 0.5);
+  cursor: not-allowed;
+}
+
+.primary-btn.error {
+  background-color: var(--error-color);
+}
+
+.hidden-user {
+  visibility: hidden;
+  font-size: .2rem;
+}
+
 /*
 .piece-list-wrap {
     height: 75%;

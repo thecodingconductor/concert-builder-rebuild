@@ -6,6 +6,7 @@ const submitComment = document.getElementById('submit-comment');
 const addPieceToFavorites = document.getElementById('add-piece-to-favorites');
 const createConcert = document.getElementById('create-concert');
 
+const composerUser = document.getElementById('hidden-user');
 
 let pieceData;
 
@@ -101,68 +102,113 @@ function imageFetch() {
         })
 }
 
-function commitNewComment() {
+function showButtonError(button, message) {
+    let initalText = button.textContent;
+    button.classList.add('error');
+    button.textContent = `${message}`;
+    window.setTimeout(() => {
+        button.classList.remove('error');
+        button.textContent = initalText
+    }, 1000);
+}
+
+function commitNewComment(e) {
+
+    console.log(e.target);
 
     const commentBody = document.getElementById('user-comment');
     const commentPieceTitle = document.getElementById('piece-title-result');
 
-    const entry = {
-        body: commentBody.value,
-        piece: commentPieceTitle.textContent
-    };
+    if(!commentBody || !commentPieceTitle) {
+        //TODO WRITE SHOW BUTTON ERROR 
+        showButtonError(e.target, 'Select a piece');
+    } else if (!composerUser) {
+        showButtonError(e.target, 'Please log In');
+    } else {
 
-    fetch(`/add_comment`, {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(entry),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
+        const entry = {
+            body: commentBody.value,
+            piece: commentPieceTitle.textContent
+        };
+    
+        fetch(`/add_comment`, {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
         })
-    })
-    .then(res => {
-        if(res.status !== 200) {
-            console.log(`There was a problem. Status code ${res.status}`);
-            return;
+        .then(res => {
+            if(res.status !== 200) {
+                showButtonError(e.target)
+                console.log(`There was a problem. Status code ${res.status}`);
+                return;
+            }
+    
+            res.json()
+            .then(data => {
+                console.log(data);
+            })
+        })
+        .catch(err => {
+            console.log("Fetch error: " + err);
+        });
+
+    }    
+}
+
+function commitNewFavorite(e) {
+    console.log('This is from addToFavorites');
+    let pieceTitle = document.getElementById('piece-title-result');
+    if(!pieceTitle) {
+        showButtonError(e.target, 'Select a piece');
+    } else if (!composerUser) {
+        showButtonError(e.target, 'Please Log in');
+    } else {
+        const request = new XMLHttpRequest();
+        request.open('POST', `/add_favorite/${document.getElementById('piece-title-result').textContent}`);
+
+        request.onload = () => {
+            
+            if(data.success) {
+                console.log('piece added to favorites!');
+            }
+        };
+
+        request.send()
+        return false;
         }
-
-        res.json()
-        .then(data => {
-            console.log(data);
-        })
-    })
-    .catch(err => {
-        console.log("Fetch error: " + err);
-    });
 
     
-
-}
-
-function commitNewFavorite() {
-    console.log('This is from addToFavorites');
-
-    const request = new XMLHttpRequest();
-    request.open('POST', `/add_favorite/${document.getElementById('piece-title-result').textContent}`);
-
-    request.onload = () => {
-            
-        if(data.success) {
-            console.log('piece added to favorites!');
-        }
-    };
-
-    request.send()
-    return false;
 }
 
 
-function newConcert() {
-
+function newConcert(e) {
+    let pieceTitle = document.getElementById('piece-title-result');
+    let currentUser = document.getElementById('hidden-user');
+    if(!pieceTitle) {
+        showButtonError(e.target, 'Select a Piece');
+    } else if (!currentUser) {
+        showButtonError(e.target, 'Please Log in');
+    } else {
+        //Todo add piece to Concert
+    }
 }
 
 
 window.addEventListener('DOMContentLoaded', imageFetch)
+window.addEventListener('DOMContentLoaded', () => {
+
+    let currentUser = document.getElementById('hidden-user');
+    if(!currentUser) {
+        createConcert.classList.add('disabled');
+    } else {
+        createConcert.classList.remove('disabled');
+        console.log('there is a logged in user');
+    }
+})
 pieceList.forEach((piece) => {
     piece.addEventListener('click', getPieceResults)
 });

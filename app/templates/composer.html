@@ -58,5 +58,8 @@
     {{ super() }}
     <script src="{{ url_for('static', filename='js/composer-test.js') }}"></script>
     {% endblock %}
+    {% if user  %}
+        <p class="hidden-user" id="hidden-user">{{ user.username }}</p>
+    {% endif %}
 </body>
 {% endblock %}
