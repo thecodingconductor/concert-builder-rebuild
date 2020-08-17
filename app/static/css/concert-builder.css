@@ -177,7 +177,8 @@
 }
 
 .piece-info {
-    width: 25%;
+    /*width: 25%;
+    */
 }
 
 .concert-title.concert-title-mobile {
@@ -207,7 +208,9 @@
     align-items: center;
 }
 
-
+.composer-info {
+    margin-right: 1rem;
+}
 
 .concert {
     display: flex;
@@ -224,7 +227,8 @@
 
 .info-inner-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
     align-items: center;
 }
 
@@ -369,6 +373,7 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
     .info-inner-container {
         width: 50%;
+        flex-direction: column;
     }
     .concert-title.concert-title-mobile {
         display: block;
