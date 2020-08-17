@@ -686,6 +686,12 @@ button {
 
     .search-bar-results {
         left: 20%;
+        top: 7.5%;
+    }
+
+    .browse-modal-area {
+        width: auto;
+        right: 0;
     }
     
 }

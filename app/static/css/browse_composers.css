@@ -61,6 +61,18 @@
   }
 
 
+@media(max-width: 769px) {
+
+  .browse-composers-container {
+    width: 90%;
+  }
+  
+  .composer-letter-container {
+    flex-wrap: wrap;
+    height: 40%;
+  }
+}
+
 @media(max-width: 376px) {
   .composer-letter-container {
     flex-wrap: wrap;

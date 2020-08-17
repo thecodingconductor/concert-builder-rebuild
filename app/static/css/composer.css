@@ -227,6 +227,10 @@ body {
     flex-direction: column;
   }
 
+  .composer-informations > * {
+    text-align: center;
+  }
+
   .user-buttons button {
     width: 90%;
     margin: 1rem 0;
@@ -260,6 +264,8 @@ body {
     margin-top: 1rem;
     min-height: unset;
   }
+
+  
 
   .composer-piece-list {
     width: 100%;

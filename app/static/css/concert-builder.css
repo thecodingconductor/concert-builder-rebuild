@@ -333,6 +333,10 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
     }
 
+    .builder-piece-list {
+        height: auto;
+    }
+
     .piece-info-left p {
         font-size: .7rem;
     }
