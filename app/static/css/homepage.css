@@ -275,6 +275,15 @@ body {
     overflow: auto;
   }
 
+  .main-container {
+    max-height: none;
+  }
+
+  .concert-name {
+    font-size: 1.5rem;
+    margin: .5rem;;
+  }
+
   .main-content-area-inner {
     margin-bottom: 5rem;
   }
@@ -285,6 +294,10 @@ body {
 
   .left-menu {
     display: none;
+  }
+
+  .primary-btn.remove-concert-btn {
+    margin-bottom: 1rem;
   }
 }
 

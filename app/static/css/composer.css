@@ -194,6 +194,10 @@ body {
 
 @media(max-width: 768px) {
 
+  body {
+    overflow: auto;
+  }
+
   .composer-top {
     flex-direction: column;
     box-shadow: var(--default-shadow);
@@ -206,9 +210,59 @@ body {
   .composer-bottom {
     flex-direction: column;
     margin-top: 1rem;
+    min-height: unset;
   }
 
   .composer-piece-list {
     width: 100%;
+  }
+}
+
+@media(max-width: 376px) {
+  body {
+    overflow: auto;
+  }
+
+  .user-buttons {
+    flex-direction: column;
+  }
+
+  .user-buttons button {
+    width: 90%;
+    margin: 1rem 0;
+  }
+
+  #piece-title-result {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  #piece-duration {
+    text-align: center;
+  }
+
+  #piece-instrumentation {
+    font-size: .75rem;
+    text-align: center;
+  }
+
+  .composer-top {
+    flex-direction: column;
+    box-shadow: var(--default-shadow);
+  }
+
+  .composer-hero {
+    margin-top: 1rem;
+  }
+  
+  .composer-bottom {
+    flex-direction: column;
+    margin-top: 1rem;
+    min-height: unset;
+  }
+
+  .composer-piece-list {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 }

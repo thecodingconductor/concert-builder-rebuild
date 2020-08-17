@@ -352,6 +352,8 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
 @media(max-width: 426px) {
 
+    
+
     .builder-piece-list {
         height: auto;
     }

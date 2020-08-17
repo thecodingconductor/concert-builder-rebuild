@@ -59,3 +59,15 @@
   .column p:hover {
       color: rgba(0,0,0,0.6);
   }
+
+
+@media(max-width: 376px) {
+  .composer-letter-container {
+    flex-wrap: wrap;
+    height: 30%;
+  }
+
+  .column {
+    flex-wrap: nowrap;
+  }
+}
