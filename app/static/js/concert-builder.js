@@ -15,7 +15,7 @@ const concertTitleInput = document.getElementById('concert-title-input');
 const changeTitleBtn = document.getElementById('change-title-btn');
 const concertTitleHeader = document.getElementById('concert-title-header');
 const saveConcertBtn = document.getElementById('save-concert-btn');
-
+const initialFavoritesResults = [...favoritesSearchResults.children];
 
 
 
@@ -278,14 +278,20 @@ function clearFaveList() {
 }
 
 
-function dynamicSearch(searchTerm = '') {
+function dynamicSearch() {
     //After search, add all elements to DOM?
+    console.log('GETTING ALL FAVES?');
     const request = new XMLHttpRequest();
-    if(searchTerm === '') {
-        searchTerm = searchFavorites.value;
-    }
+
     
-    request.open('POST', '/search_favorites');
+    let searchTerm = searchFavorites.value;
+    if (searchTerm === '') {
+        initialFavoritesResults.forEach(favorite => {
+            favoritesSearchResults.appendChild(favorite);
+        })
+    } else {
+
+        request.open('POST', '/search_favorites');
     request.onload = () => {
         const data = JSON.parse(request.response);
         if(data.success) {
@@ -324,6 +330,10 @@ function dynamicSearch(searchTerm = '') {
     data.append('search-favorites', searchTerm);
     request.send(data);
     return false;
+
+    }
+    
+    
 
 }
 
