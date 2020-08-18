@@ -198,10 +198,29 @@ body {
     overflow: auto;
   }
 
+  .piece-details {
+    flex: none;
+  }
+
+  .composer-bottom-right {
+    width: 100%;
+    max-height: 500px;
+  }
+
+
+
+  .user-buttons {
+    flex: none;
+  }
+
   .composer-top {
     flex-direction: column;
     box-shadow: var(--default-shadow);
   }
+
+ .user-interaction-area textarea {
+   height: 50%;
+ }
 
   .composer-hero {
     margin-top: 1rem;
@@ -211,6 +230,7 @@ body {
     flex-direction: column;
     margin-top: 1rem;
     min-height: unset;
+    height: 100vh;
   }
 
   .composer-piece-list {
