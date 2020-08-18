@@ -28,6 +28,7 @@ let number = 0;
 
 if(localStorage.getItem('newConcert')) {
     let res = JSON.parse(localStorage.getItem('newConcert'));
+    console.log(res);
     getFullPieceInfo(res.pieces[0].title.split('...')[0]);
     //dynamicSearch(localStorage.getItem('newConcert', 'piece'))
 }

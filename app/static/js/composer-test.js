@@ -222,7 +222,8 @@ function commitNewFavorite(e) {
 
 
 function newConcert(e) {
-    let pieceTitle = document.getElementById('piece-title-result');
+    let pieceTitle = document.getElementById('piece-title-result').textContent;
+    let pieceComposer = document.getElementById('composer-name').textContent;
     let currentUser = document.getElementById('hidden-user');
     if(!pieceTitle) {
         showButtonError(e.target, 'Select a Piece');
@@ -230,6 +231,14 @@ function newConcert(e) {
         showButtonError(e.target, 'Please Log in');
     } else {
         //Todo add piece to Concert
+        let newPiece = new Piece(pieceComposer, pieceTitle);
+        console.log(newPiece);
+        let newConcert = new Concert("No Name");
+        newConcert.pieces.push(newPiece);
+        localStorage.setItem('newConcert', JSON.stringify(newConcert));
+        location.href = '/concert_builder';
+
+
     }
 }
 
