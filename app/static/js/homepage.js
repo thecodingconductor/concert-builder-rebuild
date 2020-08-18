@@ -80,6 +80,7 @@ function displayConcerts(user, all=false) {
         
         
         `;
+        yourConcertsContainer.innerHTML = '';
         yourConcertsContainer.appendChild(notificationContainer);
 
     }
