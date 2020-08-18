@@ -102,11 +102,14 @@ function addPieceToConcertArr(e) {
         const pieceTitle = addToConcertContainer.querySelector('.piece-info-left p:last-child');
         const pieceDuration = addToConcertContainer.querySelector('.piece-info-right p');
     
+    //Change notifictaion text back and forth.
     e.target.textContent = 'Piece added to concert';
 
     window.setTimeout(() => {
         e.target.textContent = "Add to concert";
     }, 1000);
+    
+
     
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
@@ -152,16 +155,26 @@ function addPieceToConcertArr(e) {
 
 
 function getConcertDuration(pieceArr) {
+
     if(pieceArr.length === 0) {
         let empty = 0;
         concertLengthJudgement(concertBuilderArea, empty);
         return empty;
     } else {
-        const concertDurationArr = pieceArr.map(item => Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]));
+        const concertDurationArr = pieceArr.map(item => {
+
+            if(item.classList.contains('intermission')) {
+                return 30;
+            } else {
+                return Number(item.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]);
+            }
+            
+
+        });
         let concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
-        if(concertBuilderArea.querySelector('.concert.intermission')){
-            concertDuration += 30;
-        }
+        // if(concertBuilderArea.querySelector('.concert.intermission')){
+        //     concertDuration += 30;
+        // }
         
         concertLengthJudgement(concertBuilderArea, concertDuration);
 
@@ -201,32 +214,58 @@ function createIntermission(e) {
         return false;
     }
 
+    let parentConcert = e.target.parentElement.parentElement;
+    console.log('this is the parent Concert');
+    console.log(parentConcert);
     e.target.parentElement.parentElement.classList.remove('show');
 
     //concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
     
  
-            let intermissionEl = document.createElement('div');
-                intermissionEl.classList = "concert intermission";
-                intermissionEl.setAttribute("draggable", "true");
-                intermissionEl.innerHTML = `
-                    <i class="fas fa-bars"></i>
-                    <p>Intermission: ~30 minutes</p>
-                    <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
-                `;
-        
-        concertBuilderArea.appendChild(intermissionEl);
+    let intermissionEl = document.createElement('div');
+    intermissionEl.classList = "concert intermission";
+    //intermissionEl.setAttribute("draggable", "true");
+    intermissionEl.innerHTML = `
+        <i class="fas fa-bars" draggable="true"></i>
+        <p>Intermission: ~30 minutes</p>
+        <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
+    `;
         
 
+    concertPieceArr.splice(concertPieceArr.indexOf(parentConcert)+1, 0, intermissionEl);
+    //concertPieceArr.push(intermissionEl)
+    concertPieceArr.forEach((piece, index) => {
+        piece.setAttribute('data-index', index);
+    })
+    concertBuilderArea.innerHTML = '';
+    concertPieceArr.forEach(piece => {
+        concertBuilderArea.appendChild(piece);
+    })
+    //concertBuilderArea.appendChild(intermissionEl);
+    //console.log(concertPieceArr);
+
+    updateConcertDuration(getConcertDuration(concertPieceArr));
+
+    //Delete Intermission
+    let closeIntermission = intermissionEl.querySelector('#delete-intermission');
+    closeIntermission.addEventListener('click', (e) => {
+        
+
+        concertPieceArr.splice(concertPieceArr.indexOf(e.target.parentElement), 1);
+    
+        //Remove Intermission from DOM
+        e.target.parentElement.remove();
+        
+        //Update Data-Index Attribute
+        concertPieceArr.forEach((piece, index) => {
+            piece.setAttribute('data-index', index);
+        });
+
+
+        
+        
         updateConcertDuration(getConcertDuration(concertPieceArr));
-
-        //Delete Intermission
-        let closeIntermission = intermissionEl.querySelector('#delete-intermission');
-        closeIntermission.addEventListener('click', (e) => {
-            
-            e.target.parentElement.remove();
-            updateConcertDuration(getConcertDuration(concertPieceArr));
-        })
+    })
 }
 
 
