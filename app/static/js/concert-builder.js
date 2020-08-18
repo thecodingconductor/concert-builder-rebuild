@@ -110,10 +110,10 @@ function addPieceToConcertArr(e) {
     
     let pieceEl = document.createElement('div');
     pieceEl.classList = "concert";
-    pieceEl.setAttribute("draggable", "true");
+    //pieceEl.setAttribute("draggable", "true");
     pieceEl.innerHTML =  `
     
-        <i class="fas fa-bars piece-drag-bars"></i>
+        <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
         <div class="info-inner-container">
             <div class="composer-info">
                 <p>${pieceComposer.textContent}</p>
@@ -425,16 +425,19 @@ function saveConcert() {
 //Drag Functions
 function dragStart(e) {
     console.log('Event: Drag Start');
+    
     dragStartIndex = e.target.parentElement.getAttribute('data-index');
+    console.log(dragStartIndex);
     
 }
 
 function dragEnter() {
-    
+    console.log("Event: DRAG ENTER")
     this.classList.add('over');
 }
 
 function dragLeave() {
+    console.log("EVENT: DRAGE LEAVE")
     this.classList.remove('over');
 }   
 
@@ -447,6 +450,7 @@ function dragDrop() {
     console.log('Event: Drag Drop');
 
     const dragEndIndex = +this.getAttribute('data-index');
+    console.log(`DRAG START INDEX = ${dragStartIndex}, DRAG END INDEX = ${dragEndIndex}`);
     swapItems(dragStartIndex, dragEndIndex);
     this.classList.remove('over');
 }
@@ -454,9 +458,19 @@ function dragDrop() {
 function swapItems(fromIndex, toIndex) {
     const itemOne = concertPieceArr[fromIndex];
     const itemTwo = concertPieceArr[toIndex];
+   
+   
+    //console.log(concertPieceArr[fromIndex]);
+    console.log(concertPieceArr[toIndex]);
+    concertPieceArr[fromIndex] = itemTwo;
+    concertPieceArr[toIndex] = itemOne;
 
-    concertPieceArr[fromIndex].appendChild(itemTwo);
-    concertPieceArr[toIndex].appendChild(itemOne);
+    concertBuilderArea.innerHTML = ``;
+
+
+    concertPieceArr.forEach(item => {
+       addPieceToDOM(item);
+    })
 }
 
 //good. working.
@@ -466,8 +480,9 @@ function dragListeners() {
     console.log(pieceDragBars);
     console.log(dragBoxes);
     pieceDragBars.forEach(drag => {
-        console.log(drag);
+        
         drag.addEventListener('dragstart', dragStart);
+        
     });
     
     dragBoxes.forEach(box => {
