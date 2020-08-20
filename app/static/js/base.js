@@ -461,6 +461,21 @@ function logInValidation(e) {
 }
 
 
+window.addEventListener('DOMContentLoaded', () => {
+    //get viewport height and we multiple is y 1% to get a value for a vh unit
+    let vh = window.innerHeight * 0.01;
+
+    //Then we set the value in the --vh custon propery to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+
+});
+
+window.addEventListener('resize', () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 
 //Search Bar Listeners
 search.addEventListener('click', showSearch);
