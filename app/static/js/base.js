@@ -139,6 +139,12 @@ function showBrowse(e) {
     setTimeout(() => {
         browseModalArea.classList.add('show');
     }, 300);
+
+    if(browseComposers.children.length > 0) {
+        while(browseComposers.firstChild) {
+            browseComposers.removeChild(browseComposers.firstChild);
+        }
+    }
     fetch('/browse_composer_list')
         .then(res => {
             if(res.status != 200) {
@@ -341,9 +347,9 @@ function showDropDown() {
 function registerValidation(e) {
     e.preventDefault();
     let currentForm = e.target.parentElement;
-    console.log(currentForm);
+    
     let formFields = currentForm.querySelectorAll('.form-field');
-    console.log(formFields);
+    
     [...formFields].forEach(field => {
         console.log(field);
         if(field.querySelector('.error-text')) {
@@ -456,27 +462,28 @@ function logInValidation(e) {
 
 
 
-//For Base
+//Search Bar Listeners
 search.addEventListener('click', showSearch);
 openMobileSearch.addEventListener('click', showSearch)
 closeSearch.addEventListener('click', closeSearchField);
+searchInput.addEventListener('keyup', () => {
+    clearList();
+    getResults();
+});
+
 if(openMobileBrowse) {
     openMobileBrowse.addEventListener('click', showBrowse);
 }
 
 
-//for Base
-
+//Browse Modal Listenres
 browse.addEventListener('click', showBrowse);
 closeBrowse.addEventListener('click', () => {
     browseModalArea.classList.remove('show');
     browseModal.style.display  = 'none';
 });
 
-searchInput.addEventListener('keyup', () => {
-    clearList();
-    getResults();
-})
+
 
 // 
 

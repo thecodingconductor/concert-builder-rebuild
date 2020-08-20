@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-bottom: 1px solid grey;
+}
+
+.nav-left {
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.nav-right {
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-right li {
+    margin: 10px;
+}
+
+.nav-right li a {
+    color: #000;
+    text-decoration: none;
+}
+
+.main-container {
+    width: 80%;
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.search-container {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.composer-search {
+    flex: 1;
+    line-height: 2.5;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 3px;
+}
+
+
+
+.results-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.result {
+    position: relative;
+}
+
+.composer-img {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    right: 35%;
+    top: 50%;
+}
+
+
+
