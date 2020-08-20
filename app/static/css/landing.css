@@ -702,12 +702,13 @@ button {
    
 }
 
-@media(max-width: 426px) {
+@media only screen and (max-width: 426px) {
     
     body {
         /*
         overflow: hidden;
         */
+       
     }
 
     .site-title {

@@ -238,9 +238,10 @@ body {
   }
 }
 
-@media(max-width: 376px) {
+@media only screen and (max-width: 426px) {
   body {
     overflow: auto;
+    height: auto;
   }
 
   .user-buttons {

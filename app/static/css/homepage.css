@@ -301,3 +301,10 @@ body {
   }
 }
 
+
+@media only screen and (max-width: 426px) {
+  body {
+    height: auto;
+    overflow: auto;
+  }
+}

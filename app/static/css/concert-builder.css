@@ -354,8 +354,12 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
     }
 }
 
-@media(max-width: 426px) {
+@media only screen and (max-width: 426px) {
 
+    body {
+        height: auto;
+        overflow: auto;
+    }
     
 
     .builder-piece-list {
