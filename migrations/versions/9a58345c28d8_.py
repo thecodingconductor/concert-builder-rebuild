@@ -1,8 +1,8 @@
-"""inital commit
+"""empty message
 
-Revision ID: bffaeb8b6ad7
+Revision ID: 9a58345c28d8
 Revises: 
-Create Date: 2020-03-12 10:23:29.213371
+Create Date: 2020-08-24 12:50:20.633403
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bffaeb8b6ad7'
+revision = '9a58345c28d8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,6 +36,14 @@ def upgrade():
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
     op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
+    op.create_table('concert',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=200), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_concert_title'), 'concert', ['title'], unique=False)
     op.create_table('piece',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=400), nullable=True),
@@ -45,7 +53,7 @@ def upgrade():
     sa.Column('instrumentation', sa.String(length=400), nullable=True),
     sa.Column('soloists', sa.String(length=244), nullable=True),
     sa.Column('percussion', sa.String(length=244), nullable=True),
-    sa.Column('notes', sa.String(length=400), nullable=True),
+    sa.Column('notes', sa.String(length=600), nullable=True),
     sa.Column('composer_id', sa.Integer(), nullable=True),
     sa.Column('favorited_by', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['composer_id'], ['composer.id'], ),
@@ -64,6 +72,12 @@ def upgrade():
     )
     op.create_index(op.f('ix_comment_body'), 'comment', ['body'], unique=True)
     op.create_index(op.f('ix_comment_timestamp'), 'comment', ['timestamp'], unique=False)
+    op.create_table('concert_pieces',
+    sa.Column('piece_id', sa.Integer(), nullable=True),
+    sa.Column('concert_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['concert_id'], ['concert.id'], ),
+    sa.ForeignKeyConstraint(['piece_id'], ['piece.id'], )
+    )
     op.create_table('favorited_pieces',
     sa.Column('piece_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -91,10 +105,13 @@ def downgrade():
     op.drop_table('publisher_pieces')
     op.drop_table('publisher')
     op.drop_table('favorited_pieces')
+    op.drop_table('concert_pieces')
     op.drop_index(op.f('ix_comment_timestamp'), table_name='comment')
     op.drop_index(op.f('ix_comment_body'), table_name='comment')
     op.drop_table('comment')
     op.drop_table('piece')
+    op.drop_index(op.f('ix_concert_title'), table_name='concert')
+    op.drop_table('concert')
     op.drop_index(op.f('ix_user_username'), table_name='user')
     op.drop_index(op.f('ix_user_email'), table_name='user')
     op.drop_table('user')

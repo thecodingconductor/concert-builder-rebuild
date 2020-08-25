@@ -8,7 +8,6 @@ from flask_login import logout_user, login_required, current_user, login_user
 from bs4 import BeautifulSoup
 import urllib.parse
 import requests
-#import wikipedia
 import json
 
 
@@ -41,16 +40,7 @@ def login():
 
         res = make_response(jsonify({"update": "success", "message": "Logging you in."}), 200)
         return res
-        #user = User.query.filter_by(username=req.get('username')).first()
-        # if user is None or not user.check_password(req.get('password')):
-        #     flash('invalid username or password')
-        #     return "Didnt Work"
-            
-        # login_user(user)
-        # next_page = request.args.get('next')
-        # if not next_page or url_parse(next_page).netloc != '':
-        #     next_page = url_for('index')
-        # return redirect(url_for('homepage'))
+        
        
 
 @app.route('/register', methods=["GET", 'POST'])
@@ -115,7 +105,7 @@ def composers():
     composer_name = request.form.get("search-bar-field")
     res = Composer.query.filter(Composer.name.ilike(f"%{composer_name}%")).all()
     list_composers = json.dumps([{"name": composer.name} for composer in res])
-     #list composers is a string [{"name": "Charpentier, Marc-Antoine"}] for example
+    
     return jsonify({"success": True, "composers": list_composers})
 
 
@@ -272,70 +262,4 @@ def add_comment():
     res = make_response(jsonify({"message": "OK", "piece": piece.as_dict()}), 200)
 
     return res
-    #piece_title = urllib.parse.unquote(piece_title)
-    #piece = Piece.query.filter(Piece.title.ilike(f"%{piece_title}")).first()
-
-
-
-
-
-# @app.route('/user/<username>')
-# #@login_required
-# def user(username):
-#     user = User.query.filter_by(username=username).first_or_404()
-#     return render_template('user.html', user=user)
-
     
-#json.dumps(faves_list)
-
-
-
-
-
-# if search_form.validate_on_submit():
-    #     user_search = search_form.search.data
-    #     composer = Composer.query.filter(Composer.name.ilike("%{}%".format(user_search))).first()
-    #     #if composer == None:
-    #     #    flash('No results. Try a different search')
-    #     #    return render_template('index.html', search_form=search_form)
-
-    #     last_name = composer.name.split(',')[0]
-    #     #try:
-    #     #    composer_images = wikipedia.page(composer.name).images
-    #     #    matching = [img for img in composer_images if last_name in img and '.jpg' in img][0]
-    #     #except:
-    #     #    matching = 'https://via.placeholder.com/300'
-        
-    #     return render_template('composer.html', composer=composer, search_form=search_form)
-    
-
-#     @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('index'))
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(username=form.username.data).first()
-#         if user is None or not user.check_password(form.password.data):
-#             flash('Invalid username or password')
-#             return redirect(url_for('login'))
-#         login_user(user, remember=form.remember_me.data)
-#         next_page = request.args.get('next')
-#         if not next_page or url_parse(next_page).netloc != '':
-#             next_page = url_for('index')
-#         return redirect(url_for('index'))
-#     return render_template('login.html', title='Sign In', form=form)
-
-# @app.route('/register', methods=["GET", "POST"])
-# def register():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('index'))
-#     form = RegistrationForm()
-#     if form.validate_on_submit():
-#         user = User(username=form.username.data, email=form.email.data)
-#         user.set_password(form.password.data)
-#         db.session.add(user)
-#         db.session.commit()
-#         flash('Congratulations, you are now a registered user.')
-#         return redirect(url_for('login'))
-#     return render_template('register.html', title='Register', form=form)

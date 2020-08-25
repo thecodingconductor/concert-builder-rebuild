@@ -43,7 +43,7 @@ def daniels_scrape():
 
     composerletters = driver.find_elements_by_class_name('letterLink')
 
-    for comp_last_initial in range(0, len(composerletters)):
+    for comp_last_initial in range(12, len(composerletters)):
         composerletters = driver.find_elements_by_class_name('letterLink')
         composerletters[comp_last_initial].click()
         comprows = driver.find_elements_by_css_selector('div.composerRow a')
@@ -109,22 +109,24 @@ def daniels_scrape():
             instrumentation = ''.join(work_details.contents[0].split())
 
             try:
-              soloists = work_source.find(class_='workDetailsBox').text.strip()
+              soloists = work_source.find(class_='workDetailsBox').text.strip()[0:200]
             except:
               pass
             try:
-              percussion = work_details.find('.workForumla.perc').text.strip()
+              percussion = work_details.find('.workForumla.perc').text.strip()[0:200]
             except:
               pass
 
             try:
-              notes = work_details.select_one('span').text.strip()
+              notes = work_details.select_one('span').text.strip()[0:200]
             except:
               pass
 
             publishers = work_source.find_all(class_='publisher-abbreviation-seo')
 
-            #work_counter += 1
+            
+
+            
             p = Piece(title=work_title, duration=work_length, movements=work_movements,
                         movement_duration=movement_duration, instrumentation=instrumentation)
 
@@ -137,25 +139,12 @@ def daniels_scrape():
               p.notes = notes
             except NameError:
               pass
-            try:
-              p.soloists = soloists
-            except NameError:
-              pass
-
-            notes = None
-            percussion = None
-            soloists = None
-
+            
             
             
             c.add_piece(p)
             db.session.add(p)
-            try:
-              for i in publishers:
-                pub = Publisher(name=i.text)
-                p.publishers.append(pub)
-            except:
-              pass
+           
 
             try:
               db.session.commit()
@@ -170,10 +159,6 @@ def daniels_scrape():
 
 
 
-                    #This may require learning RegEx
+      
 
-                    # work_pubs = work_source.find_all(class_='workSource')
-                    # work_pubs = [pub.text.strip() for pub in work_pubs]
-                    # print(work_title, work_length, work_pubs)
-
-#daniels_scrape()
+daniels_scrape()

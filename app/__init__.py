@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, compare_type=True)
-#migrate.init_app(app, db)
+
 login = LoginManager(app)
 login.login_view = 'index'
 from app import routes, models, errors
