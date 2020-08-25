@@ -43,7 +43,7 @@ def daniels_scrape():
 
     composerletters = driver.find_elements_by_class_name('letterLink')
 
-    for comp_last_initial in range(12, len(composerletters)):
+    for comp_last_initial in range(19, len(composerletters)):
         composerletters = driver.find_elements_by_class_name('letterLink')
         composerletters[comp_last_initial].click()
         comprows = driver.find_elements_by_css_selector('div.composerRow a')
@@ -161,4 +161,4 @@ def daniels_scrape():
 
       
 
-daniels_scrape()
+#daniels_scrape()
