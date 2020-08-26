@@ -1,3 +1,6 @@
 venv/
 res.py
 test.sql
+config.py
+opera_scrape.py
+image_fetch.py

@@ -587,16 +587,3 @@ if(logInForm) {
 }
 
 
-//Check to see if user is logged in or not.
-// if(registerUserBtn && logInUserBtn) {
-//     registerUserBtn.addEventListener('click', (e) => {
-//         console.log(e.target);
-//     });
-
-//     logInUserBtn.addEventListener('click', (e) => {
-//         console.log(e.target);
-//     });
-// }
-
-//registerUserBtn.addEventListener('click', registerValidation);
-//logInUserBtn.addEventListener('click', logInValidation);
