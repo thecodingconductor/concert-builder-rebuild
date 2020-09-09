@@ -223,12 +223,13 @@ function createIntermission(e) {
         <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
     `;
 
+  //ADD TO APP
   concertPieceArr.splice(
     concertPieceArr.indexOf(parentConcert) + 1,
     0,
     intermissionEl
   );
-  //concertPieceArr.push(intermissionEl)
+
   concertPieceArr.forEach((piece, index) => {
     piece.setAttribute('data-index', index);
   });
@@ -258,11 +259,11 @@ function createIntermission(e) {
   });
 }
 
-function parseDuration() {
-  return Number(
-    this.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]
-  );
-}
+// function parseDuration() {
+//   return Number(
+//     this.querySelector('.piece-info p:last-of-type').textContent.split("'")[0]
+//   );
+// }
 
 function deletePiecesListeners() {
   let deletePieces = concertBuilderArea.querySelectorAll('.delete-piece');
@@ -436,38 +437,38 @@ function saveConcert() {
 }
 
 //Drag Functions
-function dragStart(e) {
-  console.log('Event: Drag Start');
+// function dragStart(e) {
+//   console.log('Event: Drag Start');
 
-  dragStartIndex = e.target.parentElement.getAttribute('data-index');
-  console.log(dragStartIndex);
-}
+//   dragStartIndex = e.target.parentElement.getAttribute('data-index');
+//   console.log(dragStartIndex);
+// }
 
-function dragEnter() {
-  console.log('Event: DRAG ENTER');
-  this.classList.add('over');
-}
+// function dragEnter() {
+//   console.log('Event: DRAG ENTER');
+//   this.classList.add('over');
+// }
 
-function dragLeave() {
-  console.log('EVENT: DRAGE LEAVE');
-  this.classList.remove('over');
-}
+// function dragLeave() {
+//   console.log('EVENT: DRAGE LEAVE');
+//   this.classList.remove('over');
+// }
 
-function dragOver(e) {
-  console.log('Event: Drag Over');
-  e.preventDefault();
-}
+// function dragOver(e) {
+//   console.log('Event: Drag Over');
+//   e.preventDefault();
+// }
 
-function dragDrop() {
-  console.log('Event: Drag Drop');
+// function dragDrop() {
+//   console.log('Event: Drag Drop');
 
-  const dragEndIndex = +this.getAttribute('data-index');
-  console.log(
-    `DRAG START INDEX = ${dragStartIndex}, DRAG END INDEX = ${dragEndIndex}`
-  );
-  swapItems(dragStartIndex, dragEndIndex);
-  this.classList.remove('over');
-}
+//   const dragEndIndex = +this.getAttribute('data-index');
+// console.log(
+//   `DRAG START INDEX = ${dragStartIndex}, DRAG END INDEX = ${dragEndIndex}`
+// );
+//TODO
+swapItems(dragStartIndex, dragEndIndex);
+this.classList.remove('over');
 
 function swapItems(fromIndex, toIndex) {
   const itemOne = concertPieceArr[fromIndex];

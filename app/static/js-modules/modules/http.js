@@ -1,4 +1,4 @@
-class HTTP {
+export class HTTP {
   //Make HTTP Get
   async get(url) {
     const response = await fetch(url);
@@ -32,5 +32,3 @@ class HTTP {
     return resData;
   }
 }
-
-export const myHTTP = new HTTP();

@@ -48,92 +48,92 @@
 //Log In Validation
 
 //OBJECT DECLARATION
-class User {
-  constructor(username, concerts = []) {
-    this.username = username;
-    this.concerts = concerts;
-  }
-}
+// class User {
+//   constructor(username, concerts = []) {
+//     this.username = username;
+//     this.concerts = concerts;
+//   }
+// }
 
-class Concert {
-  constructor(title, pieces = []) {
-    this.id = generateRandomNumber(0, 50000);
-    this.title = title;
-    this.pieces = pieces;
-  }
-}
+// class Concert {
+//   constructor(title, pieces = []) {
+//     this.id = generateRandomNumber(0, 50000);
+//     this.title = title;
+//     this.pieces = pieces;
+//   }
+// }
 
-class Piece {
-  constructor(composer, title) {
-    this.composer = composer;
-    this.title = title;
-  }
-}
+// class Piece {
+//   constructor(composer, title) {
+//     this.composer = composer;
+//     this.title = title;
+//   }
+// }
 
-//Random Number Generator
-function generateRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
+// //Random Number Generator
+// function generateRandomNumber(min, max) {
+//   return Math.floor(Math.random() * (max - min) + min);
+// }
 
-function openModal(e) {
-  document.body.style.overflow = 'hidden';
-  if (e.target.textContent.trim() === 'Log In') {
-    signInModal.style.display = 'flex';
-  } else {
-    signUpModal.style.display = 'flex';
-  }
-}
+// function openModal(e) {
+//   document.body.style.overflow = 'hidden';
+//   if (e.target.textContent.trim() === 'Log In') {
+//     signInModal.style.display = 'flex';
+//   } else {
+//     signUpModal.style.display = 'flex';
+//   }
+// }
 
-function closeModal(e) {
-  document.body.style.overflow = 'auto';
-  if (e.target.getAttribute('id') === 'close-sign-in') {
-    const signInModalParent =
-      e.target.parentElement.parentElement.parentElement;
-    signInModalParent.style.display = 'none';
-  } else {
-    const modalParent = e.target.parentElement.parentElement;
-    modalParent.style.display = 'none';
-  }
-}
+// function closeModal(e) {
+//   document.body.style.overflow = 'auto';
+//   if (e.target.getAttribute('id') === 'close-sign-in') {
+//     const signInModalParent =
+//       e.target.parentElement.parentElement.parentElement;
+//     signInModalParent.style.display = 'none';
+//   } else {
+//     const modalParent = e.target.parentElement.parentElement;
+//     modalParent.style.display = 'none';
+//   }
+// }
 
 //Show the Search Bar
-function showSearch(e) {
-  e.preventDefault();
-  if (e.target.parentElement === openMobileSearch) {
-    rightNavContainer.style.display = 'none';
-    siteTitle.style.display = 'none';
-    searchBarOverlay.style.display = 'flex';
-  } else {
-    rightNavContainer.style.display = 'none';
-    searchBarOverlay.style.display = 'flex';
-  }
-}
+// function showSearch(e) {
+//   e.preventDefault();
+//   if (e.target.parentElement === openMobileSearch) {
+//     rightNavContainer.style.display = 'none';
+//     siteTitle.style.display = 'none';
+//     searchBarOverlay.style.display = 'flex';
+//   } else {
+//     rightNavContainer.style.display = 'none';
+//     searchBarOverlay.style.display = 'flex';
+//   }
+// }
 
 //Close Search Bar
-function closeSearchField() {
-  searchBarOverlay.style.display = 'none';
-  rightNavContainer.style.display = 'flex';
-  searchBarResults.style.visibility = 'hidden';
-  searchInput.value = '';
+// function closeSearchField() {
+//   searchBarOverlay.style.display = 'none';
+//   rightNavContainer.style.display = 'flex';
+//   searchBarResults.style.visibility = 'hidden';
+//   searchInput.value = '';
 
-  if (siteTitle.style.display === 'none') {
-    siteTitle.style.display = 'block';
-  }
-}
+//   if (siteTitle.style.display === 'none') {
+//     siteTitle.style.display = 'block';
+//   }
+// }
 
 //Show Browse Side Bar, Populate with results
 function showBrowse(e) {
-  e.preventDefault();
-  browseModal.style.display = 'flex';
-  setTimeout(() => {
-    browseModalArea.classList.add('show');
-  }, 300);
+  // e.preventDefault();
+  // browseModal.style.display = 'flex';
+  // setTimeout(() => {
+  //   browseModalArea.classList.add('show');
+  // }, 300);
 
-  if (browseComposers.children.length > 0) {
-    while (browseComposers.firstChild) {
-      browseComposers.removeChild(browseComposers.firstChild);
-    }
-  }
+  // if (browseComposers.children.length > 0) {
+  //   while (browseComposers.firstChild) {
+  //     browseComposers.removeChild(browseComposers.firstChild);
+  //   }
+  // }
   fetch('/browse_composer_list')
     .then((res) => {
       if (res.status != 200) {
@@ -243,21 +243,21 @@ function openCurrentLetter(e) {
 }
 
 //Clear the search results
-function clearList() {
-  if (searchInput.value.length === 0) {
-    while (searchBarResults.firstChild) {
-      searchBarResults.removeChild(searchBarResults.firstChild);
-    }
+// function clearList() {
+//   if (searchInput.value.length === 0) {
+//     while (searchBarResults.firstChild) {
+//       searchBarResults.removeChild(searchBarResults.firstChild);
+//     }
 
-    searchBarResults.style.visibility = 'hidden';
+//     searchBarResults.style.visibility = 'hidden';
 
-    return false;
-  }
+//     return false;
+//   }
 
-  while (searchBarResults.firstChild) {
-    searchBarResults.removeChild(searchBarResults.firstChild);
-  }
-}
+//   while (searchBarResults.firstChild) {
+//     searchBarResults.removeChild(searchBarResults.firstChild);
+//   }
+// }
 
 //Retrieve the list of composer search results
 function getResults() {
