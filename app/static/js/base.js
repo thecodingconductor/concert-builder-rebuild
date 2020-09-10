@@ -504,34 +504,37 @@ if (logInForm) {
         password: loginPassword.value,
       };
       console.log(loginData);
-
-    //   fetch('/login', {
-    //     method: 'POST',
-    //     credentials: 'include',
-    //     body: JSON.stringify(loginData),
-    //     cache: 'no-cache',
-    //     headers: new Headers({
-    //       'content-type': 'application/json',
-    //     }),
-    //   })
-    //     .then((res) => {
-    //       if (res.status !== 200) {
-    //         console.log(`There was a problem. Status Code: ${res.status}`);
-    //         return;
-    //       }
-    //       console.log(res);
-
-    //       res.json().then((data) => {
-    //         if (data.update === 'success') {
-    //           logInUserBtn.textContent = `${data.message}`;
-    //           window.location.href = '/homepage';
-    //         } else if (data.update === 'failure') {
-    //           showError(loginUsername, data.message);
-    //           showError(loginPassword, data.message);
-    //         }
-    //       });
-    //     })
-    //     .catch((err) => console.log(`Fetch Error: ${err}`));
-    // }
+    }
   });
 }
+
+//   fetch('/login', {
+//     method: 'POST',
+//     credentials: 'include',
+//     body: JSON.stringify(loginData),
+//     cache: 'no-cache',
+//     headers: new Headers({
+//       'content-type': 'application/json',
+//     }),
+//   })
+//     .then((res) => {
+//       if (res.status !== 200) {
+//         console.log(`There was a problem. Status Code: ${res.status}`);
+//         return;
+//       }
+//       console.log(res);
+
+//       res.json().then((data) => {
+//         if (data.update === 'success') {
+//           logInUserBtn.textContent = `${data.message}`;
+//           window.location.href = '/homepage';
+//         } else if (data.update === 'failure') {
+//           showError(loginUsername, data.message);
+//           showError(loginPassword, data.message);
+//         }
+//       });
+//     })
+//     .catch((err) => console.log(`Fetch Error: ${err}`));
+// }
+// });
+//
