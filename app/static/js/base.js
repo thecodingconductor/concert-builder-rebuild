@@ -428,85 +428,85 @@
 //   console.log('Log In Prevented');
 // }
 
-window.addEventListener('DOMContentLoaded', () => {
-  //get viewport height and we multiple is y 1% to get a value for a vh unit
-  let vh = window.innerHeight * 0.01;
+// window.addEventListener('DOMContentLoaded', () => {
+//   //get viewport height and we multiple is y 1% to get a value for a vh unit
+//   let vh = window.innerHeight * 0.01;
 
-  //Then we set the value in the --vh custon propery to the root of the document
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+//   //Then we set the value in the --vh custon propery to the root of the document
+//   document.documentElement.style.setProperty('--vh', `${vh}px`);
+// });
 
-window.addEventListener('resize', () => {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+// window.addEventListener('resize', () => {
+//   let vh = window.innerHeight * 0.01;
+//   document.documentElement.style.setProperty('--vh', `${vh}px`);
+// });
 
 //Search Bar Listeners
-search.addEventListener('click', showSearch);
-openMobileSearch.addEventListener('click', showSearch);
-closeSearch.addEventListener('click', closeSearchField);
-searchInput.addEventListener('keyup', () => {
-  clearList();
-  getResults();
-});
+// search.addEventListener('click', showSearch);
+// openMobileSearch.addEventListener('click', showSearch);
+// closeSearch.addEventListener('click', closeSearchField);
+// searchInput.addEventListener('keyup', () => {
+//   clearList();
+//   getResults();
+// });
 
-if (openMobileBrowse) {
-  openMobileBrowse.addEventListener('click', showBrowse);
-}
+// if (openMobileBrowse) {
+//   openMobileBrowse.addEventListener('click', showBrowse);
+// }
 
 //Browse Modal Listenres
-browse.addEventListener('click', showBrowse);
-closeBrowse.addEventListener('click', () => {
-  browseModalArea.classList.remove('show');
-  browseModal.style.display = 'none';
-});
+// browse.addEventListener('click', showBrowse);
+// closeBrowse.addEventListener('click', () => {
+//   browseModalArea.classList.remove('show');
+//   browseModal.style.display = 'none';
+// });
 
 //
 
 //getStarted.addEventListener('click', openModal);
-if (logInOpen && signUpOpen) {
-  logInOpen.addEventListener('click', openModal);
-  signUpOpen.addEventListener('click', openModal);
-  closeSignUp.addEventListener('click', closeModal);
-  closeSignIn.addEventListener('click', closeModal);
-}
+// if (logInOpen && signUpOpen) {
+//   logInOpen.addEventListener('click', openModal);
+//   signUpOpen.addEventListener('click', openModal);
+//   closeSignUp.addEventListener('click', closeModal);
+//   closeSignIn.addEventListener('click', closeModal);
+// }
 
-if (loggedIn) {
-  loggedIn.addEventListener('click', showDropDown);
-}
+// if (loggedIn) {
+//   loggedIn.addEventListener('click', showDropDown);
+// }
 
-if (registrationForm) {
-  registrationForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+// if (registrationForm) {
+//   registrationForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
 
-    let formInputs = e.target.parentElement.querySelectorAll(
-      '.form-field input'
-    );
+//     let formInputs = e.target.parentElement.querySelectorAll(
+//       '.form-field input'
+//     );
 
-    if (!checkRequired([...formInputs])) {
-      checkLength(registerUsername, 6, 20);
-      checkLength(registerPassword, 6, 20);
-      checkEmail(registerEmail);
-      checkPasswordsMatch(registerPassword, registerPassword2);
-      if (checkAllValid([...formInputs])) {
-        registrationForm.submit();
-      }
-    }
-  });
-}
+//     if (!checkRequired([...formInputs])) {
+//       checkLength(registerUsername, 6, 20);
+//       checkLength(registerPassword, 6, 20);
+//       checkEmail(registerEmail);
+//       checkPasswordsMatch(registerPassword, registerPassword2);
+//       if (checkAllValid([...formInputs])) {
+//         registrationForm.submit();
+//       }
+//     }
+//   });
+// }
 
-if (logInForm) {
-  logInForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (!checkRequired([loginUsername, loginPassword])) {
-      let loginData = {
-        username: loginUsername.value,
-        password: loginPassword.value,
-      };
-      console.log(loginData);
-    }
-  });
-}
+// if (logInForm) {
+//   logInForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     if (!checkRequired([loginUsername, loginPassword])) {
+//       let loginData = {
+//         username: loginUsername.value,
+//         password: loginPassword.value,
+//       };
+//       console.log(loginData);
+//     }
+//   });
+// }
 
 //   fetch('/login', {
 //     method: 'POST',

@@ -83,6 +83,7 @@ function displayConcerts(user, all = false) {
   //     homeSearchResults.appendChild(notificationContainer);
   // }
 
+  //MORE ISSUES WITH THE FUCKING MAP FUNCTION WITHIN TEMPLATE LITERALS SUDENNLY NOT WORKGINNIWNAOWIND(A*HWD89wyd089p)
   user.concerts.forEach((concert, index) => {
     if (all === false && index < 3) {
       console.log('all===false, index < 3');
@@ -139,279 +140,278 @@ function displayConcerts(user, all = false) {
   removeConcertListeners(fullConcertsGrid);
   removeConcertListeners(yourConcertsContainer);
 
-  console.log(fullConcertsGrid.children);
-  console.log(yourConcertsContainer.children);
-  if (fullConcertsGrid.children.length === 0) {
-    console.log('FULL CONCERTS GRID DISPLAY NONE');
-  } else if (yourConcertsContainer.children.length === 0) {
-    console.log('HOMEPAGE DISPLAY NONE');
-  }
-}
+  //   if (fullConcertsGrid.children.length === 0) {
+  //     console.log('FULL CONCERTS GRID DISPLAY NONE');
+  //   } else if (yourConcertsContainer.children.length === 0) {
+  //     console.log('HOMEPAGE DISPLAY NONE');
+  //   }
+  // }
 
-//This works.
-function updateHoverListeners() {
-  let searchResults = document.querySelectorAll('.search-result');
+  //This works.
+  function updateHoverListeners() {
+    let searchResults = document.querySelectorAll('.search-result');
 
-  [...searchResults].forEach((result) => {
-    console.log(result);
-    result.addEventListener('mouseover', showGoldUnderline);
-    result.addEventListener('mouseleave', hideGoldUnderline);
-  });
-}
-
-//Make sure each button has a delete function
-function removeConcertListeners(container) {
-  let concertsList = container.children;
-
-  [...concertsList].forEach((concert) => {
-    if (!concert.querySelector('.remove-concert-btn')) {
-      return false;
-    } else {
-      concert
-        .querySelector('.remove-concert-btn')
-        .addEventListener('click', deleteConcert);
-    }
-  });
-}
-
-//Remove Concert from DOM and Local Storage
-function deleteConcert(e) {
-  console.log(e.target.parentElement);
-  e.target.parentElement.remove();
-  let selectedConcertID = e.target.parentElement.querySelector(
-    '.concert-id-num'
-  );
-  let deleteConcertUser = JSON.parse(localStorage.getItem('user'));
-  deleteConcertUser.concerts.forEach((concert, index, object) => {
-    // console.log(concert.id);
-    // console.log(Number(selectedConcertID.textContent));
-    if (concert.id === Number(selectedConcertID.textContent)) {
-      console.log(object);
-      object.splice(index, 1);
-    } else {
-      return;
-    }
-  });
-  console.log(deleteConcertUser.concerts);
-  localStorage.setItem('user', JSON.stringify(deleteConcertUser));
-}
-
-//Create concert button -- send piece to the concert builder.
-function createConcertFunction(e) {
-  let composerName = e.target.parentElement.querySelector('.composer-name')
-    .textContent;
-  let pieceName = e.target.parentElement.querySelector('.piece-name')
-    .textContent;
-  let newPiece = new Piece(composerName, pieceName);
-  let newConcert = new Concert('No Name');
-  newConcert.pieces.push(newPiece);
-  localStorage.setItem('newConcert', JSON.stringify(newConcert));
-  location.href = '/concert_builder';
-}
-
-// Why is this here?
-pieceNames.forEach((piece) => {
-  let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
-  piece.textContent = pieceTitleLength;
-});
-
-//Show and Hide the Gold Underline
-function showGoldUnderline(e) {
-  if (!e.target.querySelector('.hover-gold')) {
-    return false;
-  } else {
-    e.target.querySelector('.hover-gold').classList.add('show');
-  }
-}
-
-function hideGoldUnderline(e) {
-  if (e.target.querySelector('.hover-gold')) {
-    e.target.querySelector('.hover-gold').classList.remove('show');
-  }
-  return false;
-}
-
-//Get rid of the main content, and enter whatever was clicked.
-function resultsExit(e) {
-  //console.log('from results exit', e.target.id);
-  //console.log(dropDownYourConcerts.id);
-  e.preventDefault();
-  mainContentInner.classList.add('remove');
-  window.setTimeout(() => {
-    [...mainContentInner.children].forEach((node) => {
-      node.style.display = 'none';
+    [...searchResults].forEach((result) => {
+      console.log(result);
+      result.addEventListener('mouseover', showGoldUnderline);
+      result.addEventListener('mouseleave', hideGoldUnderline);
     });
-  }, 1000);
+  }
 
-  window.setTimeout(() => {
-    mainContentInner.classList.remove('remove');
-    if (e.target === returnHome) {
-      console.log('RETURN HOME');
-      homeCardEnter(mainContentInner);
-    } else if (e.target === openProfile) {
-      console.log('OPEN PROFILE');
-    } else if (
-      e.target === openFavorites ||
-      (!e.target.classList.contains('concert-view-more-btn') &&
-        e.target.classList.contains('view-more-btn'))
-    ) {
-      console.log('OPEN FAVORITES');
-      console.log(e.target.classList);
-      favoritesEnter(mainContentInner);
-    } else if (
-      e.target === openConcerts ||
-      e.target.classList.contains('concert-view-more-btn') ||
-      e.target.id === dropDownYourConcerts.id
-    ) {
-      console.log('OPEN CONCERTS');
-      concertsEnter(mainContentInner);
-    }
-  }, 1500);
-}
+  //Make sure each button has a delete function
+  //To the home page
+  function removeConcertListeners(container) {
+    let concertsList = container.children;
 
-//Show the homeCard
-function homeCardEnter(container) {
-  const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
-  const fullConcertsGrid = container.querySelector('.full-concerts-grid');
+    [...concertsList].forEach((concert) => {
+      if (!concert.querySelector('.remove-concert-btn')) {
+        return false;
+      } else {
+        concert
+          .querySelector('.remove-concert-btn')
+          .addEventListener('click', deleteConcert);
+      }
+    });
+  }
 
-  fullFavoritesGrid.style.display = 'none';
-  fullConcertsGrid.style.display = 'none';
+  //Remove Concert from DOM and Local Storage
+  // function deleteConcert(e) {
+  //   console.log(e.target.parentElement);
+  //   e.target.parentElement.remove();
+  //   let selectedConcertID = e.target.parentElement.querySelector(
+  //     '.concert-id-num'
+  //   );
+  //   let deleteConcertUser = JSON.parse(localStorage.getItem('user'));
+  //   deleteConcertUser.concerts.forEach((concert, index, object) => {
+  //     // console.log(concert.id);
+  //     // console.log(Number(selectedConcertID.textContent));
+  //     if (concert.id === Number(selectedConcertID.textContent)) {
+  //       console.log(object);
+  //       object.splice(index, 1);
+  //     } else {
+  //       return;
+  //     }
+  //   });
+  //   console.log(deleteConcertUser.concerts);
+  //   localStorage.setItem('user', JSON.stringify(deleteConcertUser));
+  // }
 
-  [...container.children].forEach((element) => {
-    console.log(element);
-    if (element === fullFavoritesGrid) {
-      return;
-    } else if (element.classList[0] === 'header-row') {
-      element.style.display = 'flex';
-      element.querySelector('.view-more-btn').style.display = 'flex';
-    } else if (
-      element.classList.length === 1 &&
-      element.classList[0] === 'search-results'
-    ) {
-      element.style.display = 'grid';
-    } else if (element.classList[1] === 'your-recent-concerts') {
-      element.style.display = 'grid';
-    } else if (element.classList[1] === 'full-concerts-grid') {
-      element.style.display = 'none';
-    }
+  //Create concert button -- send piece to the concert builder.
+  function createConcertFunction(e) {
+    let composerName = e.target.parentElement.querySelector('.composer-name')
+      .textContent;
+    let pieceName = e.target.parentElement.querySelector('.piece-name')
+      .textContent;
+    let newPiece = new Piece(composerName, pieceName);
+    let newConcert = new Concert('No Name');
+    newConcert.pieces.push(newPiece);
+    localStorage.setItem('newConcert', JSON.stringify(newConcert));
+    location.href = '/concert_builder';
+  }
+
+  // Why is this here?
+  // pieceNames.forEach((piece) => {
+  //   let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
+  //   piece.textContent = pieceTitleLength;
+  // });
+
+  // //Show and Hide the Gold Underline
+  // function showGoldUnderline(e) {
+  //   if (!e.target.querySelector('.hover-gold')) {
+  //     return false;
+  //   } else {
+  //     e.target.querySelector('.hover-gold').classList.add('show');
+  //   }
+  // }
+
+  // function hideGoldUnderline(e) {
+  //   if (e.target.querySelector('.hover-gold')) {
+  //     e.target.querySelector('.hover-gold').classList.remove('show');
+  //   }
+  //   return false;
+  // }
+
+  //Get rid of the main content, and enter whatever was clicked.
+  // function resultsExit(e) {
+  //   //console.log('from results exit', e.target.id);
+  //   //console.log(dropDownYourConcerts.id);
+  //   e.preventDefault();
+  //   mainContentInner.classList.add('remove');
+  //   window.setTimeout(() => {
+  //     [...mainContentInner.children].forEach((node) => {
+  //       node.style.display = 'none';
+  //     });
+  //   }, 1000);
+
+  //   window.setTimeout(() => {
+  //     mainContentInner.classList.remove('remove');
+  //     if (e.target === returnHome) {
+  //       console.log('RETURN HOME');
+  //       homeCardEnter(mainContentInner);
+  //     } else if (e.target === openProfile) {
+  //       console.log('OPEN PROFILE');
+  //     } else if (
+  //       e.target === openFavorites ||
+  //       (!e.target.classList.contains('concert-view-more-btn') &&
+  //         e.target.classList.contains('view-more-btn'))
+  //     ) {
+  //       console.log('OPEN FAVORITES');
+  //       console.log(e.target.classList);
+  //       favoritesEnter(mainContentInner);
+  //     } else if (
+  //       e.target === openConcerts ||
+  //       e.target.classList.contains('concert-view-more-btn') ||
+  //       e.target.id === dropDownYourConcerts.id
+  //     ) {
+  //       console.log('OPEN CONCERTS');
+  //       concertsEnter(mainContentInner);
+  //     }
+  //   }, 1500);
+  // }
+
+  //Show the homeCard
+  // function homeCardEnter(container) {
+  //   const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
+  //   const fullConcertsGrid = container.querySelector('.full-concerts-grid');
+
+  //   fullFavoritesGrid.style.display = 'none';
+  //   fullConcertsGrid.style.display = 'none';
+
+  //   [...container.children].forEach((element) => {
+  //     console.log(element);
+  //     if (element === fullFavoritesGrid) {
+  //       return;
+  //     } else if (element.classList[0] === 'header-row') {
+  //       element.style.display = 'flex';
+  //       element.querySelector('.view-more-btn').style.display = 'flex';
+  //     } else if (
+  //       element.classList.length === 1 &&
+  //       element.classList[0] === 'search-results'
+  //     ) {
+  //       element.style.display = 'grid';
+  //     } else if (element.classList[1] === 'your-recent-concerts') {
+  //       element.style.display = 'grid';
+  //     } else if (element.classList[1] === 'full-concerts-grid') {
+  //       element.style.display = 'none';
+  //     }
+  //   });
+  // }
+
+  // //Display Concerts
+  // function concertsEnter(container) {
+  //   console.log('Concerts Enter');
+  //   const fullConcertsGrid = container.querySelector(
+  //     '.search-results.full-concerts-grid'
+  //   );
+
+  //   fullConcertsGrid.style.display = 'grid';
+
+  //   container.querySelector('.header-row.concerts-header-row').style.display =
+  //     'flex';
+  //   container.querySelector(
+  //     '.header-row.concerts-header-row .view-more-btn'
+  //   ).style.display = 'none';
+  //   let currentUser = JSON.parse(localStorage.getItem('user'));
+
+  //   displayConcerts(currentUser, (all = true));
+  // }
+
+  // //Display favorite pieces
+  // function favoritesEnter(container) {
+  //   const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
+  //   fullFavoritesGrid.style.display = 'grid';
+  //   document.querySelector('.header-row').style.display = 'flex';
+  //   document.querySelector('.header-row .view-more-btn').style.display = 'none';
+  //   [...fullFavoritesGrid.children].forEach((favorite) => {
+  //     if (favorite.querySelector('.composer-name').textContent.length >= 18) {
+  //       favorite.querySelector('.composer-name').style.fontSize = '1.2rem';
+  //     } else {
+  //       return;
+  //     }
+  //   });
+  // }
+
+  //Shorten the piece titles
+  // function formatResultsCard() {
+  //   const pieceNames = document.querySelectorAll('.piece-name');
+
+  //   pieceNames.forEach((piece) => {
+  //     let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
+  //     piece.textContent = pieceTitleLength;
+  //   });
+  // }
+
+  //  function openCurrentLetter(e) {
+
+  //      if(e.target.tagName === "LI") {
+  //         console.log(e.target.textContent);
+  //         let composerLetter = e.target.textContent;
+  //         let send = {letter: composerLetter};
+  //         fetch('/browse_composer_list', {
+  //             method: 'POST',
+  //             credentials: "include",
+  //             body: JSON.stringify(send),
+  //             cache: "no-cache",
+  //             headers: new Headers({
+  //                 "content-type": "application/json"
+  //             })
+  //         })
+  //         .then(res => {
+  //             if(res.status !== 200) {
+  //                 console.log('There was a problem');
+  //                 return;
+  //             }
+  //             res.json().then(data => {
+  //                 data.letterArray.forEach(item => {
+  //                     let composerResultName = document.createElement('p');
+  //                     composerResultName.textContent = `${item}`;
+  //                     composerResultList.appendChild(composerResultName);
+
+  //                 })
+  //             });
+
+  //         })
+  //         .catch(err => console.log(err));
+  //      }
+  //  }
+
+  //EVENT LISTENERS
+
+  //Add clivk event to the your concets button in the dropdown
+  dropDownYourConcerts.addEventListener('click', (e) => {
+    dropDownMenu.style.display = 'none';
+    resultsExit(e);
+    concertsEnter(mainContentInner);
+  });
+
+  //Add click events to all links.
+  viewMore.forEach((link) => {
+    link.addEventListener('click', resultsExit);
+  });
+
+  openLinks.forEach((link) => {
+    link.addEventListener('click', resultsExit);
+  });
+
+  //Format the cards to shorten piece Title
+  window.addEventListener('DOMContentLoaded', formatResultsCard);
+
+  window.addEventListener('DOMContentLoaded', createUser);
+  //Add Gold Underline
+  window.addEventListener('DOMContentLoaded', () => {
+    let searchResults = document.querySelectorAll('.search-result');
+    [...searchResults].forEach((result) => {
+      //console.log(result);
+      result.addEventListener('mouseover', showGoldUnderline);
+      result.addEventListener('mouseleave', hideGoldUnderline);
+    });
+  });
+
+  //Open the Composer Browse
+  openBrowse.addEventListener('click', showBrowse);
+
+  [...createConcertBtns].forEach((btn) => {
+    btn.addEventListener('click', createConcertFunction);
   });
 }
-
-//Display Concerts
-function concertsEnter(container) {
-  console.log('Concerts Enter');
-  const fullConcertsGrid = container.querySelector(
-    '.search-results.full-concerts-grid'
-  );
-
-  fullConcertsGrid.style.display = 'grid';
-
-  container.querySelector('.header-row.concerts-header-row').style.display =
-    'flex';
-  container.querySelector(
-    '.header-row.concerts-header-row .view-more-btn'
-  ).style.display = 'none';
-  let currentUser = JSON.parse(localStorage.getItem('user'));
-
-  displayConcerts(currentUser, (all = true));
-}
-
-//Display favorite pieces
-function favoritesEnter(container) {
-  const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
-  fullFavoritesGrid.style.display = 'grid';
-  document.querySelector('.header-row').style.display = 'flex';
-  document.querySelector('.header-row .view-more-btn').style.display = 'none';
-  [...fullFavoritesGrid.children].forEach((favorite) => {
-    if (favorite.querySelector('.composer-name').textContent.length >= 18) {
-      favorite.querySelector('.composer-name').style.fontSize = '1.2rem';
-    } else {
-      return;
-    }
-  });
-}
-
-//Shorten the piece titles
-function formatResultsCard() {
-  const pieceNames = document.querySelectorAll('.piece-name');
-
-  pieceNames.forEach((piece) => {
-    let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
-    piece.textContent = pieceTitleLength;
-  });
-}
-
-//  function openCurrentLetter(e) {
-
-//      if(e.target.tagName === "LI") {
-//         console.log(e.target.textContent);
-//         let composerLetter = e.target.textContent;
-//         let send = {letter: composerLetter};
-//         fetch('/browse_composer_list', {
-//             method: 'POST',
-//             credentials: "include",
-//             body: JSON.stringify(send),
-//             cache: "no-cache",
-//             headers: new Headers({
-//                 "content-type": "application/json"
-//             })
-//         })
-//         .then(res => {
-//             if(res.status !== 200) {
-//                 console.log('There was a problem');
-//                 return;
-//             }
-//             res.json().then(data => {
-//                 data.letterArray.forEach(item => {
-//                     let composerResultName = document.createElement('p');
-//                     composerResultName.textContent = `${item}`;
-//                     composerResultList.appendChild(composerResultName);
-
-//                 })
-//             });
-
-//         })
-//         .catch(err => console.log(err));
-//      }
-//  }
-
-//EVENT LISTENERS
-
-//Add clivk event to the your concets button in the dropdown
-dropDownYourConcerts.addEventListener('click', (e) => {
-  dropDownMenu.style.display = 'none';
-  resultsExit(e);
-  concertsEnter(mainContentInner);
-});
-
-//Add click events to all links.
-viewMore.forEach((link) => {
-  link.addEventListener('click', resultsExit);
-});
-
-openLinks.forEach((link) => {
-  link.addEventListener('click', resultsExit);
-});
-
-//Format the cards to shorten piece Title
-window.addEventListener('DOMContentLoaded', formatResultsCard);
-
-window.addEventListener('DOMContentLoaded', createUser);
-//Add Gold Underline
-window.addEventListener('DOMContentLoaded', () => {
-  let searchResults = document.querySelectorAll('.search-result');
-  [...searchResults].forEach((result) => {
-    //console.log(result);
-    result.addEventListener('mouseover', showGoldUnderline);
-    result.addEventListener('mouseleave', hideGoldUnderline);
-  });
-});
-
-//Open the Composer Browse
-openBrowse.addEventListener('click', showBrowse);
-
-[...createConcertBtns].forEach((btn) => {
-  btn.addEventListener('click', createConcertFunction);
-});
-
 //composerLetterContainer.addEventListener('click', openCurrentLetter);

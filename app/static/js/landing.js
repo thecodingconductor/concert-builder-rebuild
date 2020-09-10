@@ -1,24 +1,5 @@
-const getStarted = document.getElementById('get-started-btn');
-getStarted.addEventListener('click', openModal);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// const getStarted = document.getElementById('get-started-btn');
+// getStarted.addEventListener('click', openModal);
 
 // //https://www.googleapis.com/customsearch/v1?key=AIzaSyC72emsapcuXsF64Hrn7ca_9xIbAUbn7DY&cx=014124391945830086859:aisrauxjejy&q=${search}&
 // //Nav Bar - to Base file
@@ -31,7 +12,6 @@ getStarted.addEventListener('click', openModal);
 // const createConcert = document.getElementById('create');
 // const openMobileSearch = document.getElementById('open-mobile-search');
 // const rightNavContainer = document.getElementById('right-nav-container');
-
 
 // //Unique for Landing
 
@@ -53,7 +33,6 @@ getStarted.addEventListener('click', openModal);
 // const searchBarResults = document.getElementById('search-bar-results');
 // const browseComposers = document.getElementById('browse-composers');
 
-
 // function generateRandomNumber(min, max) {
 //     return Math.floor(Math.random() * (max-min) + min);
 // }
@@ -67,7 +46,7 @@ getStarted.addEventListener('click', openModal);
 //         signUpModal.style.display = 'flex';
 //         console.log("SIGN UP SUCCESS");
 //     }
-    
+
 // }
 
 // function closeModal(e) {
@@ -79,7 +58,7 @@ getStarted.addEventListener('click', openModal);
 //         const modalParent = e.target.parentElement.parentElement;
 //         modalParent.style.display = 'none';
 //     }
-    
+
 // }
 
 // function showSearch(e) {
@@ -88,11 +67,10 @@ getStarted.addEventListener('click', openModal);
 //         rightNavContainer.style.display = 'none';
 //         siteTitle.style.display = 'none';
 //         searchBarOverlay.style.display = 'flex';
-//     } else{ 
+//     } else{
 //         rightNavContainer.style.display = 'none';
 //         searchBarOverlay.style.display = 'flex';
 //     }
-    
 
 // }
 
@@ -122,12 +100,11 @@ getStarted.addEventListener('click', openModal);
 
 //             res.json()
 //             .then(data => {
-                
-//                 //this is the composers array. 
+
+//                 //this is the composers array.
 //                 composersArr = data.composers_array;
-//                 composersArr.forEach(group => { 
+//                 composersArr.forEach(group => {
 //                     const mainLetter = group[0][0];
-                   
 
 //                     let composerLetter = document.createElement('div');
 //                     composerLetter.classList = 'letter';
@@ -135,22 +112,17 @@ getStarted.addEventListener('click', openModal);
 //                     for(let i =0; i < 3; i++) {
 //                         randomCompArr.push(group[generateRandomNumber(0, group.length)]);
 //                     }
-                   
 
-                    
-                    
 //                     composerLetter.innerHTML = `
 //                         <h1>${mainLetter}</h1>
 //                         <div class="letter-composers">
-                        
+
 //                             ${randomCompArr.map((item, i) => `
 //                                 <p class="random-composer-links"><a href="#">${item}</a></p>
 //                             `.trim()).join('')}
 
 //                         </div>`;
-                    
-                    
-                    
+
 //                     browseComposers.appendChild(composerLetter);
 //                     const randomComposerList = document.querySelectorAll('.random-composer-links a');
 //                     console.log(randomComposerList);
@@ -167,8 +139,6 @@ getStarted.addEventListener('click', openModal);
 //             console.log("Fetch error: " + err);
 //         });
 
-        
-    
 // }
 
 // function clearList() {
@@ -198,15 +168,13 @@ getStarted.addEventListener('click', openModal);
 //             const composer_data = JSON.parse(data.composers);
 //             console.log(composer_data);
 
-            
-
 //             composer_data.forEach(composer => {
 //                 console.log(composer);
 //                 const resultDiv = document.createElement("div");
 //                 resultDiv.classList = "search-result-down";
 //                 resultDiv.innerHTML = `
 //                     <p>${composer.name}</p>
-                    
+
 //                     <a href="composer/${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
 
 //                 `;
@@ -222,7 +190,6 @@ getStarted.addEventListener('click', openModal);
 
 // }
 
-
 // //for Landing Only
 // getStarted.addEventListener('click', openModal);
 // logInOpen.addEventListener('click', openModal);
@@ -235,7 +202,6 @@ getStarted.addEventListener('click', openModal);
 // openMobileSearch.addEventListener('click', showSearch)
 // closeSearch.addEventListener('click', closeSearchField);
 
-
 // //for Base
 // browse.addEventListener('click', showBrowse);
 // closeBrowse.addEventListener('click', () => {
@@ -246,5 +212,3 @@ getStarted.addEventListener('click', openModal);
 //     clearList();
 //     getResults();
 // })
-
-

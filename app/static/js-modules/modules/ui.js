@@ -84,19 +84,18 @@ export class UI {
     composerLetter.classList = 'letter';
     const randomCompArr = [];
 
-    composerLetter.innerHTML = `
-    <h1>${mainLetter}</h1>
-    <div class="letter-composers">
-    
-        ${randomCompArr
-          .map((item, i) =>
-            `
-            <p class="random-composer-links"><a href="#">${item}</a></p>
-        `.trim()
-          )
-          .join('')}
+    //THERE IS SOME FUCKING BEAMING ISSUE HERE
+    //   composerLetter.innerHTML = `
+    //   <h1>${mainLetter}</h1>
+    //   <div class="letter-composers">
 
-    </div>`;
+    //       ${randomCompArr.map(item => {`
+    //           <p class="random-composer-links"><a href="#">item</a></p>`.trim()
+    // })
+    //         .join('')}
+    //         }
+
+    //   </div>`;
 
     UISelectors.browseComposers.appendChild(composerLetter);
 
@@ -314,4 +313,167 @@ export class UI {
   }
 
   //HOMEPAGE
+  displayConcerts(user, all = false) {
+    if (UISelectors.fullConcertsGrid.children.length > 0) {
+      UISelectors.fullConcertsGrid.innerHTML = ``;
+    }
+
+    if (user.concerts.length === 0) {
+      let notificationContainer = document.createElement('div');
+      notificationContainer.classList = 'no-concerts-notification';
+      notificationContainer.innerHTML = `
+        <div class="search-result">
+                        <h2 class="composer-name">Visit the concert builder page above to start building concerts!</h2>
+        </div>
+        
+        
+        `;
+      yourConcertsContainer.innerHTML = '';
+      yourConcertsContainer.appendChild(notificationContainer);
+    }
+
+    //SEE homepage.js Line 86
+  }
+
+  deleteConcert(e) {
+    e.target.parentElement.remove();
+    let selectedConcertID = e.target.parentElement.querySelector(
+      '.concert-id-num'
+    );
+    //SWITCH TO STORAGE FUNCTION
+    let deleteConcertUser = JSON.parse(localStorage.getItem('user'));
+    deleteConcertUser.concerts.forEach((concert, index, object) => {
+      // console.log(concert.id);
+      // console.log(Number(selectedConcertID.textContent));
+      if (concert.id === Number(selectedConcertID.textContent)) {
+        object.splice(index, 1);
+      } else {
+        return;
+      }
+    });
+    //STORAGE FUNCTION
+    localStorage.setItem('user', JSON.stringify(deleteConcertUser));
+  }
+
+  //Where to call this?
+  shortenPieceTitle(pieceNames) {
+    pieceNames.forEach((piece) => {
+      let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
+      piece.textContent = pieceTitleLength;
+    });
+  }
+
+  showGoldUnderline(e) {
+    if (!e.target.querySelector('.hover-gold')) {
+      return false;
+    } else {
+      e.target.querySelector('.hover-gold').classList.add('show');
+    }
+  }
+
+  hideGoldUnderline(e) {
+    if (e.target.querySelector('.hover-gold')) {
+      e.target.querySelector('.hover-gold').classList.remove('show');
+    }
+    return false;
+  }
+
+  resultsExit(e) {
+    //console.log('from results exit', e.target.id);
+    //console.log(dropDownYourConcerts.id);
+    e.preventDefault();
+    UISelectors.mainContentInner.classList.add('remove');
+    window.setTimeout(() => {
+      [...UISelectors.mainContentInner.children].forEach((node) => {
+        node.style.display = 'none';
+      });
+    }, 1000);
+
+    window.setTimeout(() => {
+      UISelectors.mainContentInner.classList.remove('remove');
+      if (e.target === UISelectors.returnHome) {
+        //Change this
+        this.homeCardEnter(UISelectors.mainContentInner);
+      } else if (e.target === UISelectors.openProfile) {
+      } else if (
+        e.target === UISelectors.openFavorites ||
+        (!e.target.classList.contains('concert-view-more-btn') &&
+          e.target.classList.contains('view-more-btn'))
+      ) {
+        favoritesEnter(mainContentInner);
+      } else if (
+        e.target === UISelectors.openConcerts ||
+        e.target.classList.contains('concert-view-more-btn') ||
+        e.target.id === UISelectors.dropDownYourConcerts.id
+      ) {
+        concertsEnter(mainContentInner);
+      }
+    }, 1500);
+  }
+
+  homeCardEnter(container) {
+    const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
+    const fullConcertsGrid = container.querySelector('.full-concerts-grid');
+
+    fullFavoritesGrid.style.display = 'none';
+    fullConcertsGrid.style.display = 'none';
+
+    [...container.children].forEach((element) => {
+      if (element === fullFavoritesGrid) {
+        return;
+      } else if (element.classList[0] === 'header-row') {
+        element.style.display = 'flex';
+        element.querySelector('.view-more-btn').style.display = 'flex';
+      } else if (
+        element.classList.length === 1 &&
+        element.classList[0] === 'search-results'
+      ) {
+        element.style.display = 'grid';
+      } else if (element.classList[1] === 'your-recent-concerts') {
+        element.style.display = 'grid';
+      } else if (element.classList[1] === 'full-concerts-grid') {
+        element.style.display = 'none';
+      }
+    });
+  }
+
+  concertsEnter(container) {
+    const fullConcertsGrid = container.querySelector(
+      '.search-results.full-concerts-grid'
+    );
+
+    fullConcertsGrid.style.display = 'grid';
+
+    container.querySelector('.header-row.concerts-header-row').style.display =
+      'flex';
+    container.querySelector(
+      '.header-row.concerts-header-row .view-more-btn'
+    ).style.display = 'none';
+    //Change this
+    // let currentUser = JSON.parse(localStorage.getItem('user'));
+
+    this.displayConcerts(currentUser, (all = true));
+  }
+
+  favoritesEnter(container) {
+    const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
+    fullFavoritesGrid.style.display = 'grid';
+    document.querySelector('.header-row').style.display = 'flex';
+    document.querySelector('.header-row .view-more-btn').style.display = 'none';
+    [...fullFavoritesGrid.children].forEach((favorite) => {
+      if (favorite.querySelector('.composer-name').textContent.length >= 18) {
+        favorite.querySelector('.composer-name').style.fontSize = '1.2rem';
+      } else {
+        return;
+      }
+    });
+  }
+
+  formatResultsCard() {
+    const pieceNames = document.querySelectorAll('.piece-name');
+    pieceNames.forEach((piece) => {
+      let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
+      piece.textContent = pieceTitleLength;
+    });
+  }
 }

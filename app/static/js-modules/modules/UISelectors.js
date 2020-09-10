@@ -10,6 +10,8 @@ export class UISelectors {
     this.openMobileSearch = document.getElementById('open-mobile-search');
     this.openMobileBrowse = document.getElementById('open-mobile-browse');
     this.rightNavContainer = document.getElementById('right-nav-container');
+
+    this.getStarted = document.getElementById('get-started-btn');
     //Browse Modal
     this.browse = document.getElementById('browse');
     this.browseModal = document.getElementById('browse-modal');
@@ -121,5 +123,9 @@ export class UISelectors {
     this.resultsColumn = document.getElementById('results-column');
     this.composerResultList = document.getElementById('composer-result-list');
     this.user = document.getElementById('current-username').textContent;
+
+    //FROM INDEX
+    this.composerLinks = document.getElementById('composer-results');
+    this.searchField = document.getElementById('search-field');
   }
 }
