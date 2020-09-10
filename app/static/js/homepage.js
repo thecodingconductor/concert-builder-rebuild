@@ -378,40 +378,40 @@ function displayConcerts(user, all = false) {
   //EVENT LISTENERS
 
   //Add clivk event to the your concets button in the dropdown
-  dropDownYourConcerts.addEventListener('click', (e) => {
-    dropDownMenu.style.display = 'none';
-    resultsExit(e);
-    concertsEnter(mainContentInner);
-  });
+  // dropDownYourConcerts.addEventListener('click', (e) => {
+  //   dropDownMenu.style.display = 'none';
+  //   resultsExit(e);
+  //   concertsEnter(mainContentInner);
+  // });
 
   //Add click events to all links.
-  viewMore.forEach((link) => {
-    link.addEventListener('click', resultsExit);
-  });
+  // viewMore.forEach((link) => {
+  //   link.addEventListener('click', resultsExit);
+  // });
 
-  openLinks.forEach((link) => {
-    link.addEventListener('click', resultsExit);
-  });
+  // openLinks.forEach((link) => {
+  //   link.addEventListener('click', resultsExit);
+  // });
 
   //Format the cards to shorten piece Title
-  window.addEventListener('DOMContentLoaded', formatResultsCard);
+  // window.addEventListener('DOMContentLoaded', formatResultsCard);
 
-  window.addEventListener('DOMContentLoaded', createUser);
-  //Add Gold Underline
-  window.addEventListener('DOMContentLoaded', () => {
-    let searchResults = document.querySelectorAll('.search-result');
-    [...searchResults].forEach((result) => {
-      //console.log(result);
-      result.addEventListener('mouseover', showGoldUnderline);
-      result.addEventListener('mouseleave', hideGoldUnderline);
-    });
-  });
+  // window.addEventListener('DOMContentLoaded', createUser);
+  // //Add Gold Underline
+  // window.addEventListener('DOMContentLoaded', () => {
+  //   let searchResults = document.querySelectorAll('.search-result');
+  //   [...searchResults].forEach((result) => {
+  //     //console.log(result);
+  //     result.addEventListener('mouseover', showGoldUnderline);
+  //     result.addEventListener('mouseleave', hideGoldUnderline);
+  //   });
+  // });
 
   //Open the Composer Browse
-  openBrowse.addEventListener('click', showBrowse);
+  // openBrowse.addEventListener('click', showBrowse);
 
-  [...createConcertBtns].forEach((btn) => {
-    btn.addEventListener('click', createConcertFunction);
-  });
+  // [...createConcertBtns].forEach((btn) => {
+  //   btn.addEventListener('click', createConcertFunction);
+  // });
 }
 //composerLetterContainer.addEventListener('click', openCurrentLetter);

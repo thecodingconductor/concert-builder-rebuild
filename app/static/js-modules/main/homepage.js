@@ -6,8 +6,31 @@ import { Requests } from '../modules/requests';
 import { UI } from '../modules/ui';
 import { UISelectors } from '../modules/UISelectors';
 
-dropDownYourConcerts.addEventListener('click', (e) => {
-  dropDownMenu.style.display = 'none';
-  resultsExit(e);
-  concertsEnter(mainContentInner);
+UISelectors.dropDownYourConcerts.addEventListener('click', (e) => {
+  UISelectors.dropDownMenu.style.display = 'none';
+  UI.resultsExit(e);
+  UI.concertsEnter(UISelectors.mainContentInner);
+});
+
+UISelectors.viewMore.forEach((link) => {
+  link.addEventListener('click', UI.resultsExit);
+});
+
+UISelectors.openLinks.forEach((link) => {
+  link.addEventListener('click', UI.resultsExit);
+});
+
+window.addEventListener('DOMContentLoaded', UI.formatResultsCard);
+window.addEventListener('DOMContentLoaded', () => {
+  let searchResults = document.querySelectorAll('.search-result');
+  [...searchResults].forEach((result) => {
+    //console.log(result);
+    result.addEventListener('mouseover', UI.showGoldUnderline);
+    result.addEventListener('mouseleave', UI.hideGoldUnderline);
+  });
+});
+
+UISelectors.openBrowse.addEventListener('click', UI.showBrowse);
+[...UISelectors.createConcertBtns].forEach((btn) => {
+  btn.addEventListener('click', UI.createConcertFunction);
 });
