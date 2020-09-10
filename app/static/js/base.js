@@ -122,125 +122,125 @@
 // }
 
 //Show Browse Side Bar, Populate with results
-function showBrowse(e) {
-  // e.preventDefault();
-  // browseModal.style.display = 'flex';
-  // setTimeout(() => {
-  //   browseModalArea.classList.add('show');
-  // }, 300);
+// function showBrowse(e) {
+//   // e.preventDefault();
+//   // browseModal.style.display = 'flex';
+//   // setTimeout(() => {
+//   //   browseModalArea.classList.add('show');
+//   // }, 300);
 
-  // if (browseComposers.children.length > 0) {
-  //   while (browseComposers.firstChild) {
-  //     browseComposers.removeChild(browseComposers.firstChild);
-  //   }
-  // }
-  fetch('/browse_composer_list')
-    .then((res) => {
-      if (res.status != 200) {
-        console.log(`There was a problem. Status code ${res.status}`);
-        return;
-      }
+//   // if (browseComposers.children.length > 0) {
+//   //   while (browseComposers.firstChild) {
+//   //     browseComposers.removeChild(browseComposers.firstChild);
+//   //   }
+//   // }
+//   fetch('/browse_composer_list')
+//     .then((res) => {
+//       if (res.status != 200) {
+//         console.log(`There was a problem. Status code ${res.status}`);
+//         return;
+//       }
 
-      res.json().then((data) => {
-        //this is the composers array.
-        composersArr = data.composers_array;
-        composersArr.forEach((group) => {
-          const mainLetter = group[0][0];
+//       res.json().then((data) => {
+//         //this is the composers array.
+//         composersArr = data.composers_array;
+//         composersArr.forEach((group) => {
+//           const mainLetter = group[0][0];
 
-          let composerLetter = document.createElement('div');
-          composerLetter.classList = 'letter';
-          const randomCompArr = [];
+//           let composerLetter = document.createElement('div');
+//           composerLetter.classList = 'letter';
+//           const randomCompArr = [];
 
-          //Generate 3 random composers
-          for (let i = 0; i < 3; i++) {
-            randomCompArr.push(group[generateRandomNumber(0, group.length)]);
-          }
+//           //Generate 3 random composers
+//           for (let i = 0; i < 3; i++) {
+//             randomCompArr.push(group[generateRandomNumber(0, group.length)]);
+//           }
 
-          //Add random composers to DOM
-          composerLetter.innerHTML = `
-                        <h1>${mainLetter}</h1>
-                        <div class="letter-composers">
-                        
-                            ${randomCompArr
-                              .map((item, i) =>
-                                `
-                                <p class="random-composer-links"><a href="#">${item}</a></p>
-                            `.trim()
-                              )
-                              .join('')}
+//           //Add random composers to DOM
+//           composerLetter.innerHTML = `
+//                         <h1>${mainLetter}</h1>
+//                         <div class="letter-composers">
 
-                        </div>`;
+//                             ${randomCompArr
+//                               .map((item, i) =>
+//                                 `
+//                                 <p class="random-composer-links"><a href="#">${item}</a></p>
+//                             `.trim()
+//                               )
+//                               .join('')}
 
-          browseComposers.appendChild(composerLetter);
+//                         </div>`;
 
-          const letterLinks = document.querySelectorAll('.letter h1');
-          [...letterLinks].forEach((link) => {
-            link.addEventListener('click', openCurrentLetter);
-            //link.addEventListener('click', openCurrentLetter)
-          });
+//           browseComposers.appendChild(composerLetter);
 
-          const randomComposerList = document.querySelectorAll(
-            '.random-composer-links a'
-          );
-          [...randomComposerList].forEach((composerLink) => {
-            console.log(composerLink);
-            composerLink.href = `/composer/${composerLink.textContent}`;
-            //composerLink.addEventListener('click', () => console.log('TITS'));
-          });
-        });
-      });
-    })
-    .catch((err) => {
-      console.log('Fetch error: ' + err);
-    });
-}
+//           const letterLinks = document.querySelectorAll('.letter h1');
+//           [...letterLinks].forEach((link) => {
+//             link.addEventListener('click', openCurrentLetter);
+//             //link.addEventListener('click', openCurrentLetter)
+//           });
 
-function openCurrentLetter(e) {
-  if (!window.location.href.includes('browse_composers')) {
-    window.location.href = '/browse_composers';
-  }
+//           const randomComposerList = document.querySelectorAll(
+//             '.random-composer-links a'
+//           );
+//           [...randomComposerList].forEach((composerLink) => {
+//             console.log(composerLink);
+//             composerLink.href = `/composer/${composerLink.textContent}`;
+//             //composerLink.addEventListener('click', () => console.log('TITS'));
+//           });
+//         });
+//       });
+//     })
+//     .catch((err) => {
+//       console.log('Fetch error: ' + err);
+//     });
+// }
 
-  if (e.target.tagName !== 'LI' || e.target.tagName !== 'H1') {
-    return false;
-  } else {
-    console.log(e.target.textContent);
-    let composerLetter = e.target.textContent;
-    let send = { letter: composerLetter };
-    fetch('/browse_composer_list', {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify(send),
-      cache: 'no-cache',
-      headers: new Headers({
-        'content-type': 'application/json',
-      }),
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          console.log('There was a problem');
-          return;
-        }
-        res.json().then((data) => {
-          if (resultsColumn.textContent !== '') {
-            resultsColumn.textContent = '';
-          }
+// function openCurrentLetter(e) {
+//   if (!window.location.href.includes('browse_composers')) {
+//     window.location.href = '/browse_composers';
+//   }
 
-          data.letterArray.forEach((item) => {
-            let composerResultName = document.createElement('p');
-            composerResultName.textContent = `${item}`;
-            resultsColumn.appendChild(composerResultName);
-          });
+//   if (e.target.tagName !== 'LI' || e.target.tagName !== 'H1') {
+//     return false;
+//   } else {
+//     console.log(e.target.textContent);
+//     let composerLetter = e.target.textContent;
+//     let send = { letter: composerLetter };
+//     fetch('/browse_composer_list', {
+//       method: 'POST',
+//       credentials: 'include',
+//       body: JSON.stringify(send),
+//       cache: 'no-cache',
+//       headers: new Headers({
+//         'content-type': 'application/json',
+//       }),
+//     })
+//       .then((res) => {
+//         if (res.status !== 200) {
+//           console.log('There was a problem');
+//           return;
+//         }
+//         res.json().then((data) => {
+//           if (resultsColumn.textContent !== '') {
+//             resultsColumn.textContent = '';
+//           }
 
-          [...resultsColumn.children].forEach((comp) => {
-            comp.addEventListener('click', (e) => {
-              window.location.href = `composer/${e.target.textContent}`;
-            });
-          });
-        });
-      })
-      .catch((err) => console.log(err));
-  }
-}
+//           data.letterArray.forEach((item) => {
+//             let composerResultName = document.createElement('p');
+//             composerResultName.textContent = `${item}`;
+//             resultsColumn.appendChild(composerResultName);
+//           });
+
+//           [...resultsColumn.children].forEach((comp) => {
+//             comp.addEventListener('click', (e) => {
+//               window.location.href = `composer/${e.target.textContent}`;
+//             });
+//           });
+//         });
+//       })
+// //       .catch((err) => console.log(err));
+//   }
+// }
 
 //Clear the search results
 // function clearList() {
@@ -260,173 +260,173 @@ function openCurrentLetter(e) {
 // }
 
 //Retrieve the list of composer search results
-function getResults() {
-  searchBarResults.style.visibility = 'visible';
-  const request = new XMLHttpRequest();
-  const searchTerm = searchInput.value;
-  request.open('POST', '/composers');
-  request.onload = () => {
-    const data = JSON.parse(request.response);
-    if (data.success) {
-      const composer_data = JSON.parse(data.composers);
-      console.log(composer_data);
+// function getResults() {
+//   searchBarResults.style.visibility = 'visible';
+//   const request = new XMLHttpRequest();
+//   const searchTerm = searchInput.value;
+//   request.open('POST', '/composers');
+//   request.onload = () => {
+//     const data = JSON.parse(request.response);
+//     if (data.success) {
+//       const composer_data = JSON.parse(data.composers);
+//       console.log(composer_data);
 
-      composer_data.forEach((composer) => {
-        console.log(composer);
+//       composer_data.forEach((composer) => {
+//         console.log(composer);
 
-        const currentURL = window.location.href;
+//         const currentURL = window.location.href;
 
-        const resultDiv = document.createElement('div');
-        resultDiv.classList = 'search-result-down';
+//         const resultDiv = document.createElement('div');
+//         resultDiv.classList = 'search-result-down';
 
-        if (currentURL.includes('composer')) {
-          resultDiv.innerHTML = `
-                    <p>${composer.name}</p>
-                    <a href="${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
+//         if (currentURL.includes('composer')) {
+//           resultDiv.innerHTML = `
+//                     <p>${composer.name}</p>
+//                     <a href="${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
 
-                `;
-        } else {
-          resultDiv.innerHTML = `
-                    <p>${composer.name}</p>
-                    <a href="composer/${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
+//                 `;
+//         } else {
+//           resultDiv.innerHTML = `
+//                     <p>${composer.name}</p>
+//                     <a href="composer/${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
 
-                `;
-        }
+//                 `;
+//         }
 
-        searchBarResults.appendChild(resultDiv);
-      });
-    }
-  };
+//         searchBarResults.appendChild(resultDiv);
+//       });
+//     }
+//   };
 
-  const data = new FormData();
-  data.append('search-bar-field', searchTerm);
-  request.send(data);
-  return false;
-}
+//   const data = new FormData();
+//   data.append('search-bar-field', searchTerm);
+//   request.send(data);
+//   return false;
+// }
 
-function showDropDown() {
-  if (dropDownMenu.style.display === 'block') {
-    dropDownMenu.style.display = 'none';
-  } else {
-    dropDownMenu.style.display = 'block';
-  }
-}
+// function showDropDown() {
+//   if (dropDownMenu.style.display === 'block') {
+//     dropDownMenu.style.display = 'none';
+//   } else {
+//     dropDownMenu.style.display = 'block';
+//   }
+// }
 
-function registerValidation(e) {
-  e.preventDefault();
-  let currentForm = e.target.parentElement;
+// function registerValidation(e) {
+//   e.preventDefault();
+//   let currentForm = e.target.parentElement;
 
-  let formFields = currentForm.querySelectorAll('.form-field');
+//   let formFields = currentForm.querySelectorAll('.form-field');
 
-  [...formFields].forEach((field) => {
-    console.log(field);
-    if (field.querySelector('.error-text')) {
-      console.log('there was an error');
-    } else {
-      console.log('there are no errors');
-    }
-  });
-  console.log('register prevented.');
-}
+//   [...formFields].forEach((field) => {
+//     console.log(field);
+//     if (field.querySelector('.error-text')) {
+//       console.log('there was an error');
+//     } else {
+//       console.log('there are no errors');
+//     }
+//   });
+//   console.log('register prevented.');
+// }
 
 //FORM VALIDATION EXCERPT
 
-function showError(input, message) {
-  const formControl = input.parentElement;
-  formControl.className = 'form-field error';
+// function showError(input, message) {
+//   const formControl = input.parentElement;
+//   formControl.className = 'form-field error';
 
-  const error = formControl.querySelector('.error-text');
-  error.innerText = message;
-}
+//   const error = formControl.querySelector('.error-text');
+//   error.innerText = message;
+// }
 
-function showSuccess(input) {
-  console.log('show success');
-  const formControl = input.parentElement;
-  console.log(formControl);
-  formControl.className = 'form-field success';
-}
+// function showSuccess(input) {
+//   console.log('show success');
+//   const formControl = input.parentElement;
+//   console.log(formControl);
+//   formControl.className = 'form-field success';
+// }
 
-function checkEmail(input) {
-  console.log('check email' + input.value);
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (re.test(input.value.trim())) {
-    showSuccess(input);
-  } else {
-    showError(input, 'Email is not valid');
-  }
-}
+// function checkEmail(input) {
+//   console.log('check email' + input.value);
+//   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//   if (re.test(input.value.trim())) {
+//     showSuccess(input);
+//   } else {
+//     showError(input, 'Email is not valid');
+//   }
+// }
 
-function checkRequired(inputArr) {
-  console.log('check Required');
-  let isRequired = false;
-  inputArr.forEach((input) => {
-    console.log(input.value);
-    if (input.value.trim() === '') {
-      showError(input, `${getFieldName(input)} is required.`);
-      isRequired = true;
-    } else {
-      showSuccess(input);
-    }
-  });
+// function checkRequired(inputArr) {
+//   console.log('check Required');
+//   let isRequired = false;
+//   inputArr.forEach((input) => {
+//     console.log(input.value);
+//     if (input.value.trim() === '') {
+//       showError(input, `${getFieldName(input)} is required.`);
+//       isRequired = true;
+//     } else {
+//       showSuccess(input);
+//     }
+//   });
 
-  return isRequired;
-}
+//   return isRequired;
+// }
 
-function checkLength(input, min, max) {
-  console.log('CHECK LENGTH');
-  console.log(input.value);
-  if (input.value.length < min) {
-    showError(
-      input,
-      `${getFieldName(input)} must be at least ${min} characters`
-    );
-  } else if (input.value.length > max) {
-    showError(
-      input,
-      `${getFieldName(input)} must be less than ${max} characters}`
-    );
-  } else {
-    showSuccess(input);
-  }
-}
+// function checkLength(input, min, max) {
+//   console.log('CHECK LENGTH');
+//   console.log(input.value);
+//   if (input.value.length < min) {
+//     showError(
+//       input,
+//       `${getFieldName(input)} must be at least ${min} characters`
+//     );
+//   } else if (input.value.length > max) {
+//     showError(
+//       input,
+//       `${getFieldName(input)} must be less than ${max} characters}`
+//     );
+//   } else {
+//     showSuccess(input);
+//   }
+// }
 
-function checkPasswordsMatch(input1, input2) {
-  console.log('checkPasswordsMatch');
-  console.log(input1.value, input2.value);
-  if (input1.value !== input2.value) {
-    showError(input2, 'Passwords do not match');
-  }
-}
+// function checkPasswordsMatch(input1, input2) {
+//   console.log('checkPasswordsMatch');
+//   console.log(input1.value, input2.value);
+//   if (input1.value !== input2.value) {
+//     showError(input2, 'Passwords do not match');
+//   }
+// }
 
-function getFieldName(input) {
-  let newString = input.id.split('-')[1];
-  console.log(newString.charAt(0).toUpperCase() + newString.slice(1));
-  if (newString.includes('password2')) {
-    return 'Repeated Password';
-  }
-  return newString.charAt(0).toUpperCase() + newString.slice(1);
-}
+// function getFieldName(input) {
+//   let newString = input.id.split('-')[1];
+//   console.log(newString.charAt(0).toUpperCase() + newString.slice(1));
+//   if (newString.includes('password2')) {
+//     return 'Repeated Password';
+//   }
+//   return newString.charAt(0).toUpperCase() + newString.slice(1);
+// }
 
-function checkAllValid(formInputArr) {
-  console.log('checkAllValid');
-  let allValid = true;
-  formInputArr.forEach((field) => {
-    if (
-      field.parentElement.classList.contains('error') &&
-      field.parentElement.classList.length > 1
-    ) {
-      allValid = false;
-      return allValid;
-    }
-  });
+// function checkAllValid(formInputArr) {
+//   console.log('checkAllValid');
+//   let allValid = true;
+//   formInputArr.forEach((field) => {
+//     if (
+//       field.parentElement.classList.contains('error') &&
+//       field.parentElement.classList.length > 1
+//     ) {
+//       allValid = false;
+//       return allValid;
+//     }
+//   });
 
-  return allValid;
-}
+//   return allValid;
+// }
 
-function logInValidation(e) {
-  e.preventDefault();
-  console.log('Log In Prevented');
-}
+// function logInValidation(e) {
+//   e.preventDefault();
+//   console.log('Log In Prevented');
+// }
 
 window.addEventListener('DOMContentLoaded', () => {
   //get viewport height and we multiple is y 1% to get a value for a vh unit
@@ -505,33 +505,33 @@ if (logInForm) {
       };
       console.log(loginData);
 
-      fetch('/login', {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify(loginData),
-        cache: 'no-cache',
-        headers: new Headers({
-          'content-type': 'application/json',
-        }),
-      })
-        .then((res) => {
-          if (res.status !== 200) {
-            console.log(`There was a problem. Status Code: ${res.status}`);
-            return;
-          }
-          console.log(res);
+    //   fetch('/login', {
+    //     method: 'POST',
+    //     credentials: 'include',
+    //     body: JSON.stringify(loginData),
+    //     cache: 'no-cache',
+    //     headers: new Headers({
+    //       'content-type': 'application/json',
+    //     }),
+    //   })
+    //     .then((res) => {
+    //       if (res.status !== 200) {
+    //         console.log(`There was a problem. Status Code: ${res.status}`);
+    //         return;
+    //       }
+    //       console.log(res);
 
-          res.json().then((data) => {
-            if (data.update === 'success') {
-              logInUserBtn.textContent = `${data.message}`;
-              window.location.href = '/homepage';
-            } else if (data.update === 'failure') {
-              showError(loginUsername, data.message);
-              showError(loginPassword, data.message);
-            }
-          });
-        })
-        .catch((err) => console.log(`Fetch Error: ${err}`));
-    }
+    //       res.json().then((data) => {
+    //         if (data.update === 'success') {
+    //           logInUserBtn.textContent = `${data.message}`;
+    //           window.location.href = '/homepage';
+    //         } else if (data.update === 'failure') {
+    //           showError(loginUsername, data.message);
+    //           showError(loginPassword, data.message);
+    //         }
+    //       });
+    //     })
+    //     .catch((err) => console.log(`Fetch Error: ${err}`));
+    // }
   });
 }

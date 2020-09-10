@@ -6,7 +6,7 @@ import { Forms } from './forms';
 import { Nav } from './nav';
 import { Storage } from './storage';
 
-class App {
+export class App {
   constructor() {}
 
   generateRandomNumber(mix, max) {

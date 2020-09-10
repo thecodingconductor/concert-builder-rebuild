@@ -1,4 +1,5 @@
 import { UISelectors } from './UISelectors';
+import { Requests } from './requests';
 
 export class UI {
   constructor() {
@@ -69,7 +70,49 @@ export class UI {
       }
     }
 
-    //TODO ADD BROWSE COMPOSER FETCH
+    Requests.openCurrentLetter();
+  }
+
+  appendCurrentLetter(item) {
+    let composerResultName = document.createElement('p');
+    composerResultName.textContent = `${item}`;
+    UISelectors.resultsColumn.appendChild(composerResultName);
+  }
+
+  addRandomComposersToDOM(mainLetter) {
+    let composerLetter = document.createElement('div');
+    composerLetter.classList = 'letter';
+    const randomCompArr = [];
+
+    composerLetter.innerHTML = `
+    <h1>${mainLetter}</h1>
+    <div class="letter-composers">
+    
+        ${randomCompArr
+          .map((item, i) =>
+            `
+            <p class="random-composer-links"><a href="#">${item}</a></p>
+        `.trim()
+          )
+          .join('')}
+
+    </div>`;
+
+    UISelectors.browseComposers.appendChild(composerLetter);
+
+    const letterLinks = document.querySelector('.letter h1');
+    [...letterLinks].forEach((link) => {
+      link.addEventListener('click', Requests.openCurrentLetter);
+    });
+
+    const randomComposerList = document.querySelectorAll(
+      '.random-composer-links a'
+    );
+    [...randomComposerList].forEach((composerLink) => {
+      console.log(composerLink);
+      composerLink.href = `/composer/${composerLink.textContent}`;
+      //composerLink.addEventListener('click', () => console.log('TITS'));
+    });
   }
 
   clearList() {
@@ -92,12 +135,56 @@ export class UI {
     }
   }
 
+  populateComposerSearchResults(currentURL, composer) {
+    const resultDiv = document.createElement('div');
+    resultDiv.classList = 'search-result-down';
+
+    if (currentURL.includes('composer')) {
+      resultDiv.innerHTML = `
+      <p>${composer.name}</p>
+      <a href="${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
+
+  `;
+    } else {
+      resultDiv.innerHTML = `
+      <p>${composer.name}</p>
+      <a href="composer/${composer.name}"><button class="primary-btn">Visit Composer Page</button></a>
+
+  `;
+    }
+
+    searchBarResults.appendChild(resultDiv);
+  }
+
   showDropDown() {
     if (UISelectors.dropDownMenu.style.display === 'block') {
       UISelectors.dropDownMenu.style.display = 'none';
     } else {
       UISelectors.dropDownMenu.style.display = 'block';
     }
+  }
+
+  //FORM VALIDATION
+  showError(input, message) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-field error';
+
+    const error = formControl.querySelector('.error-text');
+    error.innerText = message;
+  }
+
+  showSuccess(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-field success';
+  }
+
+  getFieldName(input) {
+    let newString = input.id.split('-')[1];
+    console.log(newString.charAt(0).toUpperCase() + newString.slice(1));
+    if (newString.includes('password2')) {
+      return 'Repeated Password';
+    }
+    return newString.charAt(0).toUpperCase() + newString.slice(1);
   }
 
   //CONCERT BUILDER
@@ -225,4 +312,6 @@ export class UI {
     swapItems(dragStartIndex, dragEndIndex);
     this.classList.remove('over');
   }
+
+  //HOMEPAGE
 }
