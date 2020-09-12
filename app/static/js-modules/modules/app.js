@@ -8,7 +8,7 @@ import { Storage } from './storage';
 import { Requests } from './requests';
 
 export class App {
-  constructor() {}
+  constructor() { }
 
   generateRandomNumber(mix, max) {
     return Math.floor(Math.random() * (max - min) + min);
@@ -86,4 +86,90 @@ export class App {
       Requests.testLogin(loginData);
     }
   }
+
+  createConcertFunction(e) {
+    let composerName = e.target.parentElement.querySelector('.composer-name')
+      .textContent;
+    let pieceName = e.target.parentElement.querySelector('.piece-name')
+      .textContent;
+
+    let newPiece = new Piece(composerName, pieceName);
+    let newConcert = new Concert('No Name');
+    newConcert.pieces.push(newPiece);
+    Storage.setNewConcert(newConcert);
+  }
+
+  //For Concert Builder
+  addPieceToConcertArr(e, concertPieceArr) {
+    const addToConcertContainer = e.target.parentElement.parentElement;
+    const pieceComposer = addToConcertContainer.querySelector(
+      '.piece-info-left > p'
+    );
+    const pieceComposerDates = addToConcertContainer.querySelector(
+      '.data-composer-dates'
+    );
+    const pieceComposerNationality = addToConcertContainer.querySelector(
+      '.data-composer-nationality'
+    );
+    const pieceInstrumentation = addToConcertContainer.querySelector(
+      '.data-piece-instrumentation'
+    );
+    const pieceTitle = addToConcertContainer.querySelector(
+      '.piece-info-left p:last-child'
+    );
+    const pieceDuration = addToConcertContainer.querySelector(
+      '.piece-info-right p'
+    );
+
+    //Change notifictaion text back and forth.
+    e.target.textContent = 'Piece added to concert';
+
+    window.setTimeout(() => {
+      e.target.textContent = 'Add to concert';
+    }, 1000);
+
+    let pieceEl = document.createElement('div');
+    pieceEl.classList = 'concert';
+    //pieceEl.setAttribute("draggable", "true");
+    pieceEl.innerHTML = `
+      
+          <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
+          <div class="info-inner-container">
+              <div class="composer-info">
+                  <p>${pieceComposer.textContent}</p>
+                  <p>${pieceComposerDates.textContent}</p>
+                  <p>${pieceComposerNationality.textContent}</p>
+              </div>
+              <div class="piece-info">
+                  <p>${pieceTitle.textContent}</p>
+                  <p>${pieceInstrumentation.textContent}</p>
+                  <p>${pieceDuration.textContent}</p>
+              </div>
+          </div>
+          <i class="fa fa-times fa-2x delete-piece"></i>
+          <div class="add-intermission">
+              <p>Add Intermission Here</p>
+          </div>
+      
+      `;
+
+    concertPieceArr.push(pieceEl);
+    concertPieceArr.forEach((piece, index) => {
+      piece.setAttribute('data-index', index);
+    });
+
+    addPieceToDOM(pieceEl);
+
+    deletePiecesListeners();
+    createIntermissionListeners();
+    dragListeners();
+    updateConcertDuration(getConcertDuration(concertPieceArr));
+  }
+
+  //TODO
+  //deletePieces
+
+
+
+
 }

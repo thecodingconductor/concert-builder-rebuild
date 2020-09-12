@@ -5,6 +5,9 @@ import { Nav } from '../modules/nav';
 import { Requests } from '../modules/requests';
 import { UI } from '../modules/ui';
 import { UISelectors } from '../modules/UISelectors';
+import "../../css/landing.css";
+import "../../css/homepage.css";
+
 
 UISelectors.dropDownYourConcerts.addEventListener('click', (e) => {
   UISelectors.dropDownMenu.style.display = 'none';

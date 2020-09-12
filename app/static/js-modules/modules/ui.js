@@ -85,17 +85,18 @@ export class UI {
     const randomCompArr = [];
 
     //THERE IS SOME FUCKING BEAMING ISSUE HERE
-    //   composerLetter.innerHTML = `
-    //   <h1>${mainLetter}</h1>
-    //   <div class="letter-composers">
+    composerLetter.innerHTML = `
+       <h1>${mainLetter}</h1>
+     <div class="letter-composers">
 
-    //       ${randomCompArr.map(item => {`
-    //           <p class="random-composer-links"><a href="#">item</a></p>`.trim()
-    // })
-    //         .join('')}
-    //         }
+           ${randomCompArr.map((item) => {
+      return `
+               <p class="random-composer-links"><a href="#">${item}</a></p>`
+    })
+        .join('')
+      }
 
-    //   </div>`;
+       </div>`;
 
     UISelectors.browseComposers.appendChild(composerLetter);
 
@@ -187,6 +188,137 @@ export class UI {
   }
 
   //CONCERT BUILDER
+
+  addPieceFromLocalStorage(pObject) {
+    const pieceObject = pObject.piece;
+    let pieceEl = document.createElement('div');
+    pieceEl.classList = 'concert';
+    pieceEl.setAttribute('draggable', 'true');
+    pieceEl.innerHTML = `
+    
+        <i class="fas fa-bars piece-drag-bars"></i>
+        <div class="info-inner-container">
+            <div class="composer-info">
+                <p>${pieceObject.composer}</p>
+                <p>${pieceObject.years}</p>
+                <p>${pieceObject.nationality}</p>
+            </div>
+            <div class="piece-info">
+                <p>${pieceObject.title}</p>
+                <p>${pieceObject.instrumentation}</p>
+                <p>${pieceObject.duration}</p>
+            </div>
+        </div>
+        
+        <i class="fa fa-times fa-2x delete-piece"></i>
+        <div class="add-intermission">
+            <p>Add Intermission Here</p>
+        </div>
+    
+    `;
+
+    //FIX DEPENDENCIES
+    concertPieceArr.push(pieceEl);
+    concertPieceArr.forEach((piece, index) => {
+      piece.setAttribute('data-index', index);
+    });
+
+    addPieceToDOM(pieceEl);
+
+    deletePiecesListeners();
+    createIntermissionListeners();
+    dragListeners();
+    updateConcertDuration(getConcertDuration(concertPieceArr));
+
+    Storage.removeItem('newConcert');
+
+  }
+
+  getConcertDuration(pieceArr) {
+    if (pieceArr.length === 0) {
+      let empty = 0;
+      concertLengthJudgement(concertBuilderArea, empty);
+      return empty;
+    } else {
+      const concertDurationArr = pieceArr.map((item) => {
+        if (item.classList.contains('intermission')) {
+          return 30;
+        } else {
+          return Number(
+            item
+              .querySelector('.piece-info p:last-of-type')
+              .textContent.split("'")[0]
+          );
+        }
+      });
+      let concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
+      // if(concertBuilderArea.querySelector('.concert.intermission')){
+      //     concertDuration += 30;
+      // }
+
+      concertLengthJudgement(concertBuilderArea, concertDuration);
+
+      return concertDuration;
+    }
+  }
+
+
+  createIntermission(e, concertPieceArr) {
+    if (!UISelectors.concertBuilderArea.querySelector('.add-intermission')) {
+      return false;
+    }
+
+    let parentConcert = e.target.parentElement.parentElement;
+
+    e.target.parentElement.parentElement.classList.remove('show');
+
+    //concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
+
+    let intermissionEl = document.createElement('div');
+    intermissionEl.classList = 'concert intermission';
+    //intermissionEl.setAttribute("draggable", "true");
+    intermissionEl.innerHTML = `
+          <i class="fas fa-bars" draggable="true"></i>
+          <p>Intermission: ~30 minutes</p>
+          <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
+      `;
+
+    //ADD TO APP
+    concertPieceArr.splice(
+      concertPieceArr.indexOf(parentConcert) + 1,
+      0,
+      intermissionEl
+    );
+
+    concertPieceArr.forEach((piece, index) => {
+      piece.setAttribute('data-index', index);
+    });
+    UISelectors.concertBuilderArea.innerHTML = '';
+    concertPieceArr.forEach((piece) => {
+      UISelectors.concertBuilderArea.appendChild(piece);
+    });
+    //concertBuilderArea.appendChild(intermissionEl);
+    //console.log(concertPieceArr);
+
+    UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
+
+    //Delete Intermission
+    let closeIntermission = intermissionEl.querySelector('#delete-intermission');
+    closeIntermission.addEventListener('click', (e) => {
+      concertPieceArr.splice(concertPieceArr.indexOf(e.target.parentElement), 1);
+
+      //Remove Intermission from DOM
+      e.target.parentElement.remove();
+
+      //Update Data-Index Attribute
+      concertPieceArr.forEach((piece, index) => {
+        piece.setAttribute('data-index', index);
+      });
+
+      UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
+    });
+  }
+
   updateConcertDuration(durationNum) {
     UISelectors.concertMinutes.textContent = `${durationNum}`;
   }
@@ -206,6 +338,40 @@ export class UI {
       console.log('no intermission yet');
     }
   }
+
+  deletePiecesListeners() {
+    let deletePieces = UISelectors.concertBuilderArea.querySelectorAll('.delete-piece');
+    deletePieces.forEach((piece) => {
+      piece.addEventListener('click', removePiece);
+    });
+  }
+
+  createIntermissionListeners() {
+    let intermissionList = UISelectors.concertBuilderArea.querySelectorAll(
+      '.add-intermission'
+    );
+    intermissionList.forEach((intermission) => {
+      intermission.addEventListener('click', createIntermission);
+    });
+  }
+
+  removePiece(concertPieceArr) {
+    //get parent El
+    let selectedConcert = this.parentElement;
+
+    //Remove Selected Piece from Array
+    concertPieceArr.splice(concertPieceArr.indexOf(selectedConcert), 1);
+
+    //Remove Piece from DOM
+    selectedConcert.remove();
+
+    //Update Data-Index Attribute
+    concertPieceArr.forEach((piece, index) => {
+      piece.setAttribute('data-index', index);
+    });
+    UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
+  }
+
 
   addPieceToDOM(piece) {
     UISelectors.concertBuilderArea.appendChild(piece);
@@ -276,11 +442,13 @@ export class UI {
   }
 
   deleteIntermission(intermissionElement) {
-    let closeIntermission = intermissionEl.querySelector(
+    let closeIntermission = intermissionElement.querySelector(
       '#delete-intermission'
     );
-    closeIntermission.addEventListener('click', (e) => {});
+    closeIntermission.addEventListener('click', (e) => { });
   }
+
+
 
   parseDuration() {
     return Number(
@@ -308,8 +476,24 @@ export class UI {
 
   dragDrop() {
     const dragEndIndex = +this.getAttribute('data-index');
-    swapItems(dragStartIndex, dragEndIndex);
+    UI.swapItems(dragStartIndex, dragEndIndex);
     this.classList.remove('over');
+  }
+
+  swapItems(fromIndex, toIndex, concertPieceArr) {
+    const itemOne = concertPieceArr[fromIndex];
+    const itemTwo = concertPieceArr[toIndex];
+
+    //console.log(concertPieceArr[fromIndex]);
+    console.log(concertPieceArr[toIndex]);
+    concertPieceArr[fromIndex] = itemTwo;
+    concertPieceArr[toIndex] = itemOne;
+
+    UISelectors.concertBuilderArea.innerHTML = ``;
+
+    concertPieceArr.forEach((item) => {
+      UI.addPieceToDOM(item);
+    });
   }
 
   //HOMEPAGE
@@ -328,11 +512,97 @@ export class UI {
         
         
         `;
-      yourConcertsContainer.innerHTML = '';
-      yourConcertsContainer.appendChild(notificationContainer);
+      UISelectors.yourConcertsContainer.innerHTML = '';
+      UISelectors.yourConcertsContainer.appendChild(notificationContainer);
+    }
+
+    if (user.favorites.length === 0) {
+      let notificationContainer = document.createElement("div");
+      notificationContainer.classList = 'no-favorites-notification';
+      notificationContainer.innerHTML = `
+              <p class="no-favorites-message">Please browse composers to add some favorites!</p>
+          `;
+      UISelectors.homeSearchResults.appendChild(notificationContainer);
+
     }
 
     //SEE homepage.js Line 86
+    user.concerts.forEach((concert, index) => {
+      if (all === false && index < 3) {
+        console.log('all===false, index < 3');
+        //fullConcertsGrid.style.display = 'none';
+        let concertContainer = document.createElement('div');
+        concertContainer.classList = 'search-result';
+        concertContainer.innerHTML = `
+                  <span class="concert-id-num">${concert.id}</span>
+                  
+                  <h1 class="concert-name" id="concert-name"> ${concert.title
+          }</h1>
+                       ${concert.pieces
+            .map((item) => {
+              return `<p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
+                           `.trim();
+            })
+            .join('')}
+                           <button class="primary-btn remove-concert-btn">Delete Concert</button>
+                           <span class="hover-gold"></span>
+                      `;
+        yourConcertsContainer.appendChild(concertContainer);
+
+        return false;
+      } else {
+        let concertContainer = document.createElement('div');
+        concertContainer.classList = 'search-result';
+        concertContainer.innerHTML = `
+                  <span class="concert-id-num">${concert.id}</span>
+                  
+                  <h1 class="concert-name" id="concert-name"> ${concert.title
+          }</h1>
+                       ${concert.pieces
+            .map((item) =>
+              `
+                           
+                           <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
+                           
+                           `.trim()
+            )
+            .join('')}
+                           <button class="primary-btn remove-concert-btn">Delete Concert</button>
+                           <span class="hover-gold "></span>
+                      `;
+
+        fullConcertsGrid.appendChild(concertContainer);
+      }
+    });
+
+    removeConcertListeners(fullConcertsGrid);
+    removeConcertListeners(yourConcertsContainer);
+
+    //THIS IS THE CORRECT BRACKET FUCK ESLINT AND PRETTIER.
+  }
+
+  updateHoverListeners() {
+    let searchResults = document.querySelectorAll('.search-result');
+
+    [...searchResults].forEach((result) => {
+
+      result.addEventListener('mouseover', UI.showGoldUnderline);
+      result.addEventListener('mouseleave', UI.hideGoldUnderline);
+    });
+  }
+
+  removeConcertListeners(container) {
+    let concertsList = container.children;
+
+    [...concertsList].forEach((concert) => {
+      if (!concert.querySelector('.remove-concert-btn')) {
+        return false;
+      } else {
+        concert
+          .querySelector('.remove-concert-btn')
+          .addEventListener('click', UI.deleteConcert);
+      }
+    });
   }
 
   deleteConcert(e) {
@@ -476,4 +746,38 @@ export class UI {
       piece.textContent = pieceTitleLength;
     });
   }
+
+  clearComposerLinks() {
+    if (UISelectors.searchField.value.length === 0) {
+      while (UISelectors.composerLinks.firstChild) {
+        UISelectors.composerLinks.removeChild(UISelectors.composerLinks.firstChild);
+      }
+
+      return false;
+    }
+
+    while (UISelectors.composerLinks.firstChild) {
+      UISelectors.composerLinks.removeChild(UISelectors.composerLinks.firstChild);
+    }
+  }
+
+  //COMPOSER PAGE
+  clearComposerResults() {
+    UISelectors.pieceDetailsContainer.innerHTML = '';
+  }
+
+  showButtonError(button, message) {
+    let initalText = button.textContent;
+    button.classList.add('error');
+    button.textContent = `${message}`;
+    window.setTimeout(() => {
+      button.classList.remove('error');
+      button.textContent = initalText
+    }, 1000);
+  }
+
+
+}
+
+
 }

@@ -1,3 +1,7 @@
+import { User, Concert, Piece } from './sessionObj';
+import { UI } from './ui';
+import { UISelectors } from './UISelectors';
+
 export class Storage {
   getUser() {
     return JSON.parse(localStorage.getItem('user'));
@@ -5,5 +9,32 @@ export class Storage {
 
   setUser(user) {
     localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  createUser() {
+    let user = document.getElementById('current-username').textContent;
+    if (!this.getUser()) {
+      let newUser = new User(user);
+      UI.displayConcerts(newUser);
+    } else if (user === this.getUser().username) {
+      let currentUser = this.getUser();
+      UI.displayConcerts(currentUser);
+      return false;
+    } else if (user !== this.getUser().username) {
+      let newUser = new User(user);
+      this.setUser(newUser);
+    }
+  }
+
+  getConcert() {
+    localStorage.getItem('newConcert');
+  }
+
+  setNewConcert(concert) {
+    localStorage.setItem('newConcert', JSON.stringify(concert));
+  }
+
+  removeItem(string) {
+    localStorage.remove(string);
   }
 }

@@ -33,46 +33,47 @@
 // let user = document.getElementById('current-username').textContent;
 
 //Load User from Local Storage and display concerts. Or create new "User"
-function createUser() {
-  let user = document.getElementById('current-username').textContent;
-  console.log(user);
+//ADDED TO STORAGE.js
+// function createUser() {
+//   let user = document.getElementById('current-username').textContent;
+//   console.log(user);
 
-  if (!JSON.parse(localStorage.getItem('user'))) {
-    let newUser = new User(user);
-    localStorage.setItem('user', JSON.stringify(newUser));
-    displayConcerts(newUser);
-  } else if (user === JSON.parse(localStorage.getItem('user')).username) {
-    let currentUser = JSON.parse(localStorage.getItem('user'));
+//   if (!JSON.parse(localStorage.getItem('user'))) {
+//     let newUser = new User(user);
+//     localStorage.setItem('user', JSON.stringify(newUser));
+//     displayConcerts(newUser);
+//   } else if (user === JSON.parse(localStorage.getItem('user')).username) {
+//     let currentUser = JSON.parse(localStorage.getItem('user'));
 
-    displayConcerts(currentUser);
-    return false;
-  } else if (user !== JSON.parse(localStorage.getItem('user')).username) {
-    let newUser = new User(user);
-    localStorage.setItem('user', JSON.stringify(newUser));
-  }
-}
+//     displayConcerts(currentUser);
+//     return false;
+//   } else if (user !== JSON.parse(localStorage.getItem('user')).username) {
+//     let newUser = new User(user);
+//     localStorage.setItem('user', JSON.stringify(newUser));
+//   }
+// }
 
 // display the concerts.
 function displayConcerts(user, all = false) {
   //FIXED!!!!
-  if (fullConcertsGrid.children.length > 0) {
-    fullConcertsGrid.innerHTML = ``;
-  }
+  // if (fullConcertsGrid.children.length > 0) {
+  //   fullConcertsGrid.innerHTML = ``;
+  // }
 
   //console.log(user);
-  if (user.concerts.length === 0) {
-    let notificationContainer = document.createElement('div');
-    notificationContainer.classList = 'no-concerts-notification';
-    notificationContainer.innerHTML = `
-        <div class="search-result">
-                        <h2 class="composer-name">Visit the concert builder page above to start building concerts!</h2>
-        </div>
-        
-        
-        `;
-    yourConcertsContainer.innerHTML = '';
-    yourConcertsContainer.appendChild(notificationContainer);
-  }
+  // if (user.concerts.length === 0) {
+  //   let notificationContainer = document.createElement('div');
+  //   notificationContainer.classList = 'no-concerts-notification';
+  //   notificationContainer.innerHTML = `
+  //       <div class="search-result">
+  //                       <h2 class="composer-name">Visit the concert builder page above to start building concerts!</h2>
+  //       </div>
+
+
+  //       `;
+  //   yourConcertsContainer.innerHTML = '';
+  //   yourConcertsContainer.appendChild(notificationContainer);
+  // }
 
   // if(user.favorites.length === 0) {
   //     let notificationContainer = document.createElement("div");
@@ -84,61 +85,56 @@ function displayConcerts(user, all = false) {
   // }
 
   //MORE ISSUES WITH THE FUCKING MAP FUNCTION WITHIN TEMPLATE LITERALS SUDENNLY NOT WORKGINNIWNAOWIND(A*HWD89wyd089p)
-  user.concerts.forEach((concert, index) => {
-    if (all === false && index < 3) {
-      console.log('all===false, index < 3');
-      //fullConcertsGrid.style.display = 'none';
-      let concertContainer = document.createElement('div');
-      concertContainer.classList = 'search-result';
-      concertContainer.innerHTML = `
-                <span class="concert-id-num">${concert.id}</span>
-                
-                <h1 class="concert-name" id="concert-name"> ${
-                  concert.title
-                }</h1>
-                     ${concert.pieces
-                       .map((item) =>
-                         `
-                         
-                         <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
-                         
-                         `.trim()
-                       )
-                       .join('')}
-                         <button class="primary-btn remove-concert-btn">Delete Concert</button>
-                         <span class="hover-gold"></span>
-                    `;
-      yourConcertsContainer.appendChild(concertContainer);
+  // user.concerts.forEach((concert, index) => {
+  //   if (all === false && index < 3) {
+  //     console.log('all===false, index < 3');
+  //     //fullConcertsGrid.style.display = 'none';
+  //     let concertContainer = document.createElement('div');
+  //     concertContainer.classList = 'search-result';
+  //     concertContainer.innerHTML = `
+  //               <span class="concert-id-num">${concert.id}</span>
 
-      return false;
-    } else {
-      let concertContainer = document.createElement('div');
-      concertContainer.classList = 'search-result';
-      concertContainer.innerHTML = `
-                <span class="concert-id-num">${concert.id}</span>
-                
-                <h1 class="concert-name" id="concert-name"> ${
-                  concert.title
-                }</h1>
-                     ${concert.pieces
-                       .map((item) =>
-                         `
-                         
-                         <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
-                         
-                         `.trim()
-                       )
-                       .join('')}
-                         <button class="primary-btn remove-concert-btn">Delete Concert</button>
-                         <span class="hover-gold "></span>
-                    `;
+  //               <h1 class="concert-name" id="concert-name"> ${concert.title
+  //       }</h1>
+  //                    ${concert.pieces
+  //         .map((item) => {
+  //           return `<p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
+  //                        `.trim();
+  //         })
+  //         .join('')}
+  //                        <button class="primary-btn remove-concert-btn">Delete Concert</button>
+  //                        <span class="hover-gold"></span>
+  //                   `;
+  //     yourConcertsContainer.appendChild(concertContainer);
 
-      fullConcertsGrid.appendChild(concertContainer);
-    }
-  });
+  //     return false;
+  //   } else {
+  //     let concertContainer = document.createElement('div');
+  //     concertContainer.classList = 'search-result';
+  //     concertContainer.innerHTML = `
+  //               <span class="concert-id-num">${concert.id}</span>
 
-  removeConcertListeners(fullConcertsGrid);
-  removeConcertListeners(yourConcertsContainer);
+  //               <h1 class="concert-name" id="concert-name"> ${concert.title
+  //       }</h1>
+  //                    ${concert.pieces
+  //         .map((item) =>
+  //           `
+
+  //                        <p class="tiny-piece-title"> <strong> ${item.composer}</strong> ${item.title}</p>
+
+  //                        `.trim()
+  //         )
+  //         .join('')}
+  //                        <button class="primary-btn remove-concert-btn">Delete Concert</button>
+  //                        <span class="hover-gold "></span>
+  //                   `;
+
+  //     fullConcertsGrid.appendChild(concertContainer);
+  //   }
+  // });
+
+  // removeConcertListeners(fullConcertsGrid);
+  // removeConcertListeners(yourConcertsContainer);
 
   //   if (fullConcertsGrid.children.length === 0) {
   //     console.log('FULL CONCERTS GRID DISPLAY NONE');
@@ -148,31 +144,33 @@ function displayConcerts(user, all = false) {
   // }
 
   //This works.
-  function updateHoverListeners() {
-    let searchResults = document.querySelectorAll('.search-result');
+  //ADDED
+  // function updateHoverListeners() {
+  //   let searchResults = document.querySelectorAll('.search-result');
 
-    [...searchResults].forEach((result) => {
-      console.log(result);
-      result.addEventListener('mouseover', showGoldUnderline);
-      result.addEventListener('mouseleave', hideGoldUnderline);
-    });
-  }
+  //   [...searchResults].forEach((result) => {
+  //     console.log(result);
+  //     result.addEventListener('mouseover', showGoldUnderline);
+  //     result.addEventListener('mouseleave', hideGoldUnderline);
+  //   });
+  // }
 
   //Make sure each button has a delete function
   //To the home page
-  function removeConcertListeners(container) {
-    let concertsList = container.children;
+  //ADDED
+  // function removeConcertListeners(container) {
+  //   let concertsList = container.children;
 
-    [...concertsList].forEach((concert) => {
-      if (!concert.querySelector('.remove-concert-btn')) {
-        return false;
-      } else {
-        concert
-          .querySelector('.remove-concert-btn')
-          .addEventListener('click', deleteConcert);
-      }
-    });
-  }
+  //   [...concertsList].forEach((concert) => {
+  //     if (!concert.querySelector('.remove-concert-btn')) {
+  //       return false;
+  //     } else {
+  //       concert
+  //         .querySelector('.remove-concert-btn')
+  //         .addEventListener('click', deleteConcert);
+  //     }
+  //   });
+  // }
 
   //Remove Concert from DOM and Local Storage
   // function deleteConcert(e) {
@@ -197,17 +195,18 @@ function displayConcerts(user, all = false) {
   // }
 
   //Create concert button -- send piece to the concert builder.
-  function createConcertFunction(e) {
-    let composerName = e.target.parentElement.querySelector('.composer-name')
-      .textContent;
-    let pieceName = e.target.parentElement.querySelector('.piece-name')
-      .textContent;
-    let newPiece = new Piece(composerName, pieceName);
-    let newConcert = new Concert('No Name');
-    newConcert.pieces.push(newPiece);
-    localStorage.setItem('newConcert', JSON.stringify(newConcert));
-    location.href = '/concert_builder';
-  }
+  //ADDED TO APP
+  // function createConcertFunction(e) {
+  //   let composerName = e.target.parentElement.querySelector('.composer-name')
+  //     .textContent;
+  //   let pieceName = e.target.parentElement.querySelector('.piece-name')
+  //     .textContent;
+  //   let newPiece = new Piece(composerName, pieceName);
+  //   let newConcert = new Concert('No Name');
+  //   newConcert.pieces.push(newPiece);
+  //   localStorage.setItem('newConcert', JSON.stringify(newConcert));
+  //   location.href = '/concert_builder';
+  // }
 
   // Why is this here?
   // pieceNames.forEach((piece) => {

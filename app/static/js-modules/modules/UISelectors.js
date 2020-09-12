@@ -66,7 +66,7 @@ export class UISelectors {
 
     this.concertBuilderArea = document.getElementById('concert-builder-area');
     this.concertMinutes = document.getElementById('concert-minutes');
-    cthis.oncertConclusion = document.getElementById('concert-conclusion');
+    this.concertConclusion = document.getElementById('concert-conclusion');
 
     this.searchFavorites = document.getElementById('search-favorites');
     this.favoritesSearchResults = document.getElementById(
