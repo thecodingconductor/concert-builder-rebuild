@@ -1,9 +1,11 @@
 import { UISelectors } from './UISelectors';
 import { Requests } from './requests';
+import { Storage } from './storage';
 
 export class Ui {
   constructor() {
     this.dragStartIndex;
+    this.all = true;
   }
 
   testImport() {
@@ -505,6 +507,7 @@ export class Ui {
       UISelectors.fullConcertsGrid.innerHTML = ``;
     }
 
+
     if (user.concerts.length === 0) {
       let notificationContainer = document.createElement('div');
       notificationContainer.classList = 'no-concerts-notification';
@@ -519,15 +522,15 @@ export class Ui {
       UISelectors.yourConcertsContainer.appendChild(notificationContainer);
     }
 
-    if (user.favorites.length === 0) {
-      let notificationContainer = document.createElement("div");
-      notificationContainer.classList = 'no-favorites-notification';
-      notificationContainer.innerHTML = `
-              <p class="no-favorites-message">Please browse composers to add some favorites!</p>
-          `;
-      UISelectors.homeSearchResults.appendChild(notificationContainer);
+    // if (user.favorites.length === 0) {
+    //   let notificationContainer = document.createElement("div");
+    //   notificationContainer.classList = 'no-favorites-notification';
+    //   notificationContainer.innerHTML = `
+    //           <p class="no-favorites-message">Please browse composers to add some favorites!</p>
+    //       `;
+    //   UISelectors.homeSearchResults.appendChild(notificationContainer);
 
-    }
+    // }
 
     //SEE homepage.js Line 86
     user.concerts.forEach((concert, index) => {
@@ -550,7 +553,9 @@ export class Ui {
                            <button class="primary-btn remove-concert-btn">Delete Concert</button>
                            <span class="hover-gold"></span>
                       `;
-        yourConcertsContainer.appendChild(concertContainer);
+        console.log(concertContainer);
+        console.log(UISelectors.yourConcertsContainer);
+        UISelectors.yourConcertsContainer.appendChild(concertContainer);
 
         return false;
       } else {
@@ -574,12 +579,12 @@ export class Ui {
                            <span class="hover-gold "></span>
                       `;
 
-        fullConcertsGrid.appendChild(concertContainer);
+        UISelectors.fullConcertsGrid.appendChild(concertContainer);
       }
     });
 
-    removeConcertListeners(fullConcertsGrid);
-    removeConcertListeners(yourConcertsContainer);
+    UI.removeConcertListeners(UISelectors.fullConcertsGrid);
+    UI.removeConcertListeners(UISelectors.yourConcertsContainer);
 
     //THIS IS THE CORRECT BRACKET FUCK ESLINT AND PRETTIER.
   }
@@ -693,10 +698,12 @@ export class Ui {
       '.header-row.concerts-header-row .view-more-btn'
     ).style.display = 'none';
     //Change this
-    // let currentUser = JSON.parse(localStorage.getItem('user'));
+    let currentUser = Storage.getUser();
+    console.log(currentUser);
 
-    this.displayConcerts(currentUser, (all = true));
+    UI.displayConcerts(currentUser, this.all = false);
   }
+
 
   favoritesEnter(container) {
     const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
@@ -728,7 +735,7 @@ export class Ui {
       UISelectors.mainContentInner.classList.remove('remove');
       if (e.target === UISelectors.returnHome) {
         //Change this
-        Ui.homeCardEnter(UISelectors.mainContentInner);
+        UI.homeCardEnter(UISelectors.mainContentInner);
       } else if (e.target === UISelectors.openProfile) {
       } else if (
         e.target === UISelectors.openFavorites ||
@@ -741,7 +748,7 @@ export class Ui {
         e.target.classList.contains('concert-view-more-btn') ||
         e.target.id === UISelectors.dropDownYourConcerts.id
       ) {
-        Ui.concertsEnter(UISelectors.mainContentInner);
+        UI.concertsEnter(UISelectors.mainContentInner);
       }
     }, 1500);
   }
