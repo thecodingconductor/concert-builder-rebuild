@@ -37,6 +37,10 @@ class STORAGE {
   removeItem(string) {
     localStorage.remove(string);
   }
+
+  setItem(string, item) {
+    localStorage.setItem(string, JSON.stringify(item));
+  }
 }
 
 export const Storage = new STORAGE();

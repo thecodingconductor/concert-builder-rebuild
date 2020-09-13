@@ -625,7 +625,8 @@ export class Ui {
       }
     });
     //STORAGE FUNCTION
-    localStorage.setItem('user', JSON.stringify(deleteConcertUser));
+    Storage.setItem('user', deleteConcertUser);
+    // localStorage.setItem('user', JSON.stringify(deleteConcertUser));
   }
 
   //Where to call this?
@@ -651,38 +652,7 @@ export class Ui {
     return false;
   }
 
-  resultsExit(e) {
-    //console.log('from results exit', e.target.id);
-    //console.log(dropDownYourConcerts.id);
-    e.preventDefault();
-    UISelectors.mainContentInner.classList.add('remove');
-    window.setTimeout(() => {
-      [...UISelectors.mainContentInner.children].forEach((node) => {
-        node.style.display = 'none';
-      });
-    }, 1000);
 
-    window.setTimeout(() => {
-      UISelectors.mainContentInner.classList.remove('remove');
-      if (e.target === UISelectors.returnHome) {
-        //Change this
-        this.homeCardEnter(UISelectors.mainContentInner);
-      } else if (e.target === UISelectors.openProfile) {
-      } else if (
-        e.target === UISelectors.openFavorites ||
-        (!e.target.classList.contains('concert-view-more-btn') &&
-          e.target.classList.contains('view-more-btn'))
-      ) {
-        favoritesEnter(mainContentInner);
-      } else if (
-        e.target === UISelectors.openConcerts ||
-        e.target.classList.contains('concert-view-more-btn') ||
-        e.target.id === UISelectors.dropDownYourConcerts.id
-      ) {
-        concertsEnter(mainContentInner);
-      }
-    }, 1500);
-  }
 
   homeCardEnter(container) {
     const fullFavoritesGrid = container.querySelector('.full-favorites-grid');
@@ -742,6 +712,39 @@ export class Ui {
     });
   }
 
+
+  resultsExit(e) {
+    //console.log('from results exit', e.target.id);
+    //console.log(dropDownYourConcerts.id);
+    e.preventDefault();
+    UISelectors.mainContentInner.classList.add('remove');
+    window.setTimeout(() => {
+      [...UISelectors.mainContentInner.children].forEach((node) => {
+        node.style.display = 'none';
+      });
+    }, 1000);
+
+    window.setTimeout(() => {
+      UISelectors.mainContentInner.classList.remove('remove');
+      if (e.target === UISelectors.returnHome) {
+        //Change this
+        Ui.homeCardEnter(UISelectors.mainContentInner);
+      } else if (e.target === UISelectors.openProfile) {
+      } else if (
+        e.target === UISelectors.openFavorites ||
+        (!e.target.classList.contains('concert-view-more-btn') &&
+          e.target.classList.contains('view-more-btn'))
+      ) {
+        UI.favoritesEnter(UISelectors.mainContentInner);
+      } else if (
+        e.target === UISelectors.openConcerts ||
+        e.target.classList.contains('concert-view-more-btn') ||
+        e.target.id === UISelectors.dropDownYourConcerts.id
+      ) {
+        Ui.concertsEnter(UISelectors.mainContentInner);
+      }
+    }, 1500);
+  }
   formatResultsCard() {
     const pieceNames = document.querySelectorAll('.piece-name');
     pieceNames.forEach((piece) => {
