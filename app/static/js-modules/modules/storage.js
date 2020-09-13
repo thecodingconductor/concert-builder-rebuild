@@ -35,7 +35,7 @@ class STORAGE {
   }
 
   removeItem(string) {
-    localStorage.remove(string);
+    localStorage.removeItem(string);
   }
 
   setItem(string, item) {

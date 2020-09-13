@@ -6,6 +6,7 @@ import { Storage } from '../modules/storage';
 import { Requests } from '../modules/requests';
 import { UI } from '../modules/ui';
 import { UISelectors } from '../modules/UISelectors';
+import { User, Concert, Piece } from '../modules/sessionObj';
 import "../../css/landing.css";
 import "../../css/homepage.css";
 import "../../css/concert-builder.css";
@@ -18,7 +19,7 @@ let dragStartIndex;
 window.addEventListener('DOMContentLoaded', App.initBase);
 
 //Pass in Concert Piece Array
-function saveConcert(concertPieceArr) {
+function saveConcert() {
     let currentUser = Storage.getUser();
     //console.log(currentUser);
     if (UISelectors.concertTitleHeader.textContent === '') {
@@ -29,7 +30,7 @@ function saveConcert(concertPieceArr) {
             UISelectors.saveConcertBtn.textContent = 'Save Concert';
         }, 1000);
         return false;
-    } else if (concertPieceArr.length === 0) {
+    } else if (UI.concertPieceArr.length === 0) {
         UISelectors.saveConcertBtn.classList.add('disabled');
         UISelectors.saveConcertBtn.textContent = 'Please add pieces...';
         window.setTimeout(() => {
@@ -41,7 +42,7 @@ function saveConcert(concertPieceArr) {
 
     let currentConcert = new Concert(UISelectors.concertTitleHeader.textContent);
     //console.log(currentConcert);
-    concertPieceArr.forEach((piece) => {
+    UI.concertPieceArr.forEach((piece) => {
         let thisPiece = new Piece(
             piece.querySelector('.composer-info > p:first-child').textContent,
             piece.querySelector('.piece-info > p:first-child').textContent

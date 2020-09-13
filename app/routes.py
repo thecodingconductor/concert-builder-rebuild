@@ -117,7 +117,10 @@ def composers():
 @app.route('/search_favorites', methods=["GET", "POST"])
 def search_favorites():
     user = User.query.filter_by(username=current_user.username).first()
-    user_search_entry = request.form.get("search-favorites")
+    response = request.get_json()
+    user_search_entry = response['searchTerm']
+    print(user)
+    print(user_search_entry)
 
     res = Composer.query.filter(
         Composer.name.ilike(f"%{user_search_entry}%")).all()

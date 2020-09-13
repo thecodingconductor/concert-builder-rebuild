@@ -105,7 +105,7 @@ export class Ui {
     UISelectors.browseComposers.appendChild(composerLetter);
 
     const letterLinks = document.querySelectorAll('.letter h1');
-    console.log(letterLinks);
+
     [...letterLinks].forEach((link) => {
       link.addEventListener('click', Requests.openCurrentLetter);
     });
@@ -186,7 +186,7 @@ export class Ui {
 
   getFieldName(input) {
     let newString = input.id.split('-')[1];
-    console.log(newString.charAt(0).toUpperCase() + newString.slice(1));
+    //console.log(newString.charAt(0).toUpperCase() + newString.slice(1));
     if (newString.includes('password2')) {
       return 'Repeated Password';
     }
@@ -565,9 +565,12 @@ export class Ui {
     if (UISelectors.fullConcertsGrid.children.length > 0) {
       UISelectors.fullConcertsGrid.innerHTML = ``;
     }
+    // console.log(user);
+    // console.log(user.concerts);
+    // console.log(user.concerts.length);
 
-
-    if (user.concerts.length === 0) {
+    console.log('display Concerts being called');
+    if (user.concerts.length === 0 || user.concerts.length === undefined) {
       let notificationContainer = document.createElement('div');
       notificationContainer.classList = 'no-concerts-notification';
       notificationContainer.innerHTML = `

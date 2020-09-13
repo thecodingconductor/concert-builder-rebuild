@@ -101,15 +101,22 @@ class REQUESTS {
 
   favoritesSearch() {
     let searchTerm = UISelectors.searchFavorites.value;
+    let data = {
+      searchTerm
+    }
+
     if (searchTerm === '') {
       UISelectors.initialFavoritesResults.forEach((favorite) => {
         UISelectors.favoritesSearchResults.appendChild(favorite);
       });
     } else {
-      HTTP.post('/search_favorites', searchTerm)
+      HTTP.post('/search_favorites', data)
         .then(data => {
-          data.favorites.forEach(favorite => {
+
+          let parsed = JSON.parse(data.favorites);
+          parsed.forEach(favorite => {
             const favoriteLI = document.createElement('li');
+
             favoriteLI.innerHTML = `
             <div class="data-composer-info">
                     <p class="data-composer-dates">${favorite.composer.years}</p>

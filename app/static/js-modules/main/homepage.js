@@ -10,6 +10,7 @@ import "../../css/landing.css";
 import "../../css/homepage.css";
 
 
+
 window.addEventListener('DOMContentLoaded', App.initBase);
 
 UISelectors.dropDownYourConcerts.addEventListener('click', (e) => {
@@ -43,7 +44,9 @@ UISelectors.openBrowse.addEventListener('click', UI.showBrowse);
 
 //LOAD CONCERTS!!
 if (UISelectors.user !== null) {
-  const currentUser = Storage.getUser();
-  window.addEventListener('DOMContentLoaded', UI.displayConcerts(currentUser))
+
+  // const currentUser = Storage.createUser();
+
+  window.addEventListener('DOMContentLoaded', Storage.createUser())
 }
 
