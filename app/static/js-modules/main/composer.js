@@ -5,6 +5,8 @@ import { Nav } from '../modules/nav';
 import { Requests } from '../modules/requests';
 import { UI } from '../modules/ui';
 import { UISelectors } from '../modules/UISelectors';
+import { User, Piece, Concert } from '../modules/sessionObj';
+import { Storage } from '../modules/storage';
 import "../../css/landing.css";
 import "../../css/homepage.css";
 import "../../css/composer.css";

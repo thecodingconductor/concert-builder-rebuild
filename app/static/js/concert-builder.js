@@ -45,6 +45,7 @@
 // }
 
 //FIX ISSUES ON BOTTOM
+//ADDED TO UI
 // function addPieceFromLocalStorage(pObject) {
 //   const pieceObject = pObject.piece;
 //   console.log(pieceObject);
@@ -522,22 +523,22 @@
 //Event Listeners
 
 //This needs to be fixed -- it will go inside dynamicSearch
-addToConcert.forEach((button) => {
-  button.addEventListener('click', addPieceToConcertArr);
-});
+// addToConcert.forEach((button) => {
+//   button.addEventListener('click', addPieceToConcertArr);
+// });
 
-searchFavorites.addEventListener('keyup', () => {
-  clearFaveList();
-  dynamicSearch();
-});
+// searchFavorites.addEventListener('keyup', () => {
+//   clearFaveList();
+//   dynamicSearch();
+// });
 
 //showAddIntermission
-concertBuilderArea.addEventListener('mouseover', showIntermission);
+// concertBuilderArea.addEventListener('mouseover', showIntermission);
 
-concertTitleBtn.addEventListener('click', saveConcertTitle);
-changeTitleBtn.addEventListener('click', removeConcertTitle);
-window.addEventListener(
-  'DOMContentLoaded',
-  updateConcertDuration(getConcertDuration(concertPieceArr))
-);
-saveConcertBtn.addEventListener('click', saveConcert);
+// concertTitleBtn.addEventListener('click', saveConcertTitle);
+// changeTitleBtn.addEventListener('click', removeConcertTitle);
+// window.addEventListener(
+//   'DOMContentLoaded',
+//   updateConcertDuration(getConcertDuration(concertPieceArr))
+// );
+// saveConcertBtn.addEventListener('click', saveConcert);

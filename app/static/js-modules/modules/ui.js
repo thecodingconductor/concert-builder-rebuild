@@ -224,17 +224,17 @@ export class Ui {
     `;
 
     //FIX DEPENDENCIES
-    concertPieceArr.push(pieceEl);
-    concertPieceArr.forEach((piece, index) => {
+    UI.concertPieceArr.push(pieceEl);
+    UI.concertPieceArr.forEach((piece, index) => {
       piece.setAttribute('data-index', index);
     });
 
-    Ui.addPieceToDOM(pieceEl);
+    UI.addPieceToDOM(pieceEl);
 
-    Ui.deletePiecesListeners();
-    Ui.createIntermissionListeners();
-    Ui.dragListeners();
-    Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
+    UI.deletePiecesListeners();
+    UI.createIntermissionListeners();
+    UI.dragListeners();
+    UI.updateConcertDuration(UI.getConcertDuration(UI.concertPieceArr));
 
     Storage.removeItem('newConcert');
 

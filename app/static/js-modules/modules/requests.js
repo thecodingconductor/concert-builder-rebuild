@@ -162,7 +162,7 @@ class REQUESTS {
 
             const commentList = document.createElement('ul');
             commentList.classList = 'comment-list';
-            pieceDetailsContainer.appendChild(commentList);
+            UISelectors.pieceDetailsContainer.appendChild(commentList);
             data.piece.comments.forEach(comment => {
               const commentLI = document.createElement('li');
               commentLI.classList = 'comment';
@@ -228,10 +228,14 @@ class REQUESTS {
 
       HTTP.post('/add_comment', entry)
         .then(data => {
+          e.target.textContent = 'Thank you!';
+          commentBody.value = ``;
           console.log(data);
         }).catch(err => {
           UI.showButtonError(e.target);
         });
+
+
 
     }
   }

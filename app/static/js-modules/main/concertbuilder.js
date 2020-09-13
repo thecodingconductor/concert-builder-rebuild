@@ -16,7 +16,9 @@ let favoritesResults = [];
 let dragStartIndex;
 // let number = 0;
 
+//Initialize Base 
 window.addEventListener('DOMContentLoaded', App.initBase);
+
 
 
 
@@ -38,7 +40,7 @@ function dragListeners() {
     });
 }
 
-//Initialize Base 
+
 
 
 UISelectors.addToConcert.forEach((button) => {
@@ -62,3 +64,4 @@ window.addEventListener(
 
 //TODO FIX THIS
 UISelectors.saveConcertBtn.addEventListener('click', App.saveConcert);
+window.addEventListener('DOMContentLoaded', Storage.getConcert);

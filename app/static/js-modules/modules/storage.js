@@ -1,3 +1,4 @@
+import { Requests } from './requests';
 import { User, Concert, Piece } from './sessionObj';
 import { UI } from './ui';
 import { UISelectors } from './UISelectors';
@@ -30,7 +31,10 @@ class STORAGE {
   }
 
   getConcert() {
-    localStorage.getItem('newConcert');
+    let res = JSON.parse(localStorage.getItem('newConcert'));
+    console.log(res);
+    Requests.getFullPieceInfo(res.pieces[0].title.split('...')[0]);
+
   }
 
   setNewConcert(concert) {
