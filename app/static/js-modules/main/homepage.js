@@ -43,10 +43,5 @@ UISelectors.openBrowse.addEventListener('click', UI.showBrowse);
 });
 
 //LOAD CONCERTS!!
-if (UISelectors.user !== null) {
-
-  // const currentUser = Storage.createUser();
-
-  window.addEventListener('DOMContentLoaded', Storage.createUser())
-}
+window.addEventListener('DOMContentLoaded', Storage.createUser)
 

@@ -353,7 +353,7 @@ export class Ui {
   }
 
   createIntermissionListeners() {
-    console.log('CREATE INTERMISSION LISTERNERS');
+
     let intermissionList = UISelectors.concertBuilderArea.querySelectorAll(
       '.add-intermission'
     );
@@ -382,8 +382,7 @@ export class Ui {
 
 
   addPieceToDOM(piece) {
-    console.log('Add piece to DOM??')
-    console.log(piece);
+
     UISelectors.concertBuilderArea.appendChild(piece);
   }
 
@@ -569,7 +568,7 @@ export class Ui {
     // console.log(user.concerts);
     // console.log(user.concerts.length);
 
-    console.log('display Concerts being called');
+
     if (user.concerts.length === 0 || user.concerts.length === undefined) {
       let notificationContainer = document.createElement('div');
       notificationContainer.classList = 'no-concerts-notification';

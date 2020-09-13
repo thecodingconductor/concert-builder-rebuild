@@ -18,48 +18,8 @@ let dragStartIndex;
 
 window.addEventListener('DOMContentLoaded', App.initBase);
 
-//Pass in Concert Piece Array
-function saveConcert() {
-    let currentUser = Storage.getUser();
-    //console.log(currentUser);
-    if (UISelectors.concertTitleHeader.textContent === '') {
-        UISelectors.saveConcertBtn.classList.add('disabled');
-        UISelectors.saveConcertBtn.textContent = 'Please add title.';
-        window.setTimeout(() => {
-            UISelectors.saveConcertBtn.classList.remove('disabled');
-            UISelectors.saveConcertBtn.textContent = 'Save Concert';
-        }, 1000);
-        return false;
-    } else if (UI.concertPieceArr.length === 0) {
-        UISelectors.saveConcertBtn.classList.add('disabled');
-        UISelectors.saveConcertBtn.textContent = 'Please add pieces...';
-        window.setTimeout(() => {
-            UISelectors.saveConcertBtn.classList.remove('disabled');
-            UISelectors.saveConcertBtn.textContent = 'Save Concert';
-        }, 1000);
-        return false;
-    }
 
-    let currentConcert = new Concert(UISelectors.concertTitleHeader.textContent);
-    //console.log(currentConcert);
-    UI.concertPieceArr.forEach((piece) => {
-        let thisPiece = new Piece(
-            piece.querySelector('.composer-info > p:first-child').textContent,
-            piece.querySelector('.piece-info > p:first-child').textContent
-        );
 
-        currentConcert.pieces.push(thisPiece);
-    });
-
-    currentUser.concerts.push(currentConcert);
-
-    Storage.setUser();
-
-    UISelectors.saveConcertBtn.textContent = 'Concert Saved!!';
-    window.setTimeout(() => {
-        UISelectors.saveConcertBtn.textContent = 'Save Concert';
-    }, 1000);
-}
 
 function dragListeners() {
     const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
@@ -101,4 +61,4 @@ window.addEventListener(
 );
 
 //TODO FIX THIS
-UISelectors.saveConcertBtn.addEventListener('click', saveConcert);
+UISelectors.saveConcertBtn.addEventListener('click', App.saveConcert);

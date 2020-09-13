@@ -13,16 +13,19 @@ class STORAGE {
 
   createUser() {
     let user = document.getElementById('current-username').textContent;
-    if (!this.getUser()) {
+
+    if (Storage.getUser() === null || Storage.getUser() === undefined) {
+
       let newUser = new User(user);
+      Storage.setUser(newUser);
       UI.displayConcerts(newUser);
-    } else if (user === this.getUser().username) {
-      let currentUser = this.getUser();
+    } else if (user === Storage.getUser().username) {
+      let currentUser = Storage.getUser();
       UI.displayConcerts(currentUser);
       return false;
-    } else if (user !== this.getUser().username) {
+    } else if (user !== Storage.getUser().username) {
       let newUser = new User(user);
-      this.setUser(newUser);
+      Storage.setUser(newUser);
     }
   }
 

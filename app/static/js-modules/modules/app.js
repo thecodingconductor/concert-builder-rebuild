@@ -106,6 +106,53 @@ class APP {
     location.href = '/concert_builder';
   }
 
+  saveConcert() {
+    let currentUser = Storage.getUser();
+    console.log("FROM SAVECONCERT");
+    console.log(currentUser);
+    if (UISelectors.concertTitleHeader.textContent === '') {
+      UISelectors.saveConcertBtn.classList.add('disabled');
+      UISelectors.saveConcertBtn.textContent = 'Please add title.';
+      window.setTimeout(() => {
+        UISelectors.saveConcertBtn.classList.remove('disabled');
+        UISelectors.saveConcertBtn.textContent = 'Save Concert';
+      }, 1000);
+      return false;
+    } else if (UI.concertPieceArr.length === 0) {
+      UISelectors.saveConcertBtn.classList.add('disabled');
+      UISelectors.saveConcertBtn.textContent = 'Please add pieces...';
+      window.setTimeout(() => {
+        UISelectors.saveConcertBtn.classList.remove('disabled');
+        UISelectors.saveConcertBtn.textContent = 'Save Concert';
+      }, 1000);
+      return false;
+    }
+
+    let currentConcert = new Concert(UISelectors.concertTitleHeader.textContent);
+    //console.log(currentConcert);
+    UI.concertPieceArr.forEach((piece) => {
+      let thisPiece = new Piece(
+        piece.querySelector('.composer-info > p:first-child').textContent,
+        piece.querySelector('.piece-info > p:first-child').textContent
+      );
+
+      currentConcert.pieces.push(thisPiece);
+    });
+
+    console.log(currentUser);
+    console.log(currentUser.concerts);
+    console.log(currentUser.concerts[0]);
+    currentUser.concerts.push(currentConcert);
+    console.log(currentUser.concerts);
+
+    Storage.setUser(currentUser);
+
+    UISelectors.saveConcertBtn.textContent = 'Concert Saved!!';
+    window.setTimeout(() => {
+      UISelectors.saveConcertBtn.textContent = 'Save Concert';
+    }, 1000);
+  }
+
   //For Concert Builder
   addPieceToConcertArr(e) {
 
