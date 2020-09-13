@@ -816,7 +816,7 @@ export class Ui {
   formatResultsCard() {
     const pieceNames = document.querySelectorAll('.piece-name');
     pieceNames.forEach((piece) => {
-      let pieceTitleLength = piece.textContent.slice(0, 20) + '...';
+      let pieceTitleLength = piece.textContent.slice(0, 30) + '...';
       piece.textContent = pieceTitleLength;
     });
   }
