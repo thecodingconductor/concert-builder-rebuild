@@ -229,6 +229,9 @@ class REQUESTS {
       HTTP.post('/add_comment', entry)
         .then(data => {
           e.target.textContent = 'Thank you!';
+          window.setTimeout(() => {
+            e.target.textContent = 'Submit Comment';
+          }, 3000);
           commentBody.value = ``;
           console.log(data);
         }).catch(err => {
