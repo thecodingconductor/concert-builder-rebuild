@@ -10,7 +10,7 @@ import { Requests } from './requests';
 class APP {
   constructor() { }
 
-  generateRandomNumber(mix, max) {
+  generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   }
 

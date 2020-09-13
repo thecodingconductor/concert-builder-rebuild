@@ -69,8 +69,8 @@ export class Ui {
         );
       }
     }
-
-    Requests.openCurrentLetter();
+    Requests.browsePanelFetch();
+    //Requests.openCurrentLetter();
   }
 
   appendCurrentLetter(item) {
@@ -79,10 +79,10 @@ export class Ui {
     UISelectors.resultsColumn.appendChild(composerResultName);
   }
 
-  addRandomComposersToDOM(mainLetter) {
+  addRandomComposersToDOM(mainLetter, randomCompArr) {
     let composerLetter = document.createElement('div');
     composerLetter.classList = 'letter';
-    const randomCompArr = [];
+
 
     //THERE IS SOME FUCKING BEAMING ISSUE HERE
     composerLetter.innerHTML = `
@@ -90,6 +90,7 @@ export class Ui {
      <div class="letter-composers">
 
            ${randomCompArr.map((item) => {
+
       return `
                <p class="random-composer-links"><a href="#">${item}</a></p>`
     })
@@ -100,7 +101,8 @@ export class Ui {
 
     UISelectors.browseComposers.appendChild(composerLetter);
 
-    const letterLinks = document.querySelector('.letter h1');
+    const letterLinks = document.querySelectorAll('.letter h1');
+    console.log(letterLinks);
     [...letterLinks].forEach((link) => {
       link.addEventListener('click', Requests.openCurrentLetter);
     });

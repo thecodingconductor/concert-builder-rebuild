@@ -30,6 +30,7 @@ class REQUESTS {
 
 
   browsePanelFetch() {
+    let randomCompArr = [];
     HTTP.get('/browse_composer_list')
       .then((data) => {
         let composersArr = data.composers_array;
@@ -42,10 +43,11 @@ class REQUESTS {
             );
           }
 
-          UI.addRandomComposersToDOM(mainLetter);
+          UI.addRandomComposersToDOM(mainLetter, randomCompArr);
+          randomCompArr = [];
         });
       })
-      .catch();
+      .catch(err => console.log(`There was an error: ${err}`));
   }
 
   openCurrentLetter(e) {
