@@ -2,7 +2,7 @@ import { User, Concert, Piece } from './sessionObj';
 import { UI } from './ui';
 import { UISelectors } from './UISelectors';
 
-export class Storage {
+class STORAGE {
   getUser() {
     return JSON.parse(localStorage.getItem('user'));
   }
@@ -38,3 +38,5 @@ export class Storage {
     localStorage.remove(string);
   }
 }
+
+export const Storage = new STORAGE();

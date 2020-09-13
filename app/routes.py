@@ -100,7 +100,13 @@ def browse_composers():
 @app.route('/composers', methods=["POST"])
 def composers():
 
-    search_term = request.get("searchTerm")
+    response = request.get_json()
+
+    print(response)
+    print(type(response))
+    search_term = response['searchTerm']
+
+    print(search_term)
     #composer_name = request.form.get("search-bar-field")
     res = Composer.query.filter(Composer.name.ilike(f"%{search_term}%")).all()
     list_composers = json.dumps([{"name": composer.name} for composer in res])

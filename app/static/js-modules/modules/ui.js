@@ -1,7 +1,7 @@
 import { UISelectors } from './UISelectors';
 import { Requests } from './requests';
 
-export class UI {
+export class Ui {
   constructor() {
     this.dragStartIndex;
   }
@@ -25,7 +25,7 @@ export class UI {
     if (e.target.getAttribute('id') === 'close-sign-in') {
       const signInModalParent =
         e.target.parentElement.parentElement.parentElement;
-      UISelectors.signInModalParent.style.display = 'none';
+      signInModalParent.style.display = 'none';
     } else {
       const modalParent = e.target.parentElement.parentElement;
       modalParent.style.display = 'none';
@@ -63,7 +63,7 @@ export class UI {
     }, 300);
 
     if (UISelectors.browseComposers.children.length > 0) {
-      while (bUISelectors.rowseComposers.firstChild) {
+      while (UISelectors.browseComposers.firstChild) {
         UISelectors.browseComposers.removeChild(
           UISelectors.browseComposers.firstChild
         );
@@ -153,7 +153,7 @@ export class UI {
   `;
     }
 
-    searchBarResults.appendChild(resultDiv);
+    UISelectors.searchBarResults.appendChild(resultDiv);
   }
 
   showDropDown() {
@@ -223,12 +223,12 @@ export class UI {
       piece.setAttribute('data-index', index);
     });
 
-    addPieceToDOM(pieceEl);
+    Ui.addPieceToDOM(pieceEl);
 
-    deletePiecesListeners();
-    createIntermissionListeners();
-    dragListeners();
-    updateConcertDuration(getConcertDuration(concertPieceArr));
+    Ui.deletePiecesListeners();
+    Ui.createIntermissionListeners();
+    Ui.dragListeners();
+    Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
 
     Storage.removeItem('newConcert');
 
@@ -237,7 +237,7 @@ export class UI {
   getConcertDuration(pieceArr) {
     if (pieceArr.length === 0) {
       let empty = 0;
-      concertLengthJudgement(concertBuilderArea, empty);
+      Ui.concertLengthJudgement(UISelectors.concertBuilderArea, empty);
       return empty;
     } else {
       const concertDurationArr = pieceArr.map((item) => {
@@ -256,7 +256,7 @@ export class UI {
       //     concertDuration += 30;
       // }
 
-      concertLengthJudgement(concertBuilderArea, concertDuration);
+      Ui.concertLengthJudgement(concertBuilderArea, concertDuration);
 
       return concertDuration;
     }
@@ -300,7 +300,7 @@ export class UI {
     //concertBuilderArea.appendChild(intermissionEl);
     //console.log(concertPieceArr);
 
-    UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
+    Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
 
     //Delete Intermission
     let closeIntermission = intermissionEl.querySelector('#delete-intermission');
@@ -315,7 +315,7 @@ export class UI {
         piece.setAttribute('data-index', index);
       });
 
-      UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
+      Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
     });
   }
 
@@ -369,7 +369,7 @@ export class UI {
     concertPieceArr.forEach((piece, index) => {
       piece.setAttribute('data-index', index);
     });
-    UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
+    Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
   }
 
 
@@ -476,7 +476,7 @@ export class UI {
 
   dragDrop() {
     const dragEndIndex = +this.getAttribute('data-index');
-    UI.swapItems(dragStartIndex, dragEndIndex);
+    Ui.swapItems(dragStartIndex, dragEndIndex);
     this.classList.remove('over');
   }
 
@@ -492,7 +492,7 @@ export class UI {
     UISelectors.concertBuilderArea.innerHTML = ``;
 
     concertPieceArr.forEach((item) => {
-      UI.addPieceToDOM(item);
+      Ui.addPieceToDOM(item);
     });
   }
 
@@ -780,4 +780,4 @@ export class UI {
 }
 
 
-}
+export const UI = new Ui();

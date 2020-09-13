@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %} Homepage {% endblock %}
-{% block head %}
-{{ super() }}
-{% endblock %}
+
 
 {% block content %}
 
@@ -16,7 +14,7 @@
             <h1 class="hero-head">Program better concerts</h1>
             <p class="hero-description">A great concert can change the world.</p>
             <button class="primary-btn get-started-btn" id="get-started-btn">Get started</button>
-            
+
         </div>
     </div>
     <div class="image-carousel-container">
@@ -30,17 +28,8 @@
     </div>
 </div>
 
-{% block javascript %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/landing.js') }}"></script>
-    {% endblock %}
+
+<script src="{{ url_for('static', filename='dist/landing.js') }}"></script>
+
 </body>
 {% endblock %}
-
-
-
-
-
-
-
-

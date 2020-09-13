@@ -1,76 +1,73 @@
 {% extends 'base.html' %}
 
 {% block title %} Concert Builder {% endblock %}
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/concert-builder.css') }}">
-{% endblock %}
-    
-    {% block content %}
-    <div class="main-container">
-        <div class="left-container">
-            <h1>Pick Piece from Favorites</h1>
-            <form class="left-search-area">
-                <input type="text" placeholder="Search Favorites" id="search-favorites">
-                <i class="fa fa-search"></i>
-            </form>
-            
-            <ul class="builder-piece-list" id="favorites-search-results">
-                {% if user.favorites %}
-                {% for favorite in user.favorites %}
-                <li>
-                    <div class="data-composer-info">
-                        <p class="data-composer-dates">{{ favorite.composer.years}}</p>
-                        <p class="data-composer-nationality">{{favorite.composer.nationality}}</p>
-                        <p class="data-piece-instrumentation">{{ favorite.instrumentation }}</p>
-                    </div>
-                    <div class="piece-info-left">
-                        <p>{{ favorite.composer.name }}</p>
-                        <p>{{ favorite.title }}</p>
-                    </div>
-                    
-                    <div class="piece-info-right">
-                        <p>{{ favorite.duration }}</p>
-                        <button class="primary-btn add-to-concert">
-                            Add to Concert
-                        </button>
-                    </div>
-                </li>
-                {% endfor %}
-                {% endif %}
-                
-                
-            </ul>
+
+
+{% block content %}
+<div class="main-container">
+    <div class="left-container">
+        <h1>Pick Piece from Favorites</h1>
+        <form class="left-search-area">
+            <input type="text" placeholder="Search Favorites" id="search-favorites">
+            <i class="fa fa-search"></i>
+        </form>
+
+        <ul class="builder-piece-list" id="favorites-search-results">
+            {% if user.favorites %}
+            {% for favorite in user.favorites %}
+            <li>
+                <div class="data-composer-info">
+                    <p class="data-composer-dates">{{ favorite.composer.years}}</p>
+                    <p class="data-composer-nationality">{{favorite.composer.nationality}}</p>
+                    <p class="data-piece-instrumentation">{{ favorite.instrumentation }}</p>
+                </div>
+                <div class="piece-info-left">
+                    <p>{{ favorite.composer.name }}</p>
+                    <p>{{ favorite.title }}</p>
+                </div>
+
+                <div class="piece-info-right">
+                    <p>{{ favorite.duration }}</p>
+                    <button class="primary-btn add-to-concert">
+                        Add to Concert
+                    </button>
+                </div>
+            </li>
+            {% endfor %}
+            {% endif %}
+
+
+        </ul>
+    </div>
+    <div class="right-container">
+        <h1>Build Concert</h1>
+
+        <div class="right-search-area-container">
+            <div class="right-search-area" id="right-search-area">
+                <input type="text" placeholder="Provide Concert Title" class="concert-title-input"
+                    id="concert-title-input">
+
+                <button class="primary-btn concert-title-btn" id="concert-title-btn">Save Concert Title</button>
+                <button class="primary-btn change-title-btn" id="change-title-btn">Change Concert Title</button>
+            </div>
+
+            <div class="dynamic-concert-title">
+                <h2 class="concert-title" id="concert-title-header"></h2>
+            </div>
         </div>
-        <div class="right-container">
-            <h1>Build Concert</h1>
-            
-            <div class="right-search-area-container">
-                <div class="right-search-area" id="right-search-area">
-                    <input type="text" placeholder="Provide Concert Title" class="concert-title-input" id="concert-title-input">
-                
-                    <button class="primary-btn concert-title-btn" id="concert-title-btn">Save Concert Title</button>
-                    <button class="primary-btn change-title-btn" id="change-title-btn">Change Concert Title</button>
-                </div>
-                
-                <div class="dynamic-concert-title">
-                    <h2 class="concert-title" id="concert-title-header"></h2>
-                </div>
-            </div>
-            
-            <div class="concert-builder-area" id="concert-builder-area">
-                
-            </div>
-            <div class="concert-builder-text-area">
-                <p>Your concert is <span id="concert-minutes">80</span> minutes long.</p>
-                <p id="concert-conclusion">Thats perfect! </p>
-                <button class="primary-btn save-concert" id="save-concert-btn">Save Concert</button>
-            </div>
+
+        <div class="concert-builder-area" id="concert-builder-area">
+
+        </div>
+        <div class="concert-builder-text-area">
+            <p>Your concert is <span id="concert-minutes">80</span> minutes long.</p>
+            <p id="concert-conclusion">Thats perfect! </p>
+            <button class="primary-btn save-concert" id="save-concert-btn">Save Concert</button>
         </div>
     </div>
-    {% block javascript %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/concert-builder.js') }}"></script>
-    {% endblock %}
+</div>
+
+<script src="{{ url_for('static', filename='dist/concertBuilder.js') }}"></script>
+
 </body>
 {% endblock %}

@@ -1,8 +1,8 @@
 import { UISelectors } from './UISelectors';
 import { UI } from './ui';
 
-export class Nav {
-  constructor() {}
+class NAV {
+  constructor() { }
 
   composerPageListeners(composer) {
     composer.addEventListener('click', (e) => {
@@ -10,3 +10,5 @@ export class Nav {
     });
   }
 }
+
+export const Nav = new NAV();

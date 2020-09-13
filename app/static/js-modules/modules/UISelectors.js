@@ -1,4 +1,4 @@
-export class UISelectors {
+class UiSelectors {
   constructor() {
     this.siteTitle = document.getElementById('site-title');
     this.logInNav = document.getElementById('login-nav');
@@ -80,7 +80,10 @@ export class UISelectors {
     this.concertTitleHeader = document.getElementById('concert-title-header');
     this.saveConcertBtn = document.getElementById('save-concert-btn');
     //fix this.
-    this.initialFavoritesResults = [...this.favoritesSearchResults.children];
+    if (this.favoritesSearchResults !== null) {
+      this.initialFavoritesResults = [...this.favoritesSearchResults.children];
+    }
+
 
     //HOMPAGE
     this.showGold = document.querySelectorAll('.hover-gold');
@@ -105,7 +108,10 @@ export class UISelectors {
     //Concerts on Concerts Page
     this.fullConcertsGrid = document.getElementById('full-concerts-grid');
 
-    this.openLinks = [openProfile, openFavorites, openConcerts, returnHome];
+    if (this.openProfile !== undefined) {
+      this.openLinks = [this.openProfile, this.openFavorites, this.openConcerts, this.returnHome];
+    }
+
     this.openBrowse = document.querySelector('.open-browse');
 
     this.pieceNames = document.querySelectorAll('.piece-name');
@@ -122,10 +128,16 @@ export class UISelectors {
     );
     this.resultsColumn = document.getElementById('results-column');
     this.composerResultList = document.getElementById('composer-result-list');
-    this.user = document.getElementById('current-username').textContent;
+    this.user = document.getElementById('current-username');
+    if (this.user !== null) {
+      this.user = this.user.textContent;
+    }
+
 
     //FROM INDEX
     this.composerLinks = document.getElementById('composer-results');
     this.searchField = document.getElementById('search-field');
   }
 }
+
+export const UISelectors = new UiSelectors();

@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="true">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+        integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <title>Concert Builder - {% block title %}{% endblock %}</title>
     {% endblock %}
-    
+
 </head>
+
 <body>
     <nav class="landing-nav">
         <h1 class="site-title" id="site-title">
             {% if user %}
-             <a href="{{ url_for('homepage') }}">Concert Builder</a>
-            {% else %} 
+            <a href="{{ url_for('homepage') }}">Concert Builder</a>
+            {% else %}
             <a href="{{ url_for('index') }}">Concert Builder</a>
             {% endif %}
         </h1>
@@ -45,14 +45,14 @@
                 </li>
             </ul>
             <ul class="nav-right">
-            {% if user %}
-                 <li class="home-mobile-icons" id="open-mobile-browse">
+                {% if user %}
+                <li class="home-mobile-icons" id="open-mobile-browse">
                     <i class="fas fa-book"></i>
                 </li>
                 <li class="home-mobile-icons" id="open-mobile-search">
                     <i class="fas fa-search"></i>
                 </li>
-                <li class="logged-in" id="logged-in"> 
+                <li class="logged-in" id="logged-in">
                     <img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="">
                 </li>
             </ul>
@@ -62,42 +62,42 @@
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             </ul>
             {% else %}
-            
-                <li class="mobile-search-icon" id="open-mobile-search">
-                    <i class="fas fa-search"></i>
-                </li>
-                <li id="login-nav">
-                    Log In
-                </li>
-                <li>
-                    <button class="primary-btn sign-up-btn" id="sign-up-btn">Sign Up</button>
-                </li>
+
+            <li class="mobile-search-icon" id="open-mobile-search">
+                <i class="fas fa-search"></i>
+            </li>
+            <li id="login-nav">
+                Log In
+            </li>
+            <li>
+                <button class="primary-btn sign-up-btn" id="sign-up-btn">Sign Up</button>
+            </li>
             </ul>
 
             <div class="modal-container" id="sign-up-modal">
                 {% include '_register.html' %}
-             </div>
-         
-             <div class="modal-container" id="sign-in-modal">
-                 {% include '_login.html'%}    
-             </div>
+            </div>
+
+            <div class="modal-container" id="sign-in-modal">
+                {% include '_login.html'%}
+            </div>
             {% endif %}
 
         </div>
         <form class="search-bar-overlay" id="search-bar-overlay">
             {{ search_form.csrf_token }}
-            <i class="fa fa-search" ></i>
+            <i class="fa fa-search"></i>
 
             {{ search_form.search(class_="search-bar-field", id="search-bar-field") }}
-           
+
             <i class="fa fa-times close-search" id="close-search"></i>
-        </form>    
+        </form>
     </nav>
     <div class="search-bar-results" id="search-bar-results">
-      
-            
+
+
     </div>
-    
+
     <div class="modal-container" id="browse-modal">
         <div class="browse-modal-area" id="browse-modal-area">
             <div class="browse-header">
@@ -105,17 +105,13 @@
                 <i class="fa fa-times fa-2x" id="close-browse"></i>
             </div>
             <div class="browse-composers" id="browse-composers">
-                
-                
+
+
             </div>
         </div>
     </div>
     {% block content %}
-        {% block javascript %}
-            <script src="{{ url_for('static', filename='js/base.js') }}"></script>
-        {% endblock %}
+
+
+
     {% endblock %}
-
-
-
-   

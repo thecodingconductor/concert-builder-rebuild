@@ -7,7 +7,7 @@ import { Nav } from './nav';
 import { Storage } from './storage';
 import { Requests } from './requests';
 
-export class App {
+class APP {
   constructor() { }
 
   generateRandomNumber(mix, max) {
@@ -15,12 +15,14 @@ export class App {
   }
 
   initBase() {
+
+    console.log("INIT BASE");
     UISelectors.search.addEventListener('click', UI.showSearch);
     UISelectors.openMobileSearch.addEventListener('click', UI.showSearch);
     UISelectors.closeSearch.addEventListener('click', UI.closeSearchField);
     UISelectors.searchInput.addEventListener('keyup', () => {
       UI.clearList();
-      UI.getResults();
+      Requests.getComposerResults();
     });
 
     if (UISelectors.openMobileBrowse) {
@@ -35,7 +37,7 @@ export class App {
 
     if (UISelectors.logInOpen && UISelectors.signUpOpen) {
       UISelectors.logInOpen.addEventListener('click', UI.openModal);
-      UISelectors.signUpOpen.addEventListener('click', UI.penModal);
+      UISelectors.signUpOpen.addEventListener('click', UI.openModal);
       UISelectors.closeSignUp.addEventListener('click', UI.closeModal);
       UISelectors.closeSignIn.addEventListener('click', UI.closeModal);
     }
@@ -80,10 +82,12 @@ export class App {
             username: UISelectors.loginUsername.value,
             password: UISelectors.loginPassword.value,
           };
+
+          Requests.testLogin(loginData);
         }
       });
 
-      Requests.testLogin(loginData);
+
     }
   }
 
@@ -158,12 +162,12 @@ export class App {
       piece.setAttribute('data-index', index);
     });
 
-    addPieceToDOM(pieceEl);
+    UI.addPieceToDOM(pieceEl);
 
-    deletePiecesListeners();
-    createIntermissionListeners();
-    dragListeners();
-    updateConcertDuration(getConcertDuration(concertPieceArr));
+    UI.deletePiecesListeners();
+    UI.createIntermissionListeners();
+    UI.dragListeners();
+    UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
   }
 
   //TODO
@@ -173,3 +177,5 @@ export class App {
 
 
 }
+
+export const App = new APP();

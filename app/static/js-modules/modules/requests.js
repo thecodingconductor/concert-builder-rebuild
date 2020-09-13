@@ -4,22 +4,30 @@ import { HTTP } from './http';
 import { Nav } from './nav';
 import { App } from './app';
 
-export class Requests {
+class REQUESTS {
   constructor() { }
 
   getComposerResults() {
     UISelectors.searchBarResults.style.visibility = 'visibile';
     const data = {
-      searchTerm = UISelectors.searchInput.value
+      searchTerm: UISelectors.searchInput.value
     }
 
     HTTP.post('/composers', data).then(res => {
-      res.composers.forEach(composer => {
+      console.log(res);
+      console.log(typeof res);
+      console.log(typeof res.composers)
+      let compArray = JSON.parse(res.composers);
+      console.log(compArray);
+
+      compArray.forEach(composer => {
         const currentURL = window.location.href;
         UI.populateComposerSearchResults(currentURL, composer)
       })
     }).catch(err => console.log(`There was an err, ${err}`));
   }
+
+
 
   browsePanelFetch() {
     HTTP.get('/browse_composer_list')
@@ -244,3 +252,6 @@ export class Requests {
   }
 
 }
+
+
+export const Requests = new REQUESTS();

@@ -1,115 +1,113 @@
 {% extends 'base.html' %}
 {% block title %} Homepage {% endblock %}
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
-{% endblock %}
+
 
 {% block content %}
-    <div class="main-container">
-        <div class="left-menu">
-            <ul class="left-menu-items">
-                <li class="return-home" id="return-home"><a href="">Home</a></li>
-                <li class="open-browse" id="open-browse"><a href="">Browse Composers</a></li>
-                <li class="open-profile" id="open-profile"><a href="">Profile</a></li>
-                <li class="open-favorites" id="open-favorites"><a href="">Favorites</a></li>
-                <li class="open-concerts" id="open-concerts"><a href="">Concerts</a></li>
-                <li><a href="">Upgrade</a></li>
-                <li><a href="">Help Center</a></li>
-                <li><a href="">Blog</a></li>
-                <li>
-                    <a href="">
-                        <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="social-image">
-                    </a>
-                    <a href="">
-                        <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="social-image">
-                    </a>
-                    <a href="">
-                        <img src="{{ url_for('static', filename='img/company.svg') }}" alt="" class="social-image">
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main-content-area">
-            <!--TODO HIDE THIS STUFF ON SEARCH-->
-            <div class="main-content-area-inner" id="main-content-area-inner">
-                
-                <div class="header-row">
-                    <h1 class="search-result-header">Your Favorites</h1>
-                    <a href="" class="view-more-btn">View More <i class="fas fa-angle-right fa-2x"></i></a>
-                    
+<div class="main-container">
+    <div class="left-menu">
+        <ul class="left-menu-items">
+            <li class="return-home" id="return-home"><a href="">Home</a></li>
+            <li class="open-browse" id="open-browse"><a href="">Browse Composers</a></li>
+            <li class="open-profile" id="open-profile"><a href="">Profile</a></li>
+            <li class="open-favorites" id="open-favorites"><a href="">Favorites</a></li>
+            <li class="open-concerts" id="open-concerts"><a href="">Concerts</a></li>
+            <li><a href="">Upgrade</a></li>
+            <li><a href="">Help Center</a></li>
+            <li><a href="">Blog</a></li>
+            <li>
+                <a href="">
+                    <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="social-image">
+                </a>
+                <a href="">
+                    <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt=""
+                        class="social-image">
+                </a>
+                <a href="">
+                    <img src="{{ url_for('static', filename='img/company.svg') }}" alt="" class="social-image">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content-area">
+        <!--TODO HIDE THIS STUFF ON SEARCH-->
+        <div class="main-content-area-inner" id="main-content-area-inner">
+
+            <div class="header-row">
+                <h1 class="search-result-header">Your Favorites</h1>
+                <a href="" class="view-more-btn">View More <i class="fas fa-angle-right fa-2x"></i></a>
+
+            </div>
+
+            <div class="search-results" id="home-search-results">
+                {% if not user.favorites.all()|length %}
+                <div class="search-result">
+                    <h2 class="composer-name">Browse or search for composers to add a favorite!</h2>
                 </div>
-                
-                <div class="search-results" id="home-search-results">
-                    {% if not user.favorites.all()|length %}
-                    <div class="search-result">
-                        <h2 class="composer-name">Browse or search for composers to add a favorite!</h2>
-                    </div>
 
-                    {% endif %}
+                {% endif %}
 
 
-                    {% if user.favorites.all() %}
-                    {% for i in range(3) %}
-                        <div class="search-result">
-                            <h2 class="composer-name">{{ user.favorites[i].composer.name }}</h2>
-                            <p class="piece-name">{{ user.favorites[i].title }}</p>
-                           <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
-                            <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
-                            <span class="hover-gold "></span>
-                        </div>
-                    {% endfor %}
-                    {% endif %}
-
-                   
+                {% if user.favorites.all() %}
+                {% for i in range(3) %}
+                <div class="search-result">
+                    <h2 class="composer-name">{{ user.favorites[i].composer.name }}</h2>
+                    <p class="piece-name">{{ user.favorites[i].title }}</p>
+                    <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">-->
+                    <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
+                    <span class="hover-gold "></span>
                 </div>
-                
-                <div class="search-results full-favorites-grid" id="full-favorites-grid">
-                    {% if user.favorites.all() %}
-                    {% for favorite in user.favorites %}
-                        <div class="search-result">
-                            <h2 class="composer-name">{{ favorite.composer.name }}</h2>
-                            <p class="piece-name">{{ favorite.title }}</p>
-                           <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">--> 
-                            <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
-                            <span class="hover-gold "></span>
-                        </div>
-                    {% endfor %}
-                    {% endif %}
+                {% endfor %}
+                {% endif %}
+
+
+            </div>
+
+            <div class="search-results full-favorites-grid" id="full-favorites-grid">
+                {% if user.favorites.all() %}
+                {% for favorite in user.favorites %}
+                <div class="search-result">
+                    <h2 class="composer-name">{{ favorite.composer.name }}</h2>
+                    <p class="piece-name">{{ favorite.title }}</p>
+                    <!--<img src="{{ url_for('static', filename='img/JohannesBrahms.jpg') }}" alt="" class="composer-img">-->
+                    <button class="primary-btn visit-page create-concert-btn">Create Concert</button>
+                    <span class="hover-gold "></span>
                 </div>
-                <!--
+                {% endfor %}
+                {% endif %}
+            </div>
+            <!--
                     <div class="search-results browse-composer-container" id="browse-composer-container">
                      
                 </div>
                 -->
-                
 
-                <div class="header-row concerts-header-row">
-                    <h1 class="search-result-header">Your Concerts</h1>
-                    <a href="" class="view-more-btn concert-view-more-btn">View More <i class="fas fa-angle-right fa-2x"></i></a>
-                    
-                </div>
-                <div class="search-results your-recent-concerts" id="your-concerts-container">
-                   
-                    
-                    
-                 </div>
-                 <div class="search-results full-concerts-grid" id='full-concerts-grid'></div>
 
-                </div>
+            <div class="header-row concerts-header-row">
+                <h1 class="search-result-header">Your Concerts</h1>
+                <a href="" class="view-more-btn concert-view-more-btn">View More <i
+                        class="fas fa-angle-right fa-2x"></i></a>
+
             </div>
+            <div class="search-results your-recent-concerts" id="your-concerts-container">
+
+
+
+            </div>
+            <div class="search-results full-concerts-grid" id='full-concerts-grid'></div>
+
         </div>
     </div>
+</div>
+</div>
 
 
-    <div class="audio-player-container">
-        <audio src="../../../portfolio/img/fast-energy.mp3"></audio>
-    </div>
-    <p id="current-username" style="display: 'none';">{{ user.username }}</p>
-    {% block javascript %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
-    {% endblock %}
+<div class="audio-player-container">
+    <audio src="../../../portfolio/img/fast-energy.mp3"></audio>
+</div>
+<p id="current-username" style="display: 'none';">{{ user.username }}</p>
+
+<script src="{{ url_for('static', filename='dist/homepage.js') }}"></script>
+
 </body>
 {% endblock %}
 

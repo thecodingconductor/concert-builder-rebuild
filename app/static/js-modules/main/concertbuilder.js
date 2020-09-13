@@ -75,6 +75,7 @@ function dragListeners() {
     });
 }
 
+window.addEventListener('DOMContentLoaded', App.initBase);
 
 UISelectors.addToConcert.forEach((button) => {
     button.addEventListener('click', App.addPieceToConcertArr);

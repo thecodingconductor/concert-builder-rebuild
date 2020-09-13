@@ -9,6 +9,8 @@ import "../../css/landing.css";
 import "../../css/homepage.css";
 
 
+window.addEventListener('DOMContentLoaded', App.initBase);
+
 UISelectors.dropDownYourConcerts.addEventListener('click', (e) => {
   UISelectors.dropDownMenu.style.display = 'none';
   UI.resultsExit(e);

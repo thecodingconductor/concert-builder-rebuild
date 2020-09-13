@@ -1,8 +1,8 @@
 import { UISelectors } from './UISelectors';
 import { UI } from './ui';
 
-export class Forms {
-  constructor() {}
+class FORMS {
+  constructor() { }
 
   registerValidation(e) {
     e.preventDefault();
@@ -84,3 +84,5 @@ export class Forms {
     console.log('Log In Prevented');
   }
 }
+
+export const Forms = new FORMS();

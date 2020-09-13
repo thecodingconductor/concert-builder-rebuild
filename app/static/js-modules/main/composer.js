@@ -31,6 +31,8 @@ function newConcert(e) {
     }
 }
 
+window.addEventListener('DOMContentLoaded', App.initBase);
+
 window.addEventListener('DOMContentLoaded', Requests.imageFetch);
 window.addEventListener('DOMContentLoaded', () => {
     let currentUser = document.getElementById('hidden-user');

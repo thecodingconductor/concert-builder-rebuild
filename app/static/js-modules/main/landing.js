@@ -10,4 +10,10 @@ import '../../css/homepage.css';
 
 window.addEventListener('DOMContentLoaded', App.initBase);
 
-UISelectors.getStarted.addEventListener('click', UI.openModal);
+
+
+
+if (UISelectors.getStarted) {
+    UISelectors.getStarted.addEventListener('click', UI.openModal);
+}
+

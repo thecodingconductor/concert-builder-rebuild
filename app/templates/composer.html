@@ -1,61 +1,55 @@
 {% extends 'base.html' %}
 
 {% block title %} Homepage {% endblock %}
-{% block head %}
-{{ super() }}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/composer.css') }}">
-{% endblock %}
+{% block content %}
+<div class="composer-top">
+    <div class="composer-hero">
+        <div class="composer-wrap" id="composer-wrap">
 
-    {% block content %}
-    <div class="composer-top">
-        <div class="composer-hero">
-            <div class="composer-wrap" id="composer-wrap">
-               
-            </div>
-            
         </div>
-        <div class="composer-informations">
-            <h1 id="composer-name">{{ composer.name }}</h1>
-            <p>{{ composer.years }}</p>
-            <p>{{ composer.nationality }}</p>
-            
+
+    </div>
+    <div class="composer-informations">
+        <h1 id="composer-name">{{ composer.name }}</h1>
+        <p>{{ composer.years }}</p>
+        <p>{{ composer.nationality }}</p>
+
+    </div>
+</div>
+<div class="composer-bottom">
+    <div class="composer-piece-list">
+        <ul class="piece-list">
+            {% for piece in composer.pieces %}
+            <li class="piece-title">{{ piece.title }}</li>
+            {% endfor %}
+
+
+        </ul>
+    </div>
+    <div class="composer-bottom-right">
+        <div class="piece-details" id="piece-details">
+
+        </div>
+        <div class="user-interaction-area" method='post'>
+
+
+            <textarea name="user-comment" id="user-comment" cols="30" rows="10"></textarea>
+            <div class="user-buttons">
+                <!--{{ comment_form.submit_comment(id="submit-comment", class_="primary-btn") }}-->
+                <button class="primary-btn" id="submit-comment">Submit Comment</button>
+                <button class="primary-btn" id="add-piece-to-favorites">Add Piece to Favorites</button>
+                <button class="primary-btn" id="create-concert">Create Concert</button>
+            </div>
+
         </div>
     </div>
-    <div class="composer-bottom">
-        <div class="composer-piece-list">
-                <ul class="piece-list">
-                    {% for piece in composer.pieces %}
-                    <li class="piece-title">{{ piece.title }}</li>
-                    {% endfor %}
-                   
-                  
-                </ul>
-        </div>
-        <div class="composer-bottom-right">
-            <div class="piece-details"  id="piece-details">
-                
-            </div>
-            <div class="user-interaction-area" method='post'>
-                
-                
-                <textarea name="user-comment" id="user-comment" cols="30" rows="10"></textarea>
-                <div class="user-buttons">
-                    <!--{{ comment_form.submit_comment(id="submit-comment", class_="primary-btn") }}-->
-                    <button class="primary-btn" id="submit-comment">Submit Comment</button>
-                    <button class="primary-btn" id="add-piece-to-favorites">Add Piece to Favorites</button>
-                    <button class="primary-btn" id="create-concert">Create Concert</button>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    {% block javascript %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/composer-test.js') }}"></script>
-    {% endblock %}
-    {% if user  %}
-        <p class="hidden-user" id="hidden-user">{{ user.username }}</p>
-    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='dist/composer.js') }}"></script>
+
+{% if user  %}
+<p class="hidden-user" id="hidden-user">{{ user.username }}</p>
+{% endif %}
 </body>
 {% endblock %}
