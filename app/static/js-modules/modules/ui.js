@@ -136,6 +136,7 @@ export class Ui {
   }
 
   populateComposerSearchResults(currentURL, composer) {
+    // UISelectors.searchBarResults.style.visibility = 'visible';
     const resultDiv = document.createElement('div');
     resultDiv.classList = 'search-result-down';
 

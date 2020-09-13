@@ -8,7 +8,7 @@ class REQUESTS {
   constructor() { }
 
   getComposerResults() {
-    UISelectors.searchBarResults.style.visibility = 'visibile';
+    UISelectors.searchBarResults.style.visibility = 'visible';
     const data = {
       searchTerm: UISelectors.searchInput.value
     }
