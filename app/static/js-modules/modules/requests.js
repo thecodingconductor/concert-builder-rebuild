@@ -242,7 +242,7 @@ class REQUESTS {
     } else if (!composerUser) {
       UI.showButtonError(e.target, 'Please Log in');
     } else {
-      HTTP.post('/add_piece_to_favorites')
+      HTTP.post('/add_piece_to_favorites', pieceSend)
         .then(data => {
           e.target.textContent = `${data.message}`;
           window.setTimeout(() => {

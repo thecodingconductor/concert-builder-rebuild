@@ -1,3 +1,5 @@
+import { App } from './app';
+
 export class User {
   constructor(username, concerts = []) {
     this.username = username;
@@ -7,7 +9,7 @@ export class User {
 
 export class Concert {
   constructor(title, pieces = []) {
-    this.id = generateRandomNumber(0, 50000);
+    this.id = App.generateRandomNumber(0, 50000);
     this.title = title;
     this.pieces = pieces;
   }

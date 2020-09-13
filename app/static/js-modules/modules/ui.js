@@ -553,8 +553,7 @@ export class Ui {
                            <button class="primary-btn remove-concert-btn">Delete Concert</button>
                            <span class="hover-gold"></span>
                       `;
-        console.log(concertContainer);
-        console.log(UISelectors.yourConcertsContainer);
+
         UISelectors.yourConcertsContainer.appendChild(concertContainer);
 
         return false;
@@ -619,10 +618,9 @@ export class Ui {
       '.concert-id-num'
     );
     //SWITCH TO STORAGE FUNCTION
-    let deleteConcertUser = JSON.parse(localStorage.getItem('user'));
+    let deleteConcertUser = Storage.getUser();
     deleteConcertUser.concerts.forEach((concert, index, object) => {
-      // console.log(concert.id);
-      // console.log(Number(selectedConcertID.textContent));
+
       if (concert.id === Number(selectedConcertID.textContent)) {
         object.splice(index, 1);
       } else {
@@ -631,7 +629,7 @@ export class Ui {
     });
     //STORAGE FUNCTION
     Storage.setItem('user', deleteConcertUser);
-    // localStorage.setItem('user', JSON.stringify(deleteConcertUser));
+
   }
 
   //Where to call this?
@@ -701,7 +699,7 @@ export class Ui {
     let currentUser = Storage.getUser();
     console.log(currentUser);
 
-    UI.displayConcerts(currentUser, this.all = false);
+    UI.displayConcerts(currentUser, true);
   }
 
 
@@ -752,6 +750,8 @@ export class Ui {
       }
     }, 1500);
   }
+
+  //Shorten Piece title if necessary
   formatResultsCard() {
     const pieceNames = document.querySelectorAll('.piece-name');
     pieceNames.forEach((piece) => {
@@ -760,6 +760,7 @@ export class Ui {
     });
   }
 
+  //Clear Composer Search Results
   clearComposerLinks() {
     if (UISelectors.searchField.value.length === 0) {
       while (UISelectors.composerLinks.firstChild) {
@@ -773,6 +774,7 @@ export class Ui {
       UISelectors.composerLinks.removeChild(UISelectors.composerLinks.firstChild);
     }
   }
+
 
   //COMPOSER PAGE
   clearComposerResults() {

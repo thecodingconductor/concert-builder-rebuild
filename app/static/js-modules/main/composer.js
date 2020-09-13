@@ -37,10 +37,9 @@ window.addEventListener('DOMContentLoaded', Requests.imageFetch);
 window.addEventListener('DOMContentLoaded', () => {
     let currentUser = document.getElementById('hidden-user');
     if (!currentUser) {
-        createConcert.classList.add('disabled');
+        UISelectors.createConcert.classList.add('disabled');
     } else {
-        createConcert.classList.remove('disabled');
-        console.log('there is a logged in user');
+        UISelectors.createConcert.classList.remove('disabled');
     }
 });
 

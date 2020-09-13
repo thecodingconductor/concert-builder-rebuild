@@ -89,6 +89,8 @@ class APP {
 
 
     }
+
+
   }
 
   createConcertFunction(e) {
@@ -101,6 +103,7 @@ class APP {
     let newConcert = new Concert('No Name');
     newConcert.pieces.push(newPiece);
     Storage.setNewConcert(newConcert);
+    location.href = '/concert_builder';
   }
 
   //For Concert Builder

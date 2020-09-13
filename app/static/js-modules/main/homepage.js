@@ -38,9 +38,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 UISelectors.openBrowse.addEventListener('click', UI.showBrowse);
 [...UISelectors.createConcertBtns].forEach((btn) => {
-  btn.addEventListener('click', UI.createConcertFunction);
+  btn.addEventListener('click', App.createConcertFunction);
 });
 
+//LOAD CONCERTS!!
 if (UISelectors.user !== null) {
   const currentUser = Storage.getUser();
   window.addEventListener('DOMContentLoaded', UI.displayConcerts(currentUser))

@@ -54,7 +54,7 @@
 // }
 
 // display the concerts.
-function displayConcerts(user, all = false) {
+//function displayConcerts(user, all = false) {
   //FIXED!!!!
   // if (fullConcertsGrid.children.length > 0) {
   //   fullConcertsGrid.innerHTML = ``;
@@ -412,5 +412,5 @@ function displayConcerts(user, all = false) {
   // [...createConcertBtns].forEach((btn) => {
   //   btn.addEventListener('click', createConcertFunction);
   // });
-}
+//}
 //composerLetterContainer.addEventListener('click', openCurrentLetter);
