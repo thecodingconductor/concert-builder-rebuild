@@ -4,8 +4,9 @@ import { Storage } from './storage';
 
 export class Ui {
   constructor() {
-    this.dragStartIndex;
+    this.dragStartIndex = 0;
     this.all = true;
+    this.concertPieceArr = [];
   }
 
   testImport() {
@@ -242,7 +243,7 @@ export class Ui {
   getConcertDuration(pieceArr) {
     if (pieceArr.length === 0) {
       let empty = 0;
-      Ui.concertLengthJudgement(UISelectors.concertBuilderArea, empty);
+      UI.concertLengthJudgement(UISelectors.concertBuilderArea, empty);
       return empty;
     } else {
       const concertDurationArr = pieceArr.map((item) => {
@@ -261,7 +262,7 @@ export class Ui {
       //     concertDuration += 30;
       // }
 
-      Ui.concertLengthJudgement(concertBuilderArea, concertDuration);
+      UI.concertLengthJudgement(UISelectors.concertBuilderArea, concertDuration);
 
       return concertDuration;
     }
@@ -347,38 +348,42 @@ export class Ui {
   deletePiecesListeners() {
     let deletePieces = UISelectors.concertBuilderArea.querySelectorAll('.delete-piece');
     deletePieces.forEach((piece) => {
-      piece.addEventListener('click', removePiece);
+      piece.addEventListener('click', UI.removePiece);
     });
   }
 
   createIntermissionListeners() {
+    console.log('CREATE INTERMISSION LISTERNERS');
     let intermissionList = UISelectors.concertBuilderArea.querySelectorAll(
       '.add-intermission'
     );
     intermissionList.forEach((intermission) => {
-      intermission.addEventListener('click', createIntermission);
+      intermission.addEventListener('click', UI.createIntermission);
     });
   }
 
-  removePiece(concertPieceArr) {
+  removePiece(e) {
     //get parent El
-    let selectedConcert = this.parentElement;
+    let selectedConcert = e.target.parentElement;
+    console.log(selectedConcert);
 
     //Remove Selected Piece from Array
-    concertPieceArr.splice(concertPieceArr.indexOf(selectedConcert), 1);
+    UI.concertPieceArr.splice(UI.concertPieceArr.indexOf(selectedConcert), 1);
 
     //Remove Piece from DOM
     selectedConcert.remove();
 
     //Update Data-Index Attribute
-    concertPieceArr.forEach((piece, index) => {
+    UI.concertPieceArr.forEach((piece, index) => {
       piece.setAttribute('data-index', index);
     });
-    Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
+    UI.updateConcertDuration(UI.getConcertDuration(UI.concertPieceArr));
   }
 
 
   addPieceToDOM(piece) {
+    console.log('Add piece to DOM??')
+    console.log(piece);
     UISelectors.concertBuilderArea.appendChild(piece);
   }
 
@@ -444,6 +449,39 @@ export class Ui {
       `;
 
     //ADD APP FUNCTION HERE
+    UI.concertPieceArr.splice(
+      UI.concertPieceArr.indexOf(parentConcert) + 1,
+      0,
+      intermissionEl
+    );
+
+    UI.concertPieceArr.forEach((piece, index) => {
+      piece.setAttribute('data-index', index);
+    });
+    UISelectors.concertBuilderArea.innerHTML = '';
+    UI.concertPieceArr.forEach((piece) => {
+      UISelectors.concertBuilderArea.appendChild(piece);
+    });
+    //concertBuilderArea.appendChild(intermissionEl);
+    //console.log(concertPieceArr);
+
+    UI.updateConcertDuration(UI.getConcertDuration(UI.concertPieceArr));
+
+    //Delete Intermission
+    let closeIntermission = intermissionEl.querySelector('#delete-intermission');
+    closeIntermission.addEventListener('click', (e) => {
+      UI.concertPieceArr.splice(UI.concertPieceArr.indexOf(e.target.parentElement), 1);
+
+      //Remove Intermission from DOM
+      e.target.parentElement.remove();
+
+      //Update Data-Index Attribute
+      UI.concertPieceArr.forEach((piece, index) => {
+        piece.setAttribute('data-index', index);
+      });
+
+      UI.updateConcertDuration(UI.getConcertDuration(UI.concertPieceArr));
+    });
   }
 
   deleteIntermission(intermissionElement) {
@@ -464,7 +502,7 @@ export class Ui {
   //Drag Functions
 
   dragStart(e) {
-    this.dragStartIndex = e.target.parentElement.getAttribute('data-index');
+    UI.dragStartIndex = e.target.parentElement.getAttribute('data-index');
   }
 
   dragEnter() {
@@ -479,25 +517,46 @@ export class Ui {
     e.preventDefault();
   }
 
-  dragDrop() {
-    const dragEndIndex = +this.getAttribute('data-index');
-    Ui.swapItems(dragStartIndex, dragEndIndex);
-    this.classList.remove('over');
+  dragDrop(e) {
+    const dragEndIndex = +e.target.getAttribute('data-index');
+    console.log(`from dragDROP ${dragEndIndex}, ${UI.dragStartIndex}`)
+    UI.swapItems(UI.dragStartIndex, dragEndIndex);
+    e.target.classList.remove('over');
   }
 
-  swapItems(fromIndex, toIndex, concertPieceArr) {
-    const itemOne = concertPieceArr[fromIndex];
-    const itemTwo = concertPieceArr[toIndex];
+  dragListeners() {
+    const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
+    const dragBoxes = document.querySelectorAll('.concert');
 
-    //console.log(concertPieceArr[fromIndex]);
-    console.log(concertPieceArr[toIndex]);
-    concertPieceArr[fromIndex] = itemTwo;
-    concertPieceArr[toIndex] = itemOne;
+    pieceDragBars.forEach((drag) => {
+      drag.addEventListener('dragstart', UI.dragStart);
+    });
+
+    dragBoxes.forEach((box) => {
+      box.addEventListener('dragover', UI.dragOver);
+      box.addEventListener('drop', UI.dragDrop);
+      box.addEventListener('dragenter', UI.dragEnter);
+      box.addEventListener('dragleave', UI.dragLeave);
+    });
+  }
+
+  swapItems(fromIndex, toIndex) {
+    const itemOne = UI.concertPieceArr[fromIndex];
+    const itemTwo = UI.concertPieceArr[toIndex];
+
+
+    console.log(UI.concertPieceArr);
+    console.log(itemOne);
+    console.log(itemTwo);
+    UI.concertPieceArr[fromIndex] = itemTwo;
+    UI.concertPieceArr[toIndex] = itemOne;
 
     UISelectors.concertBuilderArea.innerHTML = ``;
 
-    concertPieceArr.forEach((item) => {
-      Ui.addPieceToDOM(item);
+    UI.concertPieceArr.forEach((item) => {
+      console.log(item);
+      console.log(typeof item)
+      UI.addPieceToDOM(item);
     });
   }
 

@@ -2,6 +2,7 @@ import { App } from '../modules/app';
 import { Forms } from '../modules/forms';
 import { HTTP } from '../modules/http';
 import { Nav } from '../modules/nav';
+import { Storage } from '../modules/storage';
 import { Requests } from '../modules/requests';
 import { UI } from '../modules/ui';
 import { UISelectors } from '../modules/UISelectors';
@@ -12,32 +13,33 @@ import "../../css/concert-builder.css";
 let concertPieceArr = [];
 let favoritesResults = [];
 let dragStartIndex;
-let number = 0;
+// let number = 0;
 
+window.addEventListener('DOMContentLoaded', App.initBase);
 
-
-function saveConcert() {
-    let currentUser = JSON.parse(localStorage.getItem('user'));
+//Pass in Concert Piece Array
+function saveConcert(concertPieceArr) {
+    let currentUser = Storage.getUser();
     //console.log(currentUser);
-    if (concertTitleHeader.textContent === '') {
-        saveConcertBtn.classList.add('disabled');
-        saveConcertBtn.textContent = 'Please add title.';
+    if (UISelectors.concertTitleHeader.textContent === '') {
+        UISelectors.saveConcertBtn.classList.add('disabled');
+        UISelectors.saveConcertBtn.textContent = 'Please add title.';
         window.setTimeout(() => {
-            saveConcertBtn.classList.remove('disabled');
-            saveConcertBtn.textContent = 'Save Concert';
+            UISelectors.saveConcertBtn.classList.remove('disabled');
+            UISelectors.saveConcertBtn.textContent = 'Save Concert';
         }, 1000);
         return false;
     } else if (concertPieceArr.length === 0) {
-        saveConcertBtn.classList.add('disabled');
-        saveConcertBtn.textContent = 'Please add pieces...';
+        UISelectors.saveConcertBtn.classList.add('disabled');
+        UISelectors.saveConcertBtn.textContent = 'Please add pieces...';
         window.setTimeout(() => {
-            saveConcertBtn.classList.remove('disabled');
-            saveConcertBtn.textContent = 'Save Concert';
+            UISelectors.saveConcertBtn.classList.remove('disabled');
+            UISelectors.saveConcertBtn.textContent = 'Save Concert';
         }, 1000);
         return false;
     }
 
-    let currentConcert = new Concert(concertTitleHeader.textContent);
+    let currentConcert = new Concert(UISelectors.concertTitleHeader.textContent);
     //console.log(currentConcert);
     concertPieceArr.forEach((piece) => {
         let thisPiece = new Piece(
@@ -47,14 +49,14 @@ function saveConcert() {
 
         currentConcert.pieces.push(thisPiece);
     });
-    //console.log(currentConcert.pieces);
+
     currentUser.concerts.push(currentConcert);
-    //console.log(currentUser.concerts);
-    localStorage.setItem('user', JSON.stringify(currentUser));
-    console.log(localStorage.getItem('user'));
-    saveConcertBtn.textContent = 'Concert Saved!!';
+
+    Storage.setUser();
+
+    UISelectors.saveConcertBtn.textContent = 'Concert Saved!!';
     window.setTimeout(() => {
-        saveConcertBtn.textContent = 'Save Concert';
+        UISelectors.saveConcertBtn.textContent = 'Save Concert';
     }, 1000);
 }
 
@@ -75,7 +77,8 @@ function dragListeners() {
     });
 }
 
-window.addEventListener('DOMContentLoaded', App.initBase);
+//Initialize Base 
+
 
 UISelectors.addToConcert.forEach((button) => {
     button.addEventListener('click', App.addPieceToConcertArr);

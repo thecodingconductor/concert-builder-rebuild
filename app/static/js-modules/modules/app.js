@@ -16,7 +16,7 @@ class APP {
 
   initBase() {
 
-    console.log("INIT BASE");
+
     UISelectors.search.addEventListener('click', UI.showSearch);
     UISelectors.openMobileSearch.addEventListener('click', UI.showSearch);
     UISelectors.closeSearch.addEventListener('click', UI.closeSearchField);
@@ -107,7 +107,8 @@ class APP {
   }
 
   //For Concert Builder
-  addPieceToConcertArr(e, concertPieceArr) {
+  addPieceToConcertArr(e) {
+
     const addToConcertContainer = e.target.parentElement.parentElement;
     const pieceComposer = addToConcertContainer.querySelector(
       '.piece-info-left > p'
@@ -160,8 +161,8 @@ class APP {
       
       `;
 
-    concertPieceArr.push(pieceEl);
-    concertPieceArr.forEach((piece, index) => {
+    UI.concertPieceArr.push(pieceEl);
+    UI.concertPieceArr.forEach((piece, index) => {
       piece.setAttribute('data-index', index);
     });
 
@@ -170,7 +171,7 @@ class APP {
     UI.deletePiecesListeners();
     UI.createIntermissionListeners();
     UI.dragListeners();
-    UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr));
+    UI.updateConcertDuration(UI.getConcertDuration(UI.concertPieceArr));
   }
 
   //TODO
