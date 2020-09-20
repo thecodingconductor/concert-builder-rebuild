@@ -191,6 +191,27 @@ class REQUESTS {
       })
   }
 
+  displayComments(entry) {
+    HTTP.get(`/piece_detail/${entry.piece}`)
+      .then(data => {
+        if (data.piece.comments.length > 0) {
+          const commentList = document.createElement('ul');
+          commentList.classList = 'comment-list';
+          UISelectors.pieceDetailsContainer.appendChild(commentList);
+          data.piece.comments.forEach(comment => {
+            const commentLI = document.createElement('li');
+            commentLI.classList = 'comment';
+            commentList.innerHTML = `
+            <p>${comment.author} says: </p>
+                <p>${comment.body}</p>
+                <p>${comment.timestamp}</p>`;
+            commentList.appendChild(commentLI);
+          })
+        }
+      })
+      .catch(err => `There was an err: ${err}`)
+  }
+
 
   imageFetch() {
     const composerName = document.getElementById('composer-name');
@@ -233,7 +254,7 @@ class REQUESTS {
             e.target.textContent = 'Submit Comment';
           }, 3000);
           commentBody.value = ``;
-          console.log(data);
+          Requests.displayComments(entry);
         }).catch(err => {
           UI.showButtonError(e.target);
         });

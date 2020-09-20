@@ -129,21 +129,23 @@ class APP {
     }
 
     let currentConcert = new Concert(UISelectors.concertTitleHeader.textContent);
-    //console.log(currentConcert);
-    UI.concertPieceArr.forEach((piece) => {
-      let thisPiece = new Piece(
-        piece.querySelector('.composer-info > p:first-child').textContent,
-        piece.querySelector('.piece-info > p:first-child').textContent
-      );
 
-      currentConcert.pieces.push(thisPiece);
+    UI.concertPieceArr.forEach((piece) => {
+      if (piece.classList.contains('intermission')) {
+        return;
+      } else {
+        let thisPiece = new Piece(
+          piece.querySelector('.composer-info > p:first-child').textContent,
+          piece.querySelector('.piece-info > p:first-child').textContent
+        );
+
+        currentConcert.pieces.push(thisPiece);
+      }
     });
 
-    console.log(currentUser);
-    console.log(currentUser.concerts);
-    console.log(currentUser.concerts[0]);
+
     currentUser.concerts.push(currentConcert);
-    console.log(currentUser.concerts);
+
 
     Storage.setUser(currentUser);
 

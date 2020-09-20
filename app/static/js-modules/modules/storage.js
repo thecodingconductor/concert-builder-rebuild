@@ -32,8 +32,10 @@ class STORAGE {
 
   getConcert() {
     let res = JSON.parse(localStorage.getItem('newConcert'));
-    console.log(res);
-    Requests.getFullPieceInfo(res.pieces[0].title.split('...')[0]);
+    if (res !== null) {
+      Requests.getFullPieceInfo(res.pieces[0].title.split('...')[0]);
+
+    }
 
   }
 
