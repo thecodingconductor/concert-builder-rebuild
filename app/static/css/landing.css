@@ -727,7 +727,7 @@ button {
         padding: 0;
     }
     .search-bar-results {
-        top: 9%;
+        /* top: 9%; */
         width: 100%;
         left: 0;    
     
