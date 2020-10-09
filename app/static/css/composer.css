@@ -169,6 +169,7 @@ body {
   margin: 10px;
   cursor: pointer;
   padding: 1rem .5rem;
+  font-size: .9rem;
 }
 
 #user-comment {
@@ -257,6 +258,10 @@ body {
   .user-buttons button {
     width: 90%;
     margin: 1rem 0;
+  }
+
+  .piece-title {
+    font-size: .8rem;
   }
 
   #piece-title-result {
