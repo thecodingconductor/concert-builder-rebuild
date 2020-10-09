@@ -47,6 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 UISelectors.pieceList.forEach(piece => {
     piece.addEventListener('click', Requests.getPieceResults);
+    piece.addEventListener('click', UI.scrollPieceIntoView);
 })
 
 UISelectors.submitComment.addEventListener('click', Requests.commitNewComment);
