@@ -852,11 +852,8 @@ export class Ui {
     }, 1000);
   }
 
-  scrollPieceIntoView(e) {
-    console.log('scroll piece into view');
-    console.log(e.target);
-    location.href = '#';
-    location.href = "#piece-details";
+  scrollPieceIntoView() {
+    UISelectors.pieceDetailsContainer.scrollIntoView();
   }
 
 
