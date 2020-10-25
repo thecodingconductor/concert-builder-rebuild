@@ -84,7 +84,7 @@ class UiSelectors {
       this.initialFavoritesResults = [...this.favoritesSearchResults.children];
     }
     this.concertBuilderTextArea = document.getElementById('concert-builder-text-area');
-    this.concertLengthCheck = document.getElementById('concert-length-check');
+    this.concertLengthIndicator = document.getElementById('concert-length-indicator');
 
 
     //HOMPAGE

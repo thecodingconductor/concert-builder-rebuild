@@ -333,20 +333,21 @@ export class Ui {
   concertLengthJudgement(container, duration) {
     if (duration == 0) {
       UISelectors.concertConclusion.textContent = `Please add some pieces.`;
-      UISelectors.concertLengthCheck.style.display = 'none';
+      UISelectors.concertLengthIndicator.style.display = 'none';
       UISelectors.concertBuilderTextArea.style.backgroundColor = 'lightblue';
     } else if (duration < 90 && duration > 0) {
       UISelectors.concertConclusion.textContent = `Concert is potentially too short.`;
       UISelectors.concertBuilderTextArea.style.backgroundColor = '#cdb21f';
-      UISelectors.concertLengthCheck.style.display = 'none';
+      UISelectors.concertLengthIndicator.classList = 'fa fa-exclamation-triangle concert-length-indicator';
+      UISelectors.concertLengthIndicator.style.display = 'block';
     } else if (duration >= 90 && duration <= 120) {
       UISelectors.concertConclusion.textContent = `Perfect concert length!`;
       UISelectors.concertBuilderTextArea.style.backgroundColor = '#2e773f';
-      UISelectors.concertLengthCheck.style.display = 'block';
+      UISelectors.concertLengthIndicator.classList = 'fa fa-check concert-length-indicator';
     } else {
       UISelectors.concertConclusion.textContent = `Concert is potentially too long...`;
       UISelectors.concertBuilderTextArea.style.backgroundColor = '#a7303e';
-      UISelectors.concertLengthCheck.style.display = 'none';
+      UISelectors.concertLengthIndicator.classList = 'fa fa-exclamation-triangle concert-length-indicator';
     }
 
     if (container.querySelector('.concert.intermission')) {

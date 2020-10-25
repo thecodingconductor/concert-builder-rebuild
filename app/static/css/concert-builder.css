@@ -265,10 +265,19 @@
     margin: 0;
 }
 
-.concert-length-check {
+/* .concert-length-check {
     font-size: 1.5rem;
     display: none;
 }
+
+.concert-length-danger {
+    font-size: 1.5rem;
+} */
+
+.concert-length-indicator {
+    display: block;
+}
+
 
 .concert-builder-text-area p {
     /* margin: .5rem auto; */
