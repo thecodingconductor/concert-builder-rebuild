@@ -14,11 +14,11 @@ class REQUESTS {
     }
 
     HTTP.post('/composers', data).then(res => {
-      console.log(res);
-      console.log(typeof res);
-      console.log(typeof res.composers)
+      // console.log(res);
+      // console.log(typeof res);
+      // console.log(typeof res.composers)
       let compArray = JSON.parse(res.composers);
-      console.log(compArray);
+      // console.log(compArray);
 
       compArray.forEach(composer => {
         const currentURL = window.location.href;
@@ -51,15 +51,20 @@ class REQUESTS {
   }
 
   openCurrentLetter(e) {
+
+    console.log('open current letter');
     if (!window.location.href.includes('browse_composers')) {
       window.location.href = '/browse_composers';
     }
 
-    if (e.target.tagName !== 'LI' || e.target.tagName !== 'H1') {
-      return false;
-    } else {
+    let targetTag = e.target.tagName.trim();
+
+    if (targetTag === 'LI') {
       let composerLetter = e.target.textContent;
       let data = { letter: composerLetter };
+
+      console.log(data);
+
       HTTP.post('./browse_composer_list', data)
         .then((data) => {
           if (UISelectors.resultsColumn.textContent !== '') {
@@ -75,8 +80,17 @@ class REQUESTS {
           });
         })
         .catch((err) => console.log(`There was an error ${err}`));
+    } else {
+      return false;
     }
   }
+
+
+  //   if(targetTag !== 'LI' || targetTag !== 'H1') {
+  //   console.log(e.target);
+  //   console.log(e.target.tagName);
+  //   return false;
+  // } else if (targetTag === 'LI') {
 
   testLogin(loginData) {
     HTTP.post('/login', loginData)
