@@ -64,6 +64,7 @@
     border-bottom-right-radius: 0;
     border: none;
     outline: none;
+    padding-left: 1rem;
 }
 
 .left-search-area i {
@@ -85,6 +86,7 @@
     border: none;
     outline: none;
     opacity: 1;
+    padding-left: 1rem;
 }
 
 .concert-title-btn {
@@ -149,11 +151,13 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    height: 100px;
-    border: 2px solid grey;
+    height: 7rem;
+    background-color: #303f82;
+    /* border: 2px solid #243273; */
     border-radius: 5px;
-    margin: 10px 0;
+    margin: 1rem 0;
 }
+
 
 .piece-info-left, .piece-info-right {
     display: flex;
@@ -163,8 +167,35 @@
     width: 50%;
 }
 
-.piece-info-left p:last-of-type {
+.piece-info-left {
+    align-items: flex-start;
+    margin-left: 2rem;
+    max-height: 100%;
+}
+
+.piece-info-right {
+    margin-right: 2rem;
+    align-items: flex-end;
+}
+
+.piece-info-left p {
+    margin: 0;
     font-size: .75rem;
+}
+
+.piece-info-left p:nth-of-type(1) {
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: .05rem;
+}
+
+.piece-info-left p:nth-of-type(2) {
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+
+.piece-info-left p:last-of-type {
+    font-size: .8rem;
     text-align: center;
 }
 
@@ -200,12 +231,47 @@
 }
 
 .concert-builder-text-area {
+    padding: 0.5rem 2rem;
     width: 80%;
-    flex: 1;
+    /* flex: 1; */
     background-color: lightblue;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.column-left {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem 0;
+    
+}
+
+.inner-split-left, .inner-split-right {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: auto 1rem;
+}
+
+.inner-split-right {
+    align-items: flex-start;
+}
+
+.inner-split-right > * {
+    margin: 0;
+}
+
+.concert-length-check {
+    font-size: 1.5rem;
+    display: none;
+}
+
+.concert-builder-text-area p {
+    /* margin: .5rem auto; */
 }
 
 .composer-info {
@@ -294,7 +360,7 @@
 
 .primary-btn.save-concert {
     transition: background-color .5s ease;
-    margin-bottom: 1rem;
+  
 }
 
 .primary-btn.save-concert.disabled {

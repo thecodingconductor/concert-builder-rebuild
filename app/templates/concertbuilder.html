@@ -24,10 +24,11 @@
                 <div class="piece-info-left">
                     <p>{{ favorite.composer.name }}</p>
                     <p>{{ favorite.title }}</p>
+                    <p>{{ favorite.duration }}</p>
                 </div>
 
                 <div class="piece-info-right">
-                    <p>{{ favorite.duration }}</p>
+
                     <button class="primary-btn add-to-concert">
                         Add to Concert
                     </button>
@@ -56,14 +57,25 @@
             </div>
         </div>
 
+        <div class="concert-builder-text-area" id="concert-builder-text-area">
+
+            <div class="column-left">
+                <div class="inner-split-left">
+                    <i class="fa fa-check concert-length-check" id="concert-length-check"></i>
+                </div>
+                <div class="inner-split-right">
+                    <p>Your concert is <span id="concert-minutes">80</span> minutes long.</p>
+                    <p id="concert-conclusion">Thats perfect! </p>
+                </div>
+
+            </div>
+
+            <button class="primary-btn save-concert" id="save-concert-btn">Save Concert</button>
+        </div>
         <div class="concert-builder-area" id="concert-builder-area">
 
         </div>
-        <div class="concert-builder-text-area">
-            <p>Your concert is <span id="concert-minutes">80</span> minutes long.</p>
-            <p id="concert-conclusion">Thats perfect! </p>
-            <button class="primary-btn save-concert" id="save-concert-btn">Save Concert</button>
-        </div>
+
     </div>
 </div>
 

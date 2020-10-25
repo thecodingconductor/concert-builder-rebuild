@@ -327,17 +327,26 @@ export class Ui {
 
   updateConcertDuration(durationNum) {
     UISelectors.concertMinutes.textContent = `${durationNum}`;
+    UISelectors.concertMinutes.style.fontWeight = 'bold';
   }
 
   concertLengthJudgement(container, duration) {
     if (duration == 0) {
       UISelectors.concertConclusion.textContent = `Please add some pieces.`;
+      UISelectors.concertLengthCheck.style.display = 'none';
+      UISelectors.concertBuilderTextArea.style.backgroundColor = 'lightblue';
     } else if (duration < 90 && duration > 0) {
       UISelectors.concertConclusion.textContent = `Concert is potentially too short.`;
+      UISelectors.concertBuilderTextArea.style.backgroundColor = '#cdb21f';
+      UISelectors.concertLengthCheck.style.display = 'none';
     } else if (duration >= 90 && duration <= 120) {
       UISelectors.concertConclusion.textContent = `Perfect concert length!`;
+      UISelectors.concertBuilderTextArea.style.backgroundColor = '#2e773f';
+      UISelectors.concertLengthCheck.style.display = 'block';
     } else {
-      UISelectors.concertConclusion.textContent = `Concert is getting a bit long...`;
+      UISelectors.concertConclusion.textContent = `Concert is potentially too long...`;
+      UISelectors.concertBuilderTextArea.style.backgroundColor = '#a7303e';
+      UISelectors.concertLengthCheck.style.display = 'none';
     }
 
     if (container.querySelector('.concert.intermission')) {

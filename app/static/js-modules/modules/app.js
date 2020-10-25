@@ -160,7 +160,7 @@ class APP {
 
     const addToConcertContainer = e.target.parentElement.parentElement;
     const pieceComposer = addToConcertContainer.querySelector(
-      '.piece-info-left > p'
+      '.piece-info-left p:nth-of-type(1)'
     );
     const pieceComposerDates = addToConcertContainer.querySelector(
       '.data-composer-dates'
@@ -172,10 +172,10 @@ class APP {
       '.data-piece-instrumentation'
     );
     const pieceTitle = addToConcertContainer.querySelector(
-      '.piece-info-left p:last-child'
+      '.piece-info-left p:nth-of-type(2)'
     );
     const pieceDuration = addToConcertContainer.querySelector(
-      '.piece-info-right p'
+      '.piece-info-left p:nth-of-type(3)'
     );
 
     //Change notifictaion text back and forth.

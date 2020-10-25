@@ -102,11 +102,11 @@ def composers():
 
     response = request.get_json()
 
-    print(response)
-    print(type(response))
+    # print(response)
+    # print(type(response))
     search_term = response['searchTerm']
 
-    print(search_term)
+    # print(search_term)
     #composer_name = request.form.get("search-bar-field")
     res = Composer.query.filter(Composer.name.ilike(f"%{search_term}%")).all()
     list_composers = json.dumps([{"name": composer.name} for composer in res])
@@ -119,8 +119,8 @@ def search_favorites():
     user = User.query.filter_by(username=current_user.username).first()
     response = request.get_json()
     user_search_entry = response['searchTerm']
-    print(user)
-    print(user_search_entry)
+    # print(user)
+    # print(user_search_entry)
 
     res = Composer.query.filter(
         Composer.name.ilike(f"%{user_search_entry}%")).all()

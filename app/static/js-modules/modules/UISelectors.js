@@ -83,6 +83,8 @@ class UiSelectors {
     if (this.favoritesSearchResults !== null) {
       this.initialFavoritesResults = [...this.favoritesSearchResults.children];
     }
+    this.concertBuilderTextArea = document.getElementById('concert-builder-text-area');
+    this.concertLengthCheck = document.getElementById('concert-length-check');
 
 
     //HOMPAGE
