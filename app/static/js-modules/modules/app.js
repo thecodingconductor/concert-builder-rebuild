@@ -194,8 +194,9 @@ class APP {
           <div class="info-inner-container">
               <div class="composer-info">
                   <p>${pieceComposer.textContent}</p>
-                  <p>${pieceComposerDates.textContent}</p>
                   <p>${pieceComposerNationality.textContent}</p>
+                  <p>${pieceComposerDates.textContent}</p>
+                  
               </div>
               <div class="piece-info">
                   <p>${pieceTitle.textContent}</p>

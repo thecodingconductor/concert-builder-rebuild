@@ -80,18 +80,30 @@
 
 
 .concert-title-input {
-    width: 50%;
+    width: 100%;
     line-height: 2rem;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     border: none;
     outline: none;
     opacity: 1;
     padding-left: 1rem;
+    height: 3rem;
 }
 
 .concert-title-btn {
+    background-color: #fff;
+    color: #00786f;
+    font-size: 1rem;
+    font-weight: bold;
+    height: 3rem;
     width: 25%;
     opacity: 1;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .right-search-area i {
@@ -293,8 +305,8 @@
     justify-content: space-between;
     width: 90%;
     margin: auto;
-    border: 2px solid grey;
-    border-radius: 5px;
+    border: 2px solid #b2b2b2;
+    border-radius: 3px;
     margin: 10px 0;
     box-shadow: var(--default-shadow);
     position: relative;
@@ -305,6 +317,7 @@
     justify-content: space-between;
     width: 70%;
     align-items: center;
+    margin: 1rem 0;
 }
 
 .concert.over {
@@ -342,14 +355,25 @@
 }
 
 .concert.intermission {
-    background: lightgrey;
-   
-    height: 30px;
+    background: #dddddd;
 }
 
-.concert i {
+.concert.intermission p {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.piece-drag-bars {
+    font-size: 2rem;
+    color: var(--primary-button-background);
     cursor: pointer;
     margin: 0 1rem;
+}
+
+.delete-piece {
+    color: #b2b2b2;
+    cursor: pointer;
+    margin-right: 2rem;
 }
 
 .composer-img {
@@ -365,6 +389,11 @@
 
 .composer-info > p:first-child {
     font-weight: bold;
+    margin-bottom: 0;
+}
+
+.composer-info p:nth-of-type(2) {
+    margin-top: 0;
 }
 
 .primary-btn.save-concert {

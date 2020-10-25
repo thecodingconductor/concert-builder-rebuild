@@ -206,8 +206,9 @@ export class Ui {
         <div class="info-inner-container">
             <div class="composer-info">
                 <p>${pieceObject.composer}</p>
-                <p>${pieceObject.years}</p>
                 <p>${pieceObject.nationality}</p>
+                <p>${pieceObject.years}</p>
+                
             </div>
             <div class="piece-info">
                 <p>${pieceObject.title}</p>
@@ -269,61 +270,61 @@ export class Ui {
   }
 
 
-  createIntermission(e, concertPieceArr) {
-    if (!UISelectors.concertBuilderArea.querySelector('.add-intermission')) {
-      return false;
-    }
+  // createIntermission(e, concertPieceArr) {
+  //   if (!UISelectors.concertBuilderArea.querySelector('.add-intermission')) {
+  //     return false;
+  //   }
 
-    let parentConcert = e.target.parentElement.parentElement;
+  //   let parentConcert = e.target.parentElement.parentElement;
 
-    e.target.parentElement.parentElement.classList.remove('show');
+  //   e.target.parentElement.parentElement.classList.remove('show');
 
-    //concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
+  //   //concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
 
-    let intermissionEl = document.createElement('div');
-    intermissionEl.classList = 'concert intermission';
-    //intermissionEl.setAttribute("draggable", "true");
-    intermissionEl.innerHTML = `
-          <i class="fas fa-bars" draggable="true"></i>
-          <p>Intermission: ~30 minutes</p>
-          <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
-      `;
+  //   let intermissionEl = document.createElement('div');
+  //   intermissionEl.classList = 'concert intermission';
+  //   //intermissionEl.setAttribute("draggable", "true");
+  //   intermissionEl.innerHTML = `
+  //         <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
+  //         <p>Intermission/p>
+  //         <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
+  //     `;
 
-    //ADD TO APP
-    concertPieceArr.splice(
-      concertPieceArr.indexOf(parentConcert) + 1,
-      0,
-      intermissionEl
-    );
+  //   //ADD TO APP
+  //   concertPieceArr.splice(
+  //     concertPieceArr.indexOf(parentConcert) + 1,
+  //     0,
+  //     intermissionEl
+  //   );
 
-    concertPieceArr.forEach((piece, index) => {
-      piece.setAttribute('data-index', index);
-    });
-    UISelectors.concertBuilderArea.innerHTML = '';
-    concertPieceArr.forEach((piece) => {
-      UISelectors.concertBuilderArea.appendChild(piece);
-    });
-    //concertBuilderArea.appendChild(intermissionEl);
-    //console.log(concertPieceArr);
+  //   concertPieceArr.forEach((piece, index) => {
+  //     piece.setAttribute('data-index', index);
+  //   });
+  //   UISelectors.concertBuilderArea.innerHTML = '';
+  //   concertPieceArr.forEach((piece) => {
+  //     UISelectors.concertBuilderArea.appendChild(piece);
+  //   });
+  //   //concertBuilderArea.appendChild(intermissionEl);
+  //   //console.log(concertPieceArr);
 
-    Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
+  //   Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
 
-    //Delete Intermission
-    let closeIntermission = intermissionEl.querySelector('#delete-intermission');
-    closeIntermission.addEventListener('click', (e) => {
-      concertPieceArr.splice(concertPieceArr.indexOf(e.target.parentElement), 1);
+  //   //Delete Intermission
+  //   let closeIntermission = intermissionEl.querySelector('#delete-intermission');
+  //   closeIntermission.addEventListener('click', (e) => {
+  //     concertPieceArr.splice(concertPieceArr.indexOf(e.target.parentElement), 1);
 
-      //Remove Intermission from DOM
-      e.target.parentElement.remove();
+  //     //Remove Intermission from DOM
+  //     e.target.parentElement.remove();
 
-      //Update Data-Index Attribute
-      concertPieceArr.forEach((piece, index) => {
-        piece.setAttribute('data-index', index);
-      });
+  //     //Update Data-Index Attribute
+  //     concertPieceArr.forEach((piece, index) => {
+  //       piece.setAttribute('data-index', index);
+  //     });
 
-      Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
-    });
-  }
+  //     Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
+  //   });
+  // }
 
   updateConcertDuration(durationNum) {
     UISelectors.concertMinutes.textContent = `${durationNum}`;
@@ -452,8 +453,8 @@ export class Ui {
     intermissionEl.classList = 'concert intermission';
     //intermissionEl.setAttribute("draggable", "true");
     intermissionEl.innerHTML = `
-          <i class="fas fa-bars" draggable="true"></i>
-          <p>Intermission: ~30 minutes</p>
+          <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
+          <p>Intermission</p>
           <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
       `;
 
