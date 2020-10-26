@@ -161,6 +161,14 @@ class REQUESTS {
   getPieceResults(e) {
     UI.clearComposerResults();
 
+    UISelectors.pieceList.forEach((piece) => {
+      if (piece.classList.contains('selected')) {
+        piece.classList.remove('selected');
+      }
+    });
+
+    let selectedPiece = e.target;
+    selectedPiece.classList.add('selected');
     let formattedString = e.target.innerHTML.split('&')[0];
     HTTP.get(`/piece_detail/${formattedString}`)
       .then(data => {
@@ -181,7 +189,7 @@ class REQUESTS {
               const commentLI = document.createElement('li');
               commentLI.classList = 'comment';
 
-              console.log(comment.author, comment.body, comment.timestamp);
+              // console.log(comment.author, comment.body, comment.timestamp);
 
               commentLI.innerHTML = `
                 <p>${comment.author} says: </p>

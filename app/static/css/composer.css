@@ -172,6 +172,11 @@ body {
   font-size: .9rem;
 }
 
+.piece-title.selected {
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: 0px 0 0 black;
+}
+
 #user-comment {
     font-family: 'Lato', sans-serif;
     flex: 1;
