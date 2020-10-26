@@ -114,7 +114,7 @@ export class Ui {
       '.random-composer-links a'
     );
     [...randomComposerList].forEach((composerLink) => {
-      console.log(composerLink);
+
       composerLink.href = `/composer/${composerLink.textContent}`;
       //composerLink.addEventListener('click', () => console.log('TITS'));
     });

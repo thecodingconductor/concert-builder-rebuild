@@ -38,6 +38,8 @@ function newConcert(e) {
 const fromHomepage = () => {
     if (Storage.getTempPiece()) {
         Requests.displayTempInfo();
+    } else {
+        console.log('no?');
     }
 }
 

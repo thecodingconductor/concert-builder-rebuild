@@ -44,7 +44,7 @@ class STORAGE {
     res.concerts.forEach(concert => {
       if (concert.id === id) {
         concert.pieces.forEach(piece => {
-          console.log(piece.title);
+
           Requests.getFullPieceInfo(piece.title);
           // UI.addPieceFromLocalStorage(piece);
         })

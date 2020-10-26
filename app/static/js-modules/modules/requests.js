@@ -70,8 +70,10 @@ class REQUESTS {
       UISelectors.pieceDetailsContainer.innerHTML = contents;
 
       UISelectors.pieceList.forEach(piece => {
-        if (piece.querySelector('.piece-title').textContent.includes(data.piece.title)) {
+        console.log(piece.textContent);
+        if (piece.textContent.includes(data.piece.title)) {
           piece.classList.add('selected');
+          piece.scrollIntoView();
         } else {
           console.log('could not find a match');
         }
