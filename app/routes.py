@@ -193,13 +193,15 @@ def composer(composer_name):
 
 @app.route('/piece_detail/<piece_title>', methods=["GET", "POST"])
 def piece_detail(piece_title):
+    print(piece_title)
     piece_title = urllib.parse.unquote(piece_title)
+    print(piece_title)
     try:
         piece = Piece.query.filter(Piece.title.ilike(
             f"%{piece_title}%")).first().as_dict()
         print(piece)
     except:
-        print("Recursion Fuck Up.")
+        print("Recursion Error.")
 
     return jsonify({"succcess": True, "piece": piece})
 

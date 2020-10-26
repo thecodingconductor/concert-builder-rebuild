@@ -1,3 +1,5 @@
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import { App } from '../modules/app';
 import { Forms } from '../modules/forms';
 import { HTTP } from '../modules/http';
@@ -38,8 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 UISelectors.openBrowse.addEventListener('click', UI.showBrowse);
+
 [...UISelectors.createConcertBtns].forEach((btn) => {
-  btn.addEventListener('click', App.createConcertFunction);
+  btn.addEventListener('click', App.viewPieceDetails);
 });
 
 //LOAD CONCERTS!!

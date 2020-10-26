@@ -1,4 +1,5 @@
 import { UISelectors } from './UISelectors';
+import { Storage } from './storage';
 import { UI } from './ui';
 import { HTTP } from './http';
 import { Nav } from './nav';
@@ -14,9 +15,7 @@ class REQUESTS {
     }
 
     HTTP.post('/composers', data).then(res => {
-      // console.log(res);
-      // console.log(typeof res);
-      // console.log(typeof res.composers)
+
       let compArray = JSON.parse(res.composers);
       // console.log(compArray);
 
@@ -25,6 +24,89 @@ class REQUESTS {
         UI.populateComposerSearchResults(currentURL, composer)
       })
     }).catch(err => console.log(`There was an err, ${err}`));
+  }
+
+  pieceDetailsFunc = async (composer, piece) => {
+
+    let splitString = piece.split('...')[0];
+    const moreDetailsObj = {
+      composer,
+      piece: splitString
+    }
+
+    Storage.setItem('tempPiece', moreDetailsObj);
+
+    window.location.href = `/composer/${composer}`;
+    // window.addEventListener('DOMContentLoaded', HTTP.get(`/piece_detail/${piece}`));
+
+    // let encodedURI = encodeURI(splitString);
+    // console.log(encodedURI);
+
+    // window.search = encodedURI;
+
+    // let data = await HTTP.get(`/piece_detail/${encodedURI}`);
+    // console.log(data);
+
+    // UISelectors.pieceList.forEach(piece => {
+    //   if (piece.querySelector('.piece-title').textContent.contains(data.piece.title)) {
+    //     console.log('Success?')
+    //     console.log(piece);
+    //   }
+    // })
+
+  }
+
+  displayTempInfo = async () => {
+    let temp = Storage.getTempPiece();
+
+    UI.clearComposerResults();
+    let data = await HTTP.get(`/piece_detail/${temp.piece}`);
+    if (data.piece.title) {
+      const contents =
+        `<h2 id="piece-title-result">${data.piece.title}</h2> 
+                            <p id="piece-duration">${data.piece.duration}</p>
+                            <p id="piece-instrumentation">${data.piece.instrumentation}</p>
+                            `;
+      UISelectors.pieceDetailsContainer.innerHTML = contents;
+
+      UISelectors.pieceList.forEach(piece => {
+        if (piece.querySelector('.piece-title').textContent.includes(data.piece.title)) {
+          piece.classList.add('selected');
+        } else {
+          console.log('could not find a match');
+        }
+      })
+
+      if (data.piece.comments.length > 0) {
+
+
+        const commentList = document.createElement('ul');
+        commentList.classList = 'comment-list';
+        UISelectors.pieceDetailsContainer.appendChild(commentList);
+        data.piece.comments.forEach(comment => {
+          const commentLI = document.createElement('li');
+          commentLI.classList = 'comment';
+
+          // console.log(comment.author, comment.body, comment.timestamp);
+
+          commentLI.innerHTML = `
+            <p>${comment.author} says: </p>
+            <p>${comment.body}</p>
+            <p>${comment.timestamp}</p>
+        `
+          commentList.appendChild(commentLI);
+
+        });
+
+      }
+
+    }
+
+
+    Storage.removeItem('tempPiece');
+
+    return data;
+
   }
 
 
@@ -170,6 +252,7 @@ class REQUESTS {
     let selectedPiece = e.target;
     selectedPiece.classList.add('selected');
     let formattedString = e.target.innerHTML.split('&')[0];
+
     HTTP.get(`/piece_detail/${formattedString}`)
       .then(data => {
         if (data.piece.title) {

@@ -1,3 +1,4 @@
+import { App } from './app';
 import { Requests } from './requests';
 import { User, Concert, Piece } from './sessionObj';
 import { UI } from './ui';
@@ -49,6 +50,19 @@ class STORAGE {
 
   setItem(string, item) {
     localStorage.setItem(string, JSON.stringify(item));
+  }
+
+  getItem(string, item) {
+    localStorage.getItem(string, JSON.parse(item));
+  }
+
+  getTempPiece() {
+    let res = JSON.parse(localStorage.getItem('tempPiece'));
+    if (res === null || res === undefined) {
+      return false
+    } else {
+      return res;
+    }
   }
 }
 

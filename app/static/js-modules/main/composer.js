@@ -1,3 +1,5 @@
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import { App } from '../modules/app';
 import { Forms } from '../modules/forms';
 import { HTTP } from '../modules/http';
@@ -33,6 +35,12 @@ function newConcert(e) {
     }
 }
 
+const fromHomepage = () => {
+    if (Storage.getTempPiece()) {
+        Requests.displayTempInfo();
+    }
+}
+
 window.addEventListener('DOMContentLoaded', App.initBase);
 
 window.addEventListener('DOMContentLoaded', Requests.imageFetch);
@@ -53,3 +61,6 @@ UISelectors.pieceList.forEach(piece => {
 UISelectors.submitComment.addEventListener('click', Requests.commitNewComment);
 UISelectors.addPieceToFavorites.addEventListener('click', Requests.commitNewFavorite);
 UISelectors.createConcert.addEventListener('click', newConcert);
+
+
+window.addEventListener('DOMContentLoaded', fromHomepage);

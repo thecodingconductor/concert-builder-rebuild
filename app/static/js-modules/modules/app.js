@@ -20,6 +20,7 @@ class APP {
     UISelectors.search.addEventListener('click', UI.showSearch);
     UISelectors.openMobileSearch.addEventListener('click', UI.showSearch);
     UISelectors.closeSearch.addEventListener('click', UI.closeSearchField);
+
     UISelectors.searchInput.addEventListener('keyup', () => {
       UI.clearList();
       Requests.getComposerResults();
@@ -30,6 +31,7 @@ class APP {
     }
 
     UISelectors.browse.addEventListener('click', UI.showBrowse);
+
     UISelectors.closeBrowse.addEventListener('click', () => {
       UISelectors.browseModalArea.classList.remove('show');
       UISelectors.browseModal.style.display = 'none';
@@ -108,8 +110,7 @@ class APP {
 
   saveConcert() {
     let currentUser = Storage.getUser();
-    console.log("FROM SAVECONCERT");
-    console.log(currentUser);
+
     if (UISelectors.concertTitleHeader.textContent === '') {
       UISelectors.saveConcertBtn.classList.add('disabled');
       UISelectors.saveConcertBtn.textContent = 'Please add title.';
@@ -226,6 +227,13 @@ class APP {
 
   //TODO
   //deletePieces
+  viewPieceDetails = (e) => {
+    let favoriteCard = e.target.parentElement;
+    let composerNameCard = favoriteCard.querySelector('.composer-name').textContent;
+    let pieceNameCard = favoriteCard.querySelector('.piece-name').textContent;
+    Requests.pieceDetailsFunc(composerNameCard, pieceNameCard);
+
+  }
 
 
 
