@@ -100,7 +100,7 @@ body {
 }
 
 .main-content-area-inner.remove {
-  animation: 1s remove-main;
+  animation: .1s remove-main;
   animation-fill-mode: forwards;
 }
 
@@ -189,7 +189,7 @@ body {
   max-height: 100%;
   display: none;
   opacity: 1;
-  animation: opacity .5s ease-in;
+  animation: opacity .1s ease-in;
   overflow-y: scroll;
 }
 

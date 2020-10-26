@@ -9,9 +9,9 @@ export class Ui {
     this.concertPieceArr = [];
   }
 
-  testImport() {
-    console.log(UISelectors.siteTitle);
-  }
+  // testImport() {
+  //   console.log(UISelectors.siteTitle);
+  // }
 
   //BASE
   openModal(e) {
@@ -269,62 +269,6 @@ export class Ui {
     }
   }
 
-
-  // createIntermission(e, concertPieceArr) {
-  //   if (!UISelectors.concertBuilderArea.querySelector('.add-intermission')) {
-  //     return false;
-  //   }
-
-  //   let parentConcert = e.target.parentElement.parentElement;
-
-  //   e.target.parentElement.parentElement.classList.remove('show');
-
-  //   //concertBuilderArea.querySelector('.add-intermission').parentElement.classList.remove('show');
-
-  //   let intermissionEl = document.createElement('div');
-  //   intermissionEl.classList = 'concert intermission';
-  //   //intermissionEl.setAttribute("draggable", "true");
-  //   intermissionEl.innerHTML = `
-  //         <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
-  //         <p>Intermission/p>
-  //         <i class="fa fa-times fa-2x delete-piece" id="delete-intermission"></i>
-  //     `;
-
-  //   //ADD TO APP
-  //   concertPieceArr.splice(
-  //     concertPieceArr.indexOf(parentConcert) + 1,
-  //     0,
-  //     intermissionEl
-  //   );
-
-  //   concertPieceArr.forEach((piece, index) => {
-  //     piece.setAttribute('data-index', index);
-  //   });
-  //   UISelectors.concertBuilderArea.innerHTML = '';
-  //   concertPieceArr.forEach((piece) => {
-  //     UISelectors.concertBuilderArea.appendChild(piece);
-  //   });
-  //   //concertBuilderArea.appendChild(intermissionEl);
-  //   //console.log(concertPieceArr);
-
-  //   Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
-
-  //   //Delete Intermission
-  //   let closeIntermission = intermissionEl.querySelector('#delete-intermission');
-  //   closeIntermission.addEventListener('click', (e) => {
-  //     concertPieceArr.splice(concertPieceArr.indexOf(e.target.parentElement), 1);
-
-  //     //Remove Intermission from DOM
-  //     e.target.parentElement.remove();
-
-  //     //Update Data-Index Attribute
-  //     concertPieceArr.forEach((piece, index) => {
-  //       piece.setAttribute('data-index', index);
-  //     });
-
-  //     Ui.updateConcertDuration(Ui.getConcertDuration(concertPieceArr));
-  //   });
-  // }
 
   updateConcertDuration(durationNum) {
     UISelectors.concertMinutes.textContent = `${durationNum}`;
@@ -769,7 +713,7 @@ export class Ui {
     ).style.display = 'none';
     //Change this
     let currentUser = Storage.getUser();
-    console.log(currentUser);
+
 
     UI.displayConcerts(currentUser, true);
   }
@@ -799,7 +743,7 @@ export class Ui {
       [...UISelectors.mainContentInner.children].forEach((node) => {
         node.style.display = 'none';
       });
-    }, 1000);
+    }, 300);
 
     window.setTimeout(() => {
       UISelectors.mainContentInner.classList.remove('remove');
@@ -820,7 +764,7 @@ export class Ui {
       ) {
         UI.concertsEnter(UISelectors.mainContentInner);
       }
-    }, 1500);
+    }, 500);
   }
 
   //Shorten Piece title if necessary
