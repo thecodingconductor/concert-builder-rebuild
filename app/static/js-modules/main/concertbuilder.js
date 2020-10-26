@@ -66,4 +66,6 @@ window.addEventListener(
 
 //TODO FIX THIS
 UISelectors.saveConcertBtn.addEventListener('click', App.saveConcert);
+
 window.addEventListener('DOMContentLoaded', Storage.getConcert);
+window.addEventListener('DOMContentLoaded', Storage.getPieceForEdit);

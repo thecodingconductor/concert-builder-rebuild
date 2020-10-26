@@ -37,7 +37,21 @@ class STORAGE {
       Requests.getFullPieceInfo(res.pieces[0].title.split('...')[0]);
 
     }
+  }
 
+  getConcertByID(id) {
+    let res = JSON.parse(localStorage.getItem('user'));
+    res.concerts.forEach(concert => {
+      if (concert.id === id) {
+        concert.pieces.forEach(piece => {
+          console.log(piece.title);
+          Requests.getFullPieceInfo(piece.title);
+          // UI.addPieceFromLocalStorage(piece);
+        })
+      } else {
+        return;
+      }
+    })
   }
 
   setNewConcert(concert) {
@@ -62,6 +76,16 @@ class STORAGE {
       return false
     } else {
       return res;
+    }
+  }
+
+  getPieceForEdit() {
+    let res = JSON.parse(localStorage.getItem('editConcertID'));
+    if (res === null || res === undefined) {
+      return false
+    } else {
+      console.log(res);
+      Storage.getConcertByID(res.id);
     }
   }
 }

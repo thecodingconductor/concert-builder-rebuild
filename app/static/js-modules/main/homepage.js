@@ -15,6 +15,7 @@ import "../../css/homepage.css";
 
 window.addEventListener('DOMContentLoaded', App.initBase);
 
+
 UISelectors.dropDownYourConcerts.addEventListener('click', (e) => {
   UISelectors.dropDownMenu.style.display = 'none';
   UI.resultsExit(e);
@@ -30,6 +31,7 @@ UISelectors.openLinks.forEach((link) => {
 });
 
 window.addEventListener('DOMContentLoaded', UI.formatResultsCard);
+
 window.addEventListener('DOMContentLoaded', () => {
   let searchResults = document.querySelectorAll('.search-result');
   [...searchResults].forEach((result) => {

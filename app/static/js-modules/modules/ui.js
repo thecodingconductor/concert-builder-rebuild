@@ -196,6 +196,7 @@ export class Ui {
   //CONCERT BUILDER
 
   addPieceFromLocalStorage(pObject) {
+    console.log(pObject);
     const pieceObject = pObject.piece;
     let pieceEl = document.createElement('div');
     pieceEl.classList = 'concert';
@@ -499,17 +500,14 @@ export class Ui {
     const itemTwo = UI.concertPieceArr[toIndex];
 
 
-    console.log(UI.concertPieceArr);
-    console.log(itemOne);
-    console.log(itemTwo);
+
     UI.concertPieceArr[fromIndex] = itemTwo;
     UI.concertPieceArr[toIndex] = itemOne;
 
     UISelectors.concertBuilderArea.innerHTML = ``;
 
     UI.concertPieceArr.forEach((item) => {
-      console.log(item);
-      console.log(typeof item)
+
       UI.addPieceToDOM(item);
     });
   }
@@ -519,10 +517,6 @@ export class Ui {
     if (UISelectors.fullConcertsGrid.children.length > 0) {
       UISelectors.fullConcertsGrid.innerHTML = ``;
     }
-    // console.log(user);
-    // console.log(user.concerts);
-    // console.log(user.concerts.length);
-
 
     if (user.concerts.length === 0 || user.concerts.length === undefined) {
       let notificationContainer = document.createElement('div');
@@ -551,7 +545,7 @@ export class Ui {
     //SEE homepage.js Line 86
     user.concerts.forEach((concert, index) => {
       if (all === false && index < 3) {
-        console.log('all===false, index < 3');
+
         //fullConcertsGrid.style.display = 'none';
         let concertContainer = document.createElement('div');
         concertContainer.classList = 'search-result';
@@ -566,7 +560,7 @@ export class Ui {
                            `.trim();
             })
             .join('')}
-                           <button class="primary-btn remove-concert-btn">Delete Concert</button>
+                           <button class="primary-btn remove-concert-btn">Edit Concert</button>
                            <span class="hover-gold"></span>
                       `;
 
@@ -590,7 +584,7 @@ export class Ui {
                            `.trim()
             )
             .join('')}
-                           <button class="primary-btn remove-concert-btn">Delete Concert</button>
+                           <button class="primary-btn remove-concert-btn">Edit Concert</button>
                            <span class="hover-gold "></span>
                       `;
 
@@ -598,8 +592,8 @@ export class Ui {
       }
     });
 
-    UI.removeConcertListeners(UISelectors.fullConcertsGrid);
-    UI.removeConcertListeners(UISelectors.yourConcertsContainer);
+    UI.editConcertListeners(UISelectors.fullConcertsGrid);
+    UI.editConcertListeners(UISelectors.yourConcertsContainer);
 
     //THIS IS THE CORRECT BRACKET FUCK ESLINT AND PRETTIER.
   }
@@ -614,7 +608,21 @@ export class Ui {
     });
   }
 
-  removeConcertListeners(container) {
+  // removeConcertListeners(container) {
+  //   let concertsList = container.children;
+
+  //   [...concertsList].forEach((concert) => {
+  //     if (!concert.querySelector('.remove-concert-btn')) {
+  //       return false;
+  //     } else {
+  //       concert
+  //         .querySelector('.remove-concert-btn')
+  //         .addEventListener('click', UI.deleteConcert);
+  //     }
+  //   });
+  // }
+
+  editConcertListeners(container) {
     let concertsList = container.children;
 
     [...concertsList].forEach((concert) => {
@@ -623,30 +631,45 @@ export class Ui {
       } else {
         concert
           .querySelector('.remove-concert-btn')
-          .addEventListener('click', UI.deleteConcert);
+          .addEventListener('click', UI.editConcert);
       }
     });
   }
 
-  deleteConcert(e) {
-    e.target.parentElement.remove();
+  editConcert(e) {
     let selectedConcertID = e.target.parentElement.querySelector(
       '.concert-id-num'
     );
-    //SWITCH TO STORAGE FUNCTION
-    let deleteConcertUser = Storage.getUser();
-    deleteConcertUser.concerts.forEach((concert, index, object) => {
 
-      if (concert.id === Number(selectedConcertID.textContent)) {
-        object.splice(index, 1);
-      } else {
-        return;
-      }
-    });
-    //STORAGE FUNCTION
-    Storage.setItem('user', deleteConcertUser);
+    selectedConcertID = Number(selectedConcertID.textContent);
 
+    const editConcertID = {
+      id: selectedConcertID
+    }
+
+    Storage.setItem('editConcertID', editConcertID);
+    location.href = '/concert_builder';
   }
+
+  // deleteConcert(e) {
+  //   e.target.parentElement.remove();
+  //   let selectedConcertID = e.target.parentElement.querySelector(
+  //     '.concert-id-num'
+  //   );
+  //   //SWITCH TO STORAGE FUNCTION
+  //   let deleteConcertUser = Storage.getUser();
+  //   deleteConcertUser.concerts.forEach((concert, index, object) => {
+
+  //     if (concert.id === Number(selectedConcertID.textContent)) {
+  //       object.splice(index, 1);
+  //     } else {
+  //       return;
+  //     }
+  //   });
+  //   //STORAGE FUNCTION
+  //   Storage.setItem('user', deleteConcertUser);
+
+  // }
 
   //Where to call this?
   shortenPieceTitle(pieceNames) {

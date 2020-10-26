@@ -17,6 +17,7 @@ class APP {
   initBase() {
 
 
+    //Search functionality
     UISelectors.search.addEventListener('click', UI.showSearch);
     UISelectors.openMobileSearch.addEventListener('click', UI.showSearch);
     UISelectors.closeSearch.addEventListener('click', UI.closeSearchField);
@@ -26,6 +27,7 @@ class APP {
       Requests.getComposerResults();
     });
 
+    //Browse Functionality
     if (UISelectors.openMobileBrowse) {
       UISelectors.openMobileBrowse.addEventListener('click', UI.showBrowse);
     }
@@ -37,6 +39,7 @@ class APP {
       UISelectors.browseModal.style.display = 'none';
     });
 
+    //Log in and Registration
     if (UISelectors.logInOpen && UISelectors.signUpOpen) {
       UISelectors.logInOpen.addEventListener('click', UI.openModal);
       UISelectors.signUpOpen.addEventListener('click', UI.openModal);
@@ -226,7 +229,7 @@ class APP {
   }
 
   //TODO
-  //deletePieces
+  //Sends Piece from Home page to Local Storage -> Composer Page.
   viewPieceDetails = (e) => {
     let favoriteCard = e.target.parentElement;
     let composerNameCard = favoriteCard.querySelector('.composer-name').textContent;
