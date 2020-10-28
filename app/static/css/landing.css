@@ -713,12 +713,7 @@ button {
 
 @media only screen and (max-width: 426px) {
     
-    body {
-        /*
-        overflow: hidden;
-        */
-       
-    }
+    
 
     .site-title {
         margin-left: 0rem;
