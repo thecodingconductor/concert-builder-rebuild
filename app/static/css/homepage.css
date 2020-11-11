@@ -299,12 +299,15 @@ body {
   .primary-btn.remove-concert-btn {
     margin-bottom: 1rem;
   }
+
+  .your-favorite-pieces {
+    overflow: auto;
+  }
 }
 
 
 @media only screen and (max-width: 426px) {
   body {
-    
     overflow: auto;
   }
 }

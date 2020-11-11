@@ -509,6 +509,7 @@ button {
 }
 
 .sign-in-buttons .secondary-btn {
+
     width: 100%;
     font-weight: bold;
     font-size: 1.2rem;
@@ -693,6 +694,12 @@ button {
     .sign-up-container {
         height: 90%;
         width: 75%;
+    }
+
+    .sign-in-buttons .secondary-btn {
+        flex: unset;
+        height: 2rem;
+        
     }
 
     .search-bar-results {
