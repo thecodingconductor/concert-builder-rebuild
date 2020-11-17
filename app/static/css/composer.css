@@ -239,7 +239,7 @@ body {
     flex-direction: column;
     margin-top: 1rem;
     min-height: unset;
-    height: 100vh;
+    height: 100%;
   }
 
   .composer-piece-list {
