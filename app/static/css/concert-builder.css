@@ -433,7 +433,7 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
     .right-container {
         flex: none;
-        height: 100vh;
+        height: 100%;
 
     }
 
@@ -451,6 +451,10 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
     .concert-builder-text-area {
         margin-bottom: 3rem;
+    }
+
+    .concert-builder-area {
+        height: 100%;
     }
 
     .concert .composer-img {
@@ -471,14 +475,22 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
     }
 
     .left-container {
-        height: 100vh;
+        height: 100%;
     }
 
+    .right-search-area {
+        flex-direction: column;
+    }
+
+
+
     .primary-btn.change-title-btn {
-        width: 50%;
+        width: 100%;
     }
     .concert-title-input {
-        width: 25%;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 2rem;
     }
 
     .concert-builder-text-area {
@@ -486,7 +498,8 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
     }
 
     .concert-title-btn {
-        width: 50%;
+        width: 100%;
+        border-radius: 5px;
     }
 
     .info-inner-container {

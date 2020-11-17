@@ -156,7 +156,7 @@ body {
   align-items: center;
   justify-content: space-evenly;
   position: relative;
-  z-index: -10;
+  z-index: 1;
   background-color: #fff;
   border-radius: 0.25rem;
   padding: 20px;
@@ -288,6 +288,8 @@ body {
   .main-content-area-inner {
     margin-bottom: 5rem;
   }
+
+  
 
   .home-mobile-icons {
     display: inline-block;
