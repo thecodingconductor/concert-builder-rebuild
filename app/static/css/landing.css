@@ -796,8 +796,13 @@ button {
     }
 
     .browse-modal-area {
+        height: auto;
         width: auto;
         right: 0;
+    }
+
+    .browse-composers {
+        height: auto;
     }
 
 }
