@@ -468,7 +468,20 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
         height: auto;
         overflow: auto;
     }
+
+
+    .piece-info-left p:nth-of-type(1) {
+        font-size: .8rem;
+    }
+
+    .piece-info-left p:nth-of-type(2) {
+        font-size: .7rem;
+        margin-bottom: .5rem;
+    }
     
+    .piece-info-left {
+        margin-left: 1rem;
+    }
 
     .builder-piece-list {
         height: auto;
@@ -483,6 +496,14 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
     }
 
 
+    .left-search-area i {
+        padding: 9px;
+    }
+
+    .left-search-area input {
+        padding-right: 0px;
+        margin-right: -4px;
+    }
 
     .primary-btn.change-title-btn {
         width: 100%;
