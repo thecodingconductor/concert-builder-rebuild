@@ -140,7 +140,7 @@ body {
 .search-results, .your-recent-concerts {
   width: 100%;
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
@@ -156,6 +156,7 @@ body {
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+  z-index: -10;
   background-color: #fff;
   border-radius: 0.25rem;
   padding: 20px;
@@ -308,6 +309,12 @@ body {
 
 @media only screen and (max-width: 426px) {
   body {
+    overflow: auto;
+  }
+
+  .main-content-area-inner {
+    max-height: unset;
+    height: 100%;
     overflow: auto;
   }
 }

@@ -257,6 +257,10 @@ body {
     flex-direction: column;
   }
 
+  #user-comment {
+    height: 5rem;
+  }
+
   .composer-informations > * {
     text-align: center;
   }
