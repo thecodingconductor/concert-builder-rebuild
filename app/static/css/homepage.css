@@ -319,8 +319,8 @@ body {
   }
 
   .main-content-area-inner {
-    max-height: unset;
-    height: 100%;
+    max-height: none;
+    height: unset;
     overflow: auto;
   }
 }
