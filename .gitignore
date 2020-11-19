@@ -8,3 +8,5 @@ app/static/js
 prepros.config
 geckodriver.log
 node_modules/
+__pycache__
+.vscode
