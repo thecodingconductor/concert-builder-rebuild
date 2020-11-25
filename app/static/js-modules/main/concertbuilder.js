@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', App.initBase);
 
 
 
-
+//Is this necessary?
 function dragListeners() {
     const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
     const dragBoxes = document.querySelectorAll('.concert');
@@ -43,19 +43,22 @@ function dragListeners() {
 
 
 
-
+//Add event listeners to Add to Concert Buttons.
 UISelectors.addToConcert.forEach((button) => {
     button.addEventListener('click', App.addPieceToConcertArr);
 });
 
+//Dyanmic Search of Favorites List
 UISelectors.searchFavorites.addEventListener('keyup', () => {
     UI.clearFaveList();
     Requests.favoritesSearch();
 });
 
 //showAddIntermission
+//TODO ADD SOMETHING FOR MOBILE
 UISelectors.concertBuilderArea.addEventListener('mouseover', UI.showIntermission);
 
+//ADD Event Listeners for Concert Title functionality
 UISelectors.concertTitleBtn.addEventListener('click', UI.saveConcertTitle);
 UISelectors.changeTitleBtn.addEventListener('click', UI.removeConcertTitle);
 window.addEventListener(
@@ -63,8 +66,10 @@ window.addEventListener(
     UI.updateConcertDuration(UI.getConcertDuration(concertPieceArr))
 );
 
-//TODO FIX THIS
+
 UISelectors.saveConcertBtn.addEventListener('click', App.saveConcert);
 
+
+//Get Saved pieces from Local Storage, if possible
 window.addEventListener('DOMContentLoaded', Storage.getConcert);
 window.addEventListener('DOMContentLoaded', Storage.getPieceForEdit);

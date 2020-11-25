@@ -195,6 +195,7 @@ export class Ui {
 
   //CONCERT BUILDER
 
+  //Add Piece from local Storage to DOM
   addPieceFromLocalStorage(pObject) {
 
     const pieceObject = pObject.piece;
@@ -247,13 +248,14 @@ export class Ui {
 
   }
 
+  //Calculate Concert Duration
   getConcertDuration(pieceArr) {
     if (pieceArr.length === 0) {
       let empty = 0;
       UI.concertLengthJudgement(UISelectors.concertBuilderArea, empty);
       return empty;
     } else {
-      const concertDurationArr = pieceArr.map((item) => {
+      const concertDurationArr = pieceArr.map(item => {
         if (item.classList.contains('intermission')) {
           return 30;
         } else {
@@ -265,9 +267,7 @@ export class Ui {
         }
       });
       let concertDuration = concertDurationArr.reduce((acc, val) => acc + val);
-      // if(concertBuilderArea.querySelector('.concert.intermission')){
-      //     concertDuration += 30;
-      // }
+
 
       UI.concertLengthJudgement(UISelectors.concertBuilderArea, concertDuration);
 
@@ -281,6 +281,7 @@ export class Ui {
     UISelectors.concertMinutes.style.fontWeight = 'bold';
   }
 
+  //Make dynamic on concert length
   concertLengthJudgement(container, duration) {
     if (duration == 0) {
       UISelectors.concertConclusion.textContent = `Please add some pieces.`;
@@ -306,6 +307,7 @@ export class Ui {
     }
   }
 
+  //Add Event Listeners for deleting pieces
   deletePiecesListeners() {
     let deletePieces = UISelectors.concertBuilderArea.querySelectorAll('.delete-piece');
     deletePieces.forEach((piece) => {
@@ -313,6 +315,7 @@ export class Ui {
     });
   }
 
+  //Add Event Listeners to create Intermission
   createIntermissionListeners() {
 
     let intermissionList = UISelectors.concertBuilderArea.querySelectorAll(
@@ -322,6 +325,8 @@ export class Ui {
       intermission.addEventListener('click', UI.createIntermission);
     });
   }
+
+
 
   removePiece(e) {
     //get parent El
@@ -422,8 +427,7 @@ export class Ui {
     UI.concertPieceArr.forEach((piece) => {
       UISelectors.concertBuilderArea.appendChild(piece);
     });
-    //concertBuilderArea.appendChild(intermissionEl);
-    //console.log(concertPieceArr);
+
 
     UI.updateConcertDuration(UI.getConcertDuration(UI.concertPieceArr));
 
@@ -479,7 +483,7 @@ export class Ui {
 
   dragDrop(e) {
     const dragEndIndex = +e.target.getAttribute('data-index');
-    console.log(`from dragDROP ${dragEndIndex}, ${UI.dragStartIndex}`)
+
     UI.swapItems(UI.dragStartIndex, dragEndIndex);
     e.target.classList.remove('over');
   }
@@ -537,15 +541,7 @@ export class Ui {
       UISelectors.yourConcertsContainer.appendChild(notificationContainer);
     }
 
-    // if (user.favorites.length === 0) {
-    //   let notificationContainer = document.createElement("div");
-    //   notificationContainer.classList = 'no-favorites-notification';
-    //   notificationContainer.innerHTML = `
-    //           <p class="no-favorites-message">Please browse composers to add some favorites!</p>
-    //       `;
-    //   UISelectors.homeSearchResults.appendChild(notificationContainer);
 
-    // }
 
     //SEE homepage.js Line 86
     user.concerts.forEach((concert, index) => {
@@ -763,8 +759,7 @@ export class Ui {
 
 
   resultsExit(e) {
-    //console.log('from results exit', e.target.id);
-    //console.log(dropDownYourConcerts.id);
+
     e.preventDefault();
     UISelectors.mainContentInner.classList.add('remove');
     window.setTimeout(() => {
