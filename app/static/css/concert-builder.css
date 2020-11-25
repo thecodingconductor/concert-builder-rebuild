@@ -407,13 +407,18 @@
     pointer-events: none;
 }
 
+.mobile-arrow-conatiner {
+    display: none;
+    
+}
+
 /* TODO:
 
 FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
 */
 
-@media(max-width: 768px) {
+@media only screen and (max-width: 768px) {
 
     .main-container {
         flex-direction: column;
@@ -451,6 +456,11 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
     .concert-builder-text-area {
         margin-bottom: 3rem;
+        flex-direction: column;
+    }
+
+    .inner-split-right > * {
+        font-size: .8rem;
     }
 
     .concert-builder-area {
@@ -459,6 +469,23 @@ FIX CONCERT BUILDER AREA ON MOBILE AND TABLET. ITS FUCKED
 
     .concert .composer-img {
         display: none;
+    }
+
+    .piece-drag-bars {
+        display: none;
+    }
+
+    .mobile-arrow-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-left: 1rem;
+        height: 5rem;
+    }
+
+    .mobile-arrow-container i {
+        color: var(--primary-button-background);
     }
 }
 

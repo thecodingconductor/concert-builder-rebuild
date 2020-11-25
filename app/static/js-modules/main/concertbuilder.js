@@ -28,8 +28,7 @@ window.addEventListener('DOMContentLoaded', App.initBase);
 function dragListeners() {
     const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
     const dragBoxes = document.querySelectorAll('.concert');
-    console.log(pieceDragBars);
-    console.log(dragBoxes);
+
     pieceDragBars.forEach((drag) => {
         drag.addEventListener('dragstart', dragStart);
     });

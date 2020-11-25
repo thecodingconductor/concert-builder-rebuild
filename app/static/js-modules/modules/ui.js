@@ -196,14 +196,19 @@ export class Ui {
   //CONCERT BUILDER
 
   addPieceFromLocalStorage(pObject) {
-    console.log(pObject);
+
     const pieceObject = pObject.piece;
     let pieceEl = document.createElement('div');
     pieceEl.classList = 'concert';
     pieceEl.setAttribute('draggable', 'true');
     pieceEl.innerHTML = `
     
-        <i class="fas fa-bars piece-drag-bars"></i>
+        <i class="fas fa-bars piece-drag-bars" draggable="true"></i>
+        <div class="mobile-arrow-container">
+          <i class="fas fa-arrow-up mobile-arrows mobile-arrow-up" id="mobile-arrow-up"></i>
+          <i class="fas fa-arrow-down mobile-arrows mobile-arrow-down" id="mobile-arrow-down"></i>
+        </div>
+        
         <div class="info-inner-container">
             <div class="composer-info">
                 <p>${pieceObject.composer}</p>
