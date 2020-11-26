@@ -407,10 +407,13 @@
     pointer-events: none;
 }
 
-.mobile-arrow-conatiner {
+.mobile-arrow-container {
     display: none;
-    
 }
+
+/* .mobile-arrow-container i {
+    color: blue;
+} */
 
 /* TODO:
 
