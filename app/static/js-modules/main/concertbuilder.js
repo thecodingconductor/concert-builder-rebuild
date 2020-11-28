@@ -25,21 +25,21 @@ window.addEventListener('DOMContentLoaded', App.initBase);
 
 
 //Is this necessary?
-function dragListeners() {
-    const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
-    const dragBoxes = document.querySelectorAll('.concert');
+// function dragListeners() {
+//     const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
+//     const dragBoxes = document.querySelectorAll('.concert');
 
-    pieceDragBars.forEach((drag) => {
-        drag.addEventListener('dragstart', dragStart);
-    });
+//     pieceDragBars.forEach((drag) => {
+//         drag.addEventListener('dragstart', dragStart);
+//     });
 
-    dragBoxes.forEach((box) => {
-        box.addEventListener('dragover', dragOver);
-        box.addEventListener('drop', dragDrop);
-        box.addEventListener('dragenter', dragEnter);
-        box.addEventListener('dragleave', dragLeave);
-    });
-}
+//     dragBoxes.forEach((box) => {
+//         box.addEventListener('dragover', dragOver);
+//         box.addEventListener('drop', dragDrop);
+//         box.addEventListener('dragenter', dragEnter);
+//         box.addEventListener('dragleave', dragLeave);
+//     });
+// }
 
 
 
@@ -68,6 +68,9 @@ window.addEventListener(
 
 
 UISelectors.saveConcertBtn.addEventListener('click', App.saveConcert);
+
+//Mobile Swap Functions
+
 
 
 //Get Saved pieces from Local Storage, if possible

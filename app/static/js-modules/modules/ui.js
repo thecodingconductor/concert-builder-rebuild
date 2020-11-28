@@ -87,7 +87,7 @@ export class Ui {
     composerLetter.classList = 'letter';
 
 
-    //THERE IS SOME FUCKING BEAMING ISSUE HERE
+
     composerLetter.innerHTML = `
        <h1>${mainLetter}</h1>
      <div class="letter-composers">
@@ -116,7 +116,7 @@ export class Ui {
     [...randomComposerList].forEach((composerLink) => {
 
       composerLink.href = `/composer/${composerLink.textContent}`;
-      //composerLink.addEventListener('click', () => console.log('TITS'));
+
     });
   }
 
@@ -141,7 +141,7 @@ export class Ui {
   }
 
   populateComposerSearchResults(currentURL, composer) {
-    // UISelectors.searchBarResults.style.visibility = 'visible';
+
     const resultDiv = document.createElement('div');
     resultDiv.classList = 'search-result-down';
 
@@ -186,7 +186,7 @@ export class Ui {
 
   getFieldName(input) {
     let newString = input.id.split('-')[1];
-    //console.log(newString.charAt(0).toUpperCase() + newString.slice(1));
+
     if (newString.includes('password2')) {
       return 'Repeated Password';
     }
@@ -281,7 +281,7 @@ export class Ui {
     UISelectors.concertMinutes.style.fontWeight = 'bold';
   }
 
-  //Make dynamic on concert length
+  //Make dynamic judgement on concert length
   concertLengthJudgement(container, duration) {
     if (duration == 0) {
       UISelectors.concertConclusion.textContent = `Please add some pieces.`;
@@ -349,7 +349,13 @@ export class Ui {
 
   addPieceToDOM(piece) {
 
+    // console.log(`Add Piece to Dom Piece == ${piece.textContent}`);
+
     UISelectors.concertBuilderArea.appendChild(piece);
+    UI.concertPieceArr.forEach((piece, index) => {
+      piece.setAttribute('data-index', index);
+    });
+
   }
 
   clearFaveList() {
@@ -488,9 +494,50 @@ export class Ui {
     e.target.classList.remove('over');
   }
 
+  swapItemUp = e => {
+
+    console.log(`swapup ${e.target}`);
+    const startIndex = Number(e.target.parentElement.parentElement.getAttribute('data-index'));
+    const endIndex = startIndex - 1;
+    console.log(endIndex);
+
+    if (startIndex === 0) {
+      return false;
+    }
+
+    UI.swapItems(startIndex, endIndex);
+  }
+
+  swapItemDown = e => {
+
+    const startIndex = Number(e.target.parentElement.parentElement.getAttribute('data-index'));
+    const endIndex = startIndex + 1;
+
+
+    if (endIndex === (UI.concertPieceArr.length)) {
+      return false;
+    }
+
+    UI.swapItems(startIndex, endIndex);
+  }
+
   dragListeners() {
     const pieceDragBars = document.querySelectorAll('.piece-drag-bars');
     const dragBoxes = document.querySelectorAll('.concert');
+    const mobileArrowUp = document.querySelectorAll('.mobile-arrow-up');
+    const mobileArrowDown = document.querySelectorAll('.mobile-arrow-down');
+
+    mobileArrowUp.forEach((arrow) => {
+
+      arrow.addEventListener('click', UI.swapItemUp);
+
+    });
+
+    mobileArrowDown.forEach((arrow) => {
+      arrow.addEventListener('click', UI.swapItemDown);
+    })
+
+
 
     pieceDragBars.forEach((drag) => {
       drag.addEventListener('dragstart', UI.dragStart);
@@ -502,24 +549,30 @@ export class Ui {
       box.addEventListener('dragenter', UI.dragEnter);
       box.addEventListener('dragleave', UI.dragLeave);
     });
+
   }
 
   swapItems(fromIndex, toIndex) {
+
     const itemOne = UI.concertPieceArr[fromIndex];
     const itemTwo = UI.concertPieceArr[toIndex];
 
 
+    UI.concertPieceArr.forEach(item => console.log(item));
 
     UI.concertPieceArr[fromIndex] = itemTwo;
     UI.concertPieceArr[toIndex] = itemOne;
 
     UISelectors.concertBuilderArea.innerHTML = ``;
 
-    UI.concertPieceArr.forEach((item) => {
 
+
+    UI.concertPieceArr.forEach((item) => {
       UI.addPieceToDOM(item);
     });
   }
+
+
 
   //HOMEPAGE
   displayConcerts(user, all = false) {

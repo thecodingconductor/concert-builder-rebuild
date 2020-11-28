@@ -86,8 +86,8 @@ class UiSelectors {
     this.concertBuilderTextArea = document.getElementById('concert-builder-text-area');
     this.concertLengthIndicator = document.getElementById('concert-length-indicator');
 
-    this.mobileArrowUp = document.getElementById('mobile-arrow-up');
-    this.mobileArrowDown = document.getElementById('mobile-arrow-down');
+    // this.mobileArrowUp = document.getElementById('mobile-arrow-up');
+    // this.mobileArrowDown = document.getElementById('mobile-arrow-down');
 
 
 
