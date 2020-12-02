@@ -5,20 +5,7 @@
     </div>
     <form action="/login" method="post" class="sign-in-form-area" id="sign-in-form" novalidate>
         {{ login_form.hidden_tag() }}
-        <!-- <div class="sign-in-buttons">
-            <button class="secondary-btn">
-                <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
-                <p>Sign in with Google</p>
-            </button>
-            <button class="secondary-btn">
-                <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="facebook-sign-up">
-                <p>Sign in with Facebook</p>
-            </button>
-            <button class="secondary-btn">
-                <img src="{{ url_for('static', filename='img/company.svg') }}" alt="" class="facebook-sign-up">
-                <p>Sign in with Apple</p>
-            </button>
-        </div> -->
+
         <div class="sign-in-form-fields">
             <div class="form-field">
                 {{ login_form.username(id="login-username", placeholder="Type your username") }}
@@ -38,11 +25,11 @@
                 {% for error in login_form.password.errors %}
                 <span class="error-text">{{ error }}</span>
                 {% endfor %}
-                <p><a href="#">Forgot?</a></p>
+
             </div>
 
 
-            <!--{{ login_form.login_submit(id="login-user-btn", class_="primary-btn big-login-btn") }}-->
+
             <button type="submit" name='login-user-btn' class="primary-btn big-login-btn" id="login-user-btn">Log
                 In</button>
 

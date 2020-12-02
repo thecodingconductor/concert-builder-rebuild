@@ -36,6 +36,7 @@ class UiSelectors {
     this.dropDownMenu = document.getElementById('dropdown-menu');
     this.registerUserBtn = document.getElementById('register-user-btn');
     this.logInUserBtn = document.getElementById('login-user-btn');
+    this.closeRegisterOpenLogin = document.getElementById('close-register-open-login');
 
     //Registration Validation
 

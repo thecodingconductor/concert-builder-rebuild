@@ -52,6 +52,16 @@ class APP {
     }
 
     if (UISelectors.registrationForm) {
+
+
+      if (UISelectors.closeRegisterOpenLogin) {
+        UISelectors.closeRegisterOpenLogin.addEventListener('click', (e) => {
+          UI.closeModal(e);
+          UI.openModal(e);
+
+        });
+      }
+
       UISelectors.registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -191,7 +201,7 @@ class APP {
 
     let pieceEl = document.createElement('div');
     pieceEl.classList = 'concert';
-    //pieceEl.setAttribute("draggable", "true");
+
     pieceEl.innerHTML = `
       
           <i class="fas fa-bars piece-drag-bars" draggable="true"></i>

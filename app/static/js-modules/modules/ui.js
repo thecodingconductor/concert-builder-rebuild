@@ -9,14 +9,14 @@ export class Ui {
     this.concertPieceArr = [];
   }
 
-  // testImport() {
-  //   console.log(UISelectors.siteTitle);
-  // }
+
 
   //BASE
   openModal(e) {
     document.body.style.overflow = 'hidden';
     if (e.target.textContent.trim() === 'Log In') {
+      UISelectors.signInModal.style.display = 'flex';
+    } else if (e.target === UISelectors.closeRegisterOpenLogin) {
       UISelectors.signInModal.style.display = 'flex';
     } else {
       UISelectors.signUpModal.style.display = 'flex';
@@ -29,6 +29,12 @@ export class Ui {
       const signInModalParent =
         e.target.parentElement.parentElement.parentElement;
       signInModalParent.style.display = 'none';
+    } else if (e.target === UISelectors.closeRegisterOpenLogin) {
+
+      // close from the login button
+      const modalParent = e.target.parentElement.parentElement.parentElement.parentElement;
+      modalParent.style.display = 'none';
+
     } else {
       const modalParent = e.target.parentElement.parentElement;
       modalParent.style.display = 'none';

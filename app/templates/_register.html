@@ -1,34 +1,9 @@
 <div class="sign-up-container">
     <i class="fa fa-times fa-2x" id="close-sign-up"></i>
-    <!-- <div class="third-party-buttons">
-        <button class="secondary-btn">
-            <img src="{{ url_for('static', filename='img/brands-and-logotypes.svg') }}" alt="" class="google-sign-up">
-            <p>Sign up with Google</p>
-        </button>
-        <button class="secondary-btn">
-            <img src="{{ url_for('static', filename='img/facebook.svg') }}" alt="" class="facebook-sign-up">
-
-            <p>Sign up with Facebook</p>
-        </button>
-    </div> -->
 
     <form action="/register" method="post" class="sign-up-form" id="sign-up-form" novalidate>
         {{ signup_form.hidden_tag() }}
-        <!-- <div class="birthday-selector">
-            <label for="">Birthday</label>
-            <div class="select-container">
-                <select name="month" id="month">
-                    <option value="">Month</option>
-                </select>
-                <select name="day" id="day">
-                    <option value="">Day</option>
-                </select>
-                <select name="year" id="year">
-                    <option value="">Year</option>
-                </select>
-            </div>
-            
-        </div> -->
+
         <div class="form-field">
             {{ signup_form.username.label }}
             {{ signup_form.username(placeholder="Enter Username", id="register-username") }}
@@ -58,9 +33,10 @@
             <span class="error-text"></span>
 
         </div>
-        <!--  {{ signup_form.register_submit(id="register-user-btn", class_="primary-btn register-btn") }} -->
+
         <button type="submit" name="register-user-btn" id="register-user-btn" class="primary-btn register-btn">Sign
             Up</button>
-        <button class="primary-btn login-btn">Already have an account? Log in <a href="#">here.</a></button>
+        <button class="primary-btn login-btn">Already have an account? Log in <a href="#"
+                id="close-register-open-login">here.</a></button>
     </form>
 </div>
