@@ -84,6 +84,7 @@ def concert_builder():
 
 
 @app.route('/browse_composers')
+@login_required
 def browse_composers():
 
     search_form = ComposerSearchForm()
@@ -98,6 +99,7 @@ def browse_composers():
 
 
 @app.route('/composers', methods=["POST"])
+@login_required
 def composers():
 
     response = request.get_json()
@@ -135,6 +137,7 @@ def search_favorites():
 
 
 @app.route('/composer/<composer_name>', methods=["GET", "POST"])
+@login_required
 def composer(composer_name):
     search_form = ComposerSearchForm()
     comment_form = PieceCommentForm()
@@ -189,6 +192,7 @@ def composer(composer_name):
 
 
 @app.route('/piece_detail/<piece_title>', methods=["GET", "POST"])
+@login_required
 def piece_detail(piece_title):
     print(piece_title)
     piece_title = urllib.parse.unquote(piece_title)
@@ -230,6 +234,7 @@ def add_piece_to_favorites():
 
 
 @app.route('/browse_composer_list', methods=["GET", "POST"])
+
 def browse_composer_list():
 
     if request.method == 'POST':

@@ -36,7 +36,7 @@ export class Ui {
       modalParent.style.display = 'none';
 
     } else {
-      const modalParent = e.target.parentElement.parentElement;
+      const modalParent = e.target.parentElement.parentElement.parentElement;
       modalParent.style.display = 'none';
     }
   }
