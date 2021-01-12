@@ -70,12 +70,12 @@ class REQUESTS {
       UISelectors.pieceDetailsContainer.innerHTML = contents;
 
       UISelectors.pieceList.forEach(piece => {
-        console.log(piece.textContent);
+        // console.log(piece.textContent);
         if (piece.textContent.includes(data.piece.title)) {
           piece.classList.add('selected');
           piece.scrollIntoView();
         } else {
-          console.log('could not find a match');
+          // console.log('could not find a match');
         }
       })
 
@@ -136,7 +136,7 @@ class REQUESTS {
 
   openCurrentLetter(e) {
 
-    console.log('open current letter');
+    // console.log('open current letter');
     if (!window.location.href.includes('browse_composers')) {
       window.location.href = '/browse_composers';
     }
@@ -147,7 +147,7 @@ class REQUESTS {
       let composerLetter = e.target.textContent;
       let data = { letter: composerLetter };
 
-      console.log(data);
+      // console.log(data);
 
       HTTP.post('./browse_composer_list', data)
         .then((data) => {

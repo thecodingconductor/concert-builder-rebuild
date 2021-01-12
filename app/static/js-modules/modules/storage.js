@@ -1,8 +1,7 @@
 import { App } from './app';
 import { Requests } from './requests';
-import { User, Concert, Piece } from './sessionObj';
+import { User } from './sessionObj';
 import { UI } from './ui';
-import { UISelectors } from './UISelectors';
 
 class STORAGE {
   getUser() {
@@ -84,7 +83,7 @@ class STORAGE {
     if (res === null || res === undefined) {
       return false
     } else {
-      console.log(res);
+      // console.log(res);
       Storage.getConcertByID(res.id);
     }
   }

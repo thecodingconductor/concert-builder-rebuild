@@ -1,9 +1,8 @@
 import { UISelectors } from './UISelectors';
 import { UI } from './ui';
-import { HTTP } from './http';
-import { User, Concert, Piece } from './sessionObj';
+// import { HTTP } from './http';
+import { Concert, Piece } from './sessionObj';
 import { Forms } from './forms';
-import { Nav } from './nav';
 import { Storage } from './storage';
 import { Requests } from './requests';
 

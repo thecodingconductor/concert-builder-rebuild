@@ -12,9 +12,9 @@ class FORMS {
 
     [...formFields].forEach((field) => {
       if (field.querySelector('.error-text')) {
-        console.log('there was an error');
+        // console.log('there was an error');
       } else {
-        console.log('there are no errors');
+        // console.log('there are no errors');
       }
     });
   }
@@ -81,7 +81,7 @@ class FORMS {
 
   logInValidation(e) {
     e.preventDefault();
-    console.log('Log In Prevented');
+    // console.log('Log In Prevented');
   }
 }
 

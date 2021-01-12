@@ -309,7 +309,7 @@ export class Ui {
     }
 
     if (container.querySelector('.concert.intermission')) {
-      console.log('no intermission yet');
+      // console.log('no intermission yet');
     }
   }
 
@@ -337,7 +337,7 @@ export class Ui {
   removePiece(e) {
     //get parent El
     let selectedConcert = e.target.parentElement;
-    console.log(selectedConcert);
+    // console.log(selectedConcert);
 
     //Remove Selected Piece from Array
     UI.concertPieceArr.splice(UI.concertPieceArr.indexOf(selectedConcert), 1);
@@ -502,10 +502,10 @@ export class Ui {
 
   swapItemUp = e => {
 
-    console.log(`swapup ${e.target}`);
+    // console.log(`swapup ${e.target}`);
     const startIndex = Number(e.target.parentElement.parentElement.getAttribute('data-index'));
     const endIndex = startIndex - 1;
-    console.log(endIndex);
+    // console.log(endIndex);
 
     if (startIndex === 0) {
       return false;
@@ -564,7 +564,7 @@ export class Ui {
     const itemTwo = UI.concertPieceArr[toIndex];
 
 
-    UI.concertPieceArr.forEach(item => console.log(item));
+    // UI.concertPieceArr.forEach(item => console.log(item));
 
     UI.concertPieceArr[fromIndex] = itemTwo;
     UI.concertPieceArr[toIndex] = itemOne;

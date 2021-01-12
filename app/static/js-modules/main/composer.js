@@ -27,7 +27,7 @@ function newConcert(e) {
     } else {
         //Todo add piece to Concert
         let newPiece = new Piece(pieceComposer, pieceTitle);
-        console.log(newPiece);
+        // console.log(newPiece);
         let newConcert = new Concert("No Name");
         newConcert.pieces.push(newPiece);
         Storage.setNewConcert(newConcert);
@@ -39,7 +39,7 @@ const fromHomepage = () => {
     if (Storage.getTempPiece()) {
         Requests.displayTempInfo();
     } else {
-        console.log('no?');
+        // console.log('no?');
     }
 }
 

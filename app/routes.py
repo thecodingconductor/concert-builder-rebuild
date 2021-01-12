@@ -99,7 +99,7 @@ def browse_composers():
 
 
 @app.route('/composers', methods=["POST"])
-@login_required
+# @login_required
 def composers():
 
     response = request.get_json()
@@ -274,5 +274,29 @@ def add_comment():
 
     res = make_response(
         jsonify({"message": "OK", "piece": piece.as_dict()}), 200)
+
+    return res
+
+@app.route('/pieces', methods=["GET"])
+def pieces():
+    req = request.get_json()
+    # pieces = Piece.query.filter(id <= '100').all()
+    piece = Piece.query.first()
+    # res = make_response(
+    #     jsonify({
+    #         "message": "OK",
+    #         "pieces": [p.as_dict() for p in pieces]}), 
+    #         200
+    #     )
+    res = make_response(
+    jsonify({
+        "message": "OK",
+        "pieces": piece.as_dict()}), 
+        200
+    )
+
+    # with open('data.txt', 'w') as outfile:
+    #     json.dump(res, outfile)
+
 
     return res
