@@ -61,6 +61,7 @@ class APP {
         });
       }
 
+      // Registration Validation. Client-Side
       UISelectors.registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -77,7 +78,8 @@ class APP {
             UISelectors.registerPassword2
           );
           if (Forms.checkAllValid([...formInputs])) {
-            UISelectors.registrationForm.submit();
+            // UISelectors.registrationForm.submit();
+            Requests.registerUser(e)
           }
         }
       });

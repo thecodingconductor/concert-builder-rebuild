@@ -81,7 +81,6 @@ class FORMS {
 
   logInValidation(e) {
     e.preventDefault();
-    // console.log('Log In Prevented');
   }
 }
 

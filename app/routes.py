@@ -31,7 +31,7 @@ def login():
         user = User.query.filter_by(username=req.get('username')).first()
         if user is None or not user.check_password(req.get('password')):
             res = make_response(jsonify(
-                {"update": "failure", "message": "Please enter a valid username and password"}))
+                {"update": "failure", "message": "Please enter a valid username and password"}), 404)
             return res
         login_user(user)
         next_page = request.args.get('next')
@@ -47,16 +47,37 @@ def login():
 def register():
     if request.method == "POST":
 
-        req = request.form
-        username = req.get('username')
-        user = User(username=req.get("username"), email=req.get("email"))
-        user.set_password(req.get("password"))
+        
+        test = request.get_json()
+       
+        # make sure user does not exis in DB
+        username = User.query.filter_by(username=test.get("username")).first()
+        if username is not None:
+            print('username is not none')
+            return make_response(jsonify({"update": "failure", "field":"username", "message": "There is already a user with that username"}), 404)
+        
+        # Make sure email does not exist in DB
+        email = User.query.filter_by(email=test.get("email")).first()
+       
+        if email is not None:
+            return make_response(jsonify({"update": "failure", "field": "email", "message": "There is already a user with that email"}), 404)
+
+        user = User(username=test.get("username"), email=test.get("email"))
+        user.set_password(test.get("password"))
         db.session.add(user)
         db.session.commit()
 
-        go_u = User.query.filter_by(username=username).first()
-        login_user(go_u)
-        return redirect(url_for('homepage'))
+       
+
+
+        login_user(user)
+        
+        return make_response(jsonify({"update": "success", "message": "User created"}), 201)
+
+
+        
+
+
 
 
 @app.route('/logout')

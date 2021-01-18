@@ -6,6 +6,7 @@
     </div>
 
     <form action="/register" method="post" class="sign-up-form" id="sign-up-form" novalidate>
+  
         {{ signup_form.hidden_tag() }}
 
         <div class="form-field">
@@ -40,6 +41,7 @@
 
         <button type="submit" name="register-user-btn" id="register-user-btn" class="primary-btn register-btn">Sign
             Up</button>
+        
         <button class="primary-btn login-btn">Already have an account? Log in <a href="#"
                 id="close-register-open-login">here.</a></button>
     </form>

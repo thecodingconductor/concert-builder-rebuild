@@ -395,6 +395,37 @@ class REQUESTS {
     }
   }
 
+  async registerUser(e) {
+    e.preventDefault();
+
+    const registerData = {
+      username: UISelectors.registerUsername.value,
+      email: UISelectors.registerEmail.value,
+      password: UISelectors.registerPassword.value,
+      password2: UISelectors.registerPassword2.value,
+    }
+
+    try {
+      const data = await HTTP.post('/register', registerData);
+      
+      if(data.update === "failure") {
+        if(data.field === "username") {
+          UI.showError(UISelectors.registerUsername, data.message)
+        } else if (data.field === "email") {
+          UI.showError(UISelectors.registerEmail, data.message);
+        }
+      } else if (data.update === "success") {
+        location.href = '/homepage';
+      }
+    
+    } catch (error) {
+      console.error(`There was an error: ${error.message}`);
+    }
+    
+
+    // console.log(registerData)
+  }
+
 }
 
 
